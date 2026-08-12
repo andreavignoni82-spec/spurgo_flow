@@ -38,11 +38,18 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .signature-canvas{width:100%;height:150px;display:block;background:white;border-radius:8px;touch-action:none}
 @media(max-width:700px){.inline-grid,.inline-grid-3,.photo-preview{grid-template-columns:1fr}.qtyrow{grid-template-columns:1fr 90px}}
 
+
+@media print{
+ body{background:white!important}
+ #reportView{padding:0!important;background:white!important}
+ #reportView>.top,.share{display:none!important}
+ .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
+}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.3</div>
+<div class="version">v5.0 · build 5.0.4</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -52,9 +59,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.3<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.4<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.3</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.4</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
@@ -145,24 +152,36 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div class="inline-panel active" style="margin-top:14px">
-  <h3>✍️ Firma operatore</h3>
-  <p class="muted">La firma viene riportata nel rapportino insieme alla firma cliente.</p>
-  <div class="signature-wrap"><canvas id="firmaOperatore" class="signature-canvas"></canvas></div>
-  <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaOperatore')">Cancella firma</button></div>
+  <h3>✍️ Firme intervento</h3>
+  <p class="muted">Operatore e cliente firmano direttamente sullo smartphone. Entrambe le firme vengono riportate nel rapportino PDF.</p>
+  <div class="inline-grid">
+    <div>
+      <b>FIRMA OPERATORE</b>
+      <input id="nomeOperatoreFirma" class="field" value="Luca" placeholder="Nome operatore">
+      <div class="signature-wrap"><canvas id="firmaOperatore" class="signature-canvas"></canvas></div>
+      <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaOperatore')">Cancella firma</button></div>
+    </div>
+    <div>
+      <b>FIRMA CLIENTE</b>
+      <input id="nomeClienteFirma" class="field" placeholder="Nome e cognome cliente">
+      <div class="signature-wrap"><canvas id="firmaCliente" class="signature-canvas"></canvas></div>
+      <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaCliente')">Cancella firma</button></div>
+    </div>
+  </div>
 </div>
 
 <button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
 </div></div></div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.3</span></div>
-<div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><div class="qr" title="QR predisposto per futura scheda cliente"></div></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.4</span></div>
+<div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><img src="qr-demo-intervento.png" alt="QR intervento" style="width:86px;height:86px;border:1px solid #cbd6df;padding:4px;background:white"></div>
 <div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
 <div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div></div></div><hr><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomalia">Nessuna anomalia segnalata.</p><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
 <h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="grid3"><div class="card"><b>PRIMA</b><div id="reportFotoPrima" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DURANTE</b><div id="reportFotoDurante" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DOPO</b><div id="reportFotoDopo" style="margin-top:8px">Nessuna foto</div></div></div>
-<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br>Mario Rossi<br><div style="font-family:cursive;font-size:28px">Mario Rossi</div></div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Marco Rossi</span><br><div id="reportFirmaOperatore" style="margin-top:6px">Firma non acquisita</div></div></div>
+<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br><span id="reportClienteNome">Cliente</span><br><div id="reportFirmaCliente" style="margin-top:6px">Firma non acquisita</div></div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Marco Rossi</span><br><div id="reportFirmaOperatore" style="margin-top:6px">Firma non acquisita</div></div></div>
 <p class="muted">QR predisposto: nella futura versione collegherà alla scheda cliente/intervento protetta.</p></div>
-<div class="share"><h2 style="margin-top:0">INVIA RAPPORTINO</h2><div class="sharegrid"><button class="btn primary" onclick="shareMail()">✉ INVIA VIA E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ INVIA VIA WHATSAPP</button><button class="btn navy" onclick="shareNative()">⌯ CONDIVIDI PDF</button></div></div></div>
+<div class="share"><h2 style="margin-top:0">RAPPORTINO PDF E INVIO</h2><p class="muted">Genera/salva il PDF dal dispositivo oppure condividilo con Mail o WhatsApp tramite il menu di condivisione.</p><div class="sharegrid"><button class="btn navy" onclick="window.print()">▤ GENERA / SALVA PDF</button><button class="btn primary" onclick="shareMail()">✉ E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ WHATSAPP</button></div><div style="margin-top:10px"><button class="btn ghost" style="width:100%" onclick="shareNative()">⌯ CONDIVIDI RAPPORTINO</button></div></div></div>
 
 <script>
 let prevView='office', timerInt, secs=0;
@@ -189,7 +208,7 @@ function login(){
     officeView.classList.add('hidden');
     operatorView.classList.remove('hidden');
     opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1);
-    setTimeout(()=>setupSignature('firmaOperatore'),100);
+    setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');},100);
     return;
   }
 
@@ -314,10 +333,17 @@ function prepareAndShowReport(){
   copyPreviewToReport('prevPrima','reportFotoPrima');
   copyPreviewToReport('prevDurante','reportFotoDurante');
   copyPreviewToReport('prevDopo','reportFotoDopo');
-  const c=el('firmaOperatore');
+  const opName=(el('nomeOperatoreFirma').value||'Operatore').trim();
+  const clName=(el('nomeClienteFirma').value||'Cliente').trim();
+  el('reportOperatoreNome').textContent=opName;
+  el('reportClienteNome').textContent=clName;
   try{
-    const data=c.toDataURL('image/png');
+    const data=el('firmaOperatore').toDataURL('image/png');
     el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:70px;object-fit:contain">';
+  }catch(e){}
+  try{
+    const data2=el('firmaCliente').toDataURL('image/png');
+    el('reportFirmaCliente').innerHTML='<img src="'+data2+'" style="max-width:100%;height:70px;object-fit:contain">';
   }catch(e){}
   showReport();
 }
