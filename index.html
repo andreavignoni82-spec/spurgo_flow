@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.12 - modalità ultra-operativa smartphone */
+/* Build 5.0.13 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -78,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - navigazione field-service persistente */
+/* Build 5.0.13 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -98,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 */
+/* Build 5.0.13 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -137,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - mappe reali e rapportino fedele */
+/* Build 5.0.13 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -203,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.13 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -246,7 +246,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 */
+/* Build 5.0.13 */
 .report-actions-app{display:block}
 #reportRealMap{
   width:100%;
@@ -267,7 +267,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - geocodifica reale e punto operativo */
+/* Build 5.0.13 - geocodifica reale e punto operativo */
 .location-tools{
   background:#f7fafc;
   border:1px solid #d7e1e8;
@@ -318,11 +318,58 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
 .check-row{display:flex;gap:8px;align-items:center;background:#f7fafc;padding:8px;border-radius:8px}
 @media(max-width:900px){.manage-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
+
+/* Build 5.0.13 - fix definitivo mappe iPhone/Leaflet */
+.real-map{
+  position:relative;
+  display:block;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  contain:layout paint;
+}
+.real-map .leaflet-container,
+.leaflet-container.real-map{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+}
+.real-map img.leaflet-tile{
+  max-width:none!important;
+  max-height:none!important;
+}
+.map-shell{
+  width:100%;
+  min-width:0;
+  overflow:hidden;
+}
+@media(max-width:700px){
+  .real-map{
+    width:100%!important;
+    height:280px!important;
+    min-height:280px!important;
+    max-height:280px!important;
+  }
+  .real-map.small{
+    height:240px!important;
+    min-height:240px!important;
+    max-height:240px!important;
+  }
+  .real-map.report-map-real{
+    height:105px!important;
+    min-height:105px!important;
+    max-height:105px!important;
+  }
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.12</div>
+<div class="version">v5.0 · build 5.0.13</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123 · paolo/paolo123</p>
@@ -332,14 +379,14 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.12<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.13<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.13</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
+<div class="card"><h3>Mappa interventi</h3><div class="map-shell"><div id="officeMap" class="real-map"></div></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div class="map-shell"><div id="controlMap" class="real-map" style="height:500px"></div></div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
 
 <section id="interventi" class="section"><div class="top"><h1>Interventi</h1><button class="btn primary" onclick="alert('Nuovo intervento: modulo demo predisposto')">+ Nuovo intervento</button></div><div class="card" style="margin-top:18px"><table class="table"><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Stato</th><th>Operatore</th><th>Fatturazione</th></tr><tr><td>#0051</td><td>Condominio Belvedere</td><td>Disotturazione</td><td><span class="badge urgent">URGENTE</span></td><td>Marco</td><td>Da fatturare</td></tr><tr><td>#0050</td><td>Ristorante Al Lago</td><td>Pulizia fossa</td><td><span class="badge progress">IN CORSO</span></td><td>Luca</td><td>—</td></tr><tr><td>#0049</td><td>Azienda Bianchi</td><td>Lavaggio</td><td><span class="badge planned">PROGRAMMATO</span></td><td>Marco</td><td>—</td></tr></table></div></section>
 
@@ -351,7 +398,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.13</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -408,7 +455,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div id="locationStatus" class="location-status">La posizione viene ricavata dall'indirizzo.</div>
   <div id="operationalPointLabel"></div>
 </div>
-<div id="selectedJobMap" class="real-map small"></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div class="map-shell"><div id="selectedJobMap" class="real-map small"></div></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="forceMapLayout(selectedMapObj,'selectedJobMap',activeCoords(selectedJob),16)">Ricarica mappa</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div class="completed-section">
  <h3 style="color:white">Interventi terminati</h3>
  <div id="completedJobs"></div>
@@ -519,7 +566,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="real-map"></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+ <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div class="map-shell"><div id="fieldRealMap" class="real-map"></div></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
 </div>
 
 <div id="fieldMessaggi" class="field-page">
@@ -558,7 +605,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.12</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.13</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -594,7 +641,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
       📍 <b id="reportPosizione">Via Roma 24</b><br>
       <span id="reportComune">24067 Sarnico (BG) – Italia</span><br>
       Lat: <span id="reportLat">—</span> &nbsp; Long: <span id="reportLng">—</span><br><small id="reportPointType"></small>
-      <div id="reportRealMap" class="real-map report-map-real" style="margin-top:7px"></div>
+      <div class="map-shell"><div id="reportRealMap" class="real-map report-map-real" style="margin-top:7px"></div></div>
     </div>
     <div>
       <h4>ATTIVITÀ ESEGUITE</h4>
@@ -748,7 +795,7 @@ function makeLeafletMap(id, center, zoom=12, jobs=[]){
    node._leaflet_id=null;
    node.innerHTML='';
  }
- const map=L.map(id,{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,zoom);
+ const map=L.map(id,{zoomControl:true,scrollWheelZoom:false,tap:true,trackResize:true}).setView(center,zoom);
  node._leaflet_map_instance=map;
  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
    maxZoom:19,
@@ -767,7 +814,7 @@ function makeLeafletMap(id, center, zoom=12, jobs=[]){
  }else if(bounds.length===1){
    map.setView(bounds[0],zoom);
  }
- setTimeout(()=>map.invalidateSize(true),120);
+ forceMapLayout(map,id,bounds.length===1?bounds[0]:null,zoom);
  return map;
 }
 
@@ -883,10 +930,60 @@ function refreshFieldMap(){
   if(valid.length) fieldMapObj=makeLeafletMap('fieldRealMap',activeCoords(valid[0]),12,valid);
 }
 
+
+let mapResizeObserver=null;
+let mapFixTimer=null;
+
+function forceMapLayout(map,id,recenterCoords=null,zoom=null){
+  const node=el(id);
+  if(!map||!node)return;
+  const run=()=>{
+    try{
+      void node.offsetWidth;
+      void node.offsetHeight;
+      map.invalidateSize({pan:false,animate:false});
+      if(recenterCoords) map.setView(recenterCoords,zoom||map.getZoom(),{animate:false});
+    }catch(e){}
+  };
+  requestAnimationFrame(()=>{
+    run();
+    setTimeout(run,80);
+    setTimeout(run,220);
+    setTimeout(run,500);
+  });
+}
+function setupMapResizeObserver(){
+  if(mapResizeObserver) mapResizeObserver.disconnect();
+  if(typeof ResizeObserver==='undefined') return;
+  mapResizeObserver=new ResizeObserver(entries=>{
+    clearTimeout(mapFixTimer);
+    mapFixTimer=setTimeout(()=>{
+      entries.forEach(entry=>{
+        const id=entry.target.id;
+        if(id==='selectedJobMap') forceMapLayout(selectedMapObj,id,activeCoords(selectedJob),16);
+        if(id==='fieldRealMap') forceMapLayout(fieldMapObj,id);
+        if(id==='officeMap') forceMapLayout(officeMapObj,id);
+        if(id==='controlMap') forceMapLayout(controlMapObj,id);
+        if(id==='reportRealMap') forceMapLayout(reportMapObj,id,activeCoords(selectedJob),16);
+      });
+    },40);
+  });
+  ['selectedJobMap','fieldRealMap','officeMap','controlMap','reportRealMap'].forEach(id=>{
+    const node=el(id); if(node) mapResizeObserver.observe(node);
+  });
+}
+function forceAllMapLayouts(){
+  forceMapLayout(selectedMapObj,'selectedJobMap',activeCoords(selectedJob),16);
+  forceMapLayout(fieldMapObj,'fieldRealMap');
+  forceMapLayout(officeMapObj,'officeMap');
+  forceMapLayout(controlMapObj,'controlMap');
+  forceMapLayout(reportMapObj,'reportRealMap',activeCoords(selectedJob),16);
+}
+
 function invalidateVisibleMaps(){
- [officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{
-   if(m) setTimeout(()=>m.invalidateSize(true),60);
- });
+  forceAllMapLayouts();
+  setTimeout(forceAllMapLayouts,120);
+  setTimeout(forceAllMapLayouts,350);
 }
 function fitFieldMap(){
  if(!fieldMapObj) return;
@@ -986,7 +1083,7 @@ async function initAllMaps(){
  fieldMapObj=makeLeafletMap('fieldRealMap',validDemo.length?activeCoords(validDemo[0]):fallback,10,validDemo);
  if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
  updateSelectedJobMap();
- setTimeout(invalidateVisibleMaps,180);
+ setTimeout(()=>{setupMapResizeObserver();invalidateVisibleMaps();},180);
 }
 function updateSelectedJobMap(){
  const addressCoords=(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng))?[selectedJob.lat,selectedJob.lng]:null;
@@ -998,7 +1095,7 @@ function updateSelectedJobMap(){
  }
  if(selectedMapObj){try{selectedMapObj.remove()}catch(e){} selectedMapObj=null}
  const node=el('selectedJobMap'); if(node){node._leaflet_id=null;node.innerHTML=''}
- selectedMapObj=L.map('selectedJobMap',{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,16);
+ selectedMapObj=L.map('selectedJobMap',{zoomControl:true,scrollWheelZoom:false,tap:true,trackResize:true}).setView(center,16);
  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(selectedMapObj);
  if(addressCoords){
    addressMarker=L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj).bindPopup('<b>Indirizzo intervento</b><br>'+selectedJob.address);
@@ -1016,7 +1113,7 @@ function updateSelectedJobMap(){
    updateOperationalPointLabel();
    updateSelectedJobMap();
  });
- setTimeout(()=>selectedMapObj.invalidateSize(true),100);
+ forceMapLayout(selectedMapObj,'selectedJobMap',center,16);
  updateOperationalPointLabel();
 }
 function updateReportMap(){
@@ -1030,7 +1127,7 @@ function updateReportMap(){
    node._leaflet_id=null;
    node.innerHTML='';
  }
- reportMapObj=L.map('reportRealMap',{zoomControl:false,scrollWheelZoom:false,dragging:false,tap:false})
+ reportMapObj=L.map('reportRealMap',{zoomControl:false,scrollWheelZoom:false,dragging:false,tap:false,trackResize:true})
    .setView(coords,16);
  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
    maxZoom:19,
@@ -1107,7 +1204,7 @@ function fieldNavigate(name){
  document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
  const resume=el('resumeJob');
  if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
- window.scrollTo({top:0,behavior:'smooth'}); setTimeout(invalidateVisibleMaps,80); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fitFieldMap(),120);
+ window.scrollTo({top:0,behavior:'smooth'}); setTimeout(forceAllMapLayouts,40); setTimeout(forceAllMapLayouts,180); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>{fitFieldMap();forceMapLayout(fieldMapObj,'fieldRealMap')},260);
 }
 
 function openOnly(id){
@@ -1348,6 +1445,20 @@ function markSignatureStatus(canvasId,statusId){
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
 window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();setTimeout(initAllMaps,150)});
+
+window.addEventListener('resize',()=>{
+  clearTimeout(mapFixTimer);
+  mapFixTimer=setTimeout(forceAllMapLayouts,120);
+});
+window.addEventListener('orientationchange',()=>{
+  setTimeout(forceAllMapLayouts,180);
+  setTimeout(forceAllMapLayouts,500);
+});
+document.addEventListener('visibilitychange',()=>{
+  if(!document.hidden) setTimeout(forceAllMapLayouts,150);
+});
+window.addEventListener('pageshow',()=>setTimeout(forceAllMapLayouts,180));
+
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
