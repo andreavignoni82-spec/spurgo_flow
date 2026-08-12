@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.8 - modalità ultra-operativa smartphone */
+/* Build 5.0.9 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -78,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.8 - navigazione field-service persistente */
+/* Build 5.0.9 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -98,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.8 */
+/* Build 5.0.9 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -137,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.8 - mappe reali e rapportino fedele */
+/* Build 5.0.9 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -202,11 +202,54 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .ref-layout .send-btn{min-height:46px;padding:5px}
 }
 
+
+/* Build 5.0.9 - mappe responsive, agenda selezionabile, riapertura interventi */
+.real-map{
+  width:100%;
+  min-height:260px;
+  height:clamp(260px,42vh,440px);
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #d5dfe7;
+  background:#eaf0f4;
+}
+.real-map.small{
+  min-height:190px;
+  height:clamp(190px,28vh,280px);
+}
+.real-map.report-map-real{
+  min-height:118px;
+  height:138px;
+}
+.leaflet-container{font:inherit}
+.leaflet-control-attribution{font-size:8px!important}
+.map-tools{display:flex;gap:7px;flex-wrap:wrap;margin:7px 0}
+.map-tools .btn{padding:8px 10px;font-size:12px}
+.agenda-selectable{cursor:pointer;border:2px solid transparent;transition:.15s}
+.agenda-selectable:active,.agenda-selectable:hover{border-color:#28a85a}
+.agenda-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.completed-section{margin-top:18px}
+.completed-job{background:#fff;color:#142438;border-radius:13px;padding:13px;margin:9px 0;border-left:5px solid #28a85a}
+.completed-job .head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.completed-job .actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.completed-chip{display:inline-block;background:#e8f7ee;color:#177a3e;border-radius:999px;padding:4px 7px;font-size:11px;font-weight:800}
+.reopened-chip{display:inline-block;background:#fff2dd;color:#a86400;border-radius:999px;padding:4px 7px;font-size:11px;font-weight:800}
+.edit-note{background:#fff8e8;border:1px solid #f1d9a3;color:#7a5711;border-radius:10px;padding:9px;margin:8px 0;font-size:12px}
+@media(max-width:700px){
+  .real-map{height:36vh;min-height:245px;max-height:360px}
+  .real-map.small{height:215px;min-height:215px}
+  .real-map.report-map-real{height:105px;min-height:105px}
+  .leaflet-control-zoom a{width:34px!important;height:34px!important;line-height:34px!important}
+}
+@media print{
+  .real-map.report-map-real{height:78px!important;min-height:78px!important}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.8</div>
+<div class="version">v5.0 · build 5.0.9</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -216,9 +259,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.8<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.9<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.8</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.9</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -248,7 +291,11 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" data-lat="45.6606" data-lng="10.0507" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
  <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" data-lat="45.8270" data-lng="10.0996" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
 </div>
-<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div id="selectedJobMap" class="real-map small"></div><div class="map-caption">Posizione intervento</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div id="selectedJobMap" class="real-map small"></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Posizione intervento</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div class="completed-section">
+ <h3 style="color:white">Interventi terminati</h3>
+ <div id="completedJobs"></div>
+</div>
 <div id="job" class="hidden">
 <h2>Intervento in corso · <span id="timer">00:00</span></h2>
 <div class="op-actions">
@@ -346,15 +393,16 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldAgenda" class="field-page">
  <h2>Agenda giornaliera</h2>
- <div class="day-item"><small>08:00 · COMPLETATO</small><b>Residence Sole</b>Via XX Settembre 8, Iseo</div>
- <div class="day-item"><small>10:30 · <span class="mini-badge">URGENTE</span></small><b>Condominio Belvedere</b>Via Roma 24, Sarnico · intervento in corso</div>
- <div class="day-item"><small>14:00 · PROGRAMMATO</small><b>Ristorante Al Lago</b>Iseo · Pulizia fossa biologica</div>
- <div class="day-item"><small>16:30 · PROGRAMMATO</small><b>Azienda Bianchi Srl</b>Costa Volpino · Lavaggio tubazione</div>
+ <p class="muted" style="color:#c8d6e2">Tocca qualsiasi appuntamento per aprire la relativa scheda intervento.</p>
+ <div class="day-item agenda-selectable" onclick="openCompletedByAgenda('INT-2024-00044')"><small>08:00 · COMPLETATO</small><b>Residence Sole</b>Via XX Settembre 8, Iseo<div class="agenda-actions"><button class="btn ghost">Apri intervento terminato</button></div></div>
+ <div class="day-item agenda-selectable" onclick="selectJobFromAgenda('INT-2024-00045')"><small>10:30 · <span class="mini-badge">URGENTE</span></small><b>Condominio Belvedere</b>Via Roma 24, Sarnico · intervento in corso<div class="agenda-actions"><button class="btn primary">Apri scheda</button></div></div>
+ <div class="day-item agenda-selectable" onclick="selectJobFromAgenda('INT-2024-00046')"><small>14:00 · PROGRAMMATO</small><b>Ristorante Al Lago</b>Iseo · Pulizia fossa biologica<div class="agenda-actions"><button class="btn primary">Apri scheda</button></div></div>
+ <div class="day-item agenda-selectable" onclick="selectJobFromAgenda('INT-2024-00047')"><small>16:30 · PROGRAMMATO</small><b>Azienda Bianchi Srl</b>Costa Volpino · Lavaggio tubazione<div class="agenda-actions"><button class="btn primary">Apri scheda</button></div></div>
 </div>
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div id="fieldRealMap" class="real-map" style="height:360px"></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+ <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="real-map"></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
 </div>
 
 <div id="fieldMessaggi" class="field-page">
@@ -393,7 +441,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.8</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.9</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -534,24 +582,136 @@ let jobRunning=false;
 
 let officeMapObj=null, controlMapObj=null, fieldMapObj=null, selectedMapObj=null, reportMapObj=null;
 const demoJobs=[
- {client:'Condominio Belvedere',lat:45.6722,lng:9.9229,status:'Urgente'},
- {client:'Ristorante Al Lago',lat:45.6606,lng:10.0507,status:'Programmato'},
- {client:'Azienda Bianchi Srl',lat:45.8270,lng:10.0996,status:'Programmato'}
+ {id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage',lat:45.6722,lng:9.9229,status:'Urgente'},
+ {id:'INT-2024-00046',client:'Ristorante Al Lago',address:'Lungolago, Iseo (BS)',request:'Pulizia fossa biologica',lat:45.6606,lng:10.0507,status:'Programmato'},
+ {id:'INT-2024-00047',client:'Azienda Bianchi Srl',address:'Costa Volpino (BG)',request:'Lavaggio tubazione',lat:45.8270,lng:10.0996,status:'Programmato'}
 ];
+const completedSeed=[
+ {id:'INT-2024-00044',client:'Residence Sole',address:'Via XX Settembre 8, Iseo (BS)',request:'Pulizia pozzetti',lat:45.6588,lng:10.0486,status:'Terminato',closedAt:'12/08/2026 09:05',reportNo:'2024-00044'}
+];
+let completedJobs=[...completedSeed];
 function makeLeafletMap(id, center, zoom=12, jobs=[]){
  const node=el(id); if(!node || typeof L==='undefined') return null;
- if(node._leaflet_id){try{node._leaflet_id=null;node.innerHTML=''}catch(e){}}
- const map=L.map(id,{zoomControl:true}).setView(center,zoom);
- L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
- jobs.forEach(j=>L.marker([j.lat,j.lng]).addTo(map).bindPopup('<b>'+j.client+'</b><br>'+j.status));
- setTimeout(()=>map.invalidateSize(),80);
+ if(node._leaflet_id){
+   try{
+     const old=node._leaflet_map_instance;
+     if(old) old.remove();
+   }catch(e){}
+   node._leaflet_id=null;
+   node.innerHTML='';
+ }
+ const map=L.map(id,{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,zoom);
+ node._leaflet_map_instance=map;
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+   maxZoom:19,
+   attribution:'&copy; OpenStreetMap contributors'
+ }).addTo(map);
+ const bounds=[];
+ jobs.forEach(j=>{
+   const marker=L.marker([j.lat,j.lng]).addTo(map);
+   marker.bindPopup('<b>'+j.client+'</b><br>'+(j.address||'')+'<br>'+j.status);
+   bounds.push([j.lat,j.lng]);
+ });
+ if(bounds.length>1){
+   map.fitBounds(bounds,{padding:[28,28],maxZoom:13});
+ }else if(bounds.length===1){
+   map.setView(bounds[0],zoom);
+ }
+ setTimeout(()=>map.invalidateSize(true),120);
  return map;
 }
+
+function invalidateVisibleMaps(){
+ [officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{
+   if(m) setTimeout(()=>m.invalidateSize(true),60);
+ });
+}
+function fitFieldMap(){
+ if(!fieldMapObj) return;
+ const pts=demoJobs.map(j=>[j.lat,j.lng]);
+ fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});
+}
+function centerMapOnSelected(){
+ if(!fieldMapObj) return;
+ fieldMapObj.setView([selectedJob.lat,selectedJob.lng],15);
+}
+function centerSelectedMap(){
+ if(selectedMapObj) selectedMapObj.setView([selectedJob.lat,selectedJob.lng],16);
+}
+function selectJobFromAgenda(id){
+ const node=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id===id);
+ if(node) selectJob(node);
+ fieldNavigate('Interventi');
+ setTimeout(()=>{
+   const card=el('selectedJobCard');
+   if(card) card.scrollIntoView({behavior:'smooth',block:'start'});
+   updateSelectedJobMap();
+ },100);
+}
+function openCompletedByAgenda(id){
+ fieldNavigate('Interventi');
+ setTimeout(()=>reopenCompletedJob(id),80);
+}
+function renderCompletedJobs(){
+ const host=el('completedJobs'); if(!host) return;
+ if(!completedJobs.length){
+   host.innerHTML='<div class="muted" style="color:#c8d6e2">Nessun intervento terminato.</div>';
+   return;
+ }
+ host.innerHTML=completedJobs.map(j=>`
+   <div class="completed-job">
+     <div class="head"><div><b>${j.client}</b><br><small>${j.address}</small></div><span class="completed-chip">TERMINATO</span></div>
+     <div class="muted">${j.request} · ${j.closedAt||''}</div>
+     <div class="actions">
+       <button class="btn ghost" onclick="viewCompletedReport('${j.id}')">Apri rapportino</button>
+       <button class="btn primary" onclick="reopenCompletedJob('${j.id}')">Riapri / modifica</button>
+     </div>
+   </div>`).join('');
+}
+function viewCompletedReport(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ populateReportFromSelected();
+ showReport();
+}
+function reopenCompletedJob(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ completedJobs=completedJobs.filter(x=>x.id!==id);
+ renderCompletedJobs();
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ el('jobPicker').style.display='none';
+ el('job').classList.remove('hidden');
+ el('startBtn').disabled=true;
+ el('startBtn').textContent='Intervento riaperto';
+ jobRunning=true;
+ sessionStorage.setItem('sf_job_running','1');
+ sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ const oldNotice=el('reopenNotice'); if(oldNotice) oldNotice.remove();
+ el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche. Al termine usa “Termina e genera rapportino” per creare una nuova versione del documento.</div>');
+ updateSelectedJobMap();
+ setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+function populateReportFromSelected(){
+ if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request||'';
+ if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client||'';
+ if(el('reportClientAddress')) el('reportClientAddress').innerHTML=(selectedJob.address||'').replace(', ','<br>')+' – Italia';
+ if(el('reportComune')) el('reportComune').textContent=(selectedJob.address||'')+' – Italia';
+ if(el('reportLat')) el('reportLat').textContent=Number(selectedJob.lat||0).toFixed(4);
+ if(el('reportLng')) el('reportLng').textContent=Number(selectedJob.lng||0).toFixed(4);
+ if(el('reportNumber')) el('reportNumber').textContent='N. '+String(selectedJob.reportNo||selectedJob.id||'').replace('INT-','');
+ setTimeout(updateReportMap,120);
+}
+
 function initAllMaps(){
- officeMapObj=makeLeafletMap('officeMap',[45.70,10.02],10,demoJobs);
- controlMapObj=makeLeafletMap('controlMap',[45.70,10.02],10,demoJobs);
+ const allMapJobs=[...demoJobs,...completedJobs];
+ officeMapObj=makeLeafletMap('officeMap',[45.70,10.02],10,allMapJobs);
+ controlMapObj=makeLeafletMap('controlMap',[45.70,10.02],10,allMapJobs);
  fieldMapObj=makeLeafletMap('fieldRealMap',[45.70,10.02],10,demoJobs);
  updateSelectedJobMap();
+ setTimeout(invalidateVisibleMaps,180);
 }
 function updateSelectedJobMap(){
  if(typeof selectedJob==='undefined') return;
@@ -568,7 +728,7 @@ let signatureTarget=null, modalDrawing=false, modalCtx=null;
 function selectJob(node){
  document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
  selectedJob={id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:parseFloat(node.dataset.lat),lng:parseFloat(node.dataset.lng)};
- el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request; updateSelectedJobMap();
+ el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request; updateSelectedJobMap(); if(fieldMapObj) fieldMapObj.setView([selectedJob.lat,selectedJob.lng],15);
 }
 function openSelectedMap(){window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank')}
 function openSigModal(target){
@@ -609,7 +769,7 @@ function fieldNavigate(name){
  document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
  const resume=el('resumeJob');
  if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
- window.scrollTo({top:0,behavior:'smooth'}); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fieldMapObj.invalidateSize(),80);
+ window.scrollTo({top:0,behavior:'smooth'}); setTimeout(invalidateVisibleMaps,80); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fitFieldMap(),120);
 }
 
 function openOnly(id){
@@ -749,14 +909,13 @@ function prepareAndShowReport(){
   jobRunning=false; sessionStorage.removeItem('sf_job_running'); sessionStorage.removeItem('sf_selected_job');
   el('job').classList.add('hidden'); el('jobPicker').style.display='grid'; el('startBtn').disabled=false; el('startBtn').textContent='Inizia intervento';
   el('selectedJobCard').insertAdjacentHTML('beforebegin','<div class="finished-card">✓ Intervento '+selectedJob.id+' terminato e rapportino generato.</div>');
-  if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request;
-  if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client;
-  if(el('reportClientAddress')) el('reportClientAddress').innerHTML=selectedJob.address.replace(', ','<br>')+' – Italia';
-  if(el('reportComune')) el('reportComune').textContent=selectedJob.address+' – Italia';
-  if(el('reportLat')) el('reportLat').textContent=selectedJob.lat.toFixed(4);
-  if(el('reportLng')) el('reportLng').textContent=selectedJob.lng.toFixed(4);
-  if(el('reportNumber')) el('reportNumber').textContent='N. '+selectedJob.id.replace('INT-','');
-  setTimeout(updateReportMap,120);
+  const now=new Date();
+  const closedLabel=now.toLocaleDateString('it-IT')+' '+now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  const completedRecord={...selectedJob,status:'Terminato',closedAt:closedLabel,reportNo:String(selectedJob.id||'').replace('INT-','')};
+  completedJobs=completedJobs.filter(x=>x.id!==completedRecord.id);
+  completedJobs.unshift(completedRecord);
+  renderCompletedJobs();
+  populateReportFromSelected();
 
   const rel=el('relazioneGenerata').textContent.trim();
   el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
@@ -807,6 +966,11 @@ function showReport(){
 function closeReport(){
   el('reportView').classList.add('hidden');
   el(prevView).classList.remove('hidden');
+  if(prevView==='operator'){
+    renderCompletedJobs();
+    fieldNavigate('Interventi');
+  }
+  setTimeout(invalidateVisibleMaps,120);
 }
 
 function shareMail(){
@@ -836,7 +1000,7 @@ function markSignatureStatus(canvasId,statusId){
 }
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
-window.addEventListener('load',()=>setTimeout(initAllMaps,150));
+window.addEventListener('load',()=>{renderCompletedJobs();setTimeout(initAllMaps,150)});
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
