@@ -1,43 +1,55 @@
-# Spurgo Flow — Beta v0.2
+# Spurgo Flow — Beta v0.3 Premium
 
-PWA dimostrativa per aziende di spurghi, pronta per GitHub Pages.
+Versione dimostrativa PWA pronta per **GitHub Pages**.
 
 ## Credenziali demo
 - Ufficio: `ufficio` / `ufficio123`
 - Operatore Marco: `marco` / `marco123`
 - Operatore Luca: `luca` / `luca123`
 
-L'area Ufficio può creare altri operatori e cambiare le password.
-
-## Funzioni v0.2
-- Login individuale con password hashata SHA-256
-- Area Ufficio e area Operatore separate
-- Ogni operatore vede esclusivamente gli interventi assegnati al proprio ID
-- Creazione e assegnazione interventi
-- Agenda operatori
-- Avvio/ripresa/chiusura intervento con durata
-- Fotocamera/file reali con categorie PRIMA/DURANTE/DOPO/ANOMALIA
-- Compressione foto nel browser
-- GPS reale e collegamento OpenStreetMap
-- Dettatura browser/tastiera
-- Attività e anomalie
-- Relazione professionale locale + endpoint AI opzionale
-- Firma cliente su canvas touch
-- Rapportino PDF con jsPDF (fallback stampa PDF)
+## Novità v0.3
+- Nuova identità grafica blu navy / verde e nuova icona PWA
+- Login ridisegnato
+- Dashboard Ufficio in stile gestionale professionale con menu laterale
+- Area operatore smartphone-first mantenuta e aggiornata
+- Accesso personale per ogni operatore: ciascuno vede solo i propri interventi
+- Fotografie Prima / Durante / Dopo / Anomalia
+- GPS, navigazione, dettatura, attività, anomalie e firma cliente
+- Nuovo template A4 del rapportino PDF
+- Invio/condivisione del rapportino dopo la chiusura
+- Pulsanti E-mail, WhatsApp, Condividi PDF e Download PDF
+- Condivisione nativa del PDF su smartphone compatibili (Mail, WhatsApp, AirDrop, ecc.)
 - Storico cliente e memoria tecnica
 - Sopralluogo rapido
-- PWA installabile + service worker
+- PWA installabile con icone 192/512
 
-## Pubblicazione GitHub Pages
-1. Crea un nuovo repository pubblico o privato compatibile con Pages.
-2. Carica nella root: `index.html`, `app.js`, `style.css`, `manifest.json`, `sw.js`, `README.md`.
-3. Repository > Settings > Pages.
-4. Source: Deploy from a branch.
-5. Branch: `main`, cartella `/ (root)`.
-6. Apri l'URL Pages generato da GitHub.
+## Nota su E-mail e WhatsApp
+Su iPhone/Android compatibili, il browser usa la Web Share API e condivide il **file PDF reale** tramite il menu nativo: l'utente può scegliere Mail, WhatsApp, AirDrop o altre app installate.
 
-## Nota sicurezza
-Questa Beta è volutamente senza backend. Password, interventi, foto e firme restano nel browser del dispositivo tramite localStorage/sessionStorage. Le password sono hashate, ma un'app statica non offre sicurezza multiutente reale né sincronizzazione tra dispositivi. Per una versione cliente/produzione è necessario spostare autenticazione e dati su un backend (es. Firebase/Supabase/API proprietaria) con autorizzazioni server-side.
+Su browser che non consentono la condivisione diretta dei file:
+- E-mail apre un messaggio precompilato;
+- WhatsApp apre una chat/messaggio precompilato;
+- il PDF resta scaricabile separatamente.
 
-## AI
-La Beta non contiene chiavi API. In Ufficio > Impostazioni puoi inserire l'URL di un endpoint proxy/Worker che riceva JSON e restituisca `{ "report": "..." }`. Se non configurato, la relazione viene generata localmente senza costi.
+L'invio automatico senza interazione dell'utente richiederà, nella futura versione produzione, un backend SMTP e/o WhatsApp Business API.
+
+## Pubblicazione su GitHub Pages
+1. Crea un repository GitHub.
+2. Carica **tutti i file di questa cartella nella root** del repository.
+3. Apri `Settings > Pages`.
+4. In `Build and deployment`, scegli `Deploy from a branch`.
+5. Scegli branch `main` e cartella `/ (root)`.
+6. Salva e apri l'URL fornito da GitHub Pages.
+
+## File principali
+- `index.html`
+- `style.css`
+- `app.js`
+- `manifest.json`
+- `sw.js`
+- `icon.svg`
+- `icon-192.png`
+- `icon-512.png`
+
+## Sicurezza della Beta
+Questa versione è ancora statica e salva dati tramite `localStorage/sessionStorage`. Le password sono hashate lato browser, ma la separazione degli utenti non sostituisce l'autenticazione server-side. La vera versione multi-dispositivo dovrà spostare login, permessi, interventi, foto e rapportini su un backend con regole di autorizzazione.
