@@ -136,3 +136,13 @@ Baseline utilizzata: Spurgo Flow 5.0.13 FIX1 stabile.
 ### Persistenza Beta
 La versione GitHub usa localStorage: dati e messaggi sono persistenti sullo stesso browser/dispositivo.
 La sincronizzazione reale tra dispositivi sarà il passaggio successivo con database/backend condiviso.
+
+## Spurgo Flow 6.1.0 — Multi-dispositivo
+- Firebase Authentication per utenti Ufficio/operatori.
+- Cloud Firestore per dati condivisi.
+- Listener realtime per interventi, agenda e messaggi.
+- Creazione account operatore direttamente dall'Ufficio tramite una seconda istanza Firebase Auth.
+- Firestore Security Rules incluse.
+- Bootstrap automatico dei dati iniziali dopo il primo login Ufficio.
+- Modalità locale di fallback se Firebase non è configurato.
+- Guida completa: `SETUP_FIREBASE.md`.

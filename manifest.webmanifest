@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.0",
+  "name": "Spurgo Flow 6.1",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow Suite v6.0.0 - Ufficio operativo, assegnazioni e messaggistica operatori",
+  "description": "Spurgo Flow 6.1 - Multi-dispositivo Firebase realtime",
   "icons": [
     {
       "src": "icon-192.png",
