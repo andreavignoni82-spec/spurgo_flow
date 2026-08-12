@@ -1,21 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b1f33" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Spurgo Flow Beta v0.4</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-</head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite Beta v5.0</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--navy:#071d35;--navy2:#0b2948;--green:#28a85a;--bg:#f4f7fa;--line:#dce5ec;--red:#e53e3e;--orange:#ef8c24;--blue:#1684d6}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:#142438}
+button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:700;cursor:pointer}.primary{background:var(--green);color:white}.navy{background:var(--navy);color:white}.ghost{background:white;border:1px solid var(--line)}.danger{background:var(--red);color:white}
+.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#06182c,#0c3154)}
+.login-card{width:min(430px,92vw);background:#fff;border-radius:24px;padding:30px;box-shadow:0 25px 70px #0006}
+.brand{font-size:32px;font-weight:900;color:var(--navy)}.brand b{color:var(--green)}.version{margin:14px 0 22px;background:#eaf8ef;color:#177a3e;border:1px solid #bfe8ce;padding:12px;border-radius:12px;font-weight:800}
+.field{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;margin:6px 0 12px}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}
+.side{background:var(--navy);color:#fff;padding:22px 14px;position:sticky;top:0;height:100vh}.side .logo{font-size:22px;font-weight:900;padding:0 10px 18px}.side .logo b{color:#4bd27a}.menu button{width:100%;text-align:left;background:transparent;color:#dbe7f2;border:0;padding:11px;border-radius:8px;margin:2px 0;cursor:pointer}.menu button.active,.menu button:hover{background:#12466c}.sidefoot{position:absolute;bottom:18px;left:18px;right:18px;font-size:12px;color:#bcd0df}.content{padding:26px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top h1{margin:0}.build{font-size:12px;font-weight:800;color:#177a3e;background:#eaf8ef;padding:7px 10px;border-radius:999px}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 3px 12px #0a25400a}.kpi strong{display:block;font-size:29px;margin-top:7px}.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 8px;border-bottom:1px solid #edf1f4;text-align:left;font-size:14px}.badge{font-size:11px;font-weight:900;padding:5px 7px;border-radius:999px;color:#fff}.urgent{background:var(--red)}.progress{background:var(--orange)}.planned{background:var(--blue)}.done{background:var(--green)}.map{min-height:300px;background:linear-gradient(45deg,#dbe9df,#edf4ee);position:relative;overflow:hidden}.map:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(25deg,transparent 0 35px,#fff8 36px 39px)}.pin{position:absolute;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--red);box-shadow:0 2px 5px #0004}.pin:nth-child(2){left:62%;top:28%;background:var(--orange)}.pin:nth-child(3){left:28%;top:58%;background:var(--blue)}.pin:nth-child(4){left:74%;top:66%;background:var(--green)}.section{display:none}.section.active{display:block}.fleet-card h3{margin:0 0 4px}.muted{color:#6d7d8b;font-size:13px}.meter{height:8px;background:#e7edf1;border-radius:99px;overflow:hidden;margin-top:8px}.meter i{display:block;height:100%;background:var(--green)}.actions{display:flex;gap:8px;flex-wrap:wrap}.operator-shell{min-height:100vh;background:var(--navy);color:white;padding:18px}.operator-head{display:flex;justify-content:space-between;align-items:center}.op-card{background:white;color:#142438;border-radius:14px;padding:16px;margin:12px 0}.op-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.op-actions button{min-height:80px}.report{background:#fff;color:#152436;max-width:900px;margin:20px auto;padding:28px;border-radius:12px}.report-head{display:flex;justify-content:space-between;border-bottom:3px solid var(--navy);padding-bottom:14px}.qr{width:86px;height:86px;background:repeating-conic-gradient(#071d35 0 25%,#fff 0 50%) 50%/14px 14px;border:8px solid white;outline:1px solid #cbd6df}.signs{display:grid;grid-template-columns:1fr 1fr;gap:20px}.sign{height:100px;border:1px solid #aebdca;border-radius:8px;padding:10px}.share{max-width:900px;margin:12px auto;background:white;padding:16px;border-radius:12px}.sharegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.menu{display:flex;overflow:auto}.menu button{min-width:max-content}.sidefoot{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.content{padding:15px}.sharegrid,.signs{grid-template-columns:1fr}.report{border-radius:0;margin:0}}
+</style></head>
 <body>
-  <div id="app"></div>
-  <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
-  <script src="app.js"></script>
-</body>
-</html>
+<div id="login" class="login"><div class="login-card">
+<div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
+<div class="version">SPURGO FLOW — Suite Beta v5.0<br><small>Build 5.0.0</small></div>
+<label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
+<button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
+<p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
+</div></div>
+
+<div id="office" class="app hidden">
+<aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
+<div class="menu" id="menu">
+<button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.0<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+<main class="content">
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.0</span></div>
+<div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
+<div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
+<div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
+
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card map" style="min-height:500px"><h3 style="position:relative;z-index:2">Situazione territoriale</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+
+<section id="interventi" class="section"><div class="top"><h1>Interventi</h1><button class="btn primary" onclick="alert('Nuovo intervento: modulo demo predisposto')">+ Nuovo intervento</button></div><div class="card" style="margin-top:18px"><table class="table"><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Stato</th><th>Operatore</th><th>Fatturazione</th></tr><tr><td>#0051</td><td>Condominio Belvedere</td><td>Disotturazione</td><td><span class="badge urgent">URGENTE</span></td><td>Marco</td><td>Da fatturare</td></tr><tr><td>#0050</td><td>Ristorante Al Lago</td><td>Pulizia fossa</td><td><span class="badge progress">IN CORSO</span></td><td>Luca</td><td>—</td></tr><tr><td>#0049</td><td>Azienda Bianchi</td><td>Lavaggio</td><td><span class="badge planned">PROGRAMMATO</span></td><td>Marco</td><td>—</td></tr></table></div></section>
+
+<section id="agenda" class="section"><h1>Agenda squadre</h1><div class="grid3" style="margin-top:18px"><div class="card"><h3>Marco · AB01</h3><p>08:00 Rossi ✓</p><p>10:30 Belvedere 🔴</p><p>16:30 Bianchi</p></div><div class="card"><h3>Luca · AB02</h3><p>07:30 Residence Sole ✓</p><p>14:00 Al Lago 🟠</p></div><div class="card"><h3>Paolo · FV01</h3><p>Disponibile</p><button class="btn primary">Assegna intervento</button></div></div></section>
+
+<section id="clienti" class="section"><h1>Clienti & Impianti</h1><div class="grid3" style="margin-top:18px"><div class="card"><h3>Condominio Belvedere</h3><p>Via Roma 24 · Sarnico (BG)</p><p class="muted">12 interventi · 4 pozzetti · 2 videoispezioni</p><button class="btn ghost">Scheda impianto</button></div><div class="card"><h3>Ristorante Al Lago</h3><p>Iseo (BS)</p><p class="muted">7 interventi · fossa biologica</p></div><div class="card"><h3>Azienda Bianchi Srl</h3><p>Costa Volpino (BG)</p><p class="muted">3 interventi · rete industriale</p></div></div></section>
+
+<section id="flotta" class="section"><div class="top"><h1>Mezzi & Flotta</h1><button class="btn primary">+ Nuovo mezzo</button></div><div class="grid3" style="margin-top:18px"><div class="card fleet-card"><h3>Autobotte 01</h3><div class="muted">AB01 · capacità 10 m³</div><p>Stato: 🟢 Operativa</p><p>Squadra: Marco</p><p>Manutenzione tra 38 h</p><div class="meter"><i style="width:72%"></i></div></div><div class="card fleet-card"><h3>Autobotte 02</h3><div class="muted">AB02 · capacità 8 m³</div><p>Stato: 🟠 In intervento</p><p>Squadra: Luca</p><p>Manutenzione tra 112 h</p><div class="meter"><i style="width:45%"></i></div></div><div class="card fleet-card"><h3>Furgone Video 01</h3><div class="muted">FV01 · videoispezione</div><p>Stato: 🟢 Disponibile</p><p>Squadra: Paolo</p><p>Revisione: 22/10/2026</p></div></div></section>
+
+<section id="squadre" class="section"><h1>Squadre & Operatori</h1><div class="grid3" style="margin-top:18px"><div class="card"><h3>Marco Rossi</h3><p>🟢 Attivo · AB01</p><p class="muted">3 interventi oggi · 5h 12m</p></div><div class="card"><h3>Luca Bianchi</h3><p>🟠 In intervento · AB02</p><p class="muted">2 interventi oggi · 4h 06m</p></div><div class="card"><h3>Paolo Verdi</h3><p>🟢 Disponibile · FV01</p><p class="muted">1 intervento oggi</p></div></div></section>
+
+<section id="rapportini" class="section"><h1>Rapportini</h1><div class="card" style="margin-top:18px"><table class="table"><tr><th>N.</th><th>Cliente</th><th>Data</th><th>Operatore</th><th></th></tr><tr><td>2026-00051</td><td>Condominio Belvedere</td><td>12/08/2026</td><td>Marco</td><td><button class="btn primary" onclick="showReport()">Apri</button></td></tr></table></div></section>
+
+<section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
+</main></div>
+
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div></div><div><span class="build">v5.0</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div style="max-width:620px;margin:auto"><h2>I miei interventi</h2><div class="op-card"><span class="badge urgent">URGENTE</span><h3>Condominio Belvedere</h3><p>Via Roma 24, 24067 Sarnico (BG)</p><p>Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Via+Roma+24+Sarnico')">Apri in mappa</button><button class="btn navy" onclick="startJob()">Inizia intervento</button></div></div>
+<div id="job" class="hidden"><h2>Intervento in corso · <span id="timer">00:00</span></h2><div class="op-actions"><button class="btn ghost">📷 FOTO</button><button class="btn ghost">🎙 RELAZIONE</button><button class="btn ghost">🛠 ATTIVITÀ</button><button class="btn ghost">⚠ ANOMALIA</button></div><button class="btn danger" style="width:100%;margin-top:16px" onclick="showReport()">TERMINA INTERVENTO</button></div></div></div>
+
+<div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.0</span></div>
+<div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><div class="qr" title="QR predisposto per futura scheda cliente"></div></div>
+<div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
+<div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4>✓ Aspirazione reflui — 1,5 m³<br>✓ Lavaggio alta pressione — 32 m<br>✓ Disotturazione tubazione</div></div><hr><h4>RELAZIONE TECNICA</h4><p>All'arrivo sul posto è stata riscontrata la completa ostruzione del pozzetto. È stata effettuata l'aspirazione e successivamente il lavaggio ad alta pressione della tubazione. Si consiglia una videoispezione per una valutazione completa.</p>
+<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="grid3"><div class="card">PRIMA<br><br>📷 Foto intervento</div><div class="card">DURANTE<br><br>📷 Foto intervento</div><div class="card">DOPO<br><br>📷 Foto intervento</div></div>
+<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br>Mario Rossi<br><div style="font-family:cursive;font-size:28px">Mario Rossi</div></div><div class="sign"><b>FIRMA OPERATORE</b><br>Marco Rossi<br><div style="font-family:cursive;font-size:28px">Marco Rossi</div></div></div>
+<p class="muted">QR predisposto: nella futura versione collegherà alla scheda cliente/intervento protetta.</p></div>
+<div class="share"><h2 style="margin-top:0">INVIA RAPPORTINO</h2><div class="sharegrid"><button class="btn primary" onclick="shareMail()">✉ INVIA VIA E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ INVIA VIA WHATSAPP</button><button class="btn navy" onclick="shareNative()">⌯ CONDIVIDI PDF</button></div></div></div>
+
+<script>
+let prevView='office', timerInt, secs=0;
+function login(){let u=user.value.trim().toLowerCase(),p=pass.value;if(u==='ufficio'&&p==='ufficio123'){loginEl(false);office.classList.remove('hidden')}else if((u==='marco'&&p==='marco123')||(u==='luca'&&p==='luca123')){loginEl(false);operator.classList.remove('hidden');opname.textContent='Operatore: '+u[0].toUpperCase()+u.slice(1)}else alert('Credenziali demo non valide')}
+function loginEl(show){login.classList.toggle('hidden',!show)}
+function logout(){location.reload()}
+document.querySelectorAll('#menu button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#menu button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.sec).classList.add('active')})
+function startJob(){job.classList.remove('hidden');secs=0;timerInt=setInterval(()=>{secs++;timer.textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')},1000)}
+function showReport(){clearInterval(timerInt);prevView=!operator.classList.contains('hidden')?'operator':'office';office.classList.add('hidden');operator.classList.add('hidden');reportView.classList.remove('hidden')}
+function closeReport(){reportView.classList.add('hidden');document.getElementById(prevView).classList.remove('hidden')}
+function shareMail(){location.href='mailto:?subject=Rapportino Spurgo Flow 2026-00051&body=In allegato/da condividere il rapportino dell’intervento n. 2026-00051.'}
+function shareWA(){window.open('https://wa.me/?text='+encodeURIComponent('Spurgo Flow — Rapportino intervento n. 2026-00051. Il PDF può essere condiviso dal dispositivo.'))}
+async function shareNative(){if(navigator.share){try{await navigator.share({title:'Rapportino Spurgo Flow',text:'Rapportino intervento n. 2026-00051'})}catch(e){}}else window.print()}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+</script></body></html>

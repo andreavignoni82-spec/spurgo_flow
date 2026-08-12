@@ -1,0 +1,9 @@
+{
+  "name": "Spurgo Flow Suite",
+  "short_name": "Spurgo Flow",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071d35",
+  "theme_color": "#071d35",
+  "description": "Suite aziendale per gestione interventi di spurgo - Beta v5.0 Build 5.0.0"
+}
