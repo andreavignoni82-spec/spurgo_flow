@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.5",
+  "name": "Spurgo Flow 6.1.6",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.5 - Multi-dispositivo - Client Save Fix",
+  "description": "Spurgo Flow 6.1.6 - Multi-dispositivo - Full Office Audit",
   "icons": [
     {
       "src": "icon-192.png",

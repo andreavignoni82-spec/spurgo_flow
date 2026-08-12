@@ -176,3 +176,22 @@ La sincronizzazione reale tra dispositivi sarà il passaggio successivo con data
 - Se Firestore rifiuta il salvataggio, il modulo resta aperto e mostra l'errore reale.
 - Eliminazione cliente sincronizzata direttamente con Firestore.
 - LocalStorage aggiornato solo dopo successo cloud.
+
+## 6.1.6 — Full Office Audit
+Confronto eseguito con la 6.0.0 stabile.
+
+Funzioni ripristinate:
+- `saveV6`
+- `renderClients`
+- `newInterventionForClient`
+- `openVehicleModal`
+- `deleteClient`
+
+Clienti:
+- salvataggio diretto Firestore quando disponibile;
+- fallback compatibile con `syncFromGlobals`;
+- nessun crash se Safari carica temporaneamente un modulo cloud precedente.
+
+Cache:
+- `index.html`, `firebase-config.js`, `firebase-sync.js` e navigazioni non vengono più serviti dalla cache applicativa;
+- `skipWaiting()` + `clients.claim()` per attivare subito il nuovo service worker.

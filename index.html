@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.5</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.6</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -390,7 +390,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.5 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.6 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -400,9 +400,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.5 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.6 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.5</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.6</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -453,7 +453,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.5</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.6</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -502,7 +502,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.5</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.6</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -679,7 +679,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.5</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.6</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -782,7 +782,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.5 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.6 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -847,7 +847,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.5 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.6 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -942,6 +942,17 @@ function deleteTeam(id){
  saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
 }
 
+
+function saveV6(){
+  localStorage.setItem('sf_v6_clients',JSON.stringify(Array.isArray(sfClients)?sfClients:[]));
+  localStorage.setItem('sf_v6_vehicles',JSON.stringify(Array.isArray(sfVehicles)?sfVehicles:[]));
+  localStorage.setItem('sf_v6_interventions',JSON.stringify(Array.isArray(sfOfficeInterventions)?sfOfficeInterventions:[]));
+  localStorage.setItem('sf_v6_messages',JSON.stringify(Array.isArray(sfMessages)?sfMessages:[]));
+  if(window.SFCloud?.ready && typeof window.SFCloud.syncFromGlobals==='function'){
+    window.SFCloud.syncFromGlobals();
+  }
+}
+
 function getOperator(id){return sfOperators.find(o=>o.id===id)}
 function getVehicle(id){return sfVehicles.find(v=>v.id===id)}
 function getClient(id){return sfClients.find(c=>c.id===id)}
@@ -1007,53 +1018,159 @@ function renderOfficeAgenda(){
  host.innerHTML=rows.map(i=>{const o=getOperator(i.operatorId),v=getVehicle(i.vehicleId);return `<div class="v6-row v6-agenda-day"><div class="v6-time">${esc(i.time||'—')}</div><div><div class="v6-row-head"><b>${esc(i.client)}</b><span class="v6-status ${statusClass(i.status)}">${esc(i.status)}</span></div><div class="v6-meta">${esc(i.address)}<br>${esc(i.request)} · ${esc(o?operatorName(o):'Da assegnare')} · ${esc(v?v.code:'—')}</div><div class="v6-row-actions"><button class="btn ghost" onclick="openInterventionModal('${i.id}')">Apri</button></div></div></div>`}).join('');
 }
 
+
 function openClientModal(id=null){
- const c=id?getClient(id):null;editingEntity={type:'client',id};
+ const c=id?getClient(id):null;
+ editingEntity={type:'client',id};
  showV6Modal(c?'Modifica cliente':'Nuovo cliente',`<div class="v6-form">
  <div class="full"><label>Ragione sociale / nome</label><input id="vcName" class="field" value="${esc(c?.name||'')}"></div>
- <div><label>Via / civico</label><input id="vcAddress" class="field" value="${esc(c?.address||'')}"></div><div><label>Comune</label><input id="vcCity" class="field" value="${esc(c?.city||'')}"></div>
- <div><label>Telefono</label><input id="vcPhone" class="field" value="${esc(c?.phone||'')}"></div><div><label>E-mail</label><input id="vcEmail" class="field" value="${esc(c?.email||'')}"></div>
+ <div><label>Via / civico</label><input id="vcAddress" class="field" value="${esc(c?.address||'')}"></div>
+ <div><label>Comune</label><input id="vcCity" class="field" value="${esc(c?.city||'')}"></div>
+ <div><label>Telefono</label><input id="vcPhone" class="field" value="${esc(c?.phone||'')}"></div>
+ <div><label>E-mail</label><input id="vcEmail" class="field" value="${esc(c?.email||'')}"></div>
  <div class="full"><label>Referente</label><input id="vcContact" class="field" value="${esc(c?.contact||'')}"></div>
  <div class="full"><label>Impianti / note</label><textarea id="vcNotes" class="textarea">${esc(c?.notes||'')}</textarea></div>
- </div><div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">Annulla</button><button class="btn primary" onclick="saveClient()">Salva cliente</button></div>`);
+ </div><div class="panel-actions">
+ <button class="btn ghost" onclick="closeV6Modal()">Annulla</button>
+ <button class="btn primary" id="saveClientBtn" onclick="saveClient()">Salva cliente</button>
+ </div>`);
 }
+
 async function saveClient(){
  const existing=editingEntity.id?getClient(editingEntity.id):null;
  const data={
-   name:el('vcName').value.trim(),
-   address:el('vcAddress').value.trim(),
-   city:el('vcCity').value.trim(),
-   phone:el('vcPhone').value.trim(),
-   email:el('vcEmail').value.trim(),
-   contact:el('vcContact').value.trim(),
-   notes:el('vcNotes').value.trim()
+   name:el('vcName')?.value.trim()||'',
+   address:el('vcAddress')?.value.trim()||'',
+   city:el('vcCity')?.value.trim()||'',
+   phone:el('vcPhone')?.value.trim()||'',
+   email:el('vcEmail')?.value.trim()||'',
+   contact:el('vcContact')?.value.trim()||'',
+   notes:el('vcNotes')?.value.trim()||''
  };
  if(!data.name){alert('Inserisci il nome cliente.');return}
 
  const id=existing?.id||uniqueId('cl');
  const record={id,...data};
+ const btn=el('saveClientBtn');
 
  try{
-   if(window.SFCloud?.enabled){
-     const saveBtn=[...el('v6Modal').querySelectorAll('button')].find(b=>b.textContent.includes('Salva cliente'));
-     if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Salvataggio cloud…'}
+   if(btn){btn.disabled=true;btn.textContent='Salvataggio…'}
+
+   // If the newest Firebase module is loaded, perform the direct cloud write.
+   if(window.SFCloud?.enabled && typeof window.SFCloud.saveClient==='function'){
      await window.SFCloud.saveClient(record);
    }
 
+   // Update the in-memory/local copy only after a successful direct write.
    if(existing)Object.assign(existing,data);
-   else sfClients.push(record);
+   else if(!sfClients.some(c=>c.id===id))sfClients.push(record);
 
    localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
-   closeV6Modal();
    renderClients();
-   renderAllOfficeV6();
+
+   // Compatibility fallback: older firebase-sync.js still exposes syncFromGlobals.
+   if(window.SFCloud?.ready &&
+      typeof window.SFCloud.saveClient!=='function' &&
+      typeof window.SFCloud.syncFromGlobals==='function'){
+     window.SFCloud.syncFromGlobals();
+   }
+
+   closeV6Modal();
  }catch(e){
    console.error('saveClient',e);
    alert('Cliente non salvato: '+(e.message||e));
-   const saveBtn=[...el('v6Modal').querySelectorAll('button')].find(b=>b.textContent.includes('Salvataggio cloud'));
-   if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Salva cliente'}
+   if(btn){btn.disabled=false;btn.textContent='Salva cliente'}
  }
 }
+
+async function deleteClient(id){
+ if(sfOfficeInterventions.some(i=>i.clientId===id)){
+   alert('Cliente collegato a interventi: non può essere eliminato.');
+   return;
+ }
+ if(!confirm('Eliminare cliente?'))return;
+
+ try{
+   if(window.SFCloud?.enabled && typeof window.SFCloud.deleteClient==='function'){
+     await window.SFCloud.deleteClient(id);
+   }
+   sfClients=sfClients.filter(c=>c.id!==id);
+   localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
+
+   if(window.SFCloud?.ready &&
+      typeof window.SFCloud.deleteClient!=='function' &&
+      typeof window.SFCloud.syncFromGlobals==='function'){
+     window.SFCloud.syncFromGlobals();
+   }
+
+   renderClients();
+ }catch(e){
+   console.error('deleteClient',e);
+   alert('Eliminazione cliente non riuscita: '+(e.message||e));
+ }
+}
+
+function renderClients(){
+ const host=el('clientList');
+ if(!host)return;
+
+ const q=(el('clientSearch')?.value||'').toLowerCase();
+ const list=(Array.isArray(sfClients)?sfClients:[]).filter(c=>
+   !q || [c.name,c.address,c.city,c.phone,c.email,c.contact,c.notes]
+     .join(' ').toLowerCase().includes(q)
+ );
+
+ if(!list.length){
+   host.innerHTML='<div class="v6-empty">Nessun cliente.</div>';
+   return;
+ }
+
+ host.innerHTML=list.map(c=>{
+   const n=(Array.isArray(sfOfficeInterventions)?sfOfficeInterventions:[])
+     .filter(i=>i.clientId===c.id).length;
+   return `<div class="v6-card">
+     <h3>${esc(c.name)}</h3>
+     <div>${esc(c.address||'')} ${c.city?'· '+esc(c.city):''}</div>
+     <div class="v6-meta">
+       ${esc(c.phone||'')} ${c.email?'· '+esc(c.email):''}<br>
+       Referente: ${esc(c.contact||'—')}<br>${esc(c.notes||'')}
+     </div>
+     <div class="v6-meta"><b>${n}</b> interventi registrati</div>
+     <div class="v6-row-actions">
+       <button class="btn ghost" onclick="openClientModal('${c.id}')">Modifica</button>
+       <button class="btn primary" onclick="newInterventionForClient('${c.id}')">Nuovo intervento</button>
+       <button class="btn danger" onclick="deleteClient('${c.id}')">Elimina</button>
+     </div>
+   </div>`;
+ }).join('');
+}
+
+function newInterventionForClient(id){
+ openInterventionModal();
+ setTimeout(()=>{
+   if(el('viClient'))el('viClient').value=id;
+   v6FillClientAddress();
+ },20);
+}
+
+function openVehicleModal(id=null){
+ const v=id?getVehicle(id):null;
+ editingEntity={type:'vehicle',id};
+ showV6Modal(v?'Modifica mezzo':'Nuovo mezzo',`<div class="v6-form">
+ <div><label>Nome mezzo</label><input id="vvName" class="field" value="${esc(v?.name||'')}"></div>
+ <div><label>Codice</label><input id="vvCode" class="field" value="${esc(v?.code||'')}"></div>
+ <div><label>Tipologia</label><input id="vvType" class="field" value="${esc(v?.type||'Autobotte')}"></div>
+ <div><label>Targa</label><input id="vvPlate" class="field" value="${esc(v?.plate||'')}"></div>
+ <div><label>Capacità</label><input id="vvCapacity" class="field" value="${esc(v?.capacity||'')}"></div>
+ <div><label>Stato</label><select id="vvStatus" class="field">${['Operativa','Disponibile','In intervento','Manutenzione','Fuori servizio'].map(x=>`<option ${v?.status===x?'selected':''}>${x}</option>`).join('')}</select></div>
+ <div><label>Ore/km</label><input id="vvHours" class="field" type="number" value="${esc(v?.hours??0)}"></div>
+ <div><label>Prossima manutenzione</label><input id="vvMaintenance" class="field" value="${esc(v?.nextMaintenance||'')}"></div>
+ </div><div class="panel-actions">
+ <button class="btn ghost" onclick="closeV6Modal()">Annulla</button>
+ <button class="btn primary" onclick="saveVehicle()">Salva mezzo</button>
+ </div>`);
+}
+
 function saveVehicle(){const existing=editingEntity.id?getVehicle(editingEntity.id):null,data={name:el('vvName').value.trim(),code:el('vvCode').value.trim(),type:el('vvType').value.trim(),plate:el('vvPlate').value.trim(),capacity:el('vvCapacity').value.trim(),status:el('vvStatus').value,hours:Number(el('vvHours').value||0),nextMaintenance:el('vvMaintenance').value.trim()};if(!data.name){alert('Inserisci il nome del mezzo.');return}if(existing)Object.assign(existing,data);else sfVehicles.push({id:uniqueId('veh'),...data});saveV6();closeV6Modal();renderVehicles();refreshVehicleSelects()}
 function deleteVehicle(id){if(sfOfficeInterventions.some(i=>i.vehicleId===id)){alert('Mezzo assegnato a interventi: rimuovi prima le assegnazioni.');return}if(confirm('Eliminare mezzo?')){sfVehicles=sfVehicles.filter(v=>v.id!==id);saveV6();renderVehicles();refreshVehicleSelects()}}
 function renderVehicles(){const host=el('vehicleList');if(!host)return;host.innerHTML=sfVehicles.map(v=>{const ints=sfOfficeInterventions.filter(i=>i.vehicleId===v.id&&i.date===TODAY_2026);return `<div class="v6-card"><h3>${esc(v.name)}</h3><div class="v6-meta">${esc(v.code)} · ${esc(v.type)} · ${esc(v.plate||'')}</div><p>Stato: <b>${esc(v.status)}</b></p><p>Capacità: ${esc(v.capacity||'—')} · Ore/km: ${esc(v.hours)}</p><p>Manutenzione: ${esc(v.nextMaintenance||'—')}</p><div class="v6-meta">Interventi oggi: ${ints.length}</div><div class="v6-row-actions"><button class="btn ghost" onclick="openVehicleModal('${v.id}')">Modifica</button><button class="btn danger" onclick="deleteVehicle('${v.id}')">Elimina</button></div></div>`}).join('')}
