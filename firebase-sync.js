@@ -2,7 +2,7 @@
 import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import {
   getAuth, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword,
-  updatePassword
+  updatePassword, deleteUser
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 import {
   getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc,
@@ -42,6 +42,20 @@ async function upsertAllowed(name,rows){
  await batch.commit();
 }
 
+
+async function saveClient(record){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può salvare clienti.");
+ if(!record?.id)throw new Error("ID cliente mancante.");
+ await setDoc(doc(db,'clients',String(record.id)),clean(record),{merge:true});
+ return true;
+}
+
+async function deleteClient(id){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare clienti.");
+ await deleteDoc(doc(db,'clients',String(id)));
+ return true;
+}
+
 async function syncFromGlobals(){
  if(!currentInfo||!window.SFState)return;
  clearTimeout(syncTimer);
@@ -77,6 +91,18 @@ function listenCollection(name,qry=null){
  },err=>{console.error('listener '+name,err);emit("☁ Listener interrotto","err")});
  unsubs.push(u);
 }
+function listenDocument(name,id){
+ const ref=doc(db,name,id);
+ const u=onSnapshot(ref,snap=>{
+   const rows=snap.exists()?[{id:snap.id,...snap.data()}]:[];
+   window.SFState?.applyCloud(name,rows);
+   emit("☁ Online · tempo reale","ok");
+ },err=>{
+   console.error('listener document '+name+'/'+id,err);
+   emit("☁ Listener interrotto","err");
+ });
+ unsubs.push(u);
+}
 async function seedOfficeIfEmpty(){
  const state=window.SFState.snapshot();
  for(const [name,rows] of Object.entries(state)){
@@ -92,7 +118,7 @@ async function startRealtime(info){
    ['operators','teams','clients','vehicles','interventions','messages'].forEach(n=>listenCollection(n));
  }else{
    const opid=info.operatorId;
-   listenCollection('operators',query(collection(db,'operators'),where('__name__','==',opid)));
+   listenDocument('operators',opid);
    listenCollection('interventions',query(collection(db,'interventions'),where('operatorId','==',opid)));
    listenCollection('messages',query(collection(db,'messages'),where('operatorId','==',opid)));
  }
@@ -139,6 +165,32 @@ async function changeOperatorPassword(op,oldPassword,newPassword){
  }finally{try{await deleteApp(secondary)}catch(e){}}
 }
 
+
+async function deleteOperatorData(op){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
+ if(op.cloudUid){
+   try{await deleteDoc(profileRef(op.cloudUid))}catch(e){console.warn('delete profile',e)}
+ }
+ await deleteDoc(doc(db,'operators',op.id));
+}
+
+async function deleteOperatorAccount(op,password){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
+ const secondary=initializeApp(cfg,'delete-'+Date.now());
+ const a=getAuth(secondary);
+ try{
+   const email=op.cloudEmail||emailForUsername(op.username);
+   const cred=await signInWithEmailAndPassword(a,email,password);
+   const uid=cred.user.uid;
+   await deleteUser(cred.user);
+   try{await deleteDoc(profileRef(uid))}catch(e){console.warn('delete profile',e)}
+   await deleteDoc(doc(db,'operators',op.id));
+   return true;
+ }finally{
+   try{await deleteApp(secondary)}catch(e){}
+ }
+}
+
 if(configured){
  try{
    app=initializeApp(cfg);auth=getAuth(app);db=getFirestore(app);
@@ -151,5 +203,5 @@ if(configured){
 window.SFCloud={
  enabled:configured,
  get ready(){return !!(configured&&currentInfo)},
- login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword
+ login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient
 };

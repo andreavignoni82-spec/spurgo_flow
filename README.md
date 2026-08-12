@@ -161,3 +161,18 @@ La sincronizzazione reale tra dispositivi sarà il passaggio successivo con data
 - Snapshot cloud reso tollerante a collezioni non inizializzate.
 - Firebase config dell'utente mantenuto invariato.
 - Nuova cache service worker.
+
+## 6.1.4 — Operatori & Login Fix
+- Ripristinate: modifica operatore, cambio password, attiva/disattiva, elimina operatore.
+- Ripristinate: crea/modifica/elimina squadra.
+- Cancellazione cloud completa Authentication + profilo + documento operatore quando è disponibile un account Firebase.
+- Protezione: impossibile eliminare un operatore con interventi attivi assegnati.
+- Corretto il listener realtime del nuovo operatore: ora ascolta direttamente il documento Firestore.
+- Rimossa la query errata su `__name__`.
+
+## 6.1.5 — Client Save Fix
+- `Salva cliente` riscritto cloud-first.
+- In modalità Firebase il documento cliente viene scritto direttamente in `clients/{id}` prima di chiudere il modulo.
+- Se Firestore rifiuta il salvataggio, il modulo resta aperto e mostra l'errore reale.
+- Eliminazione cliente sincronizzata direttamente con Firestore.
+- LocalStorage aggiornato solo dopo successo cloud.

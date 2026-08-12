@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.3</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.5</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -390,7 +390,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.3 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.5 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -400,9 +400,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.3 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.5 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.3</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.5</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -453,7 +453,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.3</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.5</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -502,7 +502,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.3</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.5</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -679,7 +679,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.3</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.5</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -782,7 +782,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.3 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.5 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -846,6 +846,102 @@ async function addOperator(){
    el('operatorFormMsg').textContent=window.SFCloud?.enabled?'Operatore creato e abilitato su tutti i dispositivi.':'Operatore creato in modalità locale.';
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
+
+/* ===== OPERATORI & SQUADRE 6.1.5 ===== */
+async function editOperator(id){
+ const o=sfOperators.find(x=>x.id===id);if(!o)return;
+ const nome=prompt('Nome',o.nome||'');if(nome===null)return;
+ const cognome=prompt('Cognome',o.cognome||'');if(cognome===null)return;
+ const telefono=prompt('Telefono',o.telefono||'');if(telefono===null)return;
+ const mezzo=prompt('Mezzo assegnato',o.mezzo||'');if(mezzo===null)return;
+ const ruolo=prompt('Ruolo / note',o.ruolo||'Operatore');if(ruolo===null)return;
+ Object.assign(o,{nome:nome.trim(),cognome:cognome.trim(),telefono:telefono.trim(),mezzo:mezzo.trim(),ruolo:ruolo.trim()||'Operatore'});
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+}
+
+async function changeOperatorPassword(id){
+ const o=sfOperators.find(x=>x.id===id);if(!o)return;
+ if(window.SFCloud?.enabled && o.cloudUid){
+   const oldp=prompt('Password attuale di '+operatorName(o));if(!oldp)return;
+   const newp=prompt('Nuova password');if(!newp)return;
+   try{
+     await window.SFCloud.changeOperatorPassword(o,oldp,newp);
+     alert('Password cloud aggiornata.');
+   }catch(e){alert('Errore cambio password: '+(e.message||e))}
+ }else{
+   const p=prompt('Nuova password per '+operatorName(o));if(!p)return;
+   o.password=p;saveOfficePeople();alert('Password aggiornata in modalità locale.');
+ }
+}
+
+function toggleOperator(id){
+ const o=sfOperators.find(x=>x.id===id);if(!o)return;
+ o.active=o.active===false?true:false;
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+}
+
+async function deleteOperator(id){
+ const o=sfOperators.find(x=>x.id===id);if(!o)return;
+
+ const activeJobs=sfOfficeInterventions.filter(i=>i.operatorId===id && !['Terminato','Annullato'].includes(i.status));
+ if(activeJobs.length){
+   alert('Non puoi eliminare '+operatorName(o)+': ha '+activeJobs.length+' interventi attivi assegnati. Riassegnali prima.');
+   return;
+ }
+ if(!confirm('Eliminare definitivamente '+operatorName(o)+'?'))return;
+
+ try{
+   if(window.SFCloud?.enabled && o.cloudUid){
+     const pwd=prompt('Inserisci la password attuale dell’operatore per eliminare anche il suo account Firebase:');
+     if(!pwd)return;
+     await window.SFCloud.deleteOperatorAccount(o,pwd);
+   }else if(window.SFCloud?.enabled){
+     await window.SFCloud.deleteOperatorData(o);
+   }
+
+   sfOperators=sfOperators.filter(x=>x.id!==id);
+   sfTeams.forEach(t=>t.operatorIds=(t.operatorIds||[]).filter(x=>x!==id));
+   sfMessages=sfMessages.filter(m=>m.operatorId!==id);
+   sfOfficeInterventions.forEach(i=>{if(i.operatorId===id)i.operatorId=''});
+
+   saveOfficePeople();saveV6();
+   renderOfficePeople();renderAllOfficeV6();
+   alert('Operatore eliminato.');
+ }catch(e){
+   console.error(e);
+   alert('Eliminazione non riuscita: '+(e.message||e));
+ }
+}
+
+function addTeam(){
+ const name=el('teamName').value.trim();
+ if(!name){el('teamFormMsg').textContent='Inserisci il nome della squadra.';return}
+ const ids=[...document.querySelectorAll('.team-op-check:checked')].map(x=>x.value);
+ sfTeams.push({id:uniqueId('team'),name,vehicle:el('teamVehicle').value,operatorIds:ids});
+ saveOfficePeople();renderOfficePeople();
+ el('teamName').value='';el('teamVehicle').value='';
+ el('teamFormMsg').textContent='Squadra creata correttamente.';
+}
+
+function editTeam(id){
+ const t=sfTeams.find(x=>x.id===id);if(!t)return;
+ const name=prompt('Nome squadra',t.name);if(name===null)return;
+ const vehicle=prompt('Mezzo principale',t.vehicle||'');if(vehicle===null)return;
+ const available=sfOperators.map((o,i)=>(i+1)+') '+operatorName(o)).join('\n');
+ const current=(t.operatorIds||[]).map(id=>sfOperators.findIndex(o=>o.id===id)+1).filter(x=>x>0).join(',');
+ const selected=prompt('Numeri operatori separati da virgola:\n'+available,current);if(selected===null)return;
+ const indexes=selected.split(',').map(x=>parseInt(x.trim(),10)-1).filter(x=>x>=0&&x<sfOperators.length);
+ t.name=name.trim()||t.name;t.vehicle=vehicle.trim();t.operatorIds=[...new Set(indexes.map(i=>sfOperators[i].id))];
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+}
+
+function deleteTeam(id){
+ const t=sfTeams.find(x=>x.id===id);if(!t)return;
+ if(!confirm('Eliminare la squadra '+t.name+'?'))return;
+ sfTeams=sfTeams.filter(x=>x.id!==id);
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+}
+
 function getOperator(id){return sfOperators.find(o=>o.id===id)}
 function getVehicle(id){return sfVehicles.find(v=>v.id===id)}
 function getClient(id){return sfClients.find(c=>c.id===id)}
@@ -921,19 +1017,42 @@ function openClientModal(id=null){
  <div class="full"><label>Impianti / note</label><textarea id="vcNotes" class="textarea">${esc(c?.notes||'')}</textarea></div>
  </div><div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">Annulla</button><button class="btn primary" onclick="saveClient()">Salva cliente</button></div>`);
 }
-function saveClient(){const existing=editingEntity.id?getClient(editingEntity.id):null,data={name:el('vcName').value.trim(),address:el('vcAddress').value.trim(),city:el('vcCity').value.trim(),phone:el('vcPhone').value.trim(),email:el('vcEmail').value.trim(),contact:el('vcContact').value.trim(),notes:el('vcNotes').value.trim()};if(!data.name){alert('Inserisci il nome cliente.');return}if(existing)Object.assign(existing,data);else sfClients.push({id:uniqueId('cl'),...data});saveV6();closeV6Modal();renderClients()}
-function deleteClient(id){if(sfOfficeInterventions.some(i=>i.clientId===id)){alert('Cliente collegato a interventi: non può essere eliminato.');return}if(confirm('Eliminare cliente?')){sfClients=sfClients.filter(c=>c.id!==id);saveV6();renderClients()}}
-function renderClients(){const host=el('clientList');if(!host)return;const q=(el('clientSearch')?.value||'').toLowerCase();const list=sfClients.filter(c=>!q||[c.name,c.address,c.city,c.phone,c.contact].join(' ').toLowerCase().includes(q));host.innerHTML=list.length?list.map(c=>{const n=sfOfficeInterventions.filter(i=>i.clientId===c.id).length;return `<div class="v6-card"><h3>${esc(c.name)}</h3><div>${esc(c.address)} · ${esc(c.city)}</div><div class="v6-meta">${esc(c.phone||'')} · ${esc(c.email||'')}<br>Referente: ${esc(c.contact||'—')}<br>${esc(c.notes||'')}</div><div class="v6-meta"><b>${n}</b> interventi registrati</div><div class="v6-row-actions"><button class="btn ghost" onclick="openClientModal('${c.id}')">Modifica</button><button class="btn primary" onclick="newInterventionForClient('${c.id}')">Nuovo intervento</button><button class="btn danger" onclick="deleteClient('${c.id}')">Elimina</button></div></div>`}).join(''):'<div class="v6-empty">Nessun cliente.</div>'}
-function newInterventionForClient(id){openInterventionModal();setTimeout(()=>{el('viClient').value=id;v6FillClientAddress()},20)}
+async function saveClient(){
+ const existing=editingEntity.id?getClient(editingEntity.id):null;
+ const data={
+   name:el('vcName').value.trim(),
+   address:el('vcAddress').value.trim(),
+   city:el('vcCity').value.trim(),
+   phone:el('vcPhone').value.trim(),
+   email:el('vcEmail').value.trim(),
+   contact:el('vcContact').value.trim(),
+   notes:el('vcNotes').value.trim()
+ };
+ if(!data.name){alert('Inserisci il nome cliente.');return}
 
-function openVehicleModal(id=null){
- const v=id?getVehicle(id):null;editingEntity={type:'vehicle',id};
- showV6Modal(v?'Modifica mezzo':'Nuovo mezzo',`<div class="v6-form">
- <div><label>Nome mezzo</label><input id="vvName" class="field" value="${esc(v?.name||'')}"></div><div><label>Codice</label><input id="vvCode" class="field" value="${esc(v?.code||'')}"></div>
- <div><label>Tipologia</label><input id="vvType" class="field" value="${esc(v?.type||'Autobotte')}"></div><div><label>Targa</label><input id="vvPlate" class="field" value="${esc(v?.plate||'')}"></div>
- <div><label>Capacità</label><input id="vvCapacity" class="field" value="${esc(v?.capacity||'')}"></div><div><label>Stato</label><select id="vvStatus" class="field">${['Operativa','Disponibile','In intervento','Manutenzione','Fuori servizio'].map(x=>`<option ${v?.status===x?'selected':''}>${x}</option>`).join('')}</select></div>
- <div><label>Ore/km</label><input id="vvHours" class="field" type="number" value="${esc(v?.hours??0)}"></div><div><label>Prossima manutenzione</label><input id="vvMaintenance" class="field" value="${esc(v?.nextMaintenance||'')}"></div>
- </div><div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">Annulla</button><button class="btn primary" onclick="saveVehicle()">Salva mezzo</button></div>`);
+ const id=existing?.id||uniqueId('cl');
+ const record={id,...data};
+
+ try{
+   if(window.SFCloud?.enabled){
+     const saveBtn=[...el('v6Modal').querySelectorAll('button')].find(b=>b.textContent.includes('Salva cliente'));
+     if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='Salvataggio cloud…'}
+     await window.SFCloud.saveClient(record);
+   }
+
+   if(existing)Object.assign(existing,data);
+   else sfClients.push(record);
+
+   localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
+   closeV6Modal();
+   renderClients();
+   renderAllOfficeV6();
+ }catch(e){
+   console.error('saveClient',e);
+   alert('Cliente non salvato: '+(e.message||e));
+   const saveBtn=[...el('v6Modal').querySelectorAll('button')].find(b=>b.textContent.includes('Salvataggio cloud'));
+   if(saveBtn){saveBtn.disabled=false;saveBtn.textContent='Salva cliente'}
+ }
 }
 function saveVehicle(){const existing=editingEntity.id?getVehicle(editingEntity.id):null,data={name:el('vvName').value.trim(),code:el('vvCode').value.trim(),type:el('vvType').value.trim(),plate:el('vvPlate').value.trim(),capacity:el('vvCapacity').value.trim(),status:el('vvStatus').value,hours:Number(el('vvHours').value||0),nextMaintenance:el('vvMaintenance').value.trim()};if(!data.name){alert('Inserisci il nome del mezzo.');return}if(existing)Object.assign(existing,data);else sfVehicles.push({id:uniqueId('veh'),...data});saveV6();closeV6Modal();renderVehicles();refreshVehicleSelects()}
 function deleteVehicle(id){if(sfOfficeInterventions.some(i=>i.vehicleId===id)){alert('Mezzo assegnato a interventi: rimuovi prima le assegnazioni.');return}if(confirm('Eliminare mezzo?')){sfVehicles=sfVehicles.filter(v=>v.id!==id);saveV6();renderVehicles();refreshVehicleSelects()}}
