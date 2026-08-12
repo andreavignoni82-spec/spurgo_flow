@@ -1,5 +1,5 @@
 # Spurgo Flow — Suite Beta v5.0
-Build 5.0.12
+Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -17,14 +17,14 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 > Questa è una demo statica. Sincronizzazione reale multi-dispositivo, autenticazione server, invio automatico email/WhatsApp con allegati e portale QR cliente richiederanno il backend previsto nella fase successiva.
 
 
-## Correzioni build 5.0.12
+## Correzioni build 5.0.13
 - Login corretto con riferimenti DOM espliciti.
 - Badge versione ridotto e non invasivo.
 - Cache PWA aggiornata.
 
 - Ripristinata icona PWA navy/autobotte della versione precedente.
 
-## Build 5.0.12
+## Build 5.0.13
 - Ripristinati i flussi operatore nella stessa pagina come v0.4.
 - Foto Prima/Durante/Dopo con fotocamera o libreria.
 - Relazione libera + dettatura + generazione relazione.
@@ -33,7 +33,7 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Firma operatore su schermo.
 - Tutti i dati alimentano il rapportino finale.
 
-## Build 5.0.12 — configurazione operatore consolidata
+## Build 5.0.13 — configurazione operatore consolidata
 - Tutto il flusso resta nella stessa pagina.
 - Descrizione libera predisposta per futura ottimizzazione AI.
 - Foto, attività e anomalie inline.
@@ -41,7 +41,7 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Rapportino completo con QR reale predisposto per futuro portale intervento.
 - Stampa/Salva PDF e condivisione Email/WhatsApp/menu nativo.
 
-## Build 5.0.12 — Ultra-operativa smartphone
+## Build 5.0.13 — Ultra-operativa smartphone
 - Pannelli Foto, Relazione, Attività e Anomalia espandibili nella stessa pagina.
 - Su smartphone resta aperto un pannello alla volta per ridurre lo scorrimento.
 - Riepilogo rapido dello stato di compilazione.
@@ -49,28 +49,28 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Accesso immediato a firma operatore e cliente.
 - Pulsante fisso Termina e genera rapportino.
 
-## Build 5.0.12
+## Build 5.0.13
 - Barra fissa operatore: Interventi, Agenda, Mappa, Messaggi, Profilo.
 - Sezioni separate con navigazione persistente.
 - Intervento/timer restano attivi durante la navigazione.
 - Ritorno rapido all'intervento in corso.
 - Agenda giornaliera, mappa/percorso, messaggi ufficio e profilo operatore demo.
 
-## Build 5.0.12
+## Build 5.0.13
 - Selezione libera dell'intervento, indipendente da urgenza/orario.
 - Scheda intervento operativa nello stile della seconda immagine.
 - Firme operatore/cliente corrette con pad firma dedicato full-screen/modal.
 - Chiusura intervento reale: valida le firme, arresta timer, chiude scheda e genera rapportino.
 - Rapportino ridisegnato compatto A4: cliente, intervento, posizione/mappa, attività, richiesta, anomalie, relazione, 4 foto, firme, QR e invio.
 
-## Build 5.0.12
+## Build 5.0.13
 - Mappe reali OpenStreetMap/Leaflet nella dashboard ufficio, Control Room, area Mappa operatore e scheda intervento.
 - Marker reali per gli interventi demo e navigazione esterna Google Maps.
 - Mappa reale anche nel rapportino.
 - Rapportino reimpaginato sulla struttura della foto di riferimento: testata/logo/QR, dati cliente e intervento, posizione+mappa, attività, anomalie, richiesta cliente, relazione, 4 foto, firme e blocco invio.
 - Ottimizzazione stampa A4 su una pagina.
 
-## Build 5.0.12
+## Build 5.0.13
 - Mappe responsive ottimizzate su smartphone, tablet e desktop.
 - Fit automatico dei marker e comandi Mostra tutti / Centra intervento.
 - Correzione resize Leaflet quando si cambia sezione.
@@ -80,13 +80,13 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Possibilità di riaprire un intervento terminato, modificarlo e rigenerare il rapportino.
 - Il nuovo rapportino sostituisce/aggiorna la versione operativa dell'intervento demo.
 
-## Build 5.0.12
+## Build 5.0.13
 - Rimosso dal PDF/stampa tutto il blocco Invio rapportino.
 - Le azioni PDF/Email/WhatsApp/Condividi restano disponibili solo nell'interfaccia app.
 - Mappa rapportino ricreata e centrata prima della stampa.
 - Zoom fisso e invalidateSize per evitare riquadri mappa vuoti o tagliati.
 
-## Build 5.0.12
+## Build 5.0.13
 - Eliminata la logica delle coordinate demo come posizione autorevole.
 - Geocodifica reale dell'indirizzo tramite OpenStreetMap Nominatim.
 - Lo stesso indirizzo/coordinate alimenta scheda intervento, mappe, Control Room e rapportino.
@@ -96,7 +96,7 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Navigazione usa il punto operativo, se presente; altrimenti usa le coordinate dell'indirizzo.
 - Il rapportino distingue coordinate dell'indirizzo e punto operativo corretto.
 
-## Build 5.0.12
+## Build 5.0.13
 - Ufficio crea operatori con username/password dedicati.
 - Modifica, cambio password, attiva/disattiva, elimina operatore.
 - Assegna mezzo e ruolo.
@@ -104,14 +104,12 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Assegna uno o più operatori alle squadre.
 - Gli operatori creati dall'Ufficio possono accedere subito con le proprie credenziali nella demo locale.
 
-## GPS SAFE R1 — baseline 5.0.12
-- Ripartenza dalla 5.0.12 originale.
-- Rimosso completamente il motore cartografico Leaflet dalla visualizzazione interna.
-- Nessuna tile, CDN mappa, WebGL o iframe necessario per mostrare il pannello posizione.
-- GPS nativo browser via navigator.geolocation, solo HTTPS.
-- getCurrentPosition ad alta precisione + breve watchPosition per migliorare il fix quando la precisione iniziale è debole.
-- Visualizzazione sempre disponibile con coordinate, precisione GPS, indirizzo e stato.
-- Apertura della posizione in Apple Maps e Google Maps per la cartografia reale/navigazione.
-- La posizione operativa acquisita dal dispositivo ha priorità rispetto alla posizione dell'indirizzo.
-- Errori GPS gestiti esplicitamente: permesso negato, posizione indisponibile, timeout, assenza HTTPS.
-- JavaScript verificato con Node prima del rilascio.
+## FIX1 - audit completo archivio
+- Ripristinate variabili/funzioni eliminate nel pacchetto GPS Safe corrotto.
+- Ripristinati demoJobs, selectedJob, completedJobs, selezione Agenda e riapertura interventi.
+- Eliminato riferimento fieldMapObj non definito nella navigazione.
+- Geocodifica con cache locale e GPS ad alta precisione.
+- Leaflet inizializzato solo su contenitori visibili; resize dopo apertura sezione e rotazione.
+- Mappa scheda intervento e rapportino non vengono più distrutte/ricreate inutilmente.
+- Rimossi app.js/style.css/manifest.json non utilizzati e appartenenti a un'altra architettura.
+- JavaScript verificato sintatticamente con Node; controllati handler, ID duplicati e riferimenti mancanti.

@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite Beta v5.0</title>
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -46,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.12 - modalità ultra-operativa smartphone */
+/* Build 5.0.13 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -77,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - navigazione field-service persistente */
+/* Build 5.0.13 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -97,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 */
+/* Build 5.0.13 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -136,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - mappe reali e rapportino fedele */
+/* Build 5.0.13 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -202,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.13 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -245,7 +246,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 */
+/* Build 5.0.13 */
 .report-actions-app{display:block}
 #reportRealMap{
   width:100%;
@@ -266,7 +267,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.12 - geocodifica reale e punto operativo */
+/* Build 5.0.13 - geocodifica reale e punto operativo */
 .location-tools{
   background:#f7fafc;
   border:1px solid #d7e1e8;
@@ -318,48 +319,19 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .check-row{display:flex;gap:8px;align-items:center;background:#f7fafc;padding:8px;border-radius:8px}
 @media(max-width:900px){.manage-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
 
-/* GPS SAFE MODULE — baseline 5.0.12 */
-.gps-map{
-  width:100%; min-height:260px; border-radius:14px; overflow:hidden;
-  border:1px solid #d5dfe7; background:#eef3f6; position:relative;
-  box-sizing:border-box; display:flex; flex-direction:column;
-}
-.gps-map-stage{
-  position:relative; flex:1; min-height:220px;
-  background:
-    linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px),
-    linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px),
-    #dce8df;
-  background-size:32px 32px;
-  overflow:hidden;
-}
-.gps-road{position:absolute;background:#fff;border:1px solid #cbd5db;border-radius:999px;transform-origin:center}
-.gps-road.r1{width:130%;height:22px;left:-15%;top:48%;transform:rotate(-12deg)}
-.gps-road.r2{width:90%;height:15px;left:8%;top:28%;transform:rotate(34deg)}
-.gps-road.r3{width:80%;height:13px;left:35%;top:70%;transform:rotate(-42deg)}
-.gps-water{position:absolute;right:-12%;top:-10%;width:42%;height:120%;background:#bcddec;border-radius:45%}
-.gps-pin{
- position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);
- width:28px;height:28px;border-radius:50% 50% 50% 0;background:#d92d20;
- transform-origin:center;rotate:-45deg;box-shadow:0 2px 8px #0003;
-}
-.gps-pin:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;left:9px;top:9px}
-.gps-map-info{padding:10px 12px;background:#fff;font-size:12px;line-height:1.45}
-.gps-map-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
-.gps-map-actions button,.gps-map-actions a{
- border:0;border-radius:999px;padding:8px 11px;font-weight:800;font-size:11px;text-decoration:none;
- background:#0b2948;color:#fff;
-}
-.gps-map-actions .secondary{background:#edf3f6;color:#17344f;border:1px solid #cbd7df}
-.gps-status{font-weight:800}.gps-ok{color:#177a3e}.gps-warn{color:#b54708}.gps-err{color:#b42318}
-.gps-accuracy{font-variant-numeric:tabular-nums}
-@media print{.gps-map-actions{display:none}.gps-map{min-height:150px}.gps-map-stage{min-height:105px}}
+/* Build 5.0.13 FIX — map lifecycle stabile */
+.real-map{position:relative;width:100%!important;min-width:0!important;height:320px!important;min-height:320px!important;overflow:hidden!important;box-sizing:border-box!important;background:#eaf0f4}
+.real-map.small{height:270px!important;min-height:270px!important}.real-map.report-map-real{height:145px!important;min-height:145px!important}
+.real-map img.leaflet-tile{max-width:none!important;max-height:none!important}.leaflet-container{width:100%!important;height:100%!important}
+.map-health{font-size:11px;margin-top:5px;color:#607080}.map-health.ok{color:#177a3e;font-weight:800}.map-health.err{color:#b42318;font-weight:800}
+@media(max-width:700px){.real-map{height:300px!important;min-height:300px!important}.real-map.small{height:260px!important;min-height:260px!important}.real-map.report-map-real{height:115px!important;min-height:115px!important}}
+@media print{.real-map.report-map-real{height:90px!important;min-height:90px!important}.leaflet-control-container{display:none!important}}
 
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.12</div>
+<div class="version">v5.0 · build 5.0.13</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123 · paolo/paolo123</p>
@@ -369,24 +341,14 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.12<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.13<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.13</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="gps-map">
-      <div class="gps-map-stage">
-        <div class="gps-water"></div><div class="gps-road r1"></div><div class="gps-road r2"></div><div class="gps-road r3"></div><div class="gps-pin"></div>
-      </div>
-      <div class="gps-map-info" id="officeMapInfo">Posizione non ancora caricata.</div>
-    </div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
+<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="gps-map">
-      <div class="gps-map-stage">
-        <div class="gps-water"></div><div class="gps-road r1"></div><div class="gps-road r2"></div><div class="gps-road r3"></div><div class="gps-pin"></div>
-      </div>
-      <div class="gps-map-info" id="controlMapInfo">Posizione non ancora caricata.</div>
-    </div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div><div id="controlMapHealth" class="map-health">Situazione territoriale: in attesa</div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
 
 <section id="interventi" class="section"><div class="top"><h1>Interventi</h1><button class="btn primary" onclick="alert('Nuovo intervento: modulo demo predisposto')">+ Nuovo intervento</button></div><div class="card" style="margin-top:18px"><table class="table"><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Stato</th><th>Operatore</th><th>Fatturazione</th></tr><tr><td>#0051</td><td>Condominio Belvedere</td><td>Disotturazione</td><td><span class="badge urgent">URGENTE</span></td><td>Marco</td><td>Da fatturare</td></tr><tr><td>#0050</td><td>Ristorante Al Lago</td><td>Pulizia fossa</td><td><span class="badge progress">IN CORSO</span></td><td>Luca</td><td>—</td></tr><tr><td>#0049</td><td>Azienda Bianchi</td><td>Lavaggio</td><td><span class="badge planned">PROGRAMMATO</span></td><td>Marco</td><td>—</td></tr></table></div></section>
 
@@ -398,7 +360,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.13</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -455,12 +417,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div id="locationStatus" class="location-status">La posizione viene ricavata dall'indirizzo.</div>
   <div id="operationalPointLabel"></div>
 </div>
-<div id="selectedJobMap" class="gps-map">
-      <div class="gps-map-stage">
-        <div class="gps-water"></div><div class="gps-road r1"></div><div class="gps-road r2"></div><div class="gps-road r3"></div><div class="gps-pin"></div>
-      </div>
-      <div class="gps-map-info" id="selectedJobMapInfo">Posizione non ancora caricata.</div>
-    </div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div id="selectedJobMap" class="real-map small"></div><div id="selectedJobMapHealth" class="map-health">Posizione intervento: in attesa</div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div class="completed-section">
  <h3 style="color:white">Interventi terminati</h3>
  <div id="completedJobs"></div>
@@ -571,12 +528,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="gps-map">
-      <div class="gps-map-stage">
-        <div class="gps-water"></div><div class="gps-road r1"></div><div class="gps-road r2"></div><div class="gps-road r3"></div><div class="gps-pin"></div>
-      </div>
-      <div class="gps-map-info" id="fieldRealMapInfo">Posizione non ancora caricata.</div>
-    </div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+ <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="real-map"></div><div id="fieldRealMapHealth" class="map-health">Mappa operatore: in attesa</div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
 </div>
 
 <div id="fieldMessaggi" class="field-page">
@@ -615,7 +567,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.12</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.13</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -651,12 +603,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
       📍 <b id="reportPosizione">Via Roma 24</b><br>
       <span id="reportComune">24067 Sarnico (BG) – Italia</span><br>
       Lat: <span id="reportLat">—</span> &nbsp; Long: <span id="reportLng">—</span><br><small id="reportPointType"></small>
-      <div id="reportRealMap" class="gps-map compact">
-      <div class="gps-map-stage">
-        <div class="gps-water"></div><div class="gps-road r1"></div><div class="gps-road r2"></div><div class="gps-road r3"></div><div class="gps-pin"></div>
-      </div>
-      <div class="gps-map-info" id="reportRealMapInfo">Posizione non ancora caricata.</div>
-    </div>
+      <div id="reportRealMap" class="real-map report-map-real" style="margin-top:7px"></div>
     </div>
     <div>
       <h4>ATTIVITÀ ESEGUITE</h4>
@@ -708,6 +655,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div style="margin-top:10px"><button class="btn ghost" style="width:100%" onclick="shareNative()">⌯ CONDIVIDI RAPPORTINO</button></div>
 </div>
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script>
 
 const DEFAULT_OPERATORS=[
@@ -751,7 +699,7 @@ function login(){
     officeView.classList.remove('hidden');
     operatorView.classList.add('hidden');
     renderOfficePeople();
-    setTimeout(initAllMaps,120);
+    setTimeout(()=>renderOfficeMap(),140);
     return;
   }
   const matchedOperator=sfOperators.find(o=>o.active!==false&&o.username.toLowerCase()===u&&o.password===p);
@@ -764,7 +712,7 @@ function login(){
     if(el('profileName'))el('profileName').textContent=fullName;
     if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
     sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
-    setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');initAllMaps()},120);
+    setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');updateSelectedJobMap()},140);
     return;
   }
   alert('Credenziali demo non valide');
@@ -781,6 +729,8 @@ document.querySelectorAll('#menu button').forEach(b=>{
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     const target = el(b.dataset.sec);
     if(target) target.classList.add('active');
+    if(b.dataset.sec==='dashboard')setTimeout(()=>renderOfficeMap(),80);
+    if(b.dataset.sec==='control')setTimeout(()=>renderControlMap(),80);
   });
 });
 
@@ -790,129 +740,274 @@ document.querySelectorAll('#menu button').forEach(b=>{
 let jobRunning=false;
 
 
+let officeMapObj=null, controlMapObj=null, fieldMapObj=null, selectedMapObj=null, reportMapObj=null;
+const demoJobs=[
+ {id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG), Italia',request:'Intasamento scarico garage',lat:null,lng:null,status:'Urgente',coordSource:'address'},
+ {id:'INT-2024-00046',client:'Ristorante Al Lago',address:'Lungolago, Iseo (BS), Italia',request:'Pulizia fossa biologica',lat:null,lng:null,status:'Programmato',coordSource:'address'},
+ {id:'INT-2024-00047',client:'Azienda Bianchi Srl',address:'Costa Volpino (BG), Italia',request:'Lavaggio tubazione',lat:null,lng:null,status:'Programmato',coordSource:'address'}
+];
+const completedSeed=[
+ {id:'INT-2024-00044',client:'Residence Sole',address:'Via XX Settembre 8, Iseo (BS), Italia',request:'Pulizia pozzetti',lat:null,lng:null,status:'Terminato',closedAt:'12/08/2026 09:05',reportNo:'2024-00044',coordSource:'address'}
+];
+let completedJobs=[...completedSeed];
+function mapVisible(id){
+ const n=el(id); if(!n) return false;
+ const r=n.getBoundingClientRect(); return n.offsetParent!==null && r.width>20 && r.height>20;
+}
+function setMapHealth(id,text,ok=true){const h=el(id+'Health');if(h){h.textContent=text;h.className='map-health '+(ok?'ok':'err')}}
+function makeLeafletMap(id, center, zoom=12, jobs=[]){
+ const node=el(id); if(!node || typeof L==='undefined' || !mapVisible(id)) return null;
+ let map=node._leaflet_map_instance;
+ if(!map){
+   node.innerHTML=''; node._leaflet_id=null;
+   map=L.map(id,{zoomControl:true,scrollWheelZoom:false,tap:true,trackResize:true}).setView(center,zoom);
+   node._leaflet_map_instance=map;
+   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap',updateWhenIdle:true,keepBuffer:3}).addTo(map);
+   map._sfLayer=L.layerGroup().addTo(map);
+ }
+ if(!map._sfLayer) map._sfLayer=L.layerGroup().addTo(map);
+ map._sfLayer.clearLayers();
+ const bounds=[];
+ jobs.forEach(j=>{const coords=activeCoords(j);if(!coords)return;L.marker(coords).addTo(map._sfLayer).bindPopup('<b>'+esc(j.client)+'</b><br>'+esc(j.address||'')+'<br>'+esc(j.status||''));bounds.push(coords)});
+ if(bounds.length===1) map.setView(bounds[0],zoom,{animate:false});
+ else if(bounds.length>1) map.fitBounds(bounds,{padding:[28,28],maxZoom:13,animate:false});
+ requestAnimationFrame(()=>map.invalidateSize(true));
+ setTimeout(()=>map.invalidateSize(true),80); setTimeout(()=>map.invalidateSize(true),260);
+ setMapHealth(id,'Mappa caricata',true);
+ return map;
+}
 
-/* ===== GPS SAFE MODULE / BASELINE 5.0.12 ===== */
-let gpsWatchId=null;
-let lastGpsFix=null;
+
+let manualPointMode=false;
+let addressMarker=null, operationalMarker=null;
 
 function activeCoords(job=selectedJob){
   if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)) return [job.opLat,job.opLng];
   if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lat,job.lng];
   return null;
 }
-function gpsMapsUrl(job){
-  const c=activeCoords(job);
-  if(c)return 'https://maps.apple.com/?ll='+c[0]+','+c[1]+'&q='+encodeURIComponent(job.client||'Intervento');
-  return 'https://maps.apple.com/?q='+encodeURIComponent(job.address||'');
+function setLocationStatus(text,type=''){
+  const x=el('locationStatus'); if(!x) return;
+  x.textContent=text; x.className='location-status'+(type?' '+type:'');
 }
-function gpsGoogleUrl(job){
-  const c=activeCoords(job);
-  if(c)return 'https://www.google.com/maps/search/?api=1&query='+c[0]+','+c[1];
-  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(job.address||'');
-}
-function gpsPanel(id,job,mode='job'){
-  const info=el(id+'Info'); if(!info)return;
-  const c=activeCoords(job);
-  const gps=lastGpsFix;
-  let html='';
-  if(c){
-    html+='<div class="gps-status gps-ok">● Posizione intervento disponibile</div>';
-    html+='<div><b>'+esc(job.client||'Intervento')+'</b></div>';
-    html+='<div>'+esc(job.address||'')+'</div>';
-    html+='<div>GPS: '+c[0].toFixed(6)+', '+c[1].toFixed(6)+'</div>';
+function updateOperationalPointLabel(){
+  const host=el('operationalPointLabel'); if(!host) return;
+  if(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng)){
+    host.innerHTML='<span class="point-chip">🎯 Punto operativo: '+selectedJob.opLat.toFixed(6)+', '+selectedJob.opLng.toFixed(6)+'</span>';
   }else{
-    html+='<div class="gps-status gps-warn">● Coordinate intervento non disponibili</div>';
-    html+='<div>'+esc(job?.address||'')+'</div>';
+    host.innerHTML='';
   }
-  if(gps){
-    html+='<div style="margin-top:5px">Posizione dispositivo: '+gps.lat.toFixed(6)+', '+gps.lng.toFixed(6)+' · <span class="gps-accuracy">precisione ±'+Math.round(gps.accuracy)+' m</span></div>';
-  }
-  html+='<div class="gps-map-actions">';
-  html+='<button type="button" onclick="captureGpsForSelected()">Usa GPS dispositivo</button>';
-  html+='<a class="secondary" target="_blank" rel="noopener" href="'+gpsMapsUrl(job)+'">Apri Apple Maps</a>';
-  html+='<a class="secondary" target="_blank" rel="noopener" href="'+gpsGoogleUrl(job)+'">Apri Google Maps</a>';
-  html+='</div>';
-  info.innerHTML=html;
 }
-function renderOfficeMap(){gpsPanel('officeMap',selectedJob)}
-function renderControlMap(){gpsPanel('controlMap',selectedJob)}
-function refreshFieldMap(){gpsPanel('fieldRealMap',selectedJob)}
-function updateSelectedJobMap(){gpsPanel('selectedJobMap',selectedJob);updateOperationalPointLabel()}
-function updateReportMap(){gpsPanel('reportRealMap',selectedJob)}
-function initAllMaps(){renderOfficeMap();renderControlMap();refreshFieldMap();updateSelectedJobMap()}
-function invalidateVisibleMaps(){}
-function fitFieldMap(){refreshFieldMap()}
-function centerMapOnSelected(){refreshFieldMap()}
-function centerSelectedMap(){updateSelectedJobMap()}
-function forceAllMapLayouts(){}
-function forceMapLayout(){}
-function setupMapResizeObserver(){}
-
-function gpsErrorMessage(err){
-  if(!err)return 'Errore GPS.';
-  if(err.code===1)return 'Permesso posizione negato. Abilita Localizzazione per Safari/questa web app.';
-  if(err.code===2)return 'Posizione non disponibile. Verifica GPS, rete e servizi di localizzazione.';
-  if(err.code===3)return 'Tempo scaduto durante la ricerca GPS. Riprova all’aperto.';
-  return 'Errore GPS: '+(err.message||'sconosciuto');
+async function geocodeAddress(address){
+ const q=(address||'').trim(); if(!q) throw new Error('Inserisci un indirizzo.');
+ const key='sf_geo_'+q.toLowerCase();
+ try{const c=JSON.parse(localStorage.getItem(key)||'null');if(c&&Number.isFinite(c.lat)&&Number.isFinite(c.lng))return c}catch(e){}
+ const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=it&accept-language=it&q='+encodeURIComponent(q);
+ const res=await fetch(url,{headers:{'Accept':'application/json'}}); if(!res.ok) throw new Error('Servizio di geolocalizzazione non disponibile.');
+ const data=await res.json(); if(!data.length) throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
+ const out={lat:parseFloat(data[0].lat),lng:parseFloat(data[0].lon),displayName:data[0].display_name};
+ try{localStorage.setItem(key,JSON.stringify(out))}catch(e){} return out;
 }
-
-function getDevicePosition(){
-  return new Promise((resolve,reject)=>{
-    if(!window.isSecureContext){
-      reject(new Error('La localizzazione GPS richiede HTTPS.'));
-      return;
-    }
-    if(!navigator.geolocation){
-      reject(new Error('Geolocalizzazione non supportata da questo dispositivo.'));
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      p=>resolve(p),
-      e=>reject(e),
-      {enableHighAccuracy:true,timeout:15000,maximumAge:0}
-    );
-  });
-}
-
-async function captureGpsForSelected(){
-  const btns=[...document.querySelectorAll('button')].filter(b=>b.textContent.includes('Usa GPS dispositivo'));
-  btns.forEach(b=>{b.disabled=true;b.textContent='Ricerca GPS…'});
+async function geocodeJob(job, silent=false){
+  if(!job || !job.address) return false;
   try{
-    // First fresh high-accuracy fix.
-    let p=await getDevicePosition();
-    let best=p;
-    // If accuracy is weak, allow a short watch to improve it.
-    if(p.coords.accuracy>35 && navigator.geolocation){
-      best=await new Promise(resolve=>{
-        let done=false;
-        const finish=x=>{if(done)return;done=true;if(gpsWatchId!==null)navigator.geolocation.clearWatch(gpsWatchId);gpsWatchId=null;resolve(x||p)};
-        const timer=setTimeout(()=>finish(best),8000);
-        gpsWatchId=navigator.geolocation.watchPosition(
-          x=>{
-            if(!best || x.coords.accuracy<best.coords.accuracy)best=x;
-            if(x.coords.accuracy<=20){clearTimeout(timer);finish(best)}
-          },
-          ()=>{clearTimeout(timer);finish(best)},
-          {enableHighAccuracy:true,maximumAge:0,timeout:8000}
-        );
-      });
-    }
-    lastGpsFix={lat:best.coords.latitude,lng:best.coords.longitude,accuracy:best.coords.accuracy,ts:best.timestamp};
-    selectedJob.opLat=lastGpsFix.lat;
-    selectedJob.opLng=lastGpsFix.lng;
-    selectedJob.coordSource='device';
-    const dj=demoJobs.find(j=>j.id===selectedJob.id);
-    if(dj){dj.opLat=selectedJob.opLat;dj.opLng=selectedJob.opLng;dj.coordSource='device'}
-    renderOfficeMap();renderControlMap();refreshFieldMap();updateSelectedJobMap();updateReportMap();
-    alert('Posizione GPS acquisita. Precisione stimata ±'+Math.round(lastGpsFix.accuracy)+' m.');
+    if(!silent) setLocationStatus('Ricerca posizione in corso…');
+    const g=await geocodeAddress(job.address);
+    job.lat=g.lat; job.lng=g.lng; job.coordSource='geocoded'; job.geocodedLabel=g.displayName;
+    if(!silent) setLocationStatus('Posizione trovata: '+g.displayName,'ok');
+    return true;
   }catch(err){
-    alert(gpsErrorMessage(err));
-  }finally{
-    btns.forEach(b=>{b.disabled=false;b.textContent='Usa GPS dispositivo'});
+    if(!silent) setLocationStatus(err.message||'Posizione non trovata.','err');
+    return false;
   }
+}
+async function geocodeSelectedJob(){
+  const input=el('jobAddressInput');
+  selectedJob.address=(input?input.value:selectedJob.address).trim();
+  el('selectedAddress').textContent=selectedJob.address;
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  const ok=await geocodeJob(selectedJob,false);
+  if(ok){
+    const source=demoJobs.find(j=>j.id===selectedJob.id);
+    if(source) Object.assign(source,selectedJob);
+    updateSelectedJobMap();
+    if(fieldMapObj) refreshFieldMap();
+  }
+  updateOperationalPointLabel();
+}
+async function geocodeAllDemoJobs(){
+  for(const j of demoJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100)); // rispetta il rate-limit demo del servizio pubblico
+    }
+  }
+  for(const j of completedJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100));
+    }
+  }
+}
+function useDevicePosition(){
+ if(!window.isSecureContext){setLocationStatus('Il GPS richiede HTTPS.','err');return}
+ if(!navigator.geolocation){setLocationStatus('Geolocalizzazione non supportata.','err');return}
+ setLocationStatus('Acquisizione GPS ad alta precisione…');
+ navigator.geolocation.getCurrentPosition(pos=>{
+   selectedJob.opLat=pos.coords.latitude;selectedJob.opLng=pos.coords.longitude;selectedJob.gpsAccuracy=pos.coords.accuracy;selectedJob.coordSource='device';
+   setLocationStatus('GPS acquisito · precisione ±'+Math.round(pos.coords.accuracy)+' m','ok');updateOperationalPointLabel();updateSelectedJobMap();
+ },err=>{const m=err.code===1?'Permesso posizione negato.':err.code===2?'Posizione non disponibile.':'Tempo scaduto durante la ricerca GPS.';setLocationStatus(m,'err')},{enableHighAccuracy:true,timeout:15000,maximumAge:0});
+}
+function toggleManualPoint(){
+  manualPointMode=!manualPointMode;
+  const mapNode=el('selectedJobMap');
+  const btn=el('manualPointBtn');
+  if(mapNode) mapNode.classList.toggle('manual-mode',manualPointMode);
+  if(btn) btn.textContent=manualPointMode?'✓ Tocca la mappa nel punto corretto':'🎯 Correggi punto operativo';
+  setLocationStatus(manualPointMode?'Tocca la mappa nel punto esatto in cui deve arrivare la squadra.':'Correzione manuale disattivata.',manualPointMode?'':'ok');
+}
+function clearOperationalPoint(){
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  selectedJob.coordSource='geocoded';
+  manualPointMode=false;
+  const mapNode=el('selectedJobMap'); if(mapNode) mapNode.classList.remove('manual-mode');
+  const btn=el('manualPointBtn'); if(btn) btn.textContent='🎯 Correggi punto operativo';
+  updateOperationalPointLabel();
+  updateSelectedJobMap();
+  setLocationStatus('Ripristinato il punto dell’indirizzo.','ok');
+}
+async function ensureCoords(list){
+ for(const j of list){if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){await geocodeJob(j,true);await new Promise(r=>setTimeout(r,1050))}}
+ return list.filter(j=>activeCoords(j));
+}
+async function renderOfficeMap(){if(!mapVisible('officeMap'))return;const valid=await ensureCoords([...demoJobs,...completedJobs]);officeMapObj=makeLeafletMap('officeMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid)}
+async function renderControlMap(){if(!mapVisible('controlMap'))return;const valid=await ensureCoords([...demoJobs,...completedJobs]);controlMapObj=makeLeafletMap('controlMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid)}
+async function refreshFieldMap(){if(!mapVisible('fieldRealMap'))return;const valid=await ensureCoords(demoJobs);fieldMapObj=makeLeafletMap('fieldRealMap',valid.length?activeCoords(valid[0]):[45.67,9.96],11,valid)}
+function invalidateVisibleMaps(){[officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{if(m){requestAnimationFrame(()=>m.invalidateSize(true));setTimeout(()=>m.invalidateSize(true),100)}})}
+function fitFieldMap(){if(fieldMapObj){const pts=demoJobs.map(activeCoords).filter(Boolean);if(pts.length>1)fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});else if(pts[0])fieldMapObj.setView(pts[0],15)}}
+function centerMapOnSelected(){if(fieldMapObj){const c=activeCoords(selectedJob);if(c)fieldMapObj.setView(c,15)}}
+function centerSelectedMap(){const c=activeCoords(selectedJob);if(selectedMapObj&&c)selectedMapObj.setView(c,16)}
+function selectJobFromAgenda(id){
+ const node=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id===id);
+ if(node) selectJob(node);
+ fieldNavigate('Interventi');
+ setTimeout(()=>{
+   const card=el('selectedJobCard');
+   if(card) card.scrollIntoView({behavior:'smooth',block:'start'});
+   updateSelectedJobMap();
+ },100);
+}
+function openCompletedByAgenda(id){
+ fieldNavigate('Interventi');
+ setTimeout(()=>reopenCompletedJob(id),80);
+}
+function renderCompletedJobs(){
+ const host=el('completedJobs'); if(!host) return;
+ if(!completedJobs.length){
+   host.innerHTML='<div class="muted" style="color:#c8d6e2">Nessun intervento terminato.</div>';
+   return;
+ }
+ host.innerHTML=completedJobs.map(j=>`
+   <div class="completed-job">
+     <div class="head"><div><b>${j.client}</b><br><small>${j.address}</small></div><span class="completed-chip">TERMINATO</span></div>
+     <div class="muted">${j.request} · ${j.closedAt||''}</div>
+     <div class="actions">
+       <button class="btn ghost" onclick="viewCompletedReport('${j.id}')">Apri rapportino</button>
+       <button class="btn primary" onclick="reopenCompletedJob('${j.id}')">Riapri / modifica</button>
+     </div>
+   </div>`).join('');
+}
+async function viewCompletedReport(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
+ populateReportFromSelected();
+ showReport();
+}
+async function reopenCompletedJob(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
+ completedJobs=completedJobs.filter(x=>x.id!==id);
+ renderCompletedJobs();
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ el('jobPicker').style.display='none';
+ el('job').classList.remove('hidden');
+ el('startBtn').disabled=true;
+ el('startBtn').textContent='Intervento riaperto';
+ jobRunning=true;
+ sessionStorage.setItem('sf_job_running','1');
+ sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ const oldNotice=el('reopenNotice'); if(oldNotice) oldNotice.remove();
+ el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche. Al termine usa “Termina e genera rapportino” per creare una nuova versione del documento.</div>');
+ updateSelectedJobMap();
+ setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+function populateReportFromSelected(){
+ if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request||'';
+ if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client||'';
+ if(el('reportClientAddress')) el('reportClientAddress').innerHTML=(selectedJob.address||'').replace(', ','<br>')+' – Italia';
+ if(el('reportComune')) el('reportComune').textContent=(selectedJob.address||'')+' – Italia';
+ const rc=activeCoords(selectedJob);
+ if(el('reportLat')) el('reportLat').textContent=rc?Number(rc[0]).toFixed(4):'—';
+ if(el('reportLng')) el('reportLng').textContent=rc?Number(rc[1]).toFixed(4):'—';
+ if(el('reportNumber')) el('reportNumber').textContent='N. '+String(selectedJob.reportNo||selectedJob.id||'').replace('INT-','');
+ if(el('reportPointType')) el('reportPointType').textContent=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?'Punto operativo corretto':'Coordinate dell’indirizzo';
+ setTimeout(updateReportMap,120);
+}
+
+async function initAllMaps(){
+ if(el('jobAddressInput'))el('jobAddressInput').value=selectedJob.address||'';
+ if(mapVisible('officeMap'))await renderOfficeMap();
+ if(mapVisible('controlMap'))await renderControlMap();
+ if(mapVisible('fieldRealMap'))await refreshFieldMap();
+ if(mapVisible('selectedJobMap')){
+   if(!activeCoords(selectedJob))await geocodeJob(selectedJob,true);
+   updateSelectedJobMap();
+ }
+}
+async function updateSelectedJobMap(){
+ if(!mapVisible('selectedJobMap'))return;
+ let addressCoords=(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng))?[selectedJob.lat,selectedJob.lng]:null;
+ if(!addressCoords && selectedJob.address){await geocodeJob(selectedJob,true);addressCoords=(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng))?[selectedJob.lat,selectedJob.lng]:null}
+ const opCoords=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?[selectedJob.opLat,selectedJob.opLng]:null;
+ const center=opCoords||addressCoords||[45.67,9.96];
+ if(!selectedMapObj){selectedMapObj=makeLeafletMap('selectedJobMap',center,addressCoords||opCoords?16:12,[]);if(!selectedMapObj){setMapHealth('selectedJobMap','Motore mappa non disponibile',false);return}selectedMapObj.on('click',e=>{if(!manualPointMode)return;selectedJob.opLat=e.latlng.lat;selectedJob.opLng=e.latlng.lng;selectedJob.coordSource='manual';manualPointMode=false;el('selectedJobMap')?.classList.remove('manual-mode');if(el('manualPointBtn'))el('manualPointBtn').textContent='🎯 Correggi punto operativo';setLocationStatus('Punto operativo corretto manualmente.','ok');updateOperationalPointLabel();updateSelectedJobMap()})}
+ selectedMapObj._sfLayer.clearLayers();
+ if(addressCoords)L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Indirizzo intervento</b><br>'+esc(selectedJob.address));
+ if(opCoords)L.circleMarker(opCoords,{radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Punto operativo</b>');
+ selectedMapObj.setView(center,addressCoords||opCoords?16:12,{animate:false});requestAnimationFrame(()=>selectedMapObj.invalidateSize(true));setTimeout(()=>selectedMapObj.invalidateSize(true),120);setMapHealth('selectedJobMap',addressCoords||opCoords?'Mappa caricata':'Mappa visibile · indirizzo non localizzato',!!(addressCoords||opCoords));updateOperationalPointLabel();
+}
+async function updateReportMap(){
+ if(!mapVisible('reportRealMap')||typeof L==='undefined')return;let c=activeCoords(selectedJob);if(!c&&selectedJob.address){await geocodeJob(selectedJob,true);c=activeCoords(selectedJob)};const center=c||[45.67,9.96];
+ if(!reportMapObj)reportMapObj=makeLeafletMap('reportRealMap',center,c?16:12,[]);if(!reportMapObj)return;
+ reportMapObj._sfLayer.clearLayers();if(c)L.marker(c).addTo(reportMapObj._sfLayer);reportMapObj.setView(center,c?16:12,{animate:false});setTimeout(()=>reportMapObj.invalidateSize(true),100);
+}
+
+let selectedJob={...demoJobs[0]};
+let signatureTarget=null, modalDrawing=false, modalCtx=null;
+
+function selectJob(node){
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
+ const source=demoJobs.find(j=>j.id===node.dataset.id);
+ selectedJob=source?{...source}:{id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:null,lng:null,coordSource:'address'};
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
+   geocodeJob(selectedJob,true).then(ok=>{if(ok){updateSelectedJobMap();refreshFieldMap();}});
+ }else{
+   updateSelectedJobMap();
+   if(fieldMapObj){const c=activeCoords(selectedJob);if(c)fieldMapObj.setView(c,15);}
+ }
 }
 function openSelectedMap(){
-  window.open(gpsMapsUrl(selectedJob),'_blank');
+ const c=activeCoords(selectedJob);
+ if(c) window.open('https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1],'_blank');
+ else window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank');
 }
 function openSigModal(target){
  signatureTarget=target;
@@ -952,7 +1047,7 @@ function fieldNavigate(name){
  document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
  const resume=el('resumeJob');
  if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
- window.scrollTo({top:0,behavior:'smooth'}); setTimeout(invalidateVisibleMaps,80); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fitFieldMap(),120);
+ window.scrollTo({top:0,behavior:'smooth'}); if(name==='Mappa')setTimeout(()=>refreshFieldMap(),80); if(name==='Interventi')setTimeout(()=>updateSelectedJobMap(),80);
 }
 
 function openOnly(id){
@@ -1143,7 +1238,7 @@ function showReport(){
   prevView = !el('operator').classList.contains('hidden') ? 'operator' : 'office';
   el('office').classList.add('hidden');
   el('operator').classList.add('hidden');
-  el('reportView').classList.remove('hidden');
+  el('reportView').classList.remove('hidden'); setTimeout(()=>updateReportMap(),120);
 }
 
 function closeReport(){
@@ -1157,10 +1252,7 @@ function closeReport(){
 }
 
 
-function preparePrint(){
-  updateReportMap();
-  setTimeout(()=>window.print(),120);
-}
+function preparePrint(){updateReportMap();setTimeout(()=>{if(reportMapObj)reportMapObj.invalidateSize(true);window.print()},450);}
 
 function shareMail(){
   location.href='mailto:?subject=Rapportino Spurgo Flow 2026-00051&body=In allegato/da condividere il rapportino dell’intervento n. 2026-00051.';
@@ -1189,8 +1281,10 @@ function markSignatureStatus(canvasId,statusId){
 }
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
-window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();setTimeout(initAllMaps,150)});
+window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();});
 
+window.addEventListener('orientationchange',()=>setTimeout(invalidateVisibleMaps,180));
+window.addEventListener('resize',()=>setTimeout(invalidateVisibleMaps,180));
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
