@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow Suite Beta v5.0 - Build 5.0.16 - Google Maps iframe",
+  "description": "Spurgo Flow Suite Beta v5.0 - Build 5.0.17 - Mappe rigenerate da zero con MapLibre",
   "icons": [
     {
       "src": "icon-192.png",
