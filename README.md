@@ -113,3 +113,26 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Mappa scheda intervento e rapportino non vengono più distrutte/ricreate inutilmente.
 - Rimossi app.js/style.css/manifest.json non utilizzati e appartenenti a un'altra architettura.
 - JavaScript verificato sintatticamente con Node; controllati handler, ID duplicati e riferimenti mancanti.
+
+## Spurgo Flow 6.0.0 — Office operativo
+
+Baseline utilizzata: Spurgo Flow 5.0.13 FIX1 stabile.
+
+### Funzioni Ufficio
+- Interventi: creazione, modifica, eliminazione, duplicazione, ricerca e filtri.
+- Assegnazione intervento a singolo operatore e mezzo.
+- Agenda: data, orario e filtro per operatore, con apertura della scheda.
+- Clienti: creazione/modifica/eliminazione, contatti, referente, impianti/note e nuovo intervento dal cliente.
+- Mezzi: creazione/modifica/eliminazione, tipologia, targa, capacità, stato, ore/km e manutenzione.
+- Operatori e Squadre: conserva e integra il sistema della baseline FIX1.
+- Messaggi: conversazione individuale Ufficio ↔ Operatore, badge dei non letti e risposta dell'operatore.
+
+### Area operatore
+- L'elenco Interventi viene alimentato dalle assegnazioni effettuate dall'Ufficio.
+- Agenda alimentata dagli interventi assegnati.
+- Messaggi individuali dell'Ufficio con possibilità di risposta.
+- Badge dei messaggi non letti.
+
+### Persistenza Beta
+La versione GitHub usa localStorage: dati e messaggi sono persistenti sullo stesso browser/dispositivo.
+La sincronizzazione reale tra dispositivi sarà il passaggio successivo con database/backend condiviso.

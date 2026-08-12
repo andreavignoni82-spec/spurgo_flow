@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-suite-v5-5.0.13-fix1';
+const CACHE='spurgoflow-v6-6.0.0';
 const LOCAL=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x))))));

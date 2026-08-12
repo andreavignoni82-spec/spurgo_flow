@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow Suite",
+  "name": "Spurgo Flow 6.0",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow Suite Beta v5.0 - Build 5.0.13 FIX1",
+  "description": "Spurgo Flow Suite v6.0.0 - Ufficio operativo, assegnazioni e messaggistica operatori",
   "icons": [
     {
       "src": "icon-192.png",
