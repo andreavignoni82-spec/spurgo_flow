@@ -103,3 +103,15 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Crea, modifica ed elimina squadre.
 - Assegna uno o più operatori alle squadre.
 - Gli operatori creati dall'Ufficio possono accedere subito con le proprie credenziali nella demo locale.
+
+## GPS SAFE R1 — baseline 5.0.12
+- Ripartenza dalla 5.0.12 originale.
+- Rimosso completamente il motore cartografico Leaflet dalla visualizzazione interna.
+- Nessuna tile, CDN mappa, WebGL o iframe necessario per mostrare il pannello posizione.
+- GPS nativo browser via navigator.geolocation, solo HTTPS.
+- getCurrentPosition ad alta precisione + breve watchPosition per migliorare il fix quando la precisione iniziale è debole.
+- Visualizzazione sempre disponibile con coordinate, precisione GPS, indirizzo e stato.
+- Apertura della posizione in Apple Maps e Google Maps per la cartografia reale/navigazione.
+- La posizione operativa acquisita dal dispositivo ha priorità rispetto alla posizione dell'indirizzo.
+- Errori GPS gestiti esplicitamente: permesso negato, posizione indisponibile, timeout, assenza HTTPS.
+- JavaScript verificato con Node prima del rilascio.
