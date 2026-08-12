@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow Suite Beta v5.0 - Build 5.0.13 - Fix mappe iPhone",
+  "description": "Spurgo Flow Suite Beta v5.0 - Build 5.0.14 - Nuovo motore mappe OpenStreetMap senza Leaflet",
   "icons": [
     {
       "src": "icon-192.png",
