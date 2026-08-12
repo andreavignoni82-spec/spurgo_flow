@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.11 - modalità ultra-operativa smartphone */
+/* Build 5.0.12 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -78,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 - navigazione field-service persistente */
+/* Build 5.0.12 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -98,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 */
+/* Build 5.0.12 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -137,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 - mappe reali e rapportino fedele */
+/* Build 5.0.12 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -203,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.12 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -246,7 +246,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 */
+/* Build 5.0.12 */
 .report-actions-app{display:block}
 #reportRealMap{
   width:100%;
@@ -267,7 +267,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.11 - geocodifica reale e punto operativo */
+/* Build 5.0.12 - geocodifica reale e punto operativo */
 .location-tools{
   background:#f7fafc;
   border:1px solid #d7e1e8;
@@ -304,23 +304,37 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   .location-tools .actions{display:grid;grid-template-columns:1fr 1fr}
 }
 
+
+.manage-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.manage-list{display:grid;gap:10px;margin-top:12px}
+.person-card,.team-card{background:#fff;border:1px solid #dce5ec;border-radius:13px;padding:13px}
+.person-card .head,.team-card .head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.person-meta,.team-meta{color:#6d7d8b;font-size:12px;margin-top:4px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-grid .full{grid-column:1/-1}
+.manage-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.small-pill{display:inline-block;border-radius:999px;padding:4px 7px;font-size:11px;font-weight:800;background:#eef3f6;color:#445462}
+.small-pill.green{background:#e8f7ee;color:#177a3e}.small-pill.orange{background:#fff2dd;color:#a86400}
+.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.check-row{display:flex;gap:8px;align-items:center;background:#f7fafc;padding:8px;border-radius:8px}
+@media(max-width:900px){.manage-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.11</div>
+<div class="version">v5.0 · build 5.0.12</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
-<p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
+<p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123 · paolo/paolo123</p>
 </div></div>
 
 <div id="office" class="app hidden">
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.11<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.12<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.11</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -335,7 +349,38 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <section id="flotta" class="section"><div class="top"><h1>Mezzi & Flotta</h1><button class="btn primary">+ Nuovo mezzo</button></div><div class="grid3" style="margin-top:18px"><div class="card fleet-card"><h3>Autobotte 01</h3><div class="muted">AB01 · capacità 10 m³</div><p>Stato: 🟢 Operativa</p><p>Squadra: Marco</p><p>Manutenzione tra 38 h</p><div class="meter"><i style="width:72%"></i></div></div><div class="card fleet-card"><h3>Autobotte 02</h3><div class="muted">AB02 · capacità 8 m³</div><p>Stato: 🟠 In intervento</p><p>Squadra: Luca</p><p>Manutenzione tra 112 h</p><div class="meter"><i style="width:45%"></i></div></div><div class="card fleet-card"><h3>Furgone Video 01</h3><div class="muted">FV01 · videoispezione</div><p>Stato: 🟢 Disponibile</p><p>Squadra: Paolo</p><p>Revisione: 22/10/2026</p></div></div></section>
 
-<section id="squadre" class="section"><h1>Squadre & Operatori</h1><div class="grid3" style="margin-top:18px"><div class="card"><h3>Marco Rossi</h3><p>🟢 Attivo · AB01</p><p class="muted">3 interventi oggi · 5h 12m</p></div><div class="card"><h3>Luca Bianchi</h3><p>🟠 In intervento · AB02</p><p class="muted">2 interventi oggi · 4h 06m</p></div><div class="card"><h3>Paolo Verdi</h3><p>🟢 Disponibile · FV01</p><p class="muted">1 intervento oggi</p></div></div></section>
+
+<section id="squadre" class="section">
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
+  <div class="manage-grid" style="margin-top:18px">
+    <div class="card">
+      <h3 style="margin-top:0">+ Nuovo operatore</h3>
+      <div class="form-grid">
+        <div><label>Nome</label><input id="opNome" class="field" placeholder="Marco"></div>
+        <div><label>Cognome</label><input id="opCognome" class="field" placeholder="Rossi"></div>
+        <div><label>Username</label><input id="opUsername" class="field" placeholder="marco"></div>
+        <div><label>Password</label><input id="opPassword" class="field" type="password" placeholder="Password dedicata"></div>
+        <div><label>Telefono</label><input id="opTelefono" class="field" placeholder="+39..."></div>
+        <div><label>Mezzo assegnato</label><select id="opMezzo" class="field"><option value="">Nessuno</option><option>Autobotte 01</option><option>Autobotte 02</option><option>Furgone Video 01</option></select></div>
+        <div class="full"><label>Ruolo / note</label><input id="opRuolo" class="field" placeholder="Operatore spurghi, videoispezione..."></div>
+      </div>
+      <button class="btn primary" onclick="addOperator()">Crea operatore</button>
+      <div id="operatorFormMsg" class="muted" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">+ Nuova squadra</h3>
+      <label>Nome squadra</label><input id="teamName" class="field" placeholder="Squadra A">
+      <label>Mezzo principale</label><select id="teamVehicle" class="field"><option value="">Nessuno</option><option>Autobotte 01</option><option>Autobotte 02</option><option>Furgone Video 01</option></select>
+      <label>Operatori della squadra</label><div id="teamOperatorChecks" class="check-grid"></div>
+      <button class="btn primary" style="margin-top:10px" onclick="addTeam()">Crea squadra</button>
+      <div id="teamFormMsg" class="muted" style="margin-top:8px"></div>
+    </div>
+  </div>
+  <div class="manage-grid" style="margin-top:16px">
+    <div class="card"><div class="top"><h3 style="margin:0">Operatori</h3><span id="operatorCount" class="small-pill green"></span></div><div id="operatorList" class="manage-list"></div></div>
+    <div class="card"><div class="top"><h3 style="margin:0">Squadre</h3><span id="teamCount" class="small-pill green"></span></div><div id="teamList" class="manage-list"></div></div>
+  </div>
+</section>
 
 <section id="rapportini" class="section"><h1>Rapportini</h1><div class="card" style="margin-top:18px"><table class="table"><tr><th>N.</th><th>Cliente</th><th>Data</th><th>Operatore</th><th></th></tr><tr><td>2026-00051</td><td>Condominio Belvedere</td><td>12/08/2026</td><td>Marco</td><td><button class="btn primary" onclick="showReport()">Apri</button></td></tr></table></div></section>
 
@@ -513,7 +558,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.11</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.12</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -602,34 +647,64 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 </div>
 <script>
+
+const DEFAULT_OPERATORS=[
+ {id:'op-marco',nome:'Marco',cognome:'Rossi',username:'marco',password:'marco123',telefono:'',mezzo:'Autobotte 01',ruolo:'Operatore',active:true},
+ {id:'op-luca',nome:'Luca',cognome:'Bianchi',username:'luca',password:'luca123',telefono:'',mezzo:'Autobotte 02',ruolo:'Operatore',active:true},
+ {id:'op-paolo',nome:'Paolo',cognome:'Verdi',username:'paolo',password:'paolo123',telefono:'',mezzo:'Furgone Video 01',ruolo:'Videoispezione',active:true}
+];
+const DEFAULT_TEAMS=[
+ {id:'team-a',name:'Squadra A',vehicle:'Autobotte 01',operatorIds:['op-marco']},
+ {id:'team-b',name:'Squadra B',vehicle:'Autobotte 02',operatorIds:['op-luca']}
+];
+function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
+let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
+function saveOfficePeople(){localStorage.setItem('sf_operators',JSON.stringify(sfOperators));localStorage.setItem('sf_teams',JSON.stringify(sfTeams))}
+function esc(t){return String(t??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function operatorName(o){return (o.nome+' '+o.cognome).trim()}
+function renderOperatorChecks(){const h=el('teamOperatorChecks');if(!h)return;h.innerHTML=sfOperators.filter(o=>o.active!==false).map(o=>`<label class="check-row"><input type="checkbox" class="team-op-check" value="${esc(o.id)}"><span>${esc(operatorName(o))}</span></label>`).join('')||'<div class="muted">Crea prima almeno un operatore.</div>'}
+function renderOperators(){const h=el('operatorList');if(!h)return;el('operatorCount').textContent=sfOperators.length+' operatori';h.innerHTML=sfOperators.map(o=>`<div class="person-card"><div class="head"><div><b>${esc(operatorName(o))}</b><div class="person-meta">@${esc(o.username)} · ${esc(o.mezzo||'Nessun mezzo')}</div></div><span class="small-pill ${o.active!==false?'green':'orange'}">${o.active!==false?'ATTIVO':'DISATTIVATO'}</span></div><div class="person-meta">${esc(o.ruolo||'Operatore')} ${o.telefono?'· '+esc(o.telefono):''}</div><div class="manage-actions"><button class="btn ghost" onclick="editOperator('${o.id}')">Modifica</button><button class="btn ghost" onclick="changeOperatorPassword('${o.id}')">Password</button><button class="btn ghost" onclick="toggleOperator('${o.id}')">${o.active!==false?'Disattiva':'Riattiva'}</button><button class="btn danger" onclick="deleteOperator('${o.id}')">Elimina</button></div></div>`).join('');renderOperatorChecks()}
+function renderTeams(){const h=el('teamList');if(!h)return;el('teamCount').textContent=sfTeams.length+' squadre';h.innerHTML=sfTeams.map(t=>{const names=t.operatorIds.map(id=>sfOperators.find(o=>o.id===id)).filter(Boolean).map(operatorName);return `<div class="team-card"><div class="head"><div><b>${esc(t.name)}</b><div class="team-meta">${esc(t.vehicle||'Nessun mezzo')}</div></div><span class="small-pill green">${names.length} operatori</span></div><div class="team-meta">${names.length?esc(names.join(', ')):'Nessun operatore assegnato'}</div><div class="manage-actions"><button class="btn ghost" onclick="editTeam('${t.id}')">Modifica</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Elimina</button></div></div>`}).join('')}
+function renderOfficePeople(){renderOperators();renderTeams()}
+function uniqueId(prefix){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)}
+function addOperator(){const nome=el('opNome').value.trim(),cognome=el('opCognome').value.trim(),username=el('opUsername').value.trim().toLowerCase(),password=el('opPassword').value;if(!nome||!username||!password){el('operatorFormMsg').textContent='Nome, username e password sono obbligatori.';return}if(sfOperators.some(o=>o.username.toLowerCase()===username)){el('operatorFormMsg').textContent='Username già esistente.';return}sfOperators.push({id:uniqueId('op'),nome,cognome,username,password,telefono:el('opTelefono').value.trim(),mezzo:el('opMezzo').value,ruolo:el('opRuolo').value.trim()||'Operatore',active:true});saveOfficePeople();renderOfficePeople();['opNome','opCognome','opUsername','opPassword','opTelefono','opRuolo'].forEach(id=>el(id).value='');el('opMezzo').value='';el('operatorFormMsg').textContent='Operatore creato correttamente.'}
+function editOperator(id){const o=sfOperators.find(x=>x.id===id);if(!o)return;const nome=prompt('Nome',o.nome);if(nome===null)return;const cognome=prompt('Cognome',o.cognome);if(cognome===null)return;const telefono=prompt('Telefono',o.telefono||'');if(telefono===null)return;const mezzo=prompt('Mezzo assegnato',o.mezzo||'');if(mezzo===null)return;const ruolo=prompt('Ruolo / note',o.ruolo||'Operatore');if(ruolo===null)return;Object.assign(o,{nome:nome.trim(),cognome:cognome.trim(),telefono:telefono.trim(),mezzo:mezzo.trim(),ruolo:ruolo.trim()});saveOfficePeople();renderOfficePeople()}
+function changeOperatorPassword(id){const o=sfOperators.find(x=>x.id===id);if(!o)return;const p=prompt('Nuova password per '+operatorName(o));if(!p)return;o.password=p;saveOfficePeople();alert('Password aggiornata.')}
+function toggleOperator(id){const o=sfOperators.find(x=>x.id===id);if(!o)return;o.active=o.active===false?true:false;saveOfficePeople();renderOfficePeople()}
+function deleteOperator(id){const o=sfOperators.find(x=>x.id===id);if(!o)return;if(!confirm('Eliminare '+operatorName(o)+'?'))return;sfOperators=sfOperators.filter(x=>x.id!==id);sfTeams.forEach(t=>t.operatorIds=t.operatorIds.filter(x=>x!==id));saveOfficePeople();renderOfficePeople()}
+function addTeam(){const name=el('teamName').value.trim();if(!name){el('teamFormMsg').textContent='Inserisci il nome della squadra.';return}const ids=[...document.querySelectorAll('.team-op-check:checked')].map(x=>x.value);sfTeams.push({id:uniqueId('team'),name,vehicle:el('teamVehicle').value,operatorIds:ids});saveOfficePeople();renderOfficePeople();el('teamName').value='';el('teamVehicle').value='';el('teamFormMsg').textContent='Squadra creata correttamente.'}
+function editTeam(id){const t=sfTeams.find(x=>x.id===id);if(!t)return;const name=prompt('Nome squadra',t.name);if(name===null)return;const vehicle=prompt('Mezzo principale',t.vehicle||'');if(vehicle===null)return;const available=sfOperators.map((o,i)=>(i+1)+') '+operatorName(o)).join('\n'),current=t.operatorIds.map(id=>sfOperators.findIndex(o=>o.id===id)+1).filter(x=>x>0).join(','),selected=prompt('Numeri operatori separati da virgola:\n'+available,current);if(selected===null)return;const indexes=selected.split(',').map(x=>parseInt(x.trim(),10)-1).filter(x=>x>=0&&x<sfOperators.length);t.name=name.trim()||t.name;t.vehicle=vehicle.trim();t.operatorIds=[...new Set(indexes.map(i=>sfOperators[i].id))];saveOfficePeople();renderOfficePeople()}
+function deleteTeam(id){const t=sfTeams.find(x=>x.id===id);if(!t)return;if(!confirm('Eliminare la squadra '+t.name+'?'))return;sfTeams=sfTeams.filter(x=>x.id!==id);saveOfficePeople();renderOfficePeople()}
+
 let prevView='office', timerInt, secs=0;
 
 const el = id => document.getElementById(id);
 
 function login(){
-  const u = el('user').value.trim().toLowerCase();
-  const p = el('pass').value;
-  const loginScreen = el('login');
-  const officeView = el('office');
-  const operatorView = el('operator');
-  const opName = el('opname');
-
-  if(u === 'ufficio' && p === 'ufficio123'){
+  const u=el('user').value.trim().toLowerCase();
+  const p=el('pass').value;
+  const loginScreen=el('login'),officeView=el('office'),operatorView=el('operator'),opName=el('opname');
+  if(u==='ufficio'&&p==='ufficio123'){
     loginScreen.classList.add('hidden');
-    officeView.classList.remove('hidden'); setTimeout(initAllMaps,120);
+    officeView.classList.remove('hidden');
     operatorView.classList.add('hidden');
+    renderOfficePeople();
+    setTimeout(initAllMaps,120);
     return;
   }
-
-  if((u === 'marco' && p === 'marco123') || (u === 'luca' && p === 'luca123')){
+  const matchedOperator=sfOperators.find(o=>o.active!==false&&o.username.toLowerCase()===u&&o.password===p);
+  if(matchedOperator){
     loginScreen.classList.add('hidden');
     officeView.classList.add('hidden');
-    operatorView.classList.remove('hidden'); setTimeout(initAllMaps,120);
-    opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1); if(el('profileName')) el('profileName').textContent=u.charAt(0).toUpperCase()+u.slice(1);
-    setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');},100);
+    operatorView.classList.remove('hidden');
+    const fullName=operatorName(matchedOperator);
+    opName.textContent='Operatore: '+fullName;
+    if(el('profileName'))el('profileName').textContent=fullName;
+    if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
+    sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
+    setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');initAllMaps()},120);
     return;
   }
-
   alert('Credenziali demo non valide');
 }
 
@@ -1272,7 +1347,7 @@ function markSignatureStatus(canvasId,statusId){
 }
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
-window.addEventListener('load',()=>{renderCompletedJobs();setTimeout(initAllMaps,150)});
+window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();setTimeout(initAllMaps,150)});
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
