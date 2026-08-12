@@ -318,61 +318,6 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
 .check-row{display:flex;gap:8px;align-items:center;background:#f7fafc;padding:8px;border-radius:8px}
 @media(max-width:900px){.manage-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
-
-/* MAP REBUILD R1 - base 5.0.12 */
-.real-map{
-  position:relative;
-  display:block;
-  width:100%!important;
-  min-width:0!important;
-  height:320px!important;
-  min-height:320px!important;
-  max-height:none!important;
-  overflow:hidden!important;
-  box-sizing:border-box!important;
-  border:1px solid #d5dfe7;
-  border-radius:12px;
-  background:#e7edf1;
-}
-.real-map.small{
-  height:270px!important;
-  min-height:270px!important;
-}
-.real-map.report-map-real{
-  height:145px!important;
-  min-height:145px!important;
-  border-radius:7px;
-}
-.real-map .leaflet-container,
-.leaflet-container.real-map{
-  width:100%!important;
-  height:100%!important;
-}
-.real-map img.leaflet-tile{
-  max-width:none!important;
-  max-height:none!important;
-}
-.map-load-state{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  margin:6px 0;
-  font-size:11px;
-  color:#607181;
-}
-.map-load-state .ok{color:#177a3e;font-weight:800}
-.map-load-state .err{color:#b42318;font-weight:800}
-@media(max-width:700px){
-  .real-map{height:300px!important;min-height:300px!important}
-  .real-map.small{height:260px!important;min-height:260px!important}
-  .real-map.report-map-real{height:112px!important;min-height:112px!important}
-}
-@media print{
-  .real-map.report-map-real{height:90px!important;min-height:90px!important}
-  .leaflet-control-container{display:none!important}
-}
-
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
@@ -392,9 +337,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.12</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapState" class="map-load-state"><span>Mappa interventi</span><span></span></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
+<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map"></div><div id="controlMapState" class="map-load-state"><span>Situazione territoriale</span><span></span></div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
 
 <section id="interventi" class="section"><div class="top"><h1>Interventi</h1><button class="btn primary" onclick="alert('Nuovo intervento: modulo demo predisposto')">+ Nuovo intervento</button></div><div class="card" style="margin-top:18px"><table class="table"><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Stato</th><th>Operatore</th><th>Fatturazione</th></tr><tr><td>#0051</td><td>Condominio Belvedere</td><td>Disotturazione</td><td><span class="badge urgent">URGENTE</span></td><td>Marco</td><td>Da fatturare</td></tr><tr><td>#0050</td><td>Ristorante Al Lago</td><td>Pulizia fossa</td><td><span class="badge progress">IN CORSO</span></td><td>Luca</td><td>—</td></tr><tr><td>#0049</td><td>Azienda Bianchi</td><td>Lavaggio</td><td><span class="badge planned">PROGRAMMATO</span></td><td>Marco</td><td>—</td></tr></table></div></section>
 
@@ -463,7 +408,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div id="locationStatus" class="location-status">La posizione viene ricavata dall'indirizzo.</div>
   <div id="operationalPointLabel"></div>
 </div>
-<div id="selectedJobMap" class="real-map small"></div><div id="selectedMapState" class="map-load-state"><span>Posizione intervento</span><span></span></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div id="selectedJobMap" class="real-map small"></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div class="completed-section">
  <h3 style="color:white">Interventi terminati</h3>
  <div id="completedJobs"></div>
@@ -574,7 +519,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="real-map"></div><div id="fieldMapState" class="map-load-state"><span>Interventi assegnati</span><span></span></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+ <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldRealMap" class="real-map"></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
 </div>
 
 <div id="fieldMessaggi" class="field-page">
@@ -752,7 +697,6 @@ function login(){
     loginScreen.classList.add('hidden');
     officeView.classList.add('hidden');
     operatorView.classList.remove('hidden');
-    setTimeout(()=>{fieldNavigate('Interventi');updateSelectedJobMap();},140);
     const fullName=operatorName(matchedOperator);
     opName.textContent='Operatore: '+fullName;
     if(el('profileName'))el('profileName').textContent=fullName;
@@ -772,11 +716,9 @@ document.querySelectorAll('#menu button').forEach(b=>{
   b.addEventListener('click', ()=>{
     document.querySelectorAll('#menu button').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    document.querySelectorAll('.section').forEach(sec=>sec.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     const target = el(b.dataset.sec);
     if(target) target.classList.add('active');
-    if(b.dataset.sec==='dashboard') setTimeout(renderOfficeMap,80);
-    if(b.dataset.sec==='control') setTimeout(renderControlMap,80);
   });
 });
 
@@ -786,190 +728,346 @@ document.querySelectorAll('#menu button').forEach(b=>{
 let jobRunning=false;
 
 
+let officeMapObj=null, controlMapObj=null, fieldMapObj=null, selectedMapObj=null, reportMapObj=null;
+const demoJobs=[
+ {id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG), Italia',request:'Intasamento scarico garage',lat:null,lng:null,status:'Urgente',coordSource:'address'},
+ {id:'INT-2024-00046',client:'Ristorante Al Lago',address:'Lungolago, Iseo (BS), Italia',request:'Pulizia fossa biologica',lat:null,lng:null,status:'Programmato',coordSource:'address'},
+ {id:'INT-2024-00047',client:'Azienda Bianchi Srl',address:'Costa Volpino (BG), Italia',request:'Lavaggio tubazione',lat:null,lng:null,status:'Programmato',coordSource:'address'}
+];
+const completedSeed=[
+ {id:'INT-2024-00044',client:'Residence Sole',address:'Via XX Settembre 8, Iseo (BS), Italia',request:'Pulizia pozzetti',lat:null,lng:null,status:'Terminato',closedAt:'12/08/2026 09:05',reportNo:'2024-00044',coordSource:'address'}
+];
+let completedJobs=[...completedSeed];
+function makeLeafletMap(id, center, zoom=12, jobs=[]){
+ const node=el(id); if(!node || typeof L==='undefined') return null;
+ if(node._leaflet_id){
+   try{
+     const old=node._leaflet_map_instance;
+     if(old) old.remove();
+   }catch(e){}
+   node._leaflet_id=null;
+   node.innerHTML='';
+ }
+ const map=L.map(id,{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,zoom);
+ node._leaflet_map_instance=map;
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+   maxZoom:19,
+   attribution:'&copy; OpenStreetMap contributors'
+ }).addTo(map);
+ const bounds=[];
+ jobs.forEach(j=>{
+   const coords=activeCoords(j);
+   if(!coords) return;
+   const marker=L.marker(coords).addTo(map);
+   marker.bindPopup('<b>'+j.client+'</b><br>'+(j.address||'')+'<br>'+j.status);
+   bounds.push(coords);
+ });
+ if(bounds.length>1){
+   map.fitBounds(bounds,{padding:[28,28],maxZoom:13});
+ }else if(bounds.length===1){
+   map.setView(bounds[0],zoom);
+ }
+ setTimeout(()=>map.invalidateSize(true),120);
+ return map;
+}
 
-/* ===== MAP REBUILD R1 / BASE 5.0.12 ===== */
-let sfMaps={office:null,control:null,field:null,selected:null,report:null};
-let sfLayers={office:null,control:null,field:null,selected:null,report:null};
+
+let manualPointMode=false;
+let addressMarker=null, operationalMarker=null;
 
 function activeCoords(job=selectedJob){
   if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)) return [job.opLat,job.opLng];
   if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lat,job.lng];
   return null;
 }
-
-function setMapState(id,text,ok=true){
-  const box=el(id); if(!box)return;
-  const spans=box.querySelectorAll('span');
-  if(spans[1]){
-    spans[1].textContent=text;
-    spans[1].className=ok?'ok':'err';
-  }
+function setLocationStatus(text,type=''){
+  const x=el('locationStatus'); if(!x) return;
+  x.textContent=text; x.className='location-status'+(type?' '+type:'');
 }
-
-function mapNodeVisible(id){
-  const n=el(id);
-  if(!n) return false;
-  const r=n.getBoundingClientRect();
-  return r.width>20 && r.height>20 && n.offsetParent!==null;
-}
-
-function destroyMap(key){
-  if(sfMaps[key]){
-    try{sfMaps[key].remove()}catch(e){}
-    sfMaps[key]=null;
-    sfLayers[key]=null;
-  }
-}
-
-function ensureMap(key,id,center=[45.67,9.96],zoom=13){
-  if(typeof L==='undefined') return null;
-  if(!mapNodeVisible(id)) return null;
-  if(sfMaps[key]){
-    setTimeout(()=>sfMaps[key].invalidateSize(true),50);
-    return sfMaps[key];
-  }
-  const map=L.map(id,{
-    zoomControl:true,
-    scrollWheelZoom:false,
-    tap:true,
-    preferCanvas:false
-  }).setView(center,zoom);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:19,
-    attribution:'&copy; OpenStreetMap contributors',
-    updateWhenIdle:true,
-    keepBuffer:2
-  }).addTo(map);
-  sfLayers[key]=L.layerGroup().addTo(map);
-  sfMaps[key]=map;
-  setTimeout(()=>map.invalidateSize(true),60);
-  setTimeout(()=>map.invalidateSize(true),220);
-  return map;
-}
-
-function clearLayer(key){
-  if(sfLayers[key]) sfLayers[key].clearLayers();
-}
-
-function putJobs(key,map,jobs,focusSingle=false){
-  clearLayer(key);
-  const pts=[];
-  jobs.forEach(j=>{
-    const c=activeCoords(j); if(!c)return;
-    pts.push(c);
-    L.marker(c).addTo(sfLayers[key]).bindPopup(
-      '<b>'+esc(j.client||'Intervento')+'</b><br>'+esc(j.address||'')+'<br>'+esc(j.status||'')
-    );
-  });
-  if(!pts.length) return;
-  if(focusSingle || pts.length===1) map.setView(pts[0],16,{animate:false});
-  else map.fitBounds(pts,{padding:[25,25],maxZoom:13,animate:false});
-  setTimeout(()=>map.invalidateSize(true),80);
-}
-
-function renderOfficeMap(){
-  if(!mapNodeVisible('officeMap')) return;
-  const jobs=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  const c=jobs.length?activeCoords(jobs[0]):[45.67,9.96];
-  const map=ensureMap('office','officeMap',c,11);
-  if(!map)return;
-  putJobs('office',map,jobs,false);
-  setMapState('officeMapState','Caricata',true);
-}
-
-function renderControlMap(){
-  if(!mapNodeVisible('controlMap')) return;
-  const jobs=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  const c=jobs.length?activeCoords(jobs[0]):[45.67,9.96];
-  const map=ensureMap('control','controlMap',c,11);
-  if(!map)return;
-  putJobs('control',map,jobs,false);
-  setMapState('controlMapState','Caricata',true);
-}
-
-function refreshFieldMap(){
-  if(!mapNodeVisible('fieldRealMap')) return;
-  const jobs=demoJobs.filter(j=>activeCoords(j));
-  const c=jobs.length?activeCoords(jobs[0]):[45.67,9.96];
-  const map=ensureMap('field','fieldRealMap',c,11);
-  if(!map)return;
-  putJobs('field',map,jobs,false);
-  setMapState('fieldMapState','Caricata',true);
-}
-
-function updateSelectedJobMap(){
-  if(!mapNodeVisible('selectedJobMap')) return;
-  const c=activeCoords(selectedJob);
-  if(!c){
-    setMapState('selectedMapState','Posizione non disponibile',false);
-    return;
-  }
-  const map=ensureMap('selected','selectedJobMap',c,16);
-  if(!map)return;
-  clearLayer('selected');
-
-  // address marker
-  if(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng)){
-    L.circleMarker([selectedJob.lat,selectedJob.lng],{
-      radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3
-    }).addTo(sfLayers.selected).bindPopup('<b>Indirizzo intervento</b><br>'+esc(selectedJob.address||''));
-  }
-  // operational point marker if different
+function updateOperationalPointLabel(){
+  const host=el('operationalPointLabel'); if(!host) return;
   if(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng)){
-    L.circleMarker([selectedJob.opLat,selectedJob.opLng],{
-      radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3
-    }).addTo(sfLayers.selected).bindPopup('<b>Punto operativo</b>');
+    host.innerHTML='<span class="point-chip">🎯 Punto operativo: '+selectedJob.opLat.toFixed(6)+', '+selectedJob.opLng.toFixed(6)+'</span>';
+  }else{
+    host.innerHTML='';
   }
-  map.setView(c,16,{animate:false});
-  setTimeout(()=>map.invalidateSize(true),80);
-  setTimeout(()=>map.invalidateSize(true),260);
-  setMapState('selectedMapState','Caricata',true);
+}
+async function geocodeAddress(address){
+  const q=(address||'').trim();
+  if(!q) throw new Error('Inserisci un indirizzo.');
+  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=it&accept-language=it&q='+encodeURIComponent(q);
+  const res=await fetch(url,{headers:{'Accept':'application/json'}});
+  if(!res.ok) throw new Error('Servizio di geolocalizzazione non disponibile.');
+  const data=await res.json();
+  if(!data.length) throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
+  return {lat:parseFloat(data[0].lat),lng:parseFloat(data[0].lon),displayName:data[0].display_name};
+}
+async function geocodeJob(job, silent=false){
+  if(!job || !job.address) return false;
+  try{
+    if(!silent) setLocationStatus('Ricerca posizione in corso…');
+    const g=await geocodeAddress(job.address);
+    job.lat=g.lat; job.lng=g.lng; job.coordSource='geocoded'; job.geocodedLabel=g.displayName;
+    if(!silent) setLocationStatus('Posizione trovata: '+g.displayName,'ok');
+    return true;
+  }catch(err){
+    if(!silent) setLocationStatus(err.message||'Posizione non trovata.','err');
+    return false;
+  }
+}
+async function geocodeSelectedJob(){
+  const input=el('jobAddressInput');
+  selectedJob.address=(input?input.value:selectedJob.address).trim();
+  el('selectedAddress').textContent=selectedJob.address;
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  const ok=await geocodeJob(selectedJob,false);
+  if(ok){
+    const source=demoJobs.find(j=>j.id===selectedJob.id);
+    if(source) Object.assign(source,selectedJob);
+    updateSelectedJobMap();
+    if(fieldMapObj) refreshFieldMap();
+  }
   updateOperationalPointLabel();
 }
-
-function updateReportMap(){
-  if(!mapNodeVisible('reportRealMap')) return;
-  const c=activeCoords(selectedJob); if(!c)return;
-  const map=ensureMap('report','reportRealMap',c,16);
-  if(!map)return;
-  clearLayer('report');
-  L.marker(c).addTo(sfLayers.report);
-  map.setView(c,16,{animate:false});
-  setTimeout(()=>map.invalidateSize(true),100);
+async function geocodeAllDemoJobs(){
+  for(const j of demoJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100)); // rispetta il rate-limit demo del servizio pubblico
+    }
+  }
+  for(const j of completedJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100));
+    }
+  }
+}
+function useDevicePosition(){
+  if(!navigator.geolocation){
+    setLocationStatus('Geolocalizzazione del dispositivo non supportata.','err'); return;
+  }
+  setLocationStatus('Acquisizione posizione GPS del dispositivo…');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    selectedJob.opLat=pos.coords.latitude;
+    selectedJob.opLng=pos.coords.longitude;
+    selectedJob.coordSource='device';
+    setLocationStatus('Punto operativo impostato dalla posizione attuale.','ok');
+    updateOperationalPointLabel();
+    updateSelectedJobMap();
+  },err=>{
+    setLocationStatus('Impossibile leggere la posizione del dispositivo: '+err.message,'err');
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+}
+function toggleManualPoint(){
+  manualPointMode=!manualPointMode;
+  const mapNode=el('selectedJobMap');
+  const btn=el('manualPointBtn');
+  if(mapNode) mapNode.classList.toggle('manual-mode',manualPointMode);
+  if(btn) btn.textContent=manualPointMode?'✓ Tocca la mappa nel punto corretto':'🎯 Correggi punto operativo';
+  setLocationStatus(manualPointMode?'Tocca la mappa nel punto esatto in cui deve arrivare la squadra.':'Correzione manuale disattivata.',manualPointMode?'':'ok');
+}
+function clearOperationalPoint(){
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  selectedJob.coordSource='geocoded';
+  manualPointMode=false;
+  const mapNode=el('selectedJobMap'); if(mapNode) mapNode.classList.remove('manual-mode');
+  const btn=el('manualPointBtn'); if(btn) btn.textContent='🎯 Correggi punto operativo';
+  updateOperationalPointLabel();
+  updateSelectedJobMap();
+  setLocationStatus('Ripristinato il punto dell’indirizzo.','ok');
+}
+function refreshFieldMap(){
+  const valid=demoJobs.filter(j=>activeCoords(j));
+  if(fieldMapObj){try{fieldMapObj.remove()}catch(e){} fieldMapObj=null}
+  if(valid.length) fieldMapObj=makeLeafletMap('fieldRealMap',activeCoords(valid[0]),12,valid);
 }
 
 function invalidateVisibleMaps(){
-  Object.values(sfMaps).forEach(m=>{
-    if(m){
-      setTimeout(()=>m.invalidateSize(true),50);
-      setTimeout(()=>m.invalidateSize(true),180);
-    }
-  });
+ [officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{
+   if(m) setTimeout(()=>m.invalidateSize(true),60);
+ });
 }
-
-function initAllMaps(){
-  // IMPORTANT: no map is created here unless its screen is already visible.
-  if(mapNodeVisible('officeMap')) renderOfficeMap();
-  if(mapNodeVisible('controlMap')) renderControlMap();
-  if(mapNodeVisible('fieldRealMap')) refreshFieldMap();
-  if(mapNodeVisible('selectedJobMap')) updateSelectedJobMap();
+function fitFieldMap(){
+ if(!fieldMapObj) return;
+ const pts=demoJobs.map(j=>activeCoords(j)).filter(Boolean);
+ if(pts.length) fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});
 }
-
-function fitFieldMap(){ refreshFieldMap(); }
 function centerMapOnSelected(){
-  if(!mapNodeVisible('fieldRealMap'))return;
-  const c=activeCoords(selectedJob);if(!c)return;
-  const map=ensureMap('field','fieldRealMap',c,16);if(!map)return;
-  clearLayer('field');
-  L.marker(c).addTo(sfLayers.field).bindPopup('<b>'+esc(selectedJob.client||'Intervento')+'</b>');
-  map.setView(c,16,{animate:false});
-  setTimeout(()=>map.invalidateSize(true),80);
+ if(!fieldMapObj) return;
+ const c=activeCoords(selectedJob); if(c) fieldMapObj.setView(c,15);
 }
-function centerSelectedMap(){ updateSelectedJobMap(); }
+function centerSelectedMap(){
+ const c=activeCoords(selectedJob); if(selectedMapObj&&c) selectedMapObj.setView(c,16);
+}
+function selectJobFromAgenda(id){
+ const node=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id===id);
+ if(node) selectJob(node);
+ fieldNavigate('Interventi');
+ setTimeout(()=>{
+   const card=el('selectedJobCard');
+   if(card) card.scrollIntoView({behavior:'smooth',block:'start'});
+   updateSelectedJobMap();
+ },100);
+}
+function openCompletedByAgenda(id){
+ fieldNavigate('Interventi');
+ setTimeout(()=>reopenCompletedJob(id),80);
+}
+function renderCompletedJobs(){
+ const host=el('completedJobs'); if(!host) return;
+ if(!completedJobs.length){
+   host.innerHTML='<div class="muted" style="color:#c8d6e2">Nessun intervento terminato.</div>';
+   return;
+ }
+ host.innerHTML=completedJobs.map(j=>`
+   <div class="completed-job">
+     <div class="head"><div><b>${j.client}</b><br><small>${j.address}</small></div><span class="completed-chip">TERMINATO</span></div>
+     <div class="muted">${j.request} · ${j.closedAt||''}</div>
+     <div class="actions">
+       <button class="btn ghost" onclick="viewCompletedReport('${j.id}')">Apri rapportino</button>
+       <button class="btn primary" onclick="reopenCompletedJob('${j.id}')">Riapri / modifica</button>
+     </div>
+   </div>`).join('');
+}
+async function viewCompletedReport(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
+ populateReportFromSelected();
+ showReport();
+}
+async function reopenCompletedJob(id){
+ const j=completedJobs.find(x=>x.id===id); if(!j) return;
+ selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
+ completedJobs=completedJobs.filter(x=>x.id!==id);
+ renderCompletedJobs();
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ el('jobPicker').style.display='none';
+ el('job').classList.remove('hidden');
+ el('startBtn').disabled=true;
+ el('startBtn').textContent='Intervento riaperto';
+ jobRunning=true;
+ sessionStorage.setItem('sf_job_running','1');
+ sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ const oldNotice=el('reopenNotice'); if(oldNotice) oldNotice.remove();
+ el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche. Al termine usa “Termina e genera rapportino” per creare una nuova versione del documento.</div>');
+ updateSelectedJobMap();
+ setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
+}
+function populateReportFromSelected(){
+ if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request||'';
+ if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client||'';
+ if(el('reportClientAddress')) el('reportClientAddress').innerHTML=(selectedJob.address||'').replace(', ','<br>')+' – Italia';
+ if(el('reportComune')) el('reportComune').textContent=(selectedJob.address||'')+' – Italia';
+ const rc=activeCoords(selectedJob);
+ if(el('reportLat')) el('reportLat').textContent=rc?Number(rc[0]).toFixed(4):'—';
+ if(el('reportLng')) el('reportLng').textContent=rc?Number(rc[1]).toFixed(4):'—';
+ if(el('reportNumber')) el('reportNumber').textContent='N. '+String(selectedJob.reportNo||selectedJob.id||'').replace('INT-','');
+ if(el('reportPointType')) el('reportPointType').textContent=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?'Punto operativo corretto':'Coordinate dell’indirizzo';
+ setTimeout(updateReportMap,120);
+}
+
+async function initAllMaps(){
+ await geocodeAllDemoJobs();
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
+   const found=demoJobs.find(j=>j.id===selectedJob.id);
+   if(found) selectedJob={...found};
+ }
+ const validAll=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
+ const validDemo=demoJobs.filter(j=>activeCoords(j));
+ const fallback=[45.69,10.02];
+ const officeCenter=validAll.length?activeCoords(validAll[0]):fallback;
+ officeMapObj=makeLeafletMap('officeMap',officeCenter,10,validAll);
+ controlMapObj=makeLeafletMap('controlMap',officeCenter,10,validAll);
+ fieldMapObj=makeLeafletMap('fieldRealMap',validDemo.length?activeCoords(validDemo[0]):fallback,10,validDemo);
+ if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
+ updateSelectedJobMap();
+ setTimeout(invalidateVisibleMaps,180);
+}
+function updateSelectedJobMap(){
+ const addressCoords=(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng))?[selectedJob.lat,selectedJob.lng]:null;
+ const opCoords=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?[selectedJob.opLat,selectedJob.opLng]:null;
+ const center=opCoords||addressCoords;
+ if(!center || typeof L==='undefined'){
+   const node=el('selectedJobMap'); if(node) node.innerHTML='<div style="padding:18px;color:#607080">Posizione non ancora localizzata. Premi “Localizza indirizzo”.</div>';
+   return;
+ }
+ if(selectedMapObj){try{selectedMapObj.remove()}catch(e){} selectedMapObj=null}
+ const node=el('selectedJobMap'); if(node){node._leaflet_id=null;node.innerHTML=''}
+ selectedMapObj=L.map('selectedJobMap',{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,16);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(selectedMapObj);
+ if(addressCoords){
+   addressMarker=L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj).bindPopup('<b>Indirizzo intervento</b><br>'+selectedJob.address);
+ }
+ if(opCoords){
+   operationalMarker=L.circleMarker(opCoords,{radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3}).addTo(selectedMapObj).bindPopup('<b>Punto operativo</b><br>Accesso squadra / mezzo');
+ }
+ selectedMapObj.on('click',e=>{
+   if(!manualPointMode) return;
+   selectedJob.opLat=e.latlng.lat; selectedJob.opLng=e.latlng.lng; selectedJob.coordSource='manual';
+   manualPointMode=false;
+   const mapNode=el('selectedJobMap'); if(mapNode) mapNode.classList.remove('manual-mode');
+   const btn=el('manualPointBtn'); if(btn) btn.textContent='🎯 Correggi punto operativo';
+   setLocationStatus('Punto operativo corretto manualmente.','ok');
+   updateOperationalPointLabel();
+   updateSelectedJobMap();
+ });
+ setTimeout(()=>selectedMapObj.invalidateSize(true),100);
+ updateOperationalPointLabel();
+}
+function updateReportMap(){
+ if(!selectedJob || typeof L==='undefined') return;
+ const coords=activeCoords(selectedJob);
+ const node=el('reportRealMap');
+ if(!node || !coords) return;
+ if(reportMapObj){
+   try{reportMapObj.remove()}catch(e){}
+   reportMapObj=null;
+   node._leaflet_id=null;
+   node.innerHTML='';
+ }
+ reportMapObj=L.map('reportRealMap',{zoomControl:false,scrollWheelZoom:false,dragging:false,tap:false})
+   .setView(coords,16);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+   maxZoom:19,
+   attribution:'&copy; OpenStreetMap contributors'
+ }).addTo(reportMapObj);
+ L.marker(coords).addTo(reportMapObj)
+   .bindPopup('<b>'+selectedJob.client+'</b><br>'+selectedJob.address);
+ setTimeout(()=>{
+   try{
+     reportMapObj.invalidateSize(true);
+     reportMapObj.setView(coords,16,{animate:false});
+   }catch(e){}
+ },180);
+}
+
+let selectedJob={...demoJobs[0]};
+let signatureTarget=null, modalDrawing=false, modalCtx=null;
+
+function selectJob(node){
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
+ const source=demoJobs.find(j=>j.id===node.dataset.id);
+ selectedJob=source?{...source}:{id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:null,lng:null,coordSource:'address'};
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
+   geocodeJob(selectedJob,true).then(ok=>{if(ok){updateSelectedJobMap();refreshFieldMap();}});
+ }else{
+   updateSelectedJobMap();
+   if(fieldMapObj){const c=activeCoords(selectedJob);if(c)fieldMapObj.setView(c,15);}
+ }
+}
 function openSelectedMap(){
-  const c=activeCoords(selectedJob);
-  if(c) window.open('https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1],'_blank');
-  else window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address||''),'_blank');
+ const c=activeCoords(selectedJob);
+ if(c) window.open('https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1],'_blank');
+ else window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank');
 }
 function openSigModal(target){
  signatureTarget=target;
@@ -1009,9 +1107,7 @@ function fieldNavigate(name){
  document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
  const resume=el('resumeJob');
  if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
- window.scrollTo({top:0,behavior:'smooth'});
- if(name==='Mappa') setTimeout(refreshFieldMap,80);
- if(name==='Interventi') setTimeout(updateSelectedJobMap,80); setTimeout(invalidateVisibleMaps,80); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fitFieldMap(),120);
+ window.scrollTo({top:0,behavior:'smooth'}); setTimeout(invalidateVisibleMaps,80); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fitFieldMap(),120);
 }
 
 function openOnly(id){
@@ -1202,7 +1298,7 @@ function showReport(){
   prevView = !el('operator').classList.contains('hidden') ? 'operator' : 'office';
   el('office').classList.add('hidden');
   el('operator').classList.add('hidden');
-  el('reportView').classList.remove('hidden'); setTimeout(updateReportMap,100);
+  el('reportView').classList.remove('hidden');
 }
 
 function closeReport(){
@@ -1218,7 +1314,10 @@ function closeReport(){
 
 function preparePrint(){
   updateReportMap();
-  setTimeout(()=>{if(sfMaps.report)sfMaps.report.invalidateSize(true);window.print();},450);
+  setTimeout(()=>{
+    try{ if(reportMapObj) reportMapObj.invalidateSize(true); }catch(e){}
+    setTimeout(()=>window.print(),450);
+  },250);
 }
 
 function shareMail(){
@@ -1248,12 +1347,7 @@ function markSignatureStatus(canvasId,statusId){
 }
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
-window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();});
-
-
-window.addEventListener('orientationchange',()=>setTimeout(invalidateVisibleMaps,180));
-window.addEventListener('resize',()=>setTimeout(invalidateVisibleMaps,180));
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(invalidateVisibleMaps,120)});
+window.addEventListener('load',()=>{renderCompletedJobs();renderOfficePeople();setTimeout(initAllMaps,150)});
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
