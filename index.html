@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.6</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.7</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -386,11 +386,30 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-off{color:#f0ad4e!important;font-weight:800}
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
+
+/* ===== 6.1.7 PDF + GEO PRECISION FIX ===== */
+@media print{
+  @page{size:A4 portrait;margin:8mm}
+  html,body{background:#fff!important;width:100%!important;height:auto!important;overflow:visible!important}
+  body>*:not(#reportView){display:none!important}
+  #reportView{display:block!important;position:static!important;width:100%!important;min-height:0!important;background:#fff!important;padding:0!important;margin:0!important}
+  #reportView.hidden{display:block!important}
+  #reportView .report{display:block!important;max-width:none!important;width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important}
+  #reportView>.top,.report-actions-app,.share{display:none!important}
+  #reportRealMap{height:86px!important;min-height:86px!important}
+  .leaflet-control-container{display:none!important}
+  .report-photo{break-inside:avoid}
+}
+.geo-quality{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:800;margin-top:5px}
+.geo-quality.exact{background:#e8f7ee;color:#177a3e}
+.geo-quality.street{background:#fff2d9;color:#9a5a00}
+.geo-quality.approx{background:#fee9e7;color:#b42318}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.6 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.7 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -400,9 +419,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.6 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.7 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.6</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.7</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -453,7 +472,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.6</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.7</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -502,7 +521,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.6</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.7</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -679,7 +698,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.6</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.7</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -782,7 +801,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.6 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.7 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -847,7 +866,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.6 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.7 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1430,40 +1449,113 @@ function updateOperationalPointLabel(){
     host.innerHTML='';
   }
 }
-async function geocodeAddress(address){
- const q=(address||'').trim(); if(!q) throw new Error('Inserisci un indirizzo.');
- const key='sf_geo_'+q.toLowerCase();
- try{const c=JSON.parse(localStorage.getItem(key)||'null');if(c&&Number.isFinite(c.lat)&&Number.isFinite(c.lng))return c}catch(e){}
- const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=it&accept-language=it&q='+encodeURIComponent(q);
- const res=await fetch(url,{headers:{'Accept':'application/json'}}); if(!res.ok) throw new Error('Servizio di geolocalizzazione non disponibile.');
- const data=await res.json(); if(!data.length) throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
- const out={lat:parseFloat(data[0].lat),lng:parseFloat(data[0].lon),displayName:data[0].display_name};
- try{localStorage.setItem(key,JSON.stringify(out))}catch(e){} return out;
+function normalizeGeoText(v){
+ return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,' ').replace(/\s+/g,' ').trim();
 }
-async function geocodeJob(job, silent=false){
-  if(!job || !job.address) return false;
-  try{
-    if(!silent) setLocationStatus('Ricerca posizione in corso…');
-    const g=await geocodeAddress(job.address);
-    job.lat=g.lat; job.lng=g.lng; job.coordSource='geocoded'; job.geocodedLabel=g.displayName;
-    if(!silent) setLocationStatus('Posizione trovata: '+g.displayName,'ok');
-    return true;
-  }catch(err){
-    if(!silent) setLocationStatus(err.message||'Posizione non trovata.','err');
-    return false;
-  }
+function parseItalianAddress(address){
+ const raw=String(address||'').trim();
+ const parts=raw.split(',').map(x=>x.trim()).filter(Boolean);
+ let street=parts[0]||raw;
+ let postcode='';
+ let city='';
+ for(const part of parts.slice(1)){
+   const cap=(part.match(/\b\d{5}\b/)||[])[0];
+   if(cap&&!postcode)postcode=cap;
+   let clean=part.replace(/\b\d{5}\b/g,'').replace(/\([A-Z]{2}\)/gi,'').replace(/\bitalia\b/gi,'').trim();
+   if(clean&&!city)city=clean;
+ }
+ // Handles strings like "24067 Sarnico (BG)" even when kept in the same segment.
+ if(!city){
+   const m=raw.match(/(?:\b\d{5}\b\s*)?([^,]+?)\s*\([A-Z]{2}\)/i);
+   if(m)city=m[1].replace(/^.*?,/,'').trim();
+ }
+ const hm=street.match(/(?:^|\s)(\d+[a-zA-Z]?)(?:\s*[\/-]\s*\d+[a-zA-Z]?)?\s*$/);
+ const houseNumber=hm?hm[1].toLowerCase():'';
+ return {raw,street,city,postcode,houseNumber};
+}
+function geoCandidateScore(item,parsed){
+ const a=item.address||{};
+ let score=0;
+ const wantedNo=normalizeGeoText(parsed.houseNumber);
+ const gotNo=normalizeGeoText(a.house_number||a.housenumber||'');
+ if(wantedNo&&gotNo){score += wantedNo===gotNo?100:-15}
+ else if(wantedNo&&!gotNo) score-=20;
+ const wantedRoad=normalizeGeoText(parsed.street.replace(/\s+\d+[a-zA-Z]?\s*$/,''));
+ const gotRoad=normalizeGeoText(a.road||a.pedestrian||a.residential||a.place||'');
+ if(wantedRoad&&gotRoad){if(gotRoad===wantedRoad)score+=35;else if(gotRoad.includes(wantedRoad)||wantedRoad.includes(gotRoad))score+=20}
+ const wantedCity=normalizeGeoText(parsed.city);
+ const gotCity=normalizeGeoText(a.city||a.town||a.village||a.municipality||'');
+ if(wantedCity&&gotCity){score+=gotCity===wantedCity?25:(gotCity.includes(wantedCity)||wantedCity.includes(gotCity)?12:-10)}
+ if(parsed.postcode&&a.postcode)score+=String(a.postcode)===parsed.postcode?20:-8;
+ if(item.addresstype==='house'||item.type==='house')score+=15;
+ if(Number.isFinite(Number(item.importance)))score+=Math.min(5,Number(item.importance)*5);
+ return score;
+}
+async function fetchNominatim(url){
+ const res=await fetch(url,{headers:{'Accept':'application/json','Accept-Language':'it'}});
+ if(!res.ok)throw new Error('Servizio di geolocalizzazione non disponibile.');
+ return await res.json();
+}
+async function geocodeAddress(address){
+ const q=String(address||'').trim(); if(!q)throw new Error('Inserisci un indirizzo.');
+ const parsed=parseItalianAddress(q);
+ const key='sf_geo_v2_'+q.toLowerCase();
+ try{const c=JSON.parse(localStorage.getItem(key)||'null');if(c&&Number.isFinite(c.lat)&&Number.isFinite(c.lng))return c}catch(e){}
+ let data=[];
+ // First choice: structured address lookup. The street field includes the house number.
+ if(parsed.street&&parsed.city){
+   const params=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'8',countrycodes:'it',layer:'address',street:parsed.street,city:parsed.city});
+   if(parsed.postcode)params.set('postalcode',parsed.postcode);
+   try{data=await fetchNominatim('https://nominatim.openstreetmap.org/search?'+params.toString())}catch(e){data=[]}
+ }
+ // Fallback to free-form if structured search has no result.
+ if(!data.length){
+   const params=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'8',countrycodes:'it',layer:'address',q:q});
+   data=await fetchNominatim('https://nominatim.openstreetmap.org/search?'+params.toString());
+ }
+ if(!data.length)throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
+ data.sort((a,b)=>geoCandidateScore(b,parsed)-geoCandidateScore(a,parsed));
+ const best=data[0], a=best.address||{};
+ const gotNo=String(a.house_number||a.housenumber||'').toLowerCase();
+ const exactHouse=!!parsed.houseNumber && gotNo===parsed.houseNumber;
+ const roadFound=!!(a.road||a.pedestrian||a.residential);
+ const quality=exactHouse?'exact':(roadFound?'street':'approx');
+ const out={
+   lat:parseFloat(best.lat),lng:parseFloat(best.lon),displayName:best.display_name,
+   quality,houseNumber:gotNo||'',requestedHouseNumber:parsed.houseNumber||'',
+   road:a.road||a.pedestrian||a.residential||'',city:a.city||a.town||a.village||a.municipality||'',postcode:a.postcode||''
+ };
+ try{localStorage.setItem(key,JSON.stringify(out))}catch(e){}
+ return out;
+}
+function persistSelectedCoordinates(){
+ const source=demoJobs.find(j=>j.id===selectedJob.id);if(source)Object.assign(source,selectedJob);
+ const oi=typeof sfOfficeInterventions!=='undefined'?sfOfficeInterventions.find(i=>i.id===selectedJob.id):null;
+ if(oi){oi.lat=selectedJob.lat;oi.lng=selectedJob.lng;oi.geocodedLabel=selectedJob.geocodedLabel;oi.geocodeQuality=selectedJob.geocodeQuality;if(typeof saveV6==='function')saveV6()}
+}
+async function geocodeJob(job,silent=false){
+ if(!job||!job.address)return false;
+ try{
+   if(!silent)setLocationStatus('Ricerca precisa di via e civico…');
+   const g=await geocodeAddress(job.address);
+   job.lat=g.lat;job.lng=g.lng;job.coordSource='geocoded';job.geocodedLabel=g.displayName;job.geocodeQuality=g.quality;
+   if(!silent){
+     if(g.quality==='exact')setLocationStatus('Civico verificato: '+g.displayName,'ok');
+     else if(g.quality==='street')setLocationStatus('Via trovata, ma il civico non è censito con precisione in OpenStreetMap. Puoi usare GPS o “Correggi punto operativo”.','warn');
+     else setLocationStatus('Posizione approssimata. Verifica il punto sulla mappa o usa il GPS.','warn');
+   }
+   return true;
+ }catch(err){if(!silent)setLocationStatus(err.message||'Posizione non trovata.','err');return false}
 }
 async function geocodeSelectedJob(){
   const input=el('jobAddressInput');
   selectedJob.address=(input?input.value:selectedJob.address).trim();
   el('selectedAddress').textContent=selectedJob.address;
-  selectedJob.opLat=null; selectedJob.opLng=null;
   const ok=await geocodeJob(selectedJob,false);
   if(ok){
-    const source=demoJobs.find(j=>j.id===selectedJob.id);
-    if(source) Object.assign(source,selectedJob);
+    persistSelectedCoordinates();
     updateSelectedJobMap();
-    if(fieldMapObj) refreshFieldMap();
+    if(fieldMapObj)refreshFieldMap();
   }
   updateOperationalPointLabel();
 }
@@ -1610,7 +1702,7 @@ async function updateSelectedJobMap(){
  selectedMapObj._sfLayer.clearLayers();
  if(addressCoords)L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Indirizzo intervento</b><br>'+esc(selectedJob.address));
  if(opCoords)L.circleMarker(opCoords,{radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Punto operativo</b>');
- selectedMapObj.setView(center,addressCoords||opCoords?16:12,{animate:false});requestAnimationFrame(()=>selectedMapObj.invalidateSize(true));setTimeout(()=>selectedMapObj.invalidateSize(true),120);setMapHealth('selectedJobMap',addressCoords||opCoords?'Mappa caricata':'Mappa visibile · indirizzo non localizzato',!!(addressCoords||opCoords));updateOperationalPointLabel();
+ selectedMapObj.setView(center,addressCoords||opCoords?16:12,{animate:false});requestAnimationFrame(()=>selectedMapObj.invalidateSize(true));setTimeout(()=>selectedMapObj.invalidateSize(true),120);setMapHealth('selectedJobMap',addressCoords||opCoords?(selectedJob.geocodeQuality==='exact'?'Mappa caricata · civico verificato':selectedJob.geocodeQuality==='street'?'Mappa caricata · civico da verificare':'Mappa caricata'):'Mappa visibile · indirizzo non localizzato',!!(addressCoords||opCoords));updateOperationalPointLabel();
 }
 async function updateReportMap(){
  if(!mapVisible('reportRealMap')||typeof L==='undefined')return;let c=activeCoords(selectedJob);if(!c&&selectedJob.address){await geocodeJob(selectedJob,true);c=activeCoords(selectedJob)};const center=c||[45.67,9.96];
@@ -1886,7 +1978,12 @@ function closeReport(){
 }
 
 
-function preparePrint(){updateReportMap();setTimeout(()=>{if(reportMapObj)reportMapObj.invalidateSize(true);window.print()},450);}
+function preparePrint(){
+  try{if(reportMapObj)reportMapObj.invalidateSize(true)}catch(e){}
+  // IMPORTANT on iPhone/Safari: print must be called directly from the tap event.
+  window.print();
+}
+window.addEventListener('beforeprint',()=>{try{if(reportMapObj)reportMapObj.invalidateSize(true)}catch(e){}});
 
 function shareMail(){
   location.href='mailto:?subject=Rapportino Spurgo Flow 2026-00051&body=In allegato/da condividere il rapportino dell’intervento n. 2026-00051.';

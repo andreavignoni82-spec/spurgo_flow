@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.6",
+  "name": "Spurgo Flow 6.1.7",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.6 - Multi-dispositivo - Full Office Audit",
+  "description": "Spurgo Flow 6.1.7 - PDF iPhone + geocodifica civico precisa",
   "icons": [
     {
       "src": "icon-192.png",

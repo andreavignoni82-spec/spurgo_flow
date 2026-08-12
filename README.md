@@ -195,3 +195,12 @@ Clienti:
 Cache:
 - `index.html`, `firebase-config.js`, `firebase-sync.js` e navigazioni non vengono più serviti dalla cache applicativa;
 - `skipWaiting()` + `clients.claim()` per attivare subito il nuovo service worker.
+
+## 6.1.7 — PDF + Geolocalizzazione precisa
+- Esportazione PDF: `window.print()` chiamato direttamente dal tap, senza timeout che su iOS può bloccare il dialogo.
+- CSS stampa A4 dedicato al solo rapportino.
+- Geocodifica Nominatim strutturata: `street` (con civico), `city`, CAP, countrycodes=it, addressdetails=1.
+- Valutazione di più risultati e priorità a house_number esatto.
+- Se il civico non è censito in OSM, l'app lo dichiara invece di fingere precisione.
+- Il punto GPS operativo non viene più cancellato quando si rilocalizza l'indirizzo.
+- Coordinate geocodificate persistite anche sull'intervento cloud.

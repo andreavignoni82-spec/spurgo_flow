@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.6-full-audit';
+const CACHE='spurgoflow-v6-6.1.7-pdf-geo-fix';
 const LOCAL=['./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 self.addEventListener('install',e=>{
   self.skipWaiting();
