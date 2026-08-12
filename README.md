@@ -146,3 +146,11 @@ La sincronizzazione reale tra dispositivi sarà il passaggio successivo con data
 - Bootstrap automatico dei dati iniziali dopo il primo login Ufficio.
 - Modalità locale di fallback se Firebase non è configurato.
 - Guida completa: `SETUP_FIREBASE.md`.
+
+## 6.1.2 — Login Fix
+- Corretto errore sintattico `async function logoutfunction logout()` presente nella 6.1.1.
+- Ripristinata esecuzione del JavaScript principale.
+- Firebase può ora inizializzarsi e aggiornare lo stato Cloud.
+- Logout cloud corretto.
+- Nuova cache service worker per evitare il riutilizzo dell'index.html difettoso.
+- `firebase-config.js` dell'utente mantenuto invariato.
