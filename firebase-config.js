@@ -5,7 +5,7 @@
   3. Imposta enabled: true.
 */
 window.SPURGO_FIREBASE_CONFIG = {
-  enabled: false,
+  enabled: true,
   apiKey: "AIzaSyD9kMIOkO1O8Ypsta3H--eTtQVG1kfUh1o",
   authDomain: "spurgo-flow.firebaseapp.com",
   projectId: "spurgo-flow",
