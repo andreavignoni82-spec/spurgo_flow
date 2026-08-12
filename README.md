@@ -238,3 +238,22 @@ Base: 6.1.9.
 - Storico/rapportini già filtrati per operatore.
 - Blocco applicativo se si tenta di aprire un intervento non assegnato.
 - Pulizia della commessa salvata in sessione se appartiene a un altro account.
+
+## 6.1.11 — Agenda Redesign
+Base: 6.1.10.
+
+### Operatore
+- Vista giornaliera compatta.
+- Fascia di 7 giorni navigabile.
+- Cambio giorno rapido.
+- Solo interventi assegnati all'operatore.
+- Schede con orario, cliente, indirizzo, attività e stato.
+- Apertura diretta della commessa.
+
+### Ufficio
+- Vista Giorno con timeline 07:00–18:00 per operatori.
+- Vista Settimana.
+- Filtri per operatore, squadra, stato e mezzo.
+- Pannello dettaglio intervento.
+- Modifica intervento e messaggio all'operatore dal dettaglio.
+- Dati alimentati da Firebase/data layer esistente.

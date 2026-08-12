@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.10",
+  "name": "Spurgo Flow 6.1.11",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.10 - Operatore vede e sceglie solo le proprie commesse",
+  "description": "Spurgo Flow 6.1.11 - Agenda operatore e ufficio redesign",
   "icons": [
     {
       "src": "icon-192.png",

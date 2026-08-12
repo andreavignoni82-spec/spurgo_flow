@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.10</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.11</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -387,7 +387,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.10 LIVE DATA / OPERATOR PRIVACY ===== */
+/* ===== 6.1.11 LIVE DATA / OPERATOR PRIVACY ===== */
 .msg-bubble,.msg-bubble *{color:#142438!important}
 .msg-bubble small{color:#667785!important}
 .live-empty{padding:18px;text-align:center;color:#72818d}
@@ -401,7 +401,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .report-list-row:last-child{border-bottom:0}
 @media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
 
-/* ===== 6.1.10 LE MIE COMMESSE ===== */
+/* ===== 6.1.11 LE MIE COMMESSE ===== */
 .my-jobs-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
 .my-jobs-count{background:#e8f7ee;color:#177a3e;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900}
 .job-choice{cursor:pointer;transition:.15s transform,.15s border-color,.15s box-shadow}
@@ -410,11 +410,62 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
+
+/* ===== 6.1.11 AGENDA REDESIGN ===== */
+.agenda-office-shell{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px}
+.agenda-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.agenda-view-switch{display:flex;border:1px solid #d7e1e8;border-radius:10px;overflow:hidden}
+.agenda-view-switch button{border:0;background:#fff;padding:9px 13px;font-weight:800;color:#375067}
+.agenda-view-switch button.active{background:#1d7b48;color:#fff}
+.agenda-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+.agenda-filter-row .field{min-width:140px}
+.timeline-wrap{overflow:auto;border:1px solid #dfe7ed;border-radius:12px;background:#fff}
+.timeline-grid{min-width:940px}
+.timeline-head,.timeline-row{display:grid;grid-template-columns:180px repeat(12,1fr)}
+.timeline-head>div,.timeline-row>div{border-right:1px solid #e5ebef;border-bottom:1px solid #e5ebef;min-height:48px;padding:6px}
+.timeline-head{position:sticky;top:0;background:#f6f9fb;z-index:2;font-size:11px;font-weight:900;color:#536878}
+.timeline-resource{background:#fbfcfd;font-size:12px}
+.timeline-resource b{display:block;color:#142438}
+.timeline-cell{position:relative;min-height:70px!important}
+.timeline-job{border-radius:8px;padding:7px 8px;font-size:10px;line-height:1.25;border-left:4px solid #3882d2;background:#eaf3ff;color:#14324d;cursor:pointer;box-shadow:0 2px 5px #0001}
+.timeline-job.urgent{border-left-color:#d83939;background:#feeaea}
+.timeline-job.progress{border-left-color:#ee951b;background:#fff0dd}
+.timeline-job.done{border-left-color:#2f9d56;background:#e8f6ed}
+.timeline-job b{display:block;font-size:11px}
+.agenda-detail{background:#fff;border:1px solid #dce5eb;border-radius:13px;padding:14px;position:sticky;top:12px;height:max-content}
+.agenda-detail .detail-status{display:inline-block;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900;margin-bottom:8px}
+.agenda-detail p{margin:7px 0;font-size:12px}
+.agenda-detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.week-columns{display:grid;grid-template-columns:repeat(7,minmax(150px,1fr));gap:8px;overflow:auto}
+.week-day{background:#f7fafc;border:1px solid #dce5eb;border-radius:10px;min-height:270px;padding:9px}
+.week-day h4{margin:0 0 8px}
+.week-item{background:#fff;border-left:4px solid #3882d2;border-radius:8px;padding:8px;margin:7px 0;font-size:11px;cursor:pointer}
+.week-item.urgent{border-left-color:#d83939}.week-item.progress{border-left-color:#ee951b}.week-item.done{border-left-color:#2f9d56}
+.operator-agenda-shell{padding-bottom:20px}
+.op-agenda-date{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#0b2948;border:1px solid #1f4a6e;border-radius:13px;padding:10px;margin-bottom:10px}
+.op-agenda-date button{border:0;background:#fff;color:#17344f;border-radius:9px;padding:8px 11px;font-weight:900}
+.op-day-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin:8px 0 12px}
+.op-day-pill{border:1px solid #31516e;border-radius:10px;background:#0a223b;color:#dbe7f0;padding:7px 3px;text-align:center;font-size:10px;cursor:pointer}
+.op-day-pill strong{display:block;font-size:14px;margin-top:3px}
+.op-day-pill.active{background:#28a95b;color:#fff;border-color:#28a95b}
+.op-agenda-card{display:grid;grid-template-columns:74px 1fr auto;background:#fff;color:#13263b;border-radius:13px;margin:8px 0;overflow:hidden;border:1px solid #dce5eb}
+.op-agenda-time{display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;background:#eaf3ff;color:#1a568c;padding:10px 4px}
+.op-agenda-card.urgent .op-agenda-time{background:#fee9e9;color:#a82626}
+.op-agenda-card.progress .op-agenda-time{background:#fff0da;color:#a05f00}
+.op-agenda-card.done .op-agenda-time{background:#e8f6ed;color:#257a42}
+.op-agenda-main{padding:10px}.op-agenda-main b{display:block}.op-agenda-main small{display:block;color:#677988;margin-top:3px}
+.op-agenda-open{border:0;background:transparent;font-size:22px;color:#46708d;padding:0 12px}
+.op-agenda-empty{background:#fff;color:#6d7d88;padding:18px;border-radius:12px;text-align:center}
+@media(max-width:900px){
+ .agenda-office-shell{grid-template-columns:1fr}
+ .agenda-detail{position:static}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.10 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.11 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -424,10 +475,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.10 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.11 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.10</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.11</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -456,14 +507,30 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="agenda" class="section">
- <div class="top"><div><h1>Agenda</h1><div class="muted">Programmazione giornaliera e assegnazione squadre</div></div><button class="btn primary" onclick="openInterventionModal(null,true)">+ Appuntamento</button></div>
- <div class="card" style="margin-top:18px">
-  <div class="v6-toolbar">
-   <input id="agendaDate" class="field" type="date" onchange="renderOfficeAgenda()">
-   <select id="agendaOperator" class="field" onchange="renderOfficeAgenda()"><option value="">Tutti gli operatori</option></select>
+<div class="top"><div><h1>Agenda interventi</h1><div class="muted">Programmazione chiara per giorno, settimana, operatori e squadre</div></div><button class="btn primary" onclick="openInterventionModal(null,true)">+ Nuovo intervento</button></div>
+<div class="card" style="margin-top:18px">
+ <div class="agenda-toolbar">
+  <input id="agendaDate" class="field" type="date" onchange="renderOfficeAgenda()">
+  <button class="btn ghost" onclick="agendaToday()">Oggi</button>
+  <div class="agenda-view-switch">
+   <button id="agendaDayBtn" class="active" onclick="setOfficeAgendaView('day')">Giorno</button>
+   <button id="agendaWeekBtn" onclick="setOfficeAgendaView('week')">Settimana</button>
   </div>
-  <div id="officeAgendaList" class="v6-list"></div>
  </div>
+ <div class="agenda-filter-row">
+  <select id="agendaOperator" class="field" onchange="renderOfficeAgenda()"><option value="">Tutti gli operatori</option></select>
+  <select id="agendaTeamFilter" class="field" onchange="renderOfficeAgenda()"><option value="">Tutte le squadre</option></select>
+  <select id="agendaStatusFilter" class="field" onchange="renderOfficeAgenda()"><option value="">Tutti gli stati</option><option>Urgente</option><option>Programmato</option><option>In corso</option><option>Terminato</option></select>
+  <select id="agendaVehicleFilter" class="field" onchange="renderOfficeAgenda()"><option value="">Tutti i mezzi</option></select>
+ </div>
+ <div class="agenda-office-shell">
+  <div>
+   <div id="officeAgendaDay" class="timeline-wrap"></div>
+   <div id="officeAgendaWeek" class="hidden"></div>
+  </div>
+  <div id="officeAgendaDetail" class="agenda-detail"><div class="live-empty">Seleziona un intervento per vedere i dettagli.</div></div>
+ </div>
+</div>
 </section>
 
 
@@ -485,7 +552,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.10</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.11</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -537,7 +604,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.10</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.11</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -714,7 +781,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.10</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.11</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -817,7 +884,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.10 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.11 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -882,7 +949,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.10 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.11 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1045,12 +1112,121 @@ function saveIntervention(){
 function duplicateIntervention(id){const x=sfOfficeInterventions.find(i=>i.id===id);if(!x)return;const c={...x,id:'INT-2026-'+String(100+sfOfficeInterventions.length).padStart(5,'0'),status:'Programmato',time:'08:00'};sfOfficeInterventions.unshift(c);saveV6();renderAllOfficeV6()}
 function deleteIntervention(id){if(!confirm('Eliminare questo intervento?'))return;sfOfficeInterventions=sfOfficeInterventions.filter(i=>i.id!==id);saveV6();renderAllOfficeV6();syncOperatorJobs()}
 
+
+let officeAgendaView='day';
+
+function agendaToday(){
+ if(el('agendaDate'))el('agendaDate').value=localDateKey();
+ renderOfficeAgenda();
+}
+function setOfficeAgendaView(view){
+ officeAgendaView=view;
+ el('agendaDayBtn')?.classList.toggle('active',view==='day');
+ el('agendaWeekBtn')?.classList.toggle('active',view==='week');
+ el('officeAgendaDay')?.classList.toggle('hidden',view!=='day');
+ el('officeAgendaWeek')?.classList.toggle('hidden',view!=='week');
+ renderOfficeAgenda();
+}
+function populateAgendaExtraFilters(){
+ const team=el('agendaTeamFilter'),veh=el('agendaVehicleFilter');
+ if(team){
+   const old=team.value;
+   team.innerHTML='<option value="">Tutte le squadre</option>'+sfTeams.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');
+   team.value=old;
+ }
+ if(veh){
+   const old=veh.value;
+   veh.innerHTML='<option value="">Tutti i mezzi</option>'+sfVehicles.map(v=>`<option value="${esc(v.id)}">${esc(v.name)}</option>`).join('');
+   veh.value=old;
+ }
+}
+function officeAgendaFilteredRows(){
+ const d=el('agendaDate')?.value||localDateKey();
+ const op=el('agendaOperator')?.value||'',team=el('agendaTeamFilter')?.value||'',st=el('agendaStatusFilter')?.value||'',veh=el('agendaVehicleFilter')?.value||'';
+ return sfOfficeInterventions.filter(i=>
+   (!op||i.operatorId===op||(Array.isArray(i.assignedOperatorIds)&&i.assignedOperatorIds.includes(op))) &&
+   (!team||i.teamId===team) &&
+   (!st||i.status===st) &&
+   (!veh||i.vehicleId===veh)
+ );
+}
+function officeAgendaResources(rows){
+ const ids=new Set();
+ rows.forEach(i=>{
+   if(i.operatorId)ids.add(i.operatorId);
+   (i.assignedOperatorIds||[]).forEach(id=>ids.add(id));
+ });
+ let ops=sfOperators.filter(o=>o.active!==false && (ids.has(o.id)||!rows.length));
+ const filter=el('agendaOperator')?.value||'';
+ if(filter)ops=ops.filter(o=>o.id===filter);
+ return ops;
+}
+function hourIndex(time){
+ const h=parseInt(String(time||'08:00').split(':')[0],10);
+ return Math.max(0,Math.min(11,h-7));
+}
+function renderOfficeAgendaDay(){
+ const host=el('officeAgendaDay');if(!host)return;
+ const date=el('agendaDate')?.value||localDateKey();
+ const rows=officeAgendaFilteredRows().filter(i=>i.date===date&&i.status!=='Annullato');
+ const ops=officeAgendaResources(rows);
+ const hours=Array.from({length:12},(_,i)=>String(i+7).padStart(2,'0')+':00');
+ let html='<div class="timeline-grid"><div class="timeline-head"><div>Squadra / Operatore</div>'+hours.map(h=>`<div>${h}</div>`).join('')+'</div>';
+ if(!ops.length){
+   html+='<div class="live-empty">Nessun operatore/intervento per i filtri selezionati.</div></div>';host.innerHTML=html;return;
+ }
+ ops.forEach(o=>{
+   html+=`<div class="timeline-row"><div class="timeline-resource"><b>${esc(operatorName(o))}</b><small>${esc(o.mezzo||'')}</small></div>`;
+   for(let c=0;c<12;c++){
+     const jobs=rows.filter(i=>assignedToOperator(i,o.id)&&hourIndex(i.time)===c);
+     html+=`<div class="timeline-cell">${jobs.map(i=>`<div class="timeline-job ${statusClass(i.status)}" onclick="selectOfficeAgendaDetail('${i.id}')"><b>${esc(i.client)}</b>${esc(i.time||'')} · ${esc(i.request||'')}</div>`).join('')}</div>`;
+   }
+   html+='</div>';
+ });
+ html+='</div>';
+ host.innerHTML=html;
+}
+function weekStart(dateStr){
+ const d=new Date(dateStr+'T12:00:00');
+ const day=(d.getDay()+6)%7;
+ d.setDate(d.getDate()-day);
+ return d;
+}
+function formatDateInput(d){return d.toISOString().slice(0,10)}
+function renderOfficeAgendaWeek(){
+ const host=el('officeAgendaWeek');if(!host)return;
+ const base=weekStart(el('agendaDate')?.value||localDateKey());
+ const rows=officeAgendaFilteredRows().filter(i=>i.status!=='Annullato');
+ let html='<div class="week-columns">';
+ for(let x=0;x<7;x++){
+   const d=new Date(base);d.setDate(base.getDate()+x);
+   const key=formatDateInput(d);
+   const dayRows=rows.filter(i=>i.date===key).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+   html+=`<div class="week-day"><h4>${d.toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'2-digit'})}</h4>${dayRows.length?dayRows.map(i=>`<div class="week-item ${statusClass(i.status)}" onclick="selectOfficeAgendaDetail('${i.id}')"><b>${esc(i.time||'')} · ${esc(i.client)}</b><div>${esc(interventionAssigneeLabel(i))}</div><small>${esc(i.request||'')}</small></div>`).join(''):'<div class="v6-meta">Nessun intervento</div>'}</div>`;
+ }
+ html+='</div>';
+ host.innerHTML=html;
+}
+function selectOfficeAgendaDetail(id){
+ const i=sfOfficeInterventions.find(x=>x.id===id);if(!i)return;
+ const host=el('officeAgendaDetail');if(!host)return;
+ const o=getOperator(i.operatorId),v=getVehicle(i.vehicleId),t=sfTeams.find(x=>x.id===i.teamId);
+ host.innerHTML=`<span class="detail-status v6-status ${statusClass(i.status)}">${esc(i.status)}</span>
+ <h3 style="margin:5px 0">${esc(i.client)}</h3>
+ <p><b>${esc(i.request||'')}</b></p>
+ <p>📅 ${fmtDate(i.date)} · ${esc(i.time||'')}</p>
+ <p>📍 ${esc(i.address||'')}</p>
+ <p>👤 ${esc(o?operatorName(o):'Da assegnare')}</p>
+ <p>👥 ${esc(t?.name||'Nessuna squadra')}</p>
+ <p>🚚 ${esc(v?.name||'Nessun mezzo')}</p>
+ <p>📝 ${esc(i.notes||'Nessuna nota')}</p>
+ <div class="agenda-detail-actions"><button class="btn primary" onclick="openInterventionModal('${i.id}')">Modifica</button><button class="btn ghost" onclick="openConversationFor('${i.operatorId||''}')">Messaggio</button></div>`;
+}
+
 function renderOfficeAgenda(){
- const host=el('officeAgendaList');if(!host)return;
- const d=el('agendaDate')?.value||TODAY_2026,op=el('agendaOperator')?.value||'';
- const rows=sfOfficeInterventions.filter(i=>i.date===d&&(!op||i.operatorId===op)).sort((a,b)=>(a.time||'').localeCompare(b.time||''));
- if(!rows.length){host.innerHTML='<div class="v6-empty">Nessun appuntamento per la giornata selezionata.</div>';return}
- host.innerHTML=rows.map(i=>{const o=getOperator(i.operatorId),v=getVehicle(i.vehicleId);return `<div class="v6-row v6-agenda-day"><div class="v6-time">${esc(i.time||'—')}</div><div><div class="v6-row-head"><b>${esc(i.client)}</b><span class="v6-status ${statusClass(i.status)}">${esc(i.status)}</span></div><div class="v6-meta">${esc(i.address)}<br>${esc(i.request)} · ${esc(o?operatorName(o):'Da assegnare')} · ${esc(v?v.code:'—')}</div><div class="v6-row-actions"><button class="btn ghost" onclick="openInterventionModal('${i.id}')">Apri</button></div></div></div>`}).join('');
+ populateAgendaExtraFilters();
+ if(!el('agendaDate')?.value)el('agendaDate').value=localDateKey();
+ if(officeAgendaView==='week')renderOfficeAgendaWeek();else renderOfficeAgendaDay();
 }
 
 
@@ -1436,18 +1612,37 @@ function selectOfficeAssignedJob(node,id){
 function renderOperatorAgendaFromOffice(){
  const host=el('fieldAgenda');if(!host)return;
  const id=currentOperatorId();
+ const selected=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
+ const base=new Date(selected+'T12:00:00');
+ const start=new Date(base);start.setDate(base.getDate()-3);
+
+ let strip='';
+ for(let x=0;x<7;x++){
+   const d=new Date(start);d.setDate(start.getDate()+x);
+   const key=d.toISOString().slice(0,10);
+   strip+=`<button class="op-day-pill ${key===selected?'active':''}" onclick="setOperatorAgendaDate('${key}')">${d.toLocaleDateString('it-IT',{weekday:'short'}).toUpperCase()}<strong>${d.getDate()}</strong></button>`;
+ }
 
  const rows=sfOfficeInterventions
-   .filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato')
-   .sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+  .filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato'&&i.date===selected)
+  .sort((a,b)=>(a.time||'').localeCompare(b.time||''));
 
- host.innerHTML='<h2>La mia agenda</h2><p class="muted" style="color:#c8d6e2">Solo gli interventi assegnati al tuo account.</p>'+
- (rows.length?rows.map(i=>`
-   <div class="day-item agenda-selectable" onclick="openMyAgendaJob('${i.id}')">
-     <small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.status.toUpperCase())}</small>
-     <b>${esc(i.client)}</b>${esc(i.address)} · ${esc(i.request)}
-   </div>`).join('')
- :'<div class="v6-empty" style="background:white;border-radius:12px">Nessun intervento nella tua agenda.</div>');
+ host.innerHTML=`<div class="operator-agenda-shell">
+ <div class="op-agenda-date"><button onclick="shiftOperatorAgenda(-1)">‹</button><div style="text-align:center"><b>La mia agenda</b><div>${new Date(selected+'T12:00:00').toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'})}</div></div><button onclick="shiftOperatorAgenda(1)">›</button></div>
+ <div class="op-day-strip">${strip}</div>
+ ${rows.length?rows.map(i=>`<div class="op-agenda-card ${statusClass(i.status)}" onclick="openMyAgendaJob('${i.id}')"><div class="op-agenda-time">${esc(i.time||'—')}</div><div class="op-agenda-main"><b>${esc(i.client)}</b><small>${esc(i.address||'')}</small><small>${esc(i.request||'')}</small><small>${esc(i.status)}</small></div><button class="op-agenda-open">›</button></div>`).join(''):'<div class="op-agenda-empty">Nessun intervento assegnato per questa giornata.</div>'}
+ </div>`;
+}
+
+
+function setOperatorAgendaDate(date){
+ sessionStorage.setItem('sf_operator_agenda_date',date);
+ renderOperatorAgendaFromOffice();
+}
+function shiftOperatorAgenda(delta){
+ const current=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
+ const d=new Date(current+'T12:00:00');d.setDate(d.getDate()+delta);
+ setOperatorAgendaDate(d.toISOString().slice(0,10));
 }
 
 function openMyAgendaJob(id){
