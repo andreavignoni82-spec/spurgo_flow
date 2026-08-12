@@ -46,7 +46,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.15 - modalità ultra-operativa smartphone */
+/* Build 5.0.16 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -77,7 +77,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - navigazione field-service persistente */
+/* Build 5.0.16 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -97,7 +97,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 */
+/* Build 5.0.16 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -136,7 +136,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - mappe reali e rapportino fedele */
+/* Build 5.0.16 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -202,7 +202,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.16 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -245,7 +245,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 */
+/* Build 5.0.16 */
 .report-actions-app{display:block}
 #reportRealMap{
   width:100%;
@@ -266,7 +266,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - geocodifica reale e punto operativo */
+/* Build 5.0.16 - geocodifica reale e punto operativo */
 .location-tools{
   background:#f7fafc;
   border:1px solid #d7e1e8;
@@ -318,7 +318,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .check-row{display:flex;gap:8px;align-items:center;background:#f7fafc;padding:8px;border-radius:8px}
 @media(max-width:900px){.manage-grid,.form-grid{grid-template-columns:1fr}.form-grid .full{grid-column:auto}}
 
-/* Build 5.0.15 - fix definitivo mappe iPhone/Leaflet */
+/* Build 5.0.16 - fix definitivo mappe iPhone/Leaflet */
 .real-map{
   position:relative;
   display:block;
@@ -356,7 +356,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - nuovo motore mappe senza Leaflet */
+/* Build 5.0.16 - nuovo motore mappe senza Leaflet */
 .real-map{
   position:relative;width:100%!important;min-width:0!important;
   height:300px;min-height:300px;overflow:hidden!important;
@@ -403,7 +403,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.15 - mappe OSM ufficiali in iframe */
+/* Build 5.0.16 - mappe OSM ufficiali in iframe */
 .real-map{
   position:relative;
   width:100%!important;
@@ -447,11 +447,54 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .map-switcher{display:none!important}
 }
 
+
+/* Build 5.0.16 - Google Maps iframe semplice */
+.real-map{
+  position:relative;
+  width:100%!important;
+  min-width:0!important;
+  height:320px;
+  min-height:320px;
+  overflow:hidden!important;
+  border:1px solid #d5dfe7;
+  border-radius:12px;
+  background:#eef2f5;
+  box-sizing:border-box;
+}
+.real-map.small{height:270px;min-height:270px}
+.real-map.report-map-real{height:145px;min-height:145px;border-radius:7px}
+.real-map iframe{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  border:0!important;
+  margin:0!important;
+  padding:0!important;
+  background:#eef2f5;
+}
+.map-fallback{
+  position:absolute;left:8px;right:8px;bottom:8px;z-index:3;
+  display:flex;justify-content:center;pointer-events:none;
+}
+.map-fallback a{
+  pointer-events:auto;background:#ffffffee;border:1px solid #d3dce3;color:#1768b2;
+  border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;text-decoration:none
+}
+@media(max-width:700px){
+ .real-map{height:300px!important;min-height:300px!important}
+ .real-map.small{height:260px!important;min-height:260px!important}
+ .real-map.report-map-real{height:115px!important;min-height:115px!important}
+}
+@media print{
+ .real-map.report-map-real{height:92px!important;min-height:92px!important}
+ .map-fallback{display:none!important}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.15</div>
+<div class="version">v5.0 · build 5.0.16</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123 · paolo/paolo123</p>
@@ -461,9 +504,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.15<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.16<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.15</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.16</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMapSwitcher" class="map-switcher"></div><div class="map-shell"><div id="officeMap" class="real-map"></div></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -480,7 +523,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.15</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v5.0 · Build 5.0.16</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -687,7 +730,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.15</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.16</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -859,6 +902,7 @@ let jobRunning=false;
 
 
 
+
 let currentOfficeMapJobId=null;
 let currentControlMapJobId=null;
 let currentFieldMapJobId=null;
@@ -868,104 +912,91 @@ function activeCoords(job=selectedJob){
   if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lat,job.lng];
   return null;
 }
-function bboxFor(lat,lng,scale='detail'){
-  const cfg={
-    detail:{lat:0.0032,lng:0.0048},
-    report:{lat:0.0024,lng:0.0036},
-    area:{lat:0.035,lng:0.055}
-  }[scale]||{lat:0.0032,lng:0.0048};
-  const cos=Math.max(0.35,Math.cos(lat*Math.PI/180));
-  const dlng=cfg.lng/cos;
-  return [lng-dlng,lat-cfg.lat,lng+dlng,lat+cfg.lat];
-}
-function osmEmbedUrl(lat,lng,scale='detail',marker=true){
-  const b=bboxFor(lat,lng,scale);
-  const bbox=b.map(v=>v.toFixed(6)).join(',');
-  let url='https://www.openstreetmap.org/export/embed.html?bbox='+encodeURIComponent(bbox)+'&layer=mapnik';
-  if(marker)url+='&marker='+encodeURIComponent(lat.toFixed(6)+','+lng.toFixed(6));
-  return url;
-}
-function renderOsmFrame(id,coords,scale='detail',marker=true){
-  const host=el(id); if(!host)return;
-  if(!coords){
-    host.innerHTML='<div class="tile-map-error">Posizione non disponibile. Usa “Localizza indirizzo”.</div>';
-    return;
+function googleQuery(job){
+  if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)){
+    return job.opLat.toFixed(6)+','+job.opLng.toFixed(6);
   }
-  host.innerHTML='<div class="map-loading">Caricamento mappa…</div>';
+  return (job&&job.address)?job.address:'Sarnico, BG, Italia';
+}
+function googleEmbedUrl(job,zoom=16){
+  const q=encodeURIComponent(googleQuery(job));
+  return 'https://maps.google.com/maps?q='+q+'&z='+zoom+'&output=embed';
+}
+function googleOpenUrl(job){
+  const c=activeCoords(job);
+  if(c)return 'https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1];
+  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(job.address||'');
+}
+function renderGoogleMap(id,job,zoom=16){
+  const host=el(id);if(!host)return;
+  if(!job){host.innerHTML='<div class="tile-map-error">Posizione non disponibile.</div>';return}
+  host.innerHTML='';
   const iframe=document.createElement('iframe');
-  iframe.title='Mappa OpenStreetMap';
+  iframe.title='Google Maps - '+(job.client||'intervento');
   iframe.loading='eager';
   iframe.referrerPolicy='no-referrer-when-downgrade';
-  iframe.src=osmEmbedUrl(coords[0],coords[1],scale,marker);
-  iframe.setAttribute('scrolling','no');
+  iframe.src=googleEmbedUrl(job,zoom);
   iframe.setAttribute('allowfullscreen','');
-  iframe.onload=()=>{
-    const load=host.querySelector('.map-loading');
-    if(load)load.remove();
-  };
   host.appendChild(iframe);
+  const fb=document.createElement('div');
+  fb.className='map-fallback';
+  fb.innerHTML='<a target="_blank" rel="noopener" href="'+googleOpenUrl(job)+'">Apri in Google Maps</a>';
+  host.appendChild(fb);
 }
 function makeSwitcher(hostId,jobs,currentId,handlerName){
-  const host=el(hostId); if(!host)return;
-  const valid=jobs.filter(j=>activeCoords(j));
-  if(!valid.length){host.innerHTML='';return}
-  host.innerHTML=valid.map(j=>`<button type="button" class="${j.id===currentId?'active':''}" onclick="${handlerName}('${j.id}')">${esc(j.client)}</button>`).join('');
+  const host=el(hostId);if(!host)return;
+  host.innerHTML=jobs.map(j=>`<button type="button" class="${j.id===currentId?'active':''}" onclick="${handlerName}('${j.id}')">${esc(j.client)}</button>`).join('');
 }
 function jobById(id){return [...demoJobs,...completedJobs].find(j=>j.id===id)}
 function showOfficeMapJob(id){
   const j=jobById(id);if(!j)return;
   currentOfficeMapJobId=id;
-  renderOsmFrame('officeMap',activeCoords(j),'area',true);
+  renderGoogleMap('officeMap',j,14);
   makeSwitcher('officeMapSwitcher',[...demoJobs,...completedJobs],id,'showOfficeMapJob');
 }
 function showControlMapJob(id){
   const j=jobById(id);if(!j)return;
   currentControlMapJobId=id;
-  renderOsmFrame('controlMap',activeCoords(j),'area',true);
+  renderGoogleMap('controlMap',j,14);
   makeSwitcher('controlMapSwitcher',[...demoJobs,...completedJobs],id,'showControlMapJob');
 }
 function showFieldMapJob(id){
   const j=jobById(id);if(!j)return;
   currentFieldMapJobId=id;
-  renderOsmFrame('fieldRealMap',activeCoords(j),'area',true);
+  renderGoogleMap('fieldRealMap',j,14);
   makeSwitcher('fieldMapSwitcher',demoJobs,id,'showFieldMapJob');
 }
 function renderOfficeMap(){
-  const valid=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  if(!valid.length){renderOsmFrame('officeMap',null);return}
-  const id=currentOfficeMapJobId||valid[0].id;
-  showOfficeMapJob(id);
+  const jobs=[...demoJobs,...completedJobs];
+  if(!jobs.length)return;
+  showOfficeMapJob(currentOfficeMapJobId||jobs[0].id);
 }
 function renderControlMap(){
-  const valid=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  if(!valid.length){renderOsmFrame('controlMap',null);return}
-  const urgent=valid.find(j=>String(j.status).toLowerCase().includes('urgent'))||valid[0];
-  const id=currentControlMapJobId||urgent.id;
-  showControlMapJob(id);
+  const jobs=[...demoJobs,...completedJobs];
+  if(!jobs.length)return;
+  const urgent=jobs.find(j=>String(j.status).toLowerCase().includes('urgent'))||jobs[0];
+  showControlMapJob(currentControlMapJobId||urgent.id);
 }
 function refreshFieldMap(){
-  const valid=demoJobs.filter(j=>activeCoords(j));
-  if(!valid.length){renderOsmFrame('fieldRealMap',null);return}
-  const id=currentFieldMapJobId||selectedJob.id||valid[0].id;
-  const found=valid.find(j=>j.id===id)||valid[0];
-  showFieldMapJob(found.id);
+  if(!demoJobs.length)return;
+  const j=demoJobs.find(x=>x.id===(currentFieldMapJobId||selectedJob.id))||demoJobs[0];
+  showFieldMapJob(j.id);
 }
 function updateSelectedJobMap(){
-  renderOsmFrame('selectedJobMap',activeCoords(selectedJob),'detail',true);
+  renderGoogleMap('selectedJobMap',selectedJob,17);
   updateOperationalPointLabel();
 }
 function updateReportMap(){
-  renderOsmFrame('reportRealMap',activeCoords(selectedJob),'report',true);
+  renderGoogleMap('reportRealMap',selectedJob,16);
 }
 function invalidateVisibleMaps(){
-  // iframe OSM non richiede resize del motore: basta ricaricare se il pannello è visibile
   if(el('officeMap')&&el('officeMap').offsetParent!==null)renderOfficeMap();
   if(el('controlMap')&&el('controlMap').offsetParent!==null)renderControlMap();
   if(el('fieldRealMap')&&el('fieldRealMap').offsetParent!==null)refreshFieldMap();
   if(el('selectedJobMap')&&el('selectedJobMap').offsetParent!==null)updateSelectedJobMap();
 }
 async function initAllMaps(){
-  await geocodeAllDemoJobs();
+  // La visualizzazione usa l'indirizzo direttamente; la geocodifica serve solo per GPS/punto operativo/rapportino.
   if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
     const found=demoJobs.find(j=>j.id===selectedJob.id);
     if(found)selectedJob={...found};
@@ -978,18 +1009,15 @@ async function initAllMaps(){
 }
 function fitFieldMap(){refreshFieldMap()}
 function centerMapOnSelected(){
-  const found=demoJobs.find(j=>j.id===selectedJob.id);
-  if(found)showFieldMapJob(found.id);
-  else renderOsmFrame('fieldRealMap',activeCoords(selectedJob),'detail',true);
+  const j=demoJobs.find(x=>x.id===selectedJob.id)||selectedJob;
+  renderGoogleMap('fieldRealMap',j,16);
 }
 function centerSelectedMap(){updateSelectedJobMap()}
 function forceAllMapLayouts(){invalidateVisibleMaps()}
 function forceMapLayout(){invalidateVisibleMaps()}
 function setupMapResizeObserver(){}
 function openSelectedMap(){
- const c=activeCoords(selectedJob);
- if(c) window.open('https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1],'_blank');
- else window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank');
+  window.open(googleOpenUrl(selectedJob),'_blank');
 }
 function openSigModal(target){
  signatureTarget=target;
@@ -1236,7 +1264,7 @@ function closeReport(){
 
 function preparePrint(){
   updateReportMap();
-  setTimeout(()=>window.print(),900);
+  setTimeout(()=>window.print(),1200);
 }
 
 function shareMail(){
