@@ -45,11 +45,62 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  #reportView>.top,.share{display:none!important}
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
+
+/* Build 5.0.6 - modalità ultra-operativa smartphone */
+.mobile-summary{display:none}
+.accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
+.accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
+.accordion-body{margin-top:12px}
+.sticky-signatures{display:none}
+.sig-status{font-size:11px;font-weight:800;border-radius:999px;padding:4px 7px;background:#eef2f5;color:#627382}
+.sig-status.ok{background:#e8f7ee;color:#177a3e}
+.mobile-bottom-space{height:110px}
+@media(max-width:700px){
+ .operator-shell{padding:12px 12px 110px}
+ .operator-head{position:sticky;top:0;z-index:20;background:#071d35;padding:8px 0 12px}
+ .op-card{padding:14px}
+ .op-actions{grid-template-columns:repeat(4,1fr);gap:7px;position:sticky;top:72px;z-index:18;background:#071d35;padding:8px 0}
+ .op-actions button{min-height:62px;padding:7px 3px;font-size:12px}
+ .inline-panel{padding:12px;margin-top:9px}
+ .inline-panel:not(.active){display:none}
+ .inline-panel.active{display:block}
+ .panel-head{margin:0}
+ .panel-head h3{font-size:16px}
+ .panel-head+.muted{margin-top:8px}
+ .textarea{min-height:170px;font-size:16px}
+ .sticky-signatures{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:10px;right:10px;bottom:10px;z-index:40;background:#071d35;padding:8px;border-radius:14px;box-shadow:0 8px 30px #0008}
+ .sticky-signatures button{min-height:54px}
+ .sticky-signatures .finish{grid-column:1/-1;background:#e04c43;color:#fff}
+ #firmePanel{padding-bottom:14px}
+ .signature-canvas{height:180px}
+ .mobile-summary{display:block;background:#0b2948;border:1px solid #19486d;border-radius:12px;padding:10px;margin:10px 0;color:#dce8f2;font-size:12px}
+}
+
+
+/* Build 5.0.6 - navigazione field-service persistente */
+.field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
+.field-nav{display:none}
+.resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
+.day-item,.msg-item,.profile-item{background:#fff;color:#142438;border-radius:13px;padding:14px;margin:10px 0}
+.day-item b,.msg-item b{display:block}.mini-badge{background:#e64b45;color:#fff;border-radius:99px;padding:2px 7px;font-size:11px}
+.route-card{background:#fff;color:#142438;border-radius:14px;padding:14px;margin:10px 0}
+.fake-map{height:330px;border-radius:14px;background:linear-gradient(35deg,#dcebdd,#edf4ef);position:relative;overflow:hidden;color:#142438;padding:14px}
+.fake-map:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(30deg,transparent 0 44px,#fff9 45px 49px)}
+.mapdot{position:absolute;z-index:2;width:26px;height:26px;border-radius:50%;background:#1684d6;border:4px solid #fff;box-shadow:0 2px 7px #0005}
+@media(max-width:700px){
+ .field-nav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:70;background:#061b30eF;border-top:1px solid #19486d;padding:7px 4px calc(7px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}
+ .field-nav button{background:transparent;border:0;color:#fff;padding:5px 2px;font-size:10px;min-width:0}
+ .field-nav button span{display:block;font-size:22px;line-height:25px}.field-nav button.active{color:#48d275;background:#0b2b46;border-radius:9px}
+ .field-nav .badge-nav{position:absolute;background:#e53e3e;color:#fff;border-radius:99px;font-size:10px;padding:2px 5px;margin-left:-7px}
+ .operator-shell{padding-bottom:175px}
+ .sticky-signatures{bottom:74px}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.4</div>
+<div class="version">v5.0 · build 5.0.6</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -59,9 +110,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.4<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.6<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.4</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.6</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
@@ -84,7 +135,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </main></div>
 
 <div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div></div><div><span class="build">v5.0</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
-<div style="max-width:620px;margin:auto"><h2>I miei interventi</h2><div class="op-card"><span class="badge urgent">URGENTE</span><h3>Condominio Belvedere</h3><p>Via Roma 24, 24067 Sarnico (BG)</p><p>Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Via+Roma+24+Sarnico')">Apri in mappa</button><button class="btn navy" onclick="startJob()">Inizia intervento</button></div></div>
+<div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2><div class="op-card"><span class="badge urgent">URGENTE</span><h3>Condominio Belvedere</h3><p>Via Roma 24, 24067 Sarnico (BG)</p><p>Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Via+Roma+24+Sarnico')">Apri in mappa</button><button class="btn navy" onclick="startJob()">Inizia intervento</button></div></div>
 <div id="job" class="hidden">
 <h2>Intervento in corso · <span id="timer">00:00</span></h2>
 <div class="op-actions">
@@ -94,6 +145,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <button class="btn ghost" onclick="togglePanel('panelAnomalia')">⚠ ANOMALIA</button>
 </div>
 
+<div class="mobile-summary" id="mobileSummary">Foto: <b id="sumFoto">0</b> · Relazione: <b id="sumRel">da compilare</b> · Attività: <b id="sumAct">0</b> · Anomalie: <b id="sumAno">0</b></div>
 <div id="panelFoto" class="inline-panel">
   <div class="panel-head"><h3>📷 Foto intervento</h3><button class="btn ghost" onclick="togglePanel('panelFoto')">Chiudi</button></div>
   <p class="muted">Scatta o seleziona fotografie. Verranno associate all'intervento e riportate nel rapportino.</p>
@@ -151,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div id="prevAnomalia" class="photo-box" style="margin-top:8px">Nessuna foto anomalia</div>
 </div>
 
-<div class="inline-panel active" style="margin-top:14px">
+<div id="firmePanel" class="inline-panel active" style="margin-top:14px">
   <h3>✍️ Firme intervento</h3>
   <p class="muted">Operatore e cliente firmano direttamente sullo smartphone. Entrambe le firme vengono riportate nel rapportino PDF.</p>
   <div class="inline-grid">
@@ -171,10 +223,56 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
-</div></div></div>
+<div class="sticky-signatures">
+ <button class="btn ghost" onclick="openOnly('firmePanel');setTimeout(()=>el('firmaOperatore').scrollIntoView({behavior:'smooth',block:'center'}),50)">✍️ Operatore <span id="opSigStatus" class="sig-status">firma</span></button>
+ <button class="btn ghost" onclick="openOnly('firmePanel');setTimeout(()=>el('firmaCliente').scrollIntoView({behavior:'smooth',block:'center'}),50)">✍️ Cliente <span id="clSigStatus" class="sig-status">firma</span></button>
+ <button class="btn finish" onclick="prepareAndShowReport()">TERMINA E GENERA RAPPORTINO</button>
+</div>
+<div class="mobile-bottom-space"></div>
+</div></div>
+
+<div id="fieldAgenda" class="field-page">
+ <h2>Agenda giornaliera</h2>
+ <div class="day-item"><small>08:00 · COMPLETATO</small><b>Residence Sole</b>Via XX Settembre 8, Iseo</div>
+ <div class="day-item"><small>10:30 · <span class="mini-badge">URGENTE</span></small><b>Condominio Belvedere</b>Via Roma 24, Sarnico · intervento in corso</div>
+ <div class="day-item"><small>14:00 · PROGRAMMATO</small><b>Ristorante Al Lago</b>Iseo · Pulizia fossa biologica</div>
+ <div class="day-item"><small>16:30 · PROGRAMMATO</small><b>Azienda Bianchi Srl</b>Costa Volpino · Lavaggio tubazione</div>
+</div>
+
+<div id="fieldMappa" class="field-page">
+ <h2>Mappa e percorso</h2>
+ <div class="fake-map"><b>Interventi assegnati</b><i class="mapdot" style="left:24%;top:52%"></i><i class="mapdot" style="left:61%;top:29%;background:#e53e3e"></i><i class="mapdot" style="left:73%;top:67%;background:#28a85a"></i></div>
+ <div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+</div>
+
+<div id="fieldMessaggi" class="field-page">
+ <h2>Messaggi ufficio <span class="mini-badge">2</span></h2>
+ <div class="msg-item"><b>Ufficio · 09:06</b>Terminato Belvedere passa direttamente al Ristorante Al Lago.</div>
+ <div class="msg-item"><b>Ufficio · 08:51</b>Per Belvedere fotografa anche il tratto deformato per il preventivo.</div>
+ <div class="msg-item"><b>Tu · ieri</b>Intervento Residence Sole completato.</div>
+ <textarea class="textarea" placeholder="Scrivi un messaggio all’ufficio..."></textarea><button class="btn primary" style="margin-top:8px">Invia messaggio</button>
+</div>
+
+<div id="fieldProfilo" class="field-page">
+ <h2>Profilo operatore</h2>
+ <div class="profile-item"><b id="profileName">Operatore</b><p>Stato: 🟢 In servizio</p><p>Mezzo assegnato: Autobotte 02</p></div>
+ <div class="profile-item"><b>Oggi</b><p>Interventi: 2 · Ore operative: 4h 06m</p><p>Km indicativi: 38</p></div>
+ <div class="profile-item"><b>Documenti</b><p>Patente · Abilitazioni · Procedure operative</p></div>
+</div>
+
+<div id="resumeJob" class="resume-job hidden" onclick="fieldNavigate('Interventi')">↩ Torna all’intervento in corso · <span id="resumeTimer">00:00</span></div>
+
+<nav class="field-nav" id="fieldNav">
+ <button class="active" data-page="Interventi" onclick="fieldNavigate('Interventi')"><span>▤</span>Interventi</button>
+ <button data-page="Agenda" onclick="fieldNavigate('Agenda')"><span>▦</span>Agenda</button>
+ <button data-page="Mappa" onclick="fieldNavigate('Mappa')"><span>⌖</span>Mappa</button>
+ <button data-page="Messaggi" onclick="fieldNavigate('Messaggi')"><span>➤<i class="badge-nav">2</i></span>Messaggi</button>
+ <button data-page="Profilo" onclick="fieldNavigate('Profilo')"><span>◎</span>Profilo</button>
+</nav>
+</div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.4</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.6</span></div>
 <div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><img src="qr-demo-intervento.png" alt="QR intervento" style="width:86px;height:86px;border:1px solid #cbd6df;padding:4px;background:white"></div>
 <div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
 <div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div></div></div><hr><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomalia">Nessuna anomalia segnalata.</p><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
@@ -207,7 +305,7 @@ function login(){
     loginScreen.classList.add('hidden');
     officeView.classList.add('hidden');
     operatorView.classList.remove('hidden');
-    opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1);
+    opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1); if(el('profileName')) el('profileName').textContent=u.charAt(0).toUpperCase()+u.slice(1);
     setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');},100);
     return;
   }
@@ -230,13 +328,44 @@ document.querySelectorAll('#menu button').forEach(b=>{
 });
 
 
+
+
+let jobRunning=false;
+function fieldNavigate(name){
+ ['Interventi','Agenda','Mappa','Messaggi','Profilo'].forEach(n=>{
+   const page=el('field'+n); if(page) page.classList.toggle('active',n===name);
+ });
+ document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
+ const resume=el('resumeJob');
+ if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function openOnly(id){
+  ['panelFoto','panelRelazione','panelAttivita','panelAnomalia','firmePanel'].forEach(x=>{
+    const p=el(x); if(p) p.classList.toggle('active',x===id);
+  });
+}
+function updateMobileSummary(){
+  const photos=['prevPrima','prevDurante','prevDopo','prevAnomalia'].filter(id=>el(id)&&el(id).dataset.img).length;
+  if(el('sumFoto')) el('sumFoto').textContent=photos;
+  if(el('sumRel')) el('sumRel').textContent=el('relazioneInput').value.trim()?'ok':'da compilare';
+  if(el('sumAct')) el('sumAct').textContent=document.querySelectorAll('.chip.active').length;
+  const hasAno=(el('anomaliaTipo').value||el('anomaliaTesto').value.trim())?1:0;
+  if(el('sumAno')) el('sumAno').textContent=hasAno;
+}
+
 function togglePanel(id){
   const p=el(id);
   if(!p) return;
-  p.classList.toggle('active');
+  if(window.matchMedia('(max-width:700px)').matches){
+    const was=p.classList.contains('active');
+    ['panelFoto','panelRelazione','panelAttivita','panelAnomalia','firmePanel'].forEach(x=>{const q=el(x);if(q)q.classList.remove('active')});
+    if(!was){p.classList.add('active');setTimeout(()=>p.scrollIntoView({behavior:'smooth',block:'start'}),30)}
+  }else p.classList.toggle('active');
 }
 function toggleChip(btn){
-  btn.classList.toggle('active');
+  btn.classList.toggle('active'); updateMobileSummary();
 }
 function previewPhoto(input,targetId){
   const file=input.files && input.files[0];
@@ -248,6 +377,7 @@ function previewPhoto(input,targetId){
     box.innerHTML='<img src="'+reader.result+'" alt="Foto intervento">';
   };
   reader.readAsDataURL(file);
+  setTimeout(updateMobileSummary,100);
 }
 function startSpeech(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
@@ -275,7 +405,7 @@ function generaRelazione(){
   const testo='SITUAZIONE RISCONTRATA\n'+raw+
   '\n\nOPERAZIONI ESEGUITE\n'+buildAttivitaText()+
   '\n\nANOMALIE / NOTE\n'+(el('anomaliaTesto').value.trim()||'Nessuna anomalia segnalata.');
-  el('relazioneGenerata').textContent=testo;
+  el('relazioneGenerata').textContent=testo; updateMobileSummary();
 }
 function buildAttivitaText(){
   const acts=[...document.querySelectorAll('.chip.active')].map(x=>x.dataset.act);
@@ -323,6 +453,7 @@ function copyPreviewToReport(srcId,dstId){
   dst.innerHTML=img?'<img src="'+img+'" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px">':'Nessuna foto';
 }
 function prepareAndShowReport(){
+  jobRunning=false; sessionStorage.removeItem('sf_job_running');
   clearInterval(timerInt);
   const rel=el('relazioneGenerata').textContent.trim();
   el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
@@ -349,12 +480,13 @@ function prepareAndShowReport(){
 }
 
 function startJob(){
+  jobRunning=true; sessionStorage.setItem('sf_job_running','1');
   el('job').classList.remove('hidden');
   secs=0;
   clearInterval(timerInt);
   timerInt=setInterval(()=>{
     secs++;
-    el('timer').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');
+    el('timer').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0'); if(el('resumeTimer')) el('resumeTimer').textContent=el('timer').textContent;
   },1000);
 }
 
@@ -386,6 +518,17 @@ async function shareNative(){
     window.print();
   }
 }
+
+
+document.addEventListener('input',e=>{
+  if(['relazioneInput','anomaliaTipo','anomaliaTesto'].includes(e.target.id)) updateMobileSummary();
+});
+function markSignatureStatus(canvasId,statusId){
+ const c=el(canvasId); if(!c) return;
+ const mark=()=>{const s=el(statusId);if(s){s.textContent='OK';s.classList.add('ok')}};
+ c.addEventListener('pointerup',mark);c.addEventListener('touchend',mark,{passive:true});
+}
+setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
