@@ -16,11 +16,33 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .field{width:100%;padding:13px;border:1px solid var(--line);border-radius:10px;margin:6px 0 12px}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}
 .side{background:var(--navy);color:#fff;padding:22px 14px;position:sticky;top:0;height:100vh}.side .logo{font-size:22px;font-weight:900;padding:0 10px 18px}.side .logo b{color:#4bd27a}.menu button{width:100%;text-align:left;background:transparent;color:#dbe7f2;border:0;padding:11px;border-radius:8px;margin:2px 0;cursor:pointer}.menu button.active,.menu button:hover{background:#12466c}.sidefoot{position:absolute;bottom:18px;left:18px;right:18px;font-size:12px;color:#bcd0df}.content{padding:26px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.top h1{margin:0}.build{font-size:12px;font-weight:800;color:#177a3e;background:#eaf8ef;padding:7px 10px;border-radius:999px}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 3px 12px #0a25400a}.kpi strong{display:block;font-size:29px;margin-top:7px}.grid2{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px 8px;border-bottom:1px solid #edf1f4;text-align:left;font-size:14px}.badge{font-size:11px;font-weight:900;padding:5px 7px;border-radius:999px;color:#fff}.urgent{background:var(--red)}.progress{background:var(--orange)}.planned{background:var(--blue)}.done{background:var(--green)}.map{min-height:300px;background:linear-gradient(45deg,#dbe9df,#edf4ee);position:relative;overflow:hidden}.map:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(25deg,transparent 0 35px,#fff8 36px 39px)}.pin{position:absolute;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--red);box-shadow:0 2px 5px #0004}.pin:nth-child(2){left:62%;top:28%;background:var(--orange)}.pin:nth-child(3){left:28%;top:58%;background:var(--blue)}.pin:nth-child(4){left:74%;top:66%;background:var(--green)}.section{display:none}.section.active{display:block}.fleet-card h3{margin:0 0 4px}.muted{color:#6d7d8b;font-size:13px}.meter{height:8px;background:#e7edf1;border-radius:99px;overflow:hidden;margin-top:8px}.meter i{display:block;height:100%;background:var(--green)}.actions{display:flex;gap:8px;flex-wrap:wrap}.operator-shell{min-height:100vh;background:var(--navy);color:white;padding:18px}.operator-head{display:flex;justify-content:space-between;align-items:center}.op-card{background:white;color:#142438;border-radius:14px;padding:16px;margin:12px 0}.op-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.op-actions button{min-height:80px}.report{background:#fff;color:#152436;max-width:900px;margin:20px auto;padding:28px;border-radius:12px}.report-head{display:flex;justify-content:space-between;border-bottom:3px solid var(--navy);padding-bottom:14px}.qr{width:86px;height:86px;background:repeating-conic-gradient(#071d35 0 25%,#fff 0 50%) 50%/14px 14px;border:8px solid white;outline:1px solid #cbd6df}.signs{display:grid;grid-template-columns:1fr 1fr;gap:20px}.sign{height:100px;border:1px solid #aebdca;border-radius:8px;padding:10px}.share{max-width:900px;margin:12px auto;background:white;padding:16px;border-radius:12px}.sharegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.menu{display:flex;overflow:auto}.menu button{min-width:max-content}.sidefoot{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3{grid-template-columns:1fr}.content{padding:15px}.sharegrid,.signs{grid-template-columns:1fr}.report{border-radius:0;margin:0}}
+
+.inline-panel{display:none;background:#fff;color:#142438;border-radius:14px;padding:16px;margin-top:14px;border:1px solid #dce5ec}
+.inline-panel.active{display:block}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.panel-head h3{margin:0}
+.inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inline-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid #cdd9e2;background:#f7fafc;border-radius:999px;padding:8px 10px;font-weight:700;cursor:pointer}
+.chip.active{background:#e8f7ee;border-color:#7bd49b;color:#177a3e}
+.photo-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.photo-box{min-height:90px;border:1px dashed #aebdca;border-radius:10px;display:grid;place-items:center;text-align:center;background:#f8fafb;overflow:hidden}
+.photo-box img{width:100%;height:110px;object-fit:cover}
+.panel-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.textarea{width:100%;min-height:130px;padding:12px;border:1px solid #ccd7e0;border-radius:10px;resize:vertical}
+.generated{background:#f6faf7;border:1px solid #d4eadb;border-radius:10px;padding:12px;white-space:pre-wrap}
+.qtyrow{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:center;margin:8px 0}
+.qtyrow input{width:100%;padding:9px;border:1px solid #ccd7e0;border-radius:8px}
+.signature-wrap{background:#fff;border:1px solid #cbd7e0;border-radius:10px;padding:8px}
+.signature-canvas{width:100%;height:150px;display:block;background:white;border-radius:8px;touch-action:none}
+@media(max-width:700px){.inline-grid,.inline-grid-3,.photo-preview{grid-template-columns:1fr}.qtyrow{grid-template-columns:1fr 90px}}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.2</div>
+<div class="version">v5.0 · build 5.0.3</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -30,9 +52,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.2<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.3<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.2</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.3</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
@@ -56,15 +78,89 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div></div><div><span class="build">v5.0</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div style="max-width:620px;margin:auto"><h2>I miei interventi</h2><div class="op-card"><span class="badge urgent">URGENTE</span><h3>Condominio Belvedere</h3><p>Via Roma 24, 24067 Sarnico (BG)</p><p>Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Via+Roma+24+Sarnico')">Apri in mappa</button><button class="btn navy" onclick="startJob()">Inizia intervento</button></div></div>
-<div id="job" class="hidden"><h2>Intervento in corso · <span id="timer">00:00</span></h2><div class="op-actions"><button class="btn ghost">📷 FOTO</button><button class="btn ghost">🎙 RELAZIONE</button><button class="btn ghost">🛠 ATTIVITÀ</button><button class="btn ghost">⚠ ANOMALIA</button></div><button class="btn danger" style="width:100%;margin-top:16px" onclick="showReport()">TERMINA INTERVENTO</button></div></div></div>
+<div id="job" class="hidden">
+<h2>Intervento in corso · <span id="timer">00:00</span></h2>
+<div class="op-actions">
+  <button class="btn ghost" onclick="togglePanel('panelFoto')">📷 FOTO</button>
+  <button class="btn ghost" onclick="togglePanel('panelRelazione')">🎙 RELAZIONE</button>
+  <button class="btn ghost" onclick="togglePanel('panelAttivita')">🛠 ATTIVITÀ</button>
+  <button class="btn ghost" onclick="togglePanel('panelAnomalia')">⚠ ANOMALIA</button>
+</div>
+
+<div id="panelFoto" class="inline-panel">
+  <div class="panel-head"><h3>📷 Foto intervento</h3><button class="btn ghost" onclick="togglePanel('panelFoto')">Chiudi</button></div>
+  <p class="muted">Scatta o seleziona fotografie. Verranno associate all'intervento e riportate nel rapportino.</p>
+  <div class="inline-grid-3">
+    <label class="btn ghost" style="text-align:center">PRIMA<input id="fotoPrima" type="file" accept="image/*" capture="environment" hidden onchange="previewPhoto(this,'prevPrima')"></label>
+    <label class="btn ghost" style="text-align:center">DURANTE<input id="fotoDurante" type="file" accept="image/*" capture="environment" hidden onchange="previewPhoto(this,'prevDurante')"></label>
+    <label class="btn ghost" style="text-align:center">DOPO<input id="fotoDopo" type="file" accept="image/*" capture="environment" hidden onchange="previewPhoto(this,'prevDopo')"></label>
+  </div>
+  <div class="photo-preview">
+    <div id="prevPrima" class="photo-box">Nessuna foto PRIMA</div>
+    <div id="prevDurante" class="photo-box">Nessuna foto DURANTE</div>
+    <div id="prevDopo" class="photo-box">Nessuna foto DOPO</div>
+  </div>
+</div>
+
+<div id="panelRelazione" class="inline-panel">
+  <div class="panel-head"><h3>🎙 Relazione tecnica</h3><button class="btn ghost" onclick="togglePanel('panelRelazione')">Chiudi</button></div>
+  <p class="muted">Descrivi liberamente ciò che hai trovato e ciò che hai eseguito. Puoi usare la dettatura della tastiera iPhone oppure il microfono del browser se disponibile.</p>
+  <textarea id="relazioneInput" class="textarea" placeholder="Esempio: Arrivati sul posto abbiamo trovato il pozzetto completamente ostruito..."></textarea>
+  <div class="panel-actions">
+    <button class="btn navy" onclick="startSpeech()">🎙 Detta</button>
+    <button class="btn primary" onclick="generaRelazione()">Genera relazione</button>
+    <button class="btn ghost" onclick="el('relazioneInput').value=''">Cancella</button>
+  </div>
+  <h4>Relazione generata</h4>
+  <div id="relazioneGenerata" class="generated">La relazione generata comparirà qui.</div>
+</div>
+
+<div id="panelAttivita" class="inline-panel">
+  <div class="panel-head"><h3>🛠 Attività eseguite</h3><button class="btn ghost" onclick="togglePanel('panelAttivita')">Chiudi</button></div>
+  <div class="chips">
+    <button class="chip" data-act="Aspirazione reflui" onclick="toggleChip(this)">Aspirazione reflui</button>
+    <button class="chip" data-act="Lavaggio alta pressione" onclick="toggleChip(this)">Lavaggio alta pressione</button>
+    <button class="chip" data-act="Disotturazione tubazione" onclick="toggleChip(this)">Disotturazione</button>
+    <button class="chip" data-act="Pulizia pozzetto" onclick="toggleChip(this)">Pulizia pozzetto</button>
+    <button class="chip" data-act="Videoispezione" onclick="toggleChip(this)">Videoispezione</button>
+    <button class="chip" data-act="Pulizia fossa biologica" onclick="toggleChip(this)">Pulizia fossa</button>
+  </div>
+  <div class="qtyrow"><label>Materiale aspirato (m³)</label><input id="qtaMc" type="number" step="0.1" placeholder="0"></div>
+  <div class="qtyrow"><label>Metri lavaggio (m)</label><input id="qtaMetri" type="number" step="1" placeholder="0"></div>
+  <div class="qtyrow"><label>Ore mezzo</label><input id="qtaOre" type="number" step="0.25" placeholder="0"></div>
+</div>
+
+<div id="panelAnomalia" class="inline-panel">
+  <div class="panel-head"><h3>⚠ Anomalia</h3><button class="btn ghost" onclick="togglePanel('panelAnomalia')">Chiudi</button></div>
+  <select id="anomaliaTipo" class="field">
+    <option value="">Seleziona priorità</option>
+    <option>Da monitorare</option>
+    <option>Richiede sopralluogo</option>
+    <option>Richiede preventivo</option>
+    <option>Urgente</option>
+  </select>
+  <textarea id="anomaliaTesto" class="textarea" placeholder="Descrivi l'anomalia riscontrata..."></textarea>
+  <label class="btn ghost" style="display:inline-block;margin-top:8px">📷 Foto anomalia<input id="fotoAnomalia" type="file" accept="image/*" capture="environment" hidden onchange="previewPhoto(this,'prevAnomalia')"></label>
+  <div id="prevAnomalia" class="photo-box" style="margin-top:8px">Nessuna foto anomalia</div>
+</div>
+
+<div class="inline-panel active" style="margin-top:14px">
+  <h3>✍️ Firma operatore</h3>
+  <p class="muted">La firma viene riportata nel rapportino insieme alla firma cliente.</p>
+  <div class="signature-wrap"><canvas id="firmaOperatore" class="signature-canvas"></canvas></div>
+  <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaOperatore')">Cancella firma</button></div>
+</div>
+
+<button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
+</div></div></div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.2</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.3</span></div>
 <div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><div class="qr" title="QR predisposto per futura scheda cliente"></div></div>
 <div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
-<div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4>✓ Aspirazione reflui — 1,5 m³<br>✓ Lavaggio alta pressione — 32 m<br>✓ Disotturazione tubazione</div></div><hr><h4>RELAZIONE TECNICA</h4><p>All'arrivo sul posto è stata riscontrata la completa ostruzione del pozzetto. È stata effettuata l'aspirazione e successivamente il lavaggio ad alta pressione della tubazione. Si consiglia una videoispezione per una valutazione completa.</p>
-<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="grid3"><div class="card">PRIMA<br><br>📷 Foto intervento</div><div class="card">DURANTE<br><br>📷 Foto intervento</div><div class="card">DOPO<br><br>📷 Foto intervento</div></div>
-<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br>Mario Rossi<br><div style="font-family:cursive;font-size:28px">Mario Rossi</div></div><div class="sign"><b>FIRMA OPERATORE</b><br>Marco Rossi<br><div style="font-family:cursive;font-size:28px">Marco Rossi</div></div></div>
+<div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div></div></div><hr><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomalia">Nessuna anomalia segnalata.</p><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
+<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="grid3"><div class="card"><b>PRIMA</b><div id="reportFotoPrima" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DURANTE</b><div id="reportFotoDurante" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DOPO</b><div id="reportFotoDopo" style="margin-top:8px">Nessuna foto</div></div></div>
+<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br>Mario Rossi<br><div style="font-family:cursive;font-size:28px">Mario Rossi</div></div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Marco Rossi</span><br><div id="reportFirmaOperatore" style="margin-top:6px">Firma non acquisita</div></div></div>
 <p class="muted">QR predisposto: nella futura versione collegherà alla scheda cliente/intervento protetta.</p></div>
 <div class="share"><h2 style="margin-top:0">INVIA RAPPORTINO</h2><div class="sharegrid"><button class="btn primary" onclick="shareMail()">✉ INVIA VIA E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ INVIA VIA WHATSAPP</button><button class="btn navy" onclick="shareNative()">⌯ CONDIVIDI PDF</button></div></div></div>
 
@@ -93,6 +189,7 @@ function login(){
     officeView.classList.add('hidden');
     operatorView.classList.remove('hidden');
     opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1);
+    setTimeout(()=>setupSignature('firmaOperatore'),100);
     return;
   }
 
@@ -112,6 +209,118 @@ document.querySelectorAll('#menu button').forEach(b=>{
     if(target) target.classList.add('active');
   });
 });
+
+
+function togglePanel(id){
+  const p=el(id);
+  if(!p) return;
+  p.classList.toggle('active');
+}
+function toggleChip(btn){
+  btn.classList.toggle('active');
+}
+function previewPhoto(input,targetId){
+  const file=input.files && input.files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const box=el(targetId);
+    box.dataset.img=reader.result;
+    box.innerHTML='<img src="'+reader.result+'" alt="Foto intervento">';
+  };
+  reader.readAsDataURL(file);
+}
+function startSpeech(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){
+    alert('Dettatura browser non disponibile. Su iPhone usa il microfono della tastiera per dettare direttamente nel campo.');
+    el('relazioneInput').focus();
+    return;
+  }
+  const rec=new SR();
+  rec.lang='it-IT';
+  rec.interimResults=false;
+  rec.continuous=false;
+  rec.onresult=e=>{
+    const t=e.results[0][0].transcript;
+    el('relazioneInput').value+=(el('relazioneInput').value?' ':'')+t;
+  };
+  rec.start();
+}
+function generaRelazione(){
+  const raw=el('relazioneInput').value.trim();
+  if(!raw){
+    alert('Descrivi prima l’intervento.');
+    return;
+  }
+  const testo='SITUAZIONE RISCONTRATA\n'+raw+
+  '\n\nOPERAZIONI ESEGUITE\n'+buildAttivitaText()+
+  '\n\nANOMALIE / NOTE\n'+(el('anomaliaTesto').value.trim()||'Nessuna anomalia segnalata.');
+  el('relazioneGenerata').textContent=testo;
+}
+function buildAttivitaText(){
+  const acts=[...document.querySelectorAll('.chip.active')].map(x=>x.dataset.act);
+  let parts=acts.length?acts:['Nessuna attività selezionata'];
+  if(el('qtaMc').value) parts.push('Materiale aspirato: '+el('qtaMc').value+' m³');
+  if(el('qtaMetri').value) parts.push('Lavaggio tubazioni: '+el('qtaMetri').value+' m');
+  if(el('qtaOre').value) parts.push('Ore mezzo: '+el('qtaOre').value);
+  return parts.join(' · ');
+}
+function setupSignature(id){
+  const c=el(id);
+  if(!c) return;
+  const ctx=c.getContext('2d');
+  function resize(){
+    const ratio=window.devicePixelRatio||1;
+    const r=c.getBoundingClientRect();
+    const old = c.toDataURL();
+    c.width=Math.max(1,r.width*ratio);
+    c.height=Math.max(1,r.height*ratio);
+    ctx.setTransform(ratio,0,0,ratio,0,0);
+    ctx.lineWidth=2;
+    ctx.lineCap='round';
+    ctx.strokeStyle='#0b2948';
+  }
+  resize();
+  let drawing=false;
+  const pos=e=>{
+    const r=c.getBoundingClientRect();
+    const p=e.touches?e.touches[0]:e;
+    return {x:p.clientX-r.left,y:p.clientY-r.top};
+  };
+  const down=e=>{drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()};
+  const move=e=>{if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()};
+  const up=e=>{drawing=false;e.preventDefault()};
+  c.addEventListener('pointerdown',down); c.addEventListener('pointermove',move); c.addEventListener('pointerup',up); c.addEventListener('pointerleave',up);
+  c.addEventListener('touchstart',down,{passive:false}); c.addEventListener('touchmove',move,{passive:false}); c.addEventListener('touchend',up,{passive:false});
+}
+function clearSignature(id){
+  const c=el(id),ctx=c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+}
+function copyPreviewToReport(srcId,dstId){
+  const src=el(srcId),dst=el(dstId);
+  const img=src && src.dataset.img;
+  dst.innerHTML=img?'<img src="'+img+'" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px">':'Nessuna foto';
+}
+function prepareAndShowReport(){
+  clearInterval(timerInt);
+  const rel=el('relazioneGenerata').textContent.trim();
+  el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
+  el('reportAttivita').textContent=buildAttivitaText();
+  const tipo=el('anomaliaTipo').value.trim();
+  const anom=el('anomaliaTesto').value.trim();
+  el('reportAnomalia').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
+  copyPreviewToReport('prevPrima','reportFotoPrima');
+  copyPreviewToReport('prevDurante','reportFotoDurante');
+  copyPreviewToReport('prevDopo','reportFotoDopo');
+  const c=el('firmaOperatore');
+  try{
+    const data=c.toDataURL('image/png');
+    el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:70px;object-fit:contain">';
+  }catch(e){}
+  showReport();
+}
 
 function startJob(){
   el('job').classList.remove('hidden');
