@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.2",
+  "name": "Spurgo Flow 6.1.3",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.2 - Multi-dispositivo Firebase - Login Fix",
+  "description": "Spurgo Flow 6.1.3 - Multi-dispositivo Firebase - Data Layer Fix",
   "icons": [
     {
       "src": "icon-192.png",

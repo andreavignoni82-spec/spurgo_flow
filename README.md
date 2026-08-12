@@ -154,3 +154,10 @@ La sincronizzazione reale tra dispositivi sarà il passaggio successivo con data
 - Logout cloud corretto.
 - Nuova cache service worker per evitare il riutilizzo dell'index.html difettoso.
 - `firebase-config.js` dell'utente mantenuto invariato.
+
+## 6.1.3 — Data Layer Fix
+- Ripristinate le variabili mancanti `sfClients`, `sfVehicles`, `sfOfficeInterventions`, `sfMessages`.
+- Ripristinati i dati iniziali Clienti, Mezzi, Interventi e Messaggi.
+- Snapshot cloud reso tollerante a collezioni non inizializzate.
+- Firebase config dell'utente mantenuto invariato.
+- Nuova cache service worker.
