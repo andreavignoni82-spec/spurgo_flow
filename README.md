@@ -226,3 +226,15 @@ Base stabile: 6.1.8.
 - Storico terminati/rapportini operatore filtrato per account.
 - Archivio Ufficio Rapportini alimentato dai rapportini realmente generati.
 - Snapshot del rapportino salvato nel documento intervento Firestore (`reportData`), senza nuove regole Firebase.
+
+## 6.1.10 — Le mie commesse
+Base: 6.1.9.
+
+- L'operatore vede esclusivamente gli interventi assegnati al proprio `operatorId` o alla propria squadra.
+- Nessuna commessa viene selezionata automaticamente.
+- Schermata "Le mie commesse" con scelta esplicita tramite "Apri commessa".
+- Agenda filtrata sulle sole commesse dell'operatore.
+- Mappa filtrata sulle sole commesse attive dell'operatore.
+- Storico/rapportini già filtrati per operatore.
+- Blocco applicativo se si tenta di aprire un intervento non assegnato.
+- Pulizia della commessa salvata in sessione se appartiene a un altro account.

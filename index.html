@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.9</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.10</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -387,7 +387,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.9 LIVE DATA / OPERATOR PRIVACY ===== */
+/* ===== 6.1.10 LIVE DATA / OPERATOR PRIVACY ===== */
 .msg-bubble,.msg-bubble *{color:#142438!important}
 .msg-bubble small{color:#667785!important}
 .live-empty{padding:18px;text-align:center;color:#72818d}
@@ -400,11 +400,21 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .report-list-row{display:grid;grid-template-columns:130px 1.3fr 110px 1fr auto;gap:10px;align-items:center;padding:11px;border-bottom:1px solid #e0e7ec}
 .report-list-row:last-child{border-bottom:0}
 @media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
+
+/* ===== 6.1.10 LE MIE COMMESSE ===== */
+.my-jobs-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
+.my-jobs-count{background:#e8f7ee;color:#177a3e;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900}
+.job-choice{cursor:pointer;transition:.15s transform,.15s border-color,.15s box-shadow}
+.job-choice:active{transform:scale(.99)}
+.job-choice.selected{border:2px solid #24b45c!important;box-shadow:0 0 0 3px rgba(36,180,92,.14)}
+.job-choice .choose-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+.job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
+.operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.9 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.10 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -414,10 +424,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.9 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.10 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.9</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.10</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -475,7 +485,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.9</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.10</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -527,7 +537,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.9</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.10</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -704,7 +714,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.9</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.10</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -807,7 +817,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.9 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.10 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -872,7 +882,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.9 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.10 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1362,23 +1372,101 @@ function updateMessageBadges(){
 }
 function syncOperatorJobs(){
  const id=currentOperatorId(),host=el('jobPicker');if(!host||!id)return;
- const assigned=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Terminato'&&i.status!=='Annullato').sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
- host.innerHTML=assigned.length?assigned.map((i,idx)=>`<div class="job-choice ${idx===0?'selected':''}" data-id="${esc(i.id)}" data-client="${esc(i.client)}" data-address="${esc(i.address)}" data-request="${esc(i.request)}" onclick="selectOfficeAssignedJob(this,'${i.id}')"><div class="row"><b>${esc(i.client)}</b><span class="badge ${i.status==='Urgente'?'urgent':'planned'}">${esc(i.status.toUpperCase())}</span></div><small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.address)}</small></div>`).join(''):'<div class="v6-empty" style="background:white;border-radius:12px">Nessuna commessa assegnata a questo operatore.</div>';
- if(assigned[0])selectOfficeAssignedJob(host.querySelector('.job-choice'),assigned[0].id);
- renderOperatorAgendaFromOffice();renderCompletedJobs();
+
+ const assigned=sfOfficeInterventions
+   .filter(i=>assignedToOperator(i,id)&&i.status!=='Terminato'&&i.status!=='Annullato')
+   .sort((a,b)=>{
+     const urgentA=a.status==='Urgente'?0:1,urgentB=b.status==='Urgente'?0:1;
+     if(urgentA!==urgentB)return urgentA-urgentB;
+     return ((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||''));
+   });
+
+ host.innerHTML=
+   `<div class="my-jobs-head"><div><h2 style="margin:0">Le mie commesse</h2><div class="operator-job-lock">Visualizzi solo gli interventi assegnati al tuo account.</div></div><span class="my-jobs-count">${assigned.length} assegnati</span></div>`+
+   (assigned.length?assigned.map(i=>`
+     <div class="job-choice" data-id="${esc(i.id)}" onclick="selectOfficeAssignedJob(this,'${i.id}')">
+       <div class="row">
+         <div><b>${esc(i.client)}</b><br><small>${esc(i.id)}</small></div>
+         <span class="badge ${i.status==='Urgente'?'urgent':'planned'}">${esc(i.status.toUpperCase())}</span>
+       </div>
+       <div class="v6-meta">${fmtDate(i.date)} · ${esc(i.time||'')}<br>${esc(i.address||'')}<br>${esc(i.request||'')}</div>
+       <div class="choose-row">
+         <small>${esc(interventionAssigneeLabel(i))}</small>
+         <button type="button" class="choose-btn">Apri commessa</button>
+       </div>
+     </div>`).join('')
+    :'<div class="v6-empty" style="background:white;border-radius:12px">Nessuna commessa assegnata al tuo account.</div>');
+
+ // Non selezionare automaticamente una commessa: la scelta è sempre dell'operatore.
+ selectedJob=null;
+ if(el('job'))el('job').classList.add('hidden');
+ renderOperatorAgendaFromOffice();
+ renderCompletedJobs();
 }
 function selectOfficeAssignedJob(node,id){
- const operatorId=currentOperatorId(),i=sfOfficeInterventions.find(x=>x.id===id);
- if(!i||!assignedToOperator(i,operatorId)){alert('Questa commessa non è assegnata al tuo account.');return}
- document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected'));if(node)node.classList.add('selected');
- selectedJob={...i};el('selectedClient').textContent=i.client;el('selectedAddress').textContent=i.address;el('selectedRequest').textContent=i.request;
- if(el('jobAddressInput'))el('jobAddressInput').value=i.address;updateSelectedJobMap();
+ const operatorId=currentOperatorId();
+ const i=sfOfficeInterventions.find(x=>x.id===id);
+
+ if(!i || !assignedToOperator(i,operatorId)){
+   alert('Questa commessa non è assegnata al tuo account.');
+   return;
+ }
+ if(['Terminato','Annullato'].includes(i.status)){
+   alert('Questa commessa non è più attiva.');
+   return;
+ }
+
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected'));
+ if(node)node.classList.add('selected');
+
+ selectedJob={...i};
+ el('selectedClient').textContent=i.client||'';
+ el('selectedAddress').textContent=i.address||'';
+ el('selectedRequest').textContent=i.request||'';
+ if(el('jobAddressInput'))el('jobAddressInput').value=i.address||'';
+
+ if(el('jobPicker'))el('jobPicker').style.display='block';
+ if(el('job'))el('job').classList.remove('hidden');
+
+ sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ updateSelectedJobMap();
+
+ setTimeout(()=>el('job')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
 }
 function renderOperatorAgendaFromOffice(){
  const host=el('fieldAgenda');if(!host)return;
- const id=currentOperatorId(),rows=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato').sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
- host.innerHTML='<h2>La mia agenda</h2><p class="muted" style="color:#c8d6e2">Solo le commesse assegnate al tuo account.</p>'+
- (rows.length?rows.map(i=>`<div class="day-item agenda-selectable" onclick="fieldNavigate('Interventi');setTimeout(()=>{const n=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id==='${i.id}');if(n)selectOfficeAssignedJob(n,'${i.id}')},50)"><small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.status.toUpperCase())}</small><b>${esc(i.client)}</b>${esc(i.address)} · ${esc(i.request)}</div>`).join(''):'<div class="v6-empty" style="background:white;border-radius:12px">Nessun intervento in agenda.</div>');
+ const id=currentOperatorId();
+
+ const rows=sfOfficeInterventions
+   .filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato')
+   .sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+
+ host.innerHTML='<h2>La mia agenda</h2><p class="muted" style="color:#c8d6e2">Solo gli interventi assegnati al tuo account.</p>'+
+ (rows.length?rows.map(i=>`
+   <div class="day-item agenda-selectable" onclick="openMyAgendaJob('${i.id}')">
+     <small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.status.toUpperCase())}</small>
+     <b>${esc(i.client)}</b>${esc(i.address)} · ${esc(i.request)}
+   </div>`).join('')
+ :'<div class="v6-empty" style="background:white;border-radius:12px">Nessun intervento nella tua agenda.</div>');
+}
+
+function openMyAgendaJob(id){
+ const operatorId=currentOperatorId();
+ const i=sfOfficeInterventions.find(x=>x.id===id);
+ if(!i||!assignedToOperator(i,operatorId)){
+   alert('Intervento non disponibile per il tuo account.');
+   return;
+ }
+ if(i.status==='Terminato'){
+   viewCompletedReport(id);
+   return;
+ }
+ fieldNavigate('Interventi');
+ setTimeout(()=>{
+   syncOperatorJobs();
+   const n=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id===id);
+   if(n)selectOfficeAssignedJob(n,id);
+ },60);
 }
 function renderAllOfficeV6(){
  populateOfficeFilters();renderOfficeInterventions();renderOfficeAgenda();renderClients();renderVehicles();renderOfficeMessagesUsers();renderDashboardV6();renderControlRoomV6();renderOfficeReports();
@@ -1454,6 +1542,10 @@ async function login(){
         if(el('profileName'))el('profileName').textContent=fullName;
         if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
         sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
+        try{
+          const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
+          if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
+        }catch(e){sessionStorage.removeItem('sf_selected_job')}
         await window.SFCloud.startRealtime(info);
         syncOperatorJobs();renderOperatorMessages();updateMessageBadges();
         setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');updateSelectedJobMap()},140);
@@ -1478,6 +1570,10 @@ async function login(){
     if(el('profileName'))el('profileName').textContent=fullName;
     if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
     sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
+    try{
+      const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
+      if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
+    }catch(e){sessionStorage.removeItem('sf_selected_job')}
     syncOperatorJobs();renderOperatorMessages();updateMessageBadges();setCloudStatus('☁ Modalità locale','off');
     setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');updateSelectedJobMap()},140);return;
   }
@@ -1752,10 +1848,11 @@ async function renderControlMap(){
 }
 async function refreshFieldMap(){
  if(!mapVisible('fieldRealMap'))return;
- const id=currentOperatorId(),own=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato');
+ const id=currentOperatorId();
+ const own=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&!['Terminato','Annullato'].includes(i.status));
  const valid=await ensureCoords(own);
  fieldMapObj=makeLeafletMap('fieldRealMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid);
- setMapHealth('fieldMapHealth',valid.length?'Mappa caricata · '+valid.length+' mie commesse':'Nessuna commessa localizzata',!!valid.length);
+ setMapHealth('fieldMapHealth',valid.length?'Mappa caricata · '+valid.length+' mie commesse':'Nessuna mia commessa localizzata',!!valid.length);
 }
 function invalidateVisibleMaps(){[officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{if(m){requestAnimationFrame(()=>m.invalidateSize(true));setTimeout(()=>m.invalidateSize(true),100)}})}
 function fitFieldMap(){if(fieldMapObj){const pts=demoJobs.map(activeCoords).filter(Boolean);if(pts.length>1)fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});else if(pts[0])fieldMapObj.setView(pts[0],15)}}
