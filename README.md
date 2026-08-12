@@ -196,14 +196,20 @@ Cache:
 - `index.html`, `firebase-config.js`, `firebase-sync.js` e navigazioni non vengono più serviti dalla cache applicativa;
 - `skipWaiting()` + `clients.claim()` per attivare subito il nuovo service worker.
 
-## 6.1.7 — PDF + Geoapify (ripartenza dalla 6.1.6 stabile)
-- Base: 6.1.6 Full Office Audit.
-- Scartate le modifiche della precedente 6.1.7.
-- PDF: `window.print()` chiamato direttamente dal tap, senza timeout.
-- Layout stampa A4 dedicato al solo rapportino.
-- Nuovo geocoder: Geoapify, non Nominatim.
-- Ricerca strutturata: via, numero civico, comune, CAP, Italia.
-- Valutazione di più risultati con priorità al civico esatto.
-- Se il civico non è confermato, Spurgo Flow lo dichiara esplicitamente.
-- Il GPS operativo non viene cancellato quando si rilocalizza l'indirizzo.
-- File `geocoding-config.js` separato.
+## 6.1.8 — PDF reale + ArcGIS
+Base: 6.1.6 stabile.
+
+### Geolocalizzazione
+- Eliminato Geoapify e relativa API key.
+- Nuovo servizio: ArcGIS World Geocoder pubblico `findAddressCandidates`.
+- Nessuna chiave API necessaria nella configurazione Spurgo Flow.
+- Ricerca limitata all'Italia, fino a 8 candidati.
+- Priorità a `PointAddress`, poi `StreetAddress`.
+- Civico esatto privilegiato nel ranking.
+- Se il civico non è confermato, l'app lo segnala esplicitamente.
+
+### Rapportino
+- PDF generato realmente lato browser con jsPDF + html2canvas.
+- `GENERA PDF` apre il PDF su iPhone/Safari.
+- `E-MAIL / CONDIVIDI PDF` usa Web Share API con file PDF, permettendo di scegliere Mail su iPhone.
+- Fallback a apertura PDF + mailto sui browser che non supportano file sharing.

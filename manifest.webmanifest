@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.7",
+  "name": "Spurgo Flow 6.1.8",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.7 - PDF iPhone fix + Geoapify address geocoding",
+  "description": "Spurgo Flow 6.1.8 - PDF reale + ArcGIS geocoding senza API key",
   "icons": [
     {
       "src": "icon-192.png",
