@@ -4,7 +4,6 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite Beta v5.0</title>
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.3.0/dist/maplibre-gl.css">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -373,6 +372,75 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   .sf-map-overlay,.maplibregl-ctrl-top-right,.maplibregl-ctrl-bottom-left,.maplibregl-ctrl-bottom-right{display:none!important}
 }
 
+
+/* === MAPPE REBUILD 5.0.18 === */
+.sf-map-rebuild{
+  position:relative;
+  width:100%;
+  height:320px;
+  min-height:320px;
+  border:1px solid #d5dfe7;
+  border-radius:14px;
+  overflow:hidden;
+  background:#edf2f5;
+  box-sizing:border-box;
+}
+.sf-map-rebuild.small{height:260px;min-height:260px}
+.sf-map-rebuild.report{height:150px;min-height:150px;border-radius:7px}
+.sf-map-rebuild iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#edf2f5;
+}
+.sf-map-toolbar{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin:7px 0;
+}
+.sf-map-toolbar button,.sf-map-toolbar a{
+  border:1px solid #cbd7df;
+  background:#fff;
+  color:#17344f;
+  border-radius:999px;
+  padding:7px 10px;
+  font-size:11px;
+  font-weight:800;
+  text-decoration:none;
+}
+.sf-map-toolbar .active{
+  background:#e8f7ee;
+  color:#177a3e;
+  border-color:#94d1aa;
+}
+.sf-map-status{
+  font-size:11px;
+  color:#667887;
+  margin-top:5px;
+  min-height:16px;
+}
+.sf-map-status.ok{color:#177a3e;font-weight:800}
+.sf-map-status.err{color:#b42318;font-weight:800}
+.sf-map-placeholder{
+  height:100%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:18px;
+  color:#667887;
+}
+@media(max-width:700px){
+  .sf-map-rebuild{height:300px;min-height:300px}
+  .sf-map-rebuild.small{height:250px;min-height:250px}
+  .sf-map-rebuild.report{height:115px;min-height:115px}
+}
+@media print{
+  .sf-map-rebuild.report{height:92px!important;min-height:92px!important}
+  .sf-map-toolbar{display:none!important}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
@@ -392,8 +460,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.18</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card"><h3>Mappa interventi</h3><div id="officeMapSelector" class="sf-map-selector"></div><div id="officeMap" class="sf-map ">
-      <div id="officeMapCanvas" class="sf-map-canvas"></div>
+<div class="card"><h3>Mappa interventi</h3><div id="officeMapSelector" class="sf-map-selector"></div><div id="officeMapToolbar" class="sf-map-toolbar"></div><div id="officeMap" class="sf-map-rebuild "><div class="sf-map-placeholder">Caricamento mappa…</div></div><div id="officeMapStatus" class="sf-map-status"></div>
       <div id="officeMapFallback" class="sf-map-fallback"></div>
       <div class="sf-map-overlay">
         <span id="officeMapLabel" class="sf-map-chip">Mappa</span>
@@ -401,8 +468,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
       </div>
     </div><div id="officeMapStatus" class="sf-map-status"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMapSelector" class="sf-map-selector"></div><div id="controlMap" class="sf-map ">
-      <div id="controlMapCanvas" class="sf-map-canvas"></div>
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMapSelector" class="sf-map-selector"></div><div id="controlMapToolbar" class="sf-map-toolbar"></div><div id="controlMap" class="sf-map-rebuild "><div class="sf-map-placeholder">Caricamento mappa…</div></div><div id="controlMapStatus" class="sf-map-status"></div>
       <div id="controlMapFallback" class="sf-map-fallback"></div>
       <div class="sf-map-overlay">
         <span id="controlMapLabel" class="sf-map-chip">Mappa</span>
@@ -477,8 +543,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <div id="locationStatus" class="location-status">La posizione viene ricavata dall'indirizzo.</div>
   <div id="operationalPointLabel"></div>
 </div>
-<div id="selectedJobMap" class="sf-map small">
-      <div id="selectedJobMapCanvas" class="sf-map-canvas"></div>
+<div id="selectedJobMap" class="sf-map-rebuild small"><div class="sf-map-placeholder">Caricamento mappa…</div></div><div id="selectedJobMapStatus" class="sf-map-status"></div>
       <div id="selectedJobMapFallback" class="sf-map-fallback"></div>
       <div class="sf-map-overlay">
         <span id="selectedJobMapLabel" class="sf-map-chip">Mappa</span>
@@ -595,8 +660,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldMapSelector" class="sf-map-selector"></div><div id="fieldRealMap" class="sf-map ">
-      <div id="fieldRealMapCanvas" class="sf-map-canvas"></div>
+ <div class="map-tools"><button class="btn ghost" onclick="fitFieldMap()">Mostra tutti</button><button class="btn ghost" onclick="centerMapOnSelected()">Intervento selezionato</button></div><div id="fieldMapSelector" class="sf-map-selector"></div><div id="fieldMapToolbar" class="sf-map-toolbar"></div><div id="fieldRealMap" class="sf-map-rebuild "><div class="sf-map-placeholder">Caricamento mappa…</div></div><div id="fieldMapStatus" class="sf-map-status"></div>
       <div id="fieldRealMapFallback" class="sf-map-fallback"></div>
       <div class="sf-map-overlay">
         <span id="fieldRealMapLabel" class="sf-map-chip">Mappa</span>
@@ -677,8 +741,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
       📍 <b id="reportPosizione">Via Roma 24</b><br>
       <span id="reportComune">24067 Sarnico (BG) – Italia</span><br>
       Lat: <span id="reportLat">—</span> &nbsp; Long: <span id="reportLng">—</span><br><small id="reportPointType"></small>
-      <div id="reportRealMap" class="sf-map report">
-      <div id="reportRealMapCanvas" class="sf-map-canvas"></div>
+      <div id="reportRealMap" class="sf-map-rebuild report"><div class="sf-map-placeholder">Caricamento mappa…</div></div>
       <div id="reportRealMapFallback" class="sf-map-fallback"></div>
       <div class="sf-map-overlay">
         <span id="reportRealMapLabel" class="sf-map-chip">Mappa</span>
@@ -819,234 +882,29 @@ let jobRunning=false;
 
 
 
-/* ===== MAPPE 5.0.18 - NUOVO MODULO ===== */
-const sfMapState={
-  maps:{},
-  current:{office:null,control:null,field:null}
-};
 
-function sfActiveCoords(job=selectedJob){
-  if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)) return [job.opLng,job.opLat];
-  if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lng,job.lat];
-  return null;
-}
-
+/* Bridge mappe autonomo: il resto dell'app non dipende dal motore mappa. */
 function activeCoords(job=selectedJob){
   if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)) return [job.opLat,job.opLng];
   if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lat,job.lng];
   return null;
 }
-
-function sfGoogleUrl(job){
-  const c=activeCoords(job);
-  if(c) return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(c[0]+','+c[1]);
-  return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(job?.address||'');
-}
-
-function sfStaticFallbackUrl(job,w=900,h=520,z=16){
-  const c=activeCoords(job);
-  if(!c) return '';
-  // Lightweight external static fallback used only if WebGL map fails.
-  return 'https://staticmap.openstreetmap.de/staticmap.php?center='+c[0]+','+c[1]+
-         '&zoom='+z+'&size='+Math.min(w,1024)+'x'+Math.min(h,1024)+
-         '&maptype=mapnik&markers='+c[0]+','+c[1]+',red-pushpin';
-}
-
-function sfSetStatus(id,text,ok=true){
-  const x=el(id);
-  if(!x)return;
-  x.textContent=text;
-  x.className='sf-map-status '+(ok?'ok':'err');
-}
-
-function sfDestroyMap(key){
-  const m=sfMapState.maps[key];
-  if(m){try{m.remove()}catch(e){}}
-  sfMapState.maps[key]=null;
-}
-
-function sfShowFallback(containerId,job,statusId,msg){
-  const fb=el(containerId+'Fallback');
-  const canvas=el(containerId+'Canvas');
-  if(canvas) canvas.innerHTML='';
-  if(!fb)return;
-  const url=sfStaticFallbackUrl(job);
-  fb.innerHTML=url?'<img src="'+url+'" alt="Mappa statica intervento">':'<div style="padding:20px;text-align:center;color:#61717e">Posizione non disponibile.</div>';
-  fb.classList.add('active');
-  if(statusId) sfSetStatus(statusId,msg||'Visualizzazione statica',false);
-}
-
-function sfRenderMap(key,containerId,jobs,opts={}){
-  const valid=jobs.filter(j=>activeCoords(j));
-  const job=opts.focusJob || valid[0];
-  const label=el(containerId+'Label');
-  const open=el(containerId+'Open');
-  if(label) label.textContent=job ? (job.client||'Intervento') : 'Mappa';
-  if(open) open.href=job ? sfGoogleUrl(job) : '#';
-
-  if(!job || !activeCoords(job)){
-    sfShowFallback(containerId,job,opts.statusId,'Posizione non disponibile');
-    return;
-  }
-
-  const fb=el(containerId+'Fallback');
-  if(fb){fb.classList.remove('active');fb.innerHTML='';}
-  const canvasId=containerId+'Canvas';
-  const canvas=el(canvasId);
-  if(!canvas)return;
-
-  sfDestroyMap(key);
-  canvas.innerHTML='';
-
-  if(typeof maplibregl==='undefined'){
-    sfShowFallback(containerId,job,opts.statusId,'MapLibre non disponibile: fallback statico');
-    return;
-  }
-
-  try{
-    const c=activeCoords(job);
-    const map=new maplibregl.Map({
-      container:canvasId,
-      style:{
-        version:8,
-        sources:{
-          osm:{
-            type:'raster',
-            tiles:['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            tileSize:256,
-            attribution:'© OpenStreetMap contributors'
-          }
-        },
-        layers:[{id:'osm',type:'raster',source:'osm'}]
-      },
-      center:[c[1],c[0]],
-      zoom:opts.zoom||15,
-      attributionControl:true,
-      dragRotate:false,
-      pitchWithRotate:false,
-      cooperativeGestures:false
-    });
-    sfMapState.maps[key]=map;
-    map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-right');
-
-    let loaded=false;
-    const fallbackTimer=setTimeout(()=>{
-      if(!loaded) sfShowFallback(containerId,job,opts.statusId,'Caricamento lento: fallback statico');
-    },4500);
-
-    map.on('load',()=>{
-      loaded=true; clearTimeout(fallbackTimer);
-      valid.forEach((j,idx)=>{
-        const cc=activeCoords(j);if(!cc)return;
-        new maplibregl.Marker({color:(idx===0?'#28a85a':'#e53e3e')})
-          .setLngLat([cc[1],cc[0]])
-          .setPopup(new maplibregl.Popup({offset:18}).setHTML('<b>'+esc(j.client)+'</b><br>'+esc(j.address||'')))
-          .addTo(map);
-      });
-      if(valid.length>1 && opts.fit!==false){
-        const b=new maplibregl.LngLatBounds();
-        valid.forEach(j=>{const cc=activeCoords(j);if(cc)b.extend([cc[1],cc[0]])});
-        map.fitBounds(b,{padding:45,maxZoom:13,duration:0});
-      } else {
-        map.jumpTo({center:[c[1],c[0]],zoom:opts.zoom||15});
-      }
-      setTimeout(()=>map.resize(),60);
-      setTimeout(()=>map.resize(),250);
-      if(opts.statusId) sfSetStatus(opts.statusId,'Mappa caricata',true);
-    });
-    map.on('error',()=>{
-      if(!loaded){
-        clearTimeout(fallbackTimer);
-        sfShowFallback(containerId,job,opts.statusId,'Errore mappa: fallback statico');
-      }
-    });
-  }catch(err){
-    sfShowFallback(containerId,job,opts.statusId,'Errore WebGL: fallback statico');
-  }
-}
-
-function sfJobById(id){return [...demoJobs,...completedJobs].find(j=>j.id===id)}
-
-function sfRenderSelector(hostId,jobs,currentId,fnName){
-  const h=el(hostId);
-  if(!h)return;
-  h.innerHTML='';
-  jobs.forEach(j=>{
-    const b=document.createElement('button');
-    b.type='button';
-    b.className=(j.id===currentId?'active':'');
-    b.textContent=j.client;
-    b.addEventListener('click',()=>{
-      if(fnName==='showOfficeMapJob') showOfficeMapJob(j.id);
-      if(fnName==='showControlMapJob') showControlMapJob(j.id);
-      if(fnName==='showFieldMapJob') showFieldMapJob(j.id);
-    });
-    h.appendChild(b);
-  });
-}
-
-function showOfficeMapJob(id){
-  const j=sfJobById(id);if(!j)return;
-  sfMapState.current.office=id;
-  sfRenderSelector('officeMapSelector',[...demoJobs,...completedJobs],id,'showOfficeMapJob');
-  sfRenderMap('office','officeMap',[j],{focusJob:j,zoom:15,statusId:'officeMapStatus',fit:false});
-}
-function showControlMapJob(id){
-  const j=sfJobById(id);if(!j)return;
-  sfMapState.current.control=id;
-  sfRenderSelector('controlMapSelector',[...demoJobs,...completedJobs],id,'showControlMapJob');
-  sfRenderMap('control','controlMap',[j],{focusJob:j,zoom:15,statusId:'controlMapStatus',fit:false});
-}
-function showFieldMapJob(id){
-  const j=sfJobById(id);if(!j)return;
-  sfMapState.current.field=id;
-  sfRenderSelector('fieldMapSelector',demoJobs,id,'showFieldMapJob');
-  sfRenderMap('field','fieldRealMap',[j],{focusJob:j,zoom:15,statusId:'fieldMapStatus',fit:false});
-}
-
-function renderOfficeMap(){
-  const jobs=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  if(!jobs.length){sfShowFallback('officeMap',null,'officeMapStatus','Nessun intervento localizzato');return}
-  showOfficeMapJob(sfMapState.current.office||jobs[0].id);
-}
-function renderControlMap(){
-  const jobs=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
-  if(!jobs.length){sfShowFallback('controlMap',null,'controlMapStatus','Nessun intervento localizzato');return}
-  const urgent=jobs.find(j=>String(j.status).toLowerCase().includes('urgent'))||jobs[0];
-  showControlMapJob(sfMapState.current.control||urgent.id);
-}
-function refreshFieldMap(){
-  const jobs=demoJobs.filter(j=>activeCoords(j));
-  if(!jobs.length){sfShowFallback('fieldRealMap',null,'fieldMapStatus','Nessun intervento localizzato');return}
-  const wanted=jobs.find(j=>j.id===(sfMapState.current.field||selectedJob.id))||jobs[0];
-  showFieldMapJob(wanted.id);
-}
-function updateSelectedJobMap(){
-  sfRenderMap('selected','selectedJobMap',[selectedJob],{focusJob:selectedJob,zoom:17,statusId:'selectedJobMapStatus',fit:false});
-  updateOperationalPointLabel();
-}
-function updateReportMap(){
-  sfRenderMap('report','reportRealMap',[selectedJob],{focusJob:selectedJob,zoom:16,fit:false});
-}
-
-function invalidateVisibleMaps(){
-  Object.values(sfMapState.maps).forEach(m=>{if(m)try{m.resize()}catch(e){}});
-}
-async function initAllMaps(){
-  await geocodeAllDemoJobs();
-  const found=demoJobs.find(j=>j.id===selectedJob.id);
-  if(found && (!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))) selectedJob={...found};
-  if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
-  renderOfficeMap();renderControlMap();refreshFieldMap();updateSelectedJobMap();
-}
-function fitFieldMap(){refreshFieldMap()}
-function centerMapOnSelected(){const j=demoJobs.find(x=>x.id===selectedJob.id)||selectedJob;sfRenderMap('field','fieldRealMap',[j],{focusJob:j,zoom:16,statusId:'fieldMapStatus',fit:false})}
-function centerSelectedMap(){updateSelectedJobMap()}
-function forceAllMapLayouts(){invalidateVisibleMaps()}
-function forceMapLayout(){invalidateVisibleMaps()}
+function initAllMaps(){ if(window.SFMaps) window.SFMaps.init(); }
+function renderOfficeMap(){ if(window.SFMaps) window.SFMaps.renderOffice(); }
+function renderControlMap(){ if(window.SFMaps) window.SFMaps.renderControl(); }
+function refreshFieldMap(){ if(window.SFMaps) window.SFMaps.renderField(); }
+function updateSelectedJobMap(){ if(window.SFMaps) window.SFMaps.renderSelected(); }
+function updateReportMap(){ if(window.SFMaps) window.SFMaps.renderReport(); }
+function invalidateVisibleMaps(){ if(window.SFMaps) window.SFMaps.refreshVisible(); }
+function fitFieldMap(){ refreshFieldMap(); }
+function centerMapOnSelected(){ if(window.SFMaps) window.SFMaps.focusSelectedInField(); }
+function centerSelectedMap(){ updateSelectedJobMap(); }
+function forceAllMapLayouts(){ invalidateVisibleMaps(); }
+function forceMapLayout(){ invalidateVisibleMaps(); }
 function setupMapResizeObserver(){}
+
 function openSelectedMap(){
-  window.open(sfGoogleUrl(selectedJob),'_blank');
+  if(window.SFMaps) window.SFMaps.openExternal(selectedJob);
 }
 function openSigModal(target){
  signatureTarget=target;
@@ -1293,7 +1151,7 @@ function closeReport(){
 
 function preparePrint(){
   updateReportMap();
-  setTimeout(()=>window.print(),1400);
+  setTimeout(()=>window.print(),900);
 }
 
 function shareMail(){
@@ -1334,5 +1192,5 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 </script>
-<script src="https://unpkg.com/maplibre-gl@6.3.0/dist/maplibre-gl.js"></script>
+<script src="maps.js"></script>
 </body></html>

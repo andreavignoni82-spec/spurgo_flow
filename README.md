@@ -121,3 +121,12 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Selettori mappe riscritti senza HTML/onclick generato dinamicamente.
 - Corretto un errore che poteva modificare involontariamente le coordinate.
 - Tutto il JavaScript della build è stato verificato con controllo sintattico Node prima del rilascio.
+
+## Hotfix mappe — versione mantenuta 5.0.18
+- Versione applicazione volutamente mantenuta a 5.0.18.
+- Modulo geolocalizzazione/mappe riscritto da zero in `maps.js`.
+- Nessuna libreria cartografica JavaScript: visualizzazione tramite embed HTML ufficiale OpenStreetMap.
+- Geocodifica indirizzi tramite Nominatim.
+- Mappe separate dal login: un errore cartografico non può bloccare utente/password.
+- Dashboard, Control Room, Mappa operatore, scheda intervento e rapportino usano lo stesso modulo.
+- Controllo sintattico JavaScript eseguito prima del rilascio.
