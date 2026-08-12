@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.8</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.9</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -386,11 +386,25 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-off{color:#f0ad4e!important;font-weight:800}
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
+
+/* ===== 6.1.9 LIVE DATA / OPERATOR PRIVACY ===== */
+.msg-bubble,.msg-bubble *{color:#142438!important}
+.msg-bubble small{color:#667785!important}
+.live-empty{padding:18px;text-align:center;color:#72818d}
+.control-status-list{display:grid;gap:8px;margin-top:10px}
+.control-person{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 10px;border:1px solid #dce5eb;border-radius:10px;background:#fff}
+.control-person small{color:#687986}
+.live-dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px}
+.live-dot.green{background:#23b45d}.live-dot.orange{background:#f39a1e}.live-dot.gray{background:#aab4bc}
+.report-list{display:grid;gap:9px}
+.report-list-row{display:grid;grid-template-columns:130px 1.3fr 110px 1fr auto;gap:10px;align-items:center;padding:11px;border-bottom:1px solid #e0e7ec}
+.report-list-row:last-child{border-bottom:0}
+@media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.8 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.9 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -400,14 +414,22 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.8 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.9 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v6.1.8</span></div>
-<div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
-<div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
+<section id="dashboard" class="section active">
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.9</span></div>
+<div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
+<div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
+<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
+</section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div><div id="controlMapHealth" class="map-health">Situazione territoriale: in attesa</div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+<section id="control" class="section">
+<div class="top"><div><h1>Control Room</h1><div class="muted">Assegnazioni e disponibilità in tempo reale</div></div><span class="build">LIVE</span></div>
+<div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div><div id="controlMapHealth" class="map-health">Situazione territoriale: in attesa</div></div>
+<div><div class="card"><h3>Urgenze da assegnare</h3><div id="controlUrgencyCard" class="live-empty">Nessuna urgenza da assegnare.</div></div>
+<div class="card" style="margin-top:12px"><h3>Operatori attivi</h3><div id="controlActiveOperators" class="control-status-list"></div></div>
+<div class="card" style="margin-top:12px"><h3>Squadre disponibili</h3><div id="controlTeams" class="control-status-list"></div></div></div></div>
+</section>
 
 
 <section id="interventi" class="section">
@@ -453,7 +475,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.8</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.9</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -497,12 +519,15 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  </div>
 </section>
 
-<section id="rapportini" class="section"><h1>Rapportini</h1><div class="card" style="margin-top:18px"><table class="table"><tr><th>N.</th><th>Cliente</th><th>Data</th><th>Operatore</th><th></th></tr><tr><td>2026-00051</td><td>Condominio Belvedere</td><td>12/08/2026</td><td>Marco</td><td><button class="btn primary" onclick="showReport()">Apri</button></td></tr></table></div></section>
+<section id="rapportini" class="section">
+<div class="top"><div><h1>Rapportini</h1><div class="muted">Archivio dei rapportini realmente generati</div></div><span id="reportArchiveCount" class="build">0 rapportini</span></div>
+<div class="card" style="margin-top:18px"><div id="officeReportsList" class="report-list"></div></div>
+</section>
 
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.8</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.9</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -679,7 +704,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.8</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.9</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -782,7 +807,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.8 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.9 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -847,7 +872,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.8 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.9 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1003,7 +1028,7 @@ function v6FillClientAddress(){const c=getClient(el('viClient').value);if(c&&!el
 function saveIntervention(){
  const client=getClient(el('viClient').value),existing=editingEntity.id?sfOfficeInterventions.find(x=>x.id===editingEntity.id):null;
  if(!client){alert('Seleziona un cliente.');return}
- const data={clientId:client.id,client:client.name,address:el('viAddress').value.trim()||[client.address,client.city].join(', '),request:el('viRequest').value.trim(),type:el('viType').value.trim(),date:el('viDate').value,time:el('viTime').value,status:el('viStatus').value,priority:el('viPriority').value,operatorId:el('viOperator').value,vehicleId:el('viVehicle').value,notes:el('viNotes').value.trim(),billing:existing?.billing||'—'};
+ const data={clientId:client.id,client:client.name,address:el('viAddress').value.trim()||[client.address,client.city].join(', '),request:el('viRequest').value.trim(),type:el('viType').value.trim(),date:el('viDate').value,time:el('viTime').value,status:el('viStatus').value,priority:el('viPriority').value,operatorId:el('viOperator').value,assignedOperatorIds:el('viOperator').value?[el('viOperator').value]:[],vehicleId:el('viVehicle').value,notes:el('viNotes').value.trim(),billing:existing?.billing||'—'};
  if(existing)Object.assign(existing,data);else sfOfficeInterventions.unshift({id:'INT-2026-'+String(52+sfOfficeInterventions.length).padStart(5,'0'),...data});
  saveV6();closeV6Modal();renderAllOfficeV6();syncOperatorJobs();
 }
@@ -1176,9 +1201,120 @@ function deleteVehicle(id){if(sfOfficeInterventions.some(i=>i.vehicleId===id)){a
 function renderVehicles(){const host=el('vehicleList');if(!host)return;host.innerHTML=sfVehicles.map(v=>{const ints=sfOfficeInterventions.filter(i=>i.vehicleId===v.id&&i.date===TODAY_2026);return `<div class="v6-card"><h3>${esc(v.name)}</h3><div class="v6-meta">${esc(v.code)} · ${esc(v.type)} · ${esc(v.plate||'')}</div><p>Stato: <b>${esc(v.status)}</b></p><p>Capacità: ${esc(v.capacity||'—')} · Ore/km: ${esc(v.hours)}</p><p>Manutenzione: ${esc(v.nextMaintenance||'—')}</p><div class="v6-meta">Interventi oggi: ${ints.length}</div><div class="v6-row-actions"><button class="btn ghost" onclick="openVehicleModal('${v.id}')">Modifica</button><button class="btn danger" onclick="deleteVehicle('${v.id}')">Elimina</button></div></div>`}).join('')}
 function refreshVehicleSelects(){const selects=['opMezzo','teamVehicle'];selects.forEach(id=>{const n=el(id);if(n){const old=n.value;n.innerHTML='<option value="">Nessuno</option>'+sfVehicles.map(v=>`<option>${esc(v.name)}</option>`).join('');n.value=old}})}
 
+
+function localDateKey(d=new Date()){
+ const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+ return `${y}-${m}-${day}`;
+}
+function assignedToOperator(i,operatorId){
+ if(!i||!operatorId)return false;
+ return i.operatorId===operatorId || (Array.isArray(i.assignedOperatorIds)&&i.assignedOperatorIds.includes(operatorId));
+}
+function operatorActiveJobs(operatorId){
+ return sfOfficeInterventions.filter(i=>assignedToOperator(i,operatorId)&&!['Terminato','Annullato'].includes(i.status));
+}
+function interventionAssigneeLabel(i){
+ const o=getOperator(i.operatorId),t=sfTeams.find(x=>x.id===i.teamId),v=getVehicle(i.vehicleId);
+ return [t?.name,o?operatorName(o):'',v?.code||v?.name||''].filter(Boolean).join(' · ')||'Da assegnare';
+}
+function renderControlRoomV6(){
+ const urgency=sfOfficeInterventions.filter(i=>i.status==='Urgente'&&!i.operatorId).sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')))[0];
+ const card=el('controlUrgencyCard');
+ if(card){
+   card.className=urgency?'':'live-empty';
+   card.innerHTML=urgency?`<b>${esc(urgency.client)}</b><p>${esc(urgency.request||'')}</p><p class="muted">${esc(urgency.address||'')}</p><button class="btn primary" onclick="openAssignTeamModal('${urgency.id}')">Assegna squadra</button>`:'Nessuna urgenza non assegnata.';
+ }
+ const ops=el('controlActiveOperators');
+ if(ops){
+   const active=sfOperators.filter(o=>o.active!==false);
+   ops.innerHTML=active.length?active.map(o=>{
+      const jobs=operatorActiveJobs(o.id),running=jobs.find(i=>i.status==='In corso');
+      return `<div class="control-person"><div><span class="live-dot ${running?'orange':'green'}"></span><b>${esc(operatorName(o))}</b><br><small>${esc(o.mezzo||'Nessun mezzo')}</small></div><small>${esc(running?'In intervento: '+running.client:(jobs.length?'Assegnati '+jobs.length+' interventi':'Disponibile'))}</small></div>`;
+   }).join(''):'<div class="live-empty">Nessun operatore attivo.</div>';
+ }
+ const teams=el('controlTeams');
+ if(teams){
+   const valid=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false));
+   teams.innerHTML=valid.length?valid.map(t=>{
+     const members=(t.operatorIds||[]).map(getOperator).filter(o=>o&&o.active!==false);
+     const busy=members.some(o=>operatorActiveJobs(o.id).some(i=>i.status==='In corso'));
+     return `<div class="control-person"><div><span class="live-dot ${busy?'orange':'green'}"></span><b>${esc(t.name)}</b><br><small>${esc(members.map(operatorName).join(', ')||'Nessun operatore')}</small></div><small>${esc(t.vehicle||'')} · ${busy?'occupata':'disponibile'}</small></div>`;
+   }).join(''):'<div class="live-empty">Nessuna squadra con operatori attivi.</div>';
+ }
+}
+function openAssignTeamModal(interventionId){
+ const i=sfOfficeInterventions.find(x=>x.id===interventionId);if(!i)return;
+ const teams=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false));
+ const ops=sfOperators.filter(o=>o.active!==false);
+ const vehicles=sfVehicles.filter(v=>v.status!=='Fuori servizio');
+ showV6Modal('Assegna urgenza',`<div class="v6-form">
+ <div class="full"><b>${esc(i.client)}</b><div class="v6-meta">${esc(i.address)} · ${esc(i.request)}</div></div>
+ <div><label>Squadra</label><select id="assignTeam" class="field" onchange="prefillAssignmentFromTeam()"><option value="">Nessuna squadra</option>${teams.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('')}</select></div>
+ <div><label>Operatore responsabile</label><select id="assignOperator" class="field"><option value="">Seleziona</option>${ops.map(o=>`<option value="${esc(o.id)}">${esc(operatorName(o))}</option>`).join('')}</select></div>
+ <div class="full"><label>Mezzo</label><select id="assignVehicle" class="field"><option value="">Nessuno</option>${vehicles.map(v=>`<option value="${esc(v.id)}">${esc(v.name)} · ${esc(v.code||'')}</option>`).join('')}</select></div>
+ </div><div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">Annulla</button><button class="btn primary" onclick="confirmTeamAssignment('${i.id}')">Conferma assegnazione</button></div>`);
+}
+function prefillAssignmentFromTeam(){
+ const t=sfTeams.find(x=>x.id===el('assignTeam')?.value);if(!t)return;
+ const active=(t.operatorIds||[]).map(getOperator).filter(o=>o&&o.active!==false);
+ if(active[0]&&el('assignOperator'))el('assignOperator').value=active[0].id;
+ const veh=sfVehicles.find(v=>v.name===t.vehicle||v.code===t.vehicle);
+ if(veh&&el('assignVehicle'))el('assignVehicle').value=veh.id;
+}
+function confirmTeamAssignment(interventionId){
+ const i=sfOfficeInterventions.find(x=>x.id===interventionId);if(!i)return;
+ const teamId=el('assignTeam')?.value||'',operatorId=el('assignOperator')?.value||'',vehicleId=el('assignVehicle')?.value||'';
+ if(!operatorId){alert('Seleziona almeno un operatore responsabile.');return}
+ const o=getOperator(operatorId);if(!o||o.active===false){alert('L’operatore selezionato non è attivo.');return}
+ const t=sfTeams.find(x=>x.id===teamId);
+ i.teamId=teamId;i.operatorId=operatorId;i.vehicleId=vehicleId;
+ i.assignedOperatorIds=t?(t.operatorIds||[]).filter(id=>getOperator(id)?.active!==false):[operatorId];
+ if(!i.assignedOperatorIds.includes(operatorId))i.assignedOperatorIds.unshift(operatorId);
+ saveV6();closeV6Modal();renderAllOfficeV6();syncOperatorJobs();
+}
+function reportArchiveItems(){
+ return sfOfficeInterventions.filter(i=>i.status==='Terminato'&&(i.reportNo||i.reportData)).sort((a,b)=>String(b.closedAt||b.date||'').localeCompare(String(a.closedAt||a.date||'')));
+}
+function renderOfficeReports(){
+ const host=el('officeReportsList');if(!host)return;
+ const list=reportArchiveItems();
+ if(el('reportArchiveCount'))el('reportArchiveCount').textContent=list.length+' rapportini';
+ host.innerHTML=list.length?list.map(i=>{
+   const o=getOperator(i.operatorId);
+   return `<div class="report-list-row"><b>${esc(i.reportNo||String(i.id||'').replace('INT-',''))}</b><div class="wide"><b>${esc(i.client||'')}</b><br><small>${esc(i.address||'')}</small></div><span>${esc(i.closedAt||fmtDate(i.date))}</span><span>${esc(o?operatorName(o):(i.reportData?.operatorName||'—'))}</span><button class="btn primary" onclick="viewOfficeGeneratedReport('${i.id}')">Apri</button></div>`;
+ }).join(''):'<div class="live-empty">Nessun rapportino generato.</div>';
+}
+function applyReportSnapshot(i){
+ const d=i?.reportData||{};
+ if(el('reportRelazione'))el('reportRelazione').textContent=d.relation||'Relazione non disponibile.';
+ if(el('reportAnomaliaTop'))el('reportAnomaliaTop').textContent=d.anomaly||'Nessuna anomalia segnalata.';
+ if(el('reportOperatoreNome'))el('reportOperatoreNome').textContent=d.operatorName||'Operatore';
+ if(el('reportClienteNome'))el('reportClienteNome').textContent=d.customerSigner||'Cliente';
+ if(el('reportFirmaOperatore'))el('reportFirmaOperatore').innerHTML=d.operatorSignature?`<img src="${d.operatorSignature}" style="max-width:100%;height:50px;object-fit:contain">`:'Firma non archiviata';
+ if(el('reportFirmaCliente'))el('reportFirmaCliente').innerHTML=d.customerSignature?`<img src="${d.customerSignature}" style="max-width:100%;height:50px;object-fit:contain">`:'Firma non archiviata';
+ if(el('reportOpSignTime'))el('reportOpSignTime').textContent=d.operatorSignTime||'';
+ if(el('reportClientSignTime'))el('reportClientSignTime').textContent=d.customerSignTime||'';
+}
+async function viewOfficeGeneratedReport(id){
+ const i=sfOfficeInterventions.find(x=>x.id===id);if(!i)return;
+ selectedJob={...i};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
+ populateReportFromSelected();applyReportSnapshot(i);showReport();
+}
+
 function renderDashboardV6(){
- const today=sfOfficeInterventions.filter(i=>i.date===TODAY_2026),inprog=today.filter(i=>i.status==='In corso').length,done=today.filter(i=>i.status==='Terminato').length;
- const k=el('dashboard')?.querySelectorAll('.kpi strong');if(k?.length>=5){k[0].textContent=today.length;k[1].textContent=inprog;k[2].textContent=done;k[3].textContent=sfTeams.length;k[4].textContent=sfOfficeInterventions.filter(i=>i.billing==='Da fatturare').length}
+ const todayKey=localDateKey();
+ const today=sfOfficeInterventions.filter(i=>i.date===todayKey&&i.status!=='Annullato');
+ if(el('dashToday'))el('dashToday').textContent=today.length;
+ if(el('dashProgress'))el('dashProgress').textContent=today.filter(i=>i.status==='In corso').length;
+ if(el('dashDone'))el('dashDone').textContent=today.filter(i=>i.status==='Terminato').length;
+ if(el('dashTeams'))el('dashTeams').textContent=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false)).length;
+ if(el('dashBilling'))el('dashBilling').textContent=sfOfficeInterventions.filter(i=>i.billing==='Da fatturare').length;
+ const rows=el('dashRecentRows');
+ if(rows){
+   const recent=[...sfOfficeInterventions].filter(i=>i.status!=='Annullato').sort((a,b)=>((b.date||'')+(b.time||'')).localeCompare((a.date||'')+(a.time||''))).slice(0,8);
+   rows.innerHTML=recent.length?recent.map(i=>`<tr><td><span class="v6-status ${statusClass(i.status)}">${esc(i.status)}</span></td><td><b>${esc(i.client||'')}</b><br><small>${esc(i.address||'')}</small></td><td>${esc(i.time||'—')}</td><td>${esc(interventionAssigneeLabel(i))}</td></tr>`).join(''):'<tr><td colspan="4" class="live-empty">Nessun intervento registrato.</td></tr>';
+ }
 }
 
 function refreshOperatorAreaData(){
@@ -1225,19 +1361,28 @@ function updateMessageBadges(){
  const navBadge=document.querySelector('#fieldNav [data-page="Messaggi"] .badge-nav');if(navBadge)navBadge.textContent=operatorUnread;
 }
 function syncOperatorJobs(){
- // Replace operator job picker using assignments for currently logged-in operator.
  const id=currentOperatorId(),host=el('jobPicker');if(!host||!id)return;
- const assigned=sfOfficeInterventions.filter(i=>i.operatorId===id&&i.status!=='Terminato'&&i.status!=='Annullato');
- host.innerHTML=assigned.length?assigned.map((i,idx)=>`<div class="job-choice ${idx===0?'selected':''}" data-id="${esc(i.id)}" data-client="${esc(i.client)}" data-address="${esc(i.address)}" data-request="${esc(i.request)}" onclick="selectOfficeAssignedJob(this,'${i.id}')"><div class="row"><b>${esc(i.client)}</b><span class="badge ${i.status==='Urgente'?'urgent':'planned'}">${esc(i.status.toUpperCase())}</span></div><small>${esc(i.time||'')} · ${esc(i.address)}</small></div>`).join(''):'<div class="v6-empty" style="background:white;border-radius:12px">Nessun intervento assegnato.</div>';
+ const assigned=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Terminato'&&i.status!=='Annullato').sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+ host.innerHTML=assigned.length?assigned.map((i,idx)=>`<div class="job-choice ${idx===0?'selected':''}" data-id="${esc(i.id)}" data-client="${esc(i.client)}" data-address="${esc(i.address)}" data-request="${esc(i.request)}" onclick="selectOfficeAssignedJob(this,'${i.id}')"><div class="row"><b>${esc(i.client)}</b><span class="badge ${i.status==='Urgente'?'urgent':'planned'}">${esc(i.status.toUpperCase())}</span></div><small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.address)}</small></div>`).join(''):'<div class="v6-empty" style="background:white;border-radius:12px">Nessuna commessa assegnata a questo operatore.</div>';
  if(assigned[0])selectOfficeAssignedJob(host.querySelector('.job-choice'),assigned[0].id);
- renderOperatorAgendaFromOffice();
+ renderOperatorAgendaFromOffice();renderCompletedJobs();
 }
-function selectOfficeAssignedJob(node,id){document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected'));if(node)node.classList.add('selected');const i=sfOfficeInterventions.find(x=>x.id===id);if(!i)return;selectedJob={id:i.id,client:i.client,address:i.address,request:i.request,lat:i.lat??null,lng:i.lng??null,operatorId:i.operatorId,vehicleId:i.vehicleId};el('selectedClient').textContent=i.client;el('selectedAddress').textContent=i.address;el('selectedRequest').textContent=i.request;if(el('jobAddressInput'))el('jobAddressInput').value=i.address;updateSelectedJobMap()}
+function selectOfficeAssignedJob(node,id){
+ const operatorId=currentOperatorId(),i=sfOfficeInterventions.find(x=>x.id===id);
+ if(!i||!assignedToOperator(i,operatorId)){alert('Questa commessa non è assegnata al tuo account.');return}
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected'));if(node)node.classList.add('selected');
+ selectedJob={...i};el('selectedClient').textContent=i.client;el('selectedAddress').textContent=i.address;el('selectedRequest').textContent=i.request;
+ if(el('jobAddressInput'))el('jobAddressInput').value=i.address;updateSelectedJobMap();
+}
 function renderOperatorAgendaFromOffice(){
- const host=el('fieldAgenda');if(!host)return;const id=currentOperatorId(),rows=sfOfficeInterventions.filter(i=>i.operatorId===id).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
- host.innerHTML='<h2>Agenda giornaliera</h2><p class="muted" style="color:#c8d6e2">Interventi assegnati dall’Ufficio.</p>'+rows.map(i=>`<div class="day-item agenda-selectable" onclick="fieldNavigate('Interventi');setTimeout(()=>{const n=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id==='${i.id}');if(n)selectOfficeAssignedJob(n,'${i.id}')},50)"><small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.status.toUpperCase())}</small><b>${esc(i.client)}</b>${esc(i.address)} · ${esc(i.request)}</div>`).join('');
+ const host=el('fieldAgenda');if(!host)return;
+ const id=currentOperatorId(),rows=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato').sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+ host.innerHTML='<h2>La mia agenda</h2><p class="muted" style="color:#c8d6e2">Solo le commesse assegnate al tuo account.</p>'+
+ (rows.length?rows.map(i=>`<div class="day-item agenda-selectable" onclick="fieldNavigate('Interventi');setTimeout(()=>{const n=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id==='${i.id}');if(n)selectOfficeAssignedJob(n,'${i.id}')},50)"><small>${fmtDate(i.date)} · ${esc(i.time||'')} · ${esc(i.status.toUpperCase())}</small><b>${esc(i.client)}</b>${esc(i.address)} · ${esc(i.request)}</div>`).join(''):'<div class="v6-empty" style="background:white;border-radius:12px">Nessun intervento in agenda.</div>');
 }
-function renderAllOfficeV6(){populateOfficeFilters();renderOfficeInterventions();renderOfficeAgenda();renderClients();renderVehicles();renderOfficeMessagesUsers();renderDashboardV6()}
+function renderAllOfficeV6(){
+ populateOfficeFilters();renderOfficeInterventions();renderOfficeAgenda();renderClients();renderVehicles();renderOfficeMessagesUsers();renderDashboardV6();renderControlRoomV6();renderOfficeReports();
+}
 
 
 
@@ -1261,9 +1406,9 @@ window.SFState={
    if(name==='interventions')sfOfficeInterventions=rows;
    if(name==='messages')sfMessages=rows;
    try{
-     if(name==='operators'||name==='teams')renderOfficePeople();
+     if(name==='operators'||name==='teams'){renderOfficePeople();renderDashboardV6();renderControlRoomV6();}
      if(['clients','vehicles','interventions','messages'].includes(name))renderAllOfficeV6();
-     if(name==='interventions'){syncOperatorJobs();renderOperatorAgendaFromOffice();}
+     if(name==='interventions'){syncOperatorJobs();renderOperatorAgendaFromOffice();renderDashboardV6();renderControlRoomV6();renderOfficeReports();}
      if(name==='messages'){renderOfficeMessagesUsers();renderOperatorMessages();updateMessageBadges();}
    }catch(e){console.warn('refresh cloud UI',e)}
  },
@@ -1356,13 +1501,14 @@ document.querySelectorAll('#menu button').forEach(b=>{
     const target = el(b.dataset.sec);
     if(target) target.classList.add('active');
     if(b.dataset.sec==='dashboard'){renderDashboardV6();setTimeout(()=>renderOfficeMap(),80)}
-    if(b.dataset.sec==='control')setTimeout(()=>renderControlMap(),80);
+    if(b.dataset.sec==='control'){renderControlRoomV6();setTimeout(()=>renderControlMap(),80);}
     if(b.dataset.sec==='interventi')renderOfficeInterventions();
     if(b.dataset.sec==='agenda')renderOfficeAgenda();
     if(b.dataset.sec==='clienti')renderClients();
     if(b.dataset.sec==='flotta')renderVehicles();
     if(b.dataset.sec==='squadre')renderOfficePeople();
     if(b.dataset.sec==='messaggiUfficio'){renderOfficeMessagesUsers();renderOfficeThread();}
+    if(b.dataset.sec==='rapportini')renderOfficeReports();
   });
 });
 
@@ -1594,9 +1740,23 @@ async function ensureCoords(list){
  for(const j of list){if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){await geocodeJob(j,true);await new Promise(r=>setTimeout(r,1050))}}
  return list.filter(j=>activeCoords(j));
 }
-async function renderOfficeMap(){if(!mapVisible('officeMap'))return;const valid=await ensureCoords([...demoJobs,...completedJobs]);officeMapObj=makeLeafletMap('officeMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid)}
-async function renderControlMap(){if(!mapVisible('controlMap'))return;const valid=await ensureCoords([...demoJobs,...completedJobs]);controlMapObj=makeLeafletMap('controlMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid)}
-async function refreshFieldMap(){if(!mapVisible('fieldRealMap'))return;const valid=await ensureCoords(demoJobs);fieldMapObj=makeLeafletMap('fieldRealMap',valid.length?activeCoords(valid[0]):[45.67,9.96],11,valid)}
+async function renderOfficeMap(){
+ if(!mapVisible('officeMap'))return;
+ const valid=await ensureCoords(sfOfficeInterventions.filter(i=>i.status!=='Annullato'));
+ officeMapObj=makeLeafletMap('officeMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid);
+}
+async function renderControlMap(){
+ if(!mapVisible('controlMap'))return;
+ const valid=await ensureCoords(sfOfficeInterventions.filter(i=>!['Terminato','Annullato'].includes(i.status)));
+ controlMapObj=makeLeafletMap('controlMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid);
+}
+async function refreshFieldMap(){
+ if(!mapVisible('fieldRealMap'))return;
+ const id=currentOperatorId(),own=sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato');
+ const valid=await ensureCoords(own);
+ fieldMapObj=makeLeafletMap('fieldRealMap',valid.length?activeCoords(valid[0]):[45.67,9.96],10,valid);
+ setMapHealth('fieldMapHealth',valid.length?'Mappa caricata · '+valid.length+' mie commesse':'Nessuna commessa localizzata',!!valid.length);
+}
 function invalidateVisibleMaps(){[officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{if(m){requestAnimationFrame(()=>m.invalidateSize(true));setTimeout(()=>m.invalidateSize(true),100)}})}
 function fitFieldMap(){if(fieldMapObj){const pts=demoJobs.map(activeCoords).filter(Boolean);if(pts.length>1)fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});else if(pts[0])fieldMapObj.setView(pts[0],15)}}
 function centerMapOnSelected(){if(fieldMapObj){const c=activeCoords(selectedJob);if(c)fieldMapObj.setView(c,15)}}
@@ -1616,48 +1776,32 @@ function openCompletedByAgenda(id){
  setTimeout(()=>reopenCompletedJob(id),80);
 }
 function renderCompletedJobs(){
- const host=el('completedJobs'); if(!host) return;
- if(!completedJobs.length){
-   host.innerHTML='<div class="muted" style="color:#c8d6e2">Nessun intervento terminato.</div>';
-   return;
- }
- host.innerHTML=completedJobs.map(j=>`
-   <div class="completed-job">
-     <div class="head"><div><b>${j.client}</b><br><small>${j.address}</small></div><span class="completed-chip">TERMINATO</span></div>
-     <div class="muted">${j.request} · ${j.closedAt||''}</div>
-     <div class="actions">
-       <button class="btn ghost" onclick="viewCompletedReport('${j.id}')">Apri rapportino</button>
-       <button class="btn primary" onclick="reopenCompletedJob('${j.id}')">Riapri / modifica</button>
-     </div>
-   </div>`).join('');
+ const host=el('completedJobs');if(!host)return;
+ const id=currentOperatorId();
+ const cloudDone=sfOfficeInterventions.filter(i=>i.status==='Terminato'&&assignedToOperator(i,id));
+ const legacy=(completedJobs||[]).filter(j=>assignedToOperator(j,id));
+ const map=new Map();[...cloudDone,...legacy].forEach(j=>map.set(j.id,j));
+ const list=[...map.values()].sort((a,b)=>String(b.closedAt||b.date||'').localeCompare(String(a.closedAt||a.date||'')));
+ host.innerHTML=list.length?list.map(j=>`<div class="completed-job"><div class="head"><div><b>${esc(j.client||'')}</b><br><small>${esc(j.address||'')}</small></div><span class="completed-chip">TERMINATO</span></div><div class="muted">${esc(j.request||'')} · ${esc(j.closedAt||'')}</div><div class="actions"><button class="btn ghost" onclick="viewCompletedReport('${j.id}')">Apri rapportino</button><button class="btn primary" onclick="reopenCompletedJob('${j.id}')">Riapri / modifica</button></div></div>`).join(''):'<div class="muted" style="color:#c8d6e2">Nessun intervento terminato per questo operatore.</div>';
 }
 async function viewCompletedReport(id){
- const j=completedJobs.find(x=>x.id===id); if(!j) return;
- selectedJob={...j};
- if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
- populateReportFromSelected();
- showReport();
+ const operatorId=currentOperatorId(),j=sfOfficeInterventions.find(x=>x.id===id)||completedJobs.find(x=>x.id===id);
+ if(!j||!assignedToOperator(j,operatorId))return;
+ selectedJob={...j};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
+ populateReportFromSelected();applyReportSnapshot(j);showReport();
 }
 async function reopenCompletedJob(id){
- const j=completedJobs.find(x=>x.id===id); if(!j) return;
- selectedJob={...j};
- if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
- completedJobs=completedJobs.filter(x=>x.id!==id);
- renderCompletedJobs();
- el('selectedClient').textContent=selectedJob.client;
- el('selectedAddress').textContent=selectedJob.address;
- el('selectedRequest').textContent=selectedJob.request;
- el('jobPicker').style.display='none';
- el('job').classList.remove('hidden');
- el('startBtn').disabled=true;
- el('startBtn').textContent='Intervento riaperto';
- jobRunning=true;
- sessionStorage.setItem('sf_job_running','1');
- sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
- const oldNotice=el('reopenNotice'); if(oldNotice) oldNotice.remove();
- el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche. Al termine usa “Termina e genera rapportino” per creare una nuova versione del documento.</div>');
- updateSelectedJobMap();
- setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
+ const operatorId=currentOperatorId(),j=sfOfficeInterventions.find(x=>x.id===id)||completedJobs.find(x=>x.id===id);
+ if(!j||!assignedToOperator(j,operatorId)){alert('Questa commessa non appartiene al tuo account.');return}
+ selectedJob={...j};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
+ const cloud=sfOfficeInterventions.find(x=>x.id===id);if(cloud){cloud.status='In corso';saveV6()}
+ completedJobs=completedJobs.filter(x=>x.id!==id);renderCompletedJobs();
+ el('selectedClient').textContent=selectedJob.client;el('selectedAddress').textContent=selectedJob.address;el('selectedRequest').textContent=selectedJob.request;
+ el('jobPicker').style.display='none';el('job').classList.remove('hidden');el('startBtn').disabled=true;el('startBtn').textContent='Intervento riaperto';
+ jobRunning=true;sessionStorage.setItem('sf_job_running','1');sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ const oldNotice=el('reopenNotice');if(oldNotice)oldNotice.remove();
+ el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche.</div>');
+ updateSelectedJobMap();setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
 function populateReportFromSelected(){
  if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request||'';
@@ -1905,10 +2049,28 @@ function prepareAndShowReport(){
   const closedLabel=now.toLocaleDateString('it-IT')+' '+now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
   const completedRecord={...selectedJob,status:'Terminato',closedAt:closedLabel,reportNo:String(selectedJob.id||'').replace('INT-','')};
   const cloudInt=sfOfficeInterventions.find(x=>x.id===selectedJob.id);
-  if(cloudInt){cloudInt.status='Terminato';cloudInt.closedAt=closedLabel;cloudInt.reportNo=completedRecord.reportNo;saveV6();}
+  if(cloudInt){
+    const relTxt=el('relazioneGenerata').textContent.trim();
+    const relationSnap=(relTxt&&!relTxt.startsWith('La relazione generata'))?relTxt:(el('relazioneInput').value.trim()||'Relazione non compilata.');
+    const tipoSnap=el('anomaliaTipo').value.trim(),anomSnap=el('anomaliaTesto').value.trim();
+    cloudInt.status='Terminato';cloudInt.closedAt=closedLabel;cloudInt.reportNo=completedRecord.reportNo;
+    cloudInt.reportData={
+      relation:relationSnap,
+      anomaly:(tipoSnap||anomSnap)?((tipoSnap?tipoSnap+': ':'')+(anomSnap||'Anomalia segnalata.')):'Nessuna anomalia segnalata.',
+      operatorName:(el('nomeOperatoreFirma').value||'Operatore').trim(),
+      customerSigner:(el('nomeClienteFirma').value||'Cliente').trim(),
+      operatorSignature:el('firmaOperatore').dataset.signature||'',
+      customerSignature:el('firmaCliente').dataset.signature||'',
+      operatorSignTime:el('reportOpSignTime')?.textContent||closedLabel,
+      customerSignTime:el('reportClientSignTime')?.textContent||closedLabel,
+      generatedAt:new Date().toISOString()
+    };
+    saveV6();
+  }
   completedJobs=completedJobs.filter(x=>x.id!==completedRecord.id);
   completedJobs.unshift(completedRecord);
   renderCompletedJobs();
+  renderOfficeReports();
   populateReportFromSelected();
 
   const rel=el('relazioneGenerata').textContent.trim();

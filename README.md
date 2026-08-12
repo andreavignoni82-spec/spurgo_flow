@@ -213,3 +213,16 @@ Base: 6.1.6 stabile.
 - `GENERA PDF` apre il PDF su iPhone/Safari.
 - `E-MAIL / CONDIVIDI PDF` usa Web Share API con file PDF, permettendo di scegliere Mail su iPhone.
 - Fallback a apertura PDF + mailto sui browser che non supportano file sharing.
+
+## 6.1.9 — Live Operations
+Base stabile: 6.1.8.
+
+- Testo messaggi operatore nero.
+- Dashboard alimentata dai dati reali interventi/Firebase.
+- Control Room alimentata da operatori e squadre attivi reali.
+- "Assegna squadra" operativo con scelta squadra, responsabile e mezzo.
+- Ogni operatore vede solo le proprie commesse.
+- Agenda e mappa operatore filtrate sulle proprie commesse.
+- Storico terminati/rapportini operatore filtrato per account.
+- Archivio Ufficio Rapportini alimentato dai rapportini realmente generati.
+- Snapshot del rapportino salvato nel documento intervento Firestore (`reportData`), senza nuove regole Firebase.
