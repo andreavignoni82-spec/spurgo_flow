@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.10 - modalità ultra-operativa smartphone */
+/* Build 5.0.11 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -78,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.10 - navigazione field-service persistente */
+/* Build 5.0.11 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -98,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.10 */
+/* Build 5.0.11 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -137,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.10 - mappe reali e rapportino fedele */
+/* Build 5.0.11 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -203,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.10 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.11 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -246,7 +246,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.10 */
+/* Build 5.0.11 */
 .report-actions-app{display:block}
 #reportRealMap{
   width:100%;
@@ -266,11 +266,49 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   }
 }
 
+
+/* Build 5.0.11 - geocodifica reale e punto operativo */
+.location-tools{
+  background:#f7fafc;
+  border:1px solid #d7e1e8;
+  border-radius:11px;
+  padding:10px;
+  margin:9px 0;
+  color:#142438;
+}
+.location-tools label{display:block;font-size:12px;font-weight:800;margin:5px 0 3px}
+.location-status{
+  font-size:11px;
+  color:#607080;
+  margin-top:6px;
+  min-height:16px;
+}
+.location-status.ok{color:#177a3e;font-weight:800}
+.location-status.err{color:#b42318;font-weight:800}
+.point-chip{
+  display:inline-block;
+  background:#e8f7ee;
+  color:#177a3e;
+  border:1px solid #bfe8ce;
+  border-radius:999px;
+  padding:4px 7px;
+  font-size:11px;
+  font-weight:800;
+  margin-top:5px;
+}
+.manual-mode{
+  outline:3px solid #ef8c2444;
+  border-color:#ef8c24!important;
+}
+@media(max-width:700px){
+  .location-tools .actions{display:grid;grid-template-columns:1fr 1fr}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.10</div>
+<div class="version">v5.0 · build 5.0.11</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -280,9 +318,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.10<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.11<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.10</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.11</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -308,11 +346,24 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
- <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" data-lat="45.6722" data-lng="9.9229" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
- <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" data-lat="45.6606" data-lng="10.0507" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
- <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" data-lat="45.8270" data-lng="10.0996" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
+ <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
+ <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
+ <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
 </div>
-<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div id="selectedJobMap" class="real-map small"></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Posizione intervento</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p>
+<div class="location-tools">
+  <label for="jobAddressInput">Indirizzo intervento</label>
+  <input id="jobAddressInput" class="field" value="Via Roma 24, 24067 Sarnico (BG), Italia">
+  <div class="actions">
+    <button class="btn primary" onclick="geocodeSelectedJob()">📍 Localizza indirizzo</button>
+    <button class="btn ghost" onclick="useDevicePosition()">◎ Usa posizione attuale</button>
+    <button class="btn ghost" id="manualPointBtn" onclick="toggleManualPoint()">🎯 Correggi punto operativo</button>
+    <button class="btn ghost" onclick="clearOperationalPoint()">Ripristina indirizzo</button>
+  </div>
+  <div id="locationStatus" class="location-status">La posizione viene ricavata dall'indirizzo.</div>
+  <div id="operationalPointLabel"></div>
+</div>
+<div id="selectedJobMap" class="real-map small"></div><div class="map-tools"><button class="btn ghost" onclick="centerSelectedMap()">Centra marker</button><button class="btn ghost" onclick="openSelectedMap()">Naviga</button></div><div class="map-caption">Marker verde: indirizzo · marker arancione: eventuale punto operativo corretto</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div class="completed-section">
  <h3 style="color:white">Interventi terminati</h3>
  <div id="completedJobs"></div>
@@ -462,7 +513,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.10</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.11</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -497,7 +548,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
       <h4>POSIZIONE INTERVENTO</h4>
       📍 <b id="reportPosizione">Via Roma 24</b><br>
       <span id="reportComune">24067 Sarnico (BG) – Italia</span><br>
-      Lat: <span id="reportLat">45.6722</span> &nbsp; Long: <span id="reportLng">9.9229</span>
+      Lat: <span id="reportLat">—</span> &nbsp; Long: <span id="reportLng">—</span><br><small id="reportPointType"></small>
       <div id="reportRealMap" class="real-map report-map-real" style="margin-top:7px"></div>
     </div>
     <div>
@@ -604,12 +655,12 @@ let jobRunning=false;
 
 let officeMapObj=null, controlMapObj=null, fieldMapObj=null, selectedMapObj=null, reportMapObj=null;
 const demoJobs=[
- {id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage',lat:45.6722,lng:9.9229,status:'Urgente'},
- {id:'INT-2024-00046',client:'Ristorante Al Lago',address:'Lungolago, Iseo (BS)',request:'Pulizia fossa biologica',lat:45.6606,lng:10.0507,status:'Programmato'},
- {id:'INT-2024-00047',client:'Azienda Bianchi Srl',address:'Costa Volpino (BG)',request:'Lavaggio tubazione',lat:45.8270,lng:10.0996,status:'Programmato'}
+ {id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG), Italia',request:'Intasamento scarico garage',lat:null,lng:null,status:'Urgente',coordSource:'address'},
+ {id:'INT-2024-00046',client:'Ristorante Al Lago',address:'Lungolago, Iseo (BS), Italia',request:'Pulizia fossa biologica',lat:null,lng:null,status:'Programmato',coordSource:'address'},
+ {id:'INT-2024-00047',client:'Azienda Bianchi Srl',address:'Costa Volpino (BG), Italia',request:'Lavaggio tubazione',lat:null,lng:null,status:'Programmato',coordSource:'address'}
 ];
 const completedSeed=[
- {id:'INT-2024-00044',client:'Residence Sole',address:'Via XX Settembre 8, Iseo (BS)',request:'Pulizia pozzetti',lat:45.6588,lng:10.0486,status:'Terminato',closedAt:'12/08/2026 09:05',reportNo:'2024-00044'}
+ {id:'INT-2024-00044',client:'Residence Sole',address:'Via XX Settembre 8, Iseo (BS), Italia',request:'Pulizia pozzetti',lat:null,lng:null,status:'Terminato',closedAt:'12/08/2026 09:05',reportNo:'2024-00044',coordSource:'address'}
 ];
 let completedJobs=[...completedSeed];
 function makeLeafletMap(id, center, zoom=12, jobs=[]){
@@ -630,9 +681,11 @@ function makeLeafletMap(id, center, zoom=12, jobs=[]){
  }).addTo(map);
  const bounds=[];
  jobs.forEach(j=>{
-   const marker=L.marker([j.lat,j.lng]).addTo(map);
+   const coords=activeCoords(j);
+   if(!coords) return;
+   const marker=L.marker(coords).addTo(map);
    marker.bindPopup('<b>'+j.client+'</b><br>'+(j.address||'')+'<br>'+j.status);
-   bounds.push([j.lat,j.lng]);
+   bounds.push(coords);
  });
  if(bounds.length>1){
    map.fitBounds(bounds,{padding:[28,28],maxZoom:13});
@@ -643,6 +696,118 @@ function makeLeafletMap(id, center, zoom=12, jobs=[]){
  return map;
 }
 
+
+let manualPointMode=false;
+let addressMarker=null, operationalMarker=null;
+
+function activeCoords(job=selectedJob){
+  if(job && Number.isFinite(job.opLat) && Number.isFinite(job.opLng)) return [job.opLat,job.opLng];
+  if(job && Number.isFinite(job.lat) && Number.isFinite(job.lng)) return [job.lat,job.lng];
+  return null;
+}
+function setLocationStatus(text,type=''){
+  const x=el('locationStatus'); if(!x) return;
+  x.textContent=text; x.className='location-status'+(type?' '+type:'');
+}
+function updateOperationalPointLabel(){
+  const host=el('operationalPointLabel'); if(!host) return;
+  if(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng)){
+    host.innerHTML='<span class="point-chip">🎯 Punto operativo: '+selectedJob.opLat.toFixed(6)+', '+selectedJob.opLng.toFixed(6)+'</span>';
+  }else{
+    host.innerHTML='';
+  }
+}
+async function geocodeAddress(address){
+  const q=(address||'').trim();
+  if(!q) throw new Error('Inserisci un indirizzo.');
+  const url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=it&accept-language=it&q='+encodeURIComponent(q);
+  const res=await fetch(url,{headers:{'Accept':'application/json'}});
+  if(!res.ok) throw new Error('Servizio di geolocalizzazione non disponibile.');
+  const data=await res.json();
+  if(!data.length) throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
+  return {lat:parseFloat(data[0].lat),lng:parseFloat(data[0].lon),displayName:data[0].display_name};
+}
+async function geocodeJob(job, silent=false){
+  if(!job || !job.address) return false;
+  try{
+    if(!silent) setLocationStatus('Ricerca posizione in corso…');
+    const g=await geocodeAddress(job.address);
+    job.lat=g.lat; job.lng=g.lng; job.coordSource='geocoded'; job.geocodedLabel=g.displayName;
+    if(!silent) setLocationStatus('Posizione trovata: '+g.displayName,'ok');
+    return true;
+  }catch(err){
+    if(!silent) setLocationStatus(err.message||'Posizione non trovata.','err');
+    return false;
+  }
+}
+async function geocodeSelectedJob(){
+  const input=el('jobAddressInput');
+  selectedJob.address=(input?input.value:selectedJob.address).trim();
+  el('selectedAddress').textContent=selectedJob.address;
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  const ok=await geocodeJob(selectedJob,false);
+  if(ok){
+    const source=demoJobs.find(j=>j.id===selectedJob.id);
+    if(source) Object.assign(source,selectedJob);
+    updateSelectedJobMap();
+    if(fieldMapObj) refreshFieldMap();
+  }
+  updateOperationalPointLabel();
+}
+async function geocodeAllDemoJobs(){
+  for(const j of demoJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100)); // rispetta il rate-limit demo del servizio pubblico
+    }
+  }
+  for(const j of completedJobs){
+    if(!Number.isFinite(j.lat)||!Number.isFinite(j.lng)){
+      await geocodeJob(j,true);
+      await new Promise(r=>setTimeout(r,1100));
+    }
+  }
+}
+function useDevicePosition(){
+  if(!navigator.geolocation){
+    setLocationStatus('Geolocalizzazione del dispositivo non supportata.','err'); return;
+  }
+  setLocationStatus('Acquisizione posizione GPS del dispositivo…');
+  navigator.geolocation.getCurrentPosition(pos=>{
+    selectedJob.opLat=pos.coords.latitude;
+    selectedJob.opLng=pos.coords.longitude;
+    selectedJob.coordSource='device';
+    setLocationStatus('Punto operativo impostato dalla posizione attuale.','ok');
+    updateOperationalPointLabel();
+    updateSelectedJobMap();
+  },err=>{
+    setLocationStatus('Impossibile leggere la posizione del dispositivo: '+err.message,'err');
+  },{enableHighAccuracy:true,timeout:12000,maximumAge:0});
+}
+function toggleManualPoint(){
+  manualPointMode=!manualPointMode;
+  const mapNode=el('selectedJobMap');
+  const btn=el('manualPointBtn');
+  if(mapNode) mapNode.classList.toggle('manual-mode',manualPointMode);
+  if(btn) btn.textContent=manualPointMode?'✓ Tocca la mappa nel punto corretto':'🎯 Correggi punto operativo';
+  setLocationStatus(manualPointMode?'Tocca la mappa nel punto esatto in cui deve arrivare la squadra.':'Correzione manuale disattivata.',manualPointMode?'':'ok');
+}
+function clearOperationalPoint(){
+  selectedJob.opLat=null; selectedJob.opLng=null;
+  selectedJob.coordSource='geocoded';
+  manualPointMode=false;
+  const mapNode=el('selectedJobMap'); if(mapNode) mapNode.classList.remove('manual-mode');
+  const btn=el('manualPointBtn'); if(btn) btn.textContent='🎯 Correggi punto operativo';
+  updateOperationalPointLabel();
+  updateSelectedJobMap();
+  setLocationStatus('Ripristinato il punto dell’indirizzo.','ok');
+}
+function refreshFieldMap(){
+  const valid=demoJobs.filter(j=>activeCoords(j));
+  if(fieldMapObj){try{fieldMapObj.remove()}catch(e){} fieldMapObj=null}
+  if(valid.length) fieldMapObj=makeLeafletMap('fieldRealMap',activeCoords(valid[0]),12,valid);
+}
+
 function invalidateVisibleMaps(){
  [officeMapObj,controlMapObj,fieldMapObj,selectedMapObj,reportMapObj].forEach(m=>{
    if(m) setTimeout(()=>m.invalidateSize(true),60);
@@ -650,15 +815,15 @@ function invalidateVisibleMaps(){
 }
 function fitFieldMap(){
  if(!fieldMapObj) return;
- const pts=demoJobs.map(j=>[j.lat,j.lng]);
- fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});
+ const pts=demoJobs.map(j=>activeCoords(j)).filter(Boolean);
+ if(pts.length) fieldMapObj.fitBounds(pts,{padding:[28,28],maxZoom:13});
 }
 function centerMapOnSelected(){
  if(!fieldMapObj) return;
- fieldMapObj.setView([selectedJob.lat,selectedJob.lng],15);
+ const c=activeCoords(selectedJob); if(c) fieldMapObj.setView(c,15);
 }
 function centerSelectedMap(){
- if(selectedMapObj) selectedMapObj.setView([selectedJob.lat,selectedJob.lng],16);
+ const c=activeCoords(selectedJob); if(selectedMapObj&&c) selectedMapObj.setView(c,16);
 }
 function selectJobFromAgenda(id){
  const node=[...document.querySelectorAll('.job-choice')].find(x=>x.dataset.id===id);
@@ -690,15 +855,17 @@ function renderCompletedJobs(){
      </div>
    </div>`).join('');
 }
-function viewCompletedReport(id){
+async function viewCompletedReport(id){
  const j=completedJobs.find(x=>x.id===id); if(!j) return;
  selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
  populateReportFromSelected();
  showReport();
 }
-function reopenCompletedJob(id){
+async function reopenCompletedJob(id){
  const j=completedJobs.find(x=>x.id===id); if(!j) return;
  selectedJob={...j};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)) await geocodeJob(selectedJob,true);
  completedJobs=completedJobs.filter(x=>x.id!==id);
  renderCompletedJobs();
  el('selectedClient').textContent=selectedJob.client;
@@ -721,28 +888,67 @@ function populateReportFromSelected(){
  if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client||'';
  if(el('reportClientAddress')) el('reportClientAddress').innerHTML=(selectedJob.address||'').replace(', ','<br>')+' – Italia';
  if(el('reportComune')) el('reportComune').textContent=(selectedJob.address||'')+' – Italia';
- if(el('reportLat')) el('reportLat').textContent=Number(selectedJob.lat||0).toFixed(4);
- if(el('reportLng')) el('reportLng').textContent=Number(selectedJob.lng||0).toFixed(4);
+ const rc=activeCoords(selectedJob);
+ if(el('reportLat')) el('reportLat').textContent=rc?Number(rc[0]).toFixed(4):'—';
+ if(el('reportLng')) el('reportLng').textContent=rc?Number(rc[1]).toFixed(4):'—';
  if(el('reportNumber')) el('reportNumber').textContent='N. '+String(selectedJob.reportNo||selectedJob.id||'').replace('INT-','');
+ if(el('reportPointType')) el('reportPointType').textContent=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?'Punto operativo corretto':'Coordinate dell’indirizzo';
  setTimeout(updateReportMap,120);
 }
 
-function initAllMaps(){
- const allMapJobs=[...demoJobs,...completedJobs];
- officeMapObj=makeLeafletMap('officeMap',[45.70,10.02],10,allMapJobs);
- controlMapObj=makeLeafletMap('controlMap',[45.70,10.02],10,allMapJobs);
- fieldMapObj=makeLeafletMap('fieldRealMap',[45.70,10.02],10,demoJobs);
+async function initAllMaps(){
+ await geocodeAllDemoJobs();
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
+   const found=demoJobs.find(j=>j.id===selectedJob.id);
+   if(found) selectedJob={...found};
+ }
+ const validAll=[...demoJobs,...completedJobs].filter(j=>activeCoords(j));
+ const validDemo=demoJobs.filter(j=>activeCoords(j));
+ const fallback=[45.69,10.02];
+ const officeCenter=validAll.length?activeCoords(validAll[0]):fallback;
+ officeMapObj=makeLeafletMap('officeMap',officeCenter,10,validAll);
+ controlMapObj=makeLeafletMap('controlMap',officeCenter,10,validAll);
+ fieldMapObj=makeLeafletMap('fieldRealMap',validDemo.length?activeCoords(validDemo[0]):fallback,10,validDemo);
+ if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
  updateSelectedJobMap();
  setTimeout(invalidateVisibleMaps,180);
 }
 function updateSelectedJobMap(){
- if(typeof selectedJob==='undefined') return;
- selectedMapObj=makeLeafletMap('selectedJobMap',[selectedJob.lat,selectedJob.lng],15,[{client:selectedJob.client,lat:selectedJob.lat,lng:selectedJob.lng,status:'Intervento selezionato'}]);
+ const addressCoords=(Number.isFinite(selectedJob.lat)&&Number.isFinite(selectedJob.lng))?[selectedJob.lat,selectedJob.lng]:null;
+ const opCoords=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?[selectedJob.opLat,selectedJob.opLng]:null;
+ const center=opCoords||addressCoords;
+ if(!center || typeof L==='undefined'){
+   const node=el('selectedJobMap'); if(node) node.innerHTML='<div style="padding:18px;color:#607080">Posizione non ancora localizzata. Premi “Localizza indirizzo”.</div>';
+   return;
+ }
+ if(selectedMapObj){try{selectedMapObj.remove()}catch(e){} selectedMapObj=null}
+ const node=el('selectedJobMap'); if(node){node._leaflet_id=null;node.innerHTML=''}
+ selectedMapObj=L.map('selectedJobMap',{zoomControl:true,scrollWheelZoom:false,tap:true}).setView(center,16);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(selectedMapObj);
+ if(addressCoords){
+   addressMarker=L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj).bindPopup('<b>Indirizzo intervento</b><br>'+selectedJob.address);
+ }
+ if(opCoords){
+   operationalMarker=L.circleMarker(opCoords,{radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3}).addTo(selectedMapObj).bindPopup('<b>Punto operativo</b><br>Accesso squadra / mezzo');
+ }
+ selectedMapObj.on('click',e=>{
+   if(!manualPointMode) return;
+   selectedJob.opLat=e.latlng.lat; selectedJob.opLng=e.latlng.lng; selectedJob.coordSource='manual';
+   manualPointMode=false;
+   const mapNode=el('selectedJobMap'); if(mapNode) mapNode.classList.remove('manual-mode');
+   const btn=el('manualPointBtn'); if(btn) btn.textContent='🎯 Correggi punto operativo';
+   setLocationStatus('Punto operativo corretto manualmente.','ok');
+   updateOperationalPointLabel();
+   updateSelectedJobMap();
+ });
+ setTimeout(()=>selectedMapObj.invalidateSize(true),100);
+ updateOperationalPointLabel();
 }
 function updateReportMap(){
  if(!selectedJob || typeof L==='undefined') return;
+ const coords=activeCoords(selectedJob);
  const node=el('reportRealMap');
- if(!node) return;
+ if(!node || !coords) return;
  if(reportMapObj){
    try{reportMapObj.remove()}catch(e){}
    reportMapObj=null;
@@ -750,30 +956,44 @@ function updateReportMap(){
    node.innerHTML='';
  }
  reportMapObj=L.map('reportRealMap',{zoomControl:false,scrollWheelZoom:false,dragging:false,tap:false})
-   .setView([selectedJob.lat,selectedJob.lng],16);
+   .setView(coords,16);
  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
    maxZoom:19,
    attribution:'&copy; OpenStreetMap contributors'
  }).addTo(reportMapObj);
- L.marker([selectedJob.lat,selectedJob.lng]).addTo(reportMapObj)
+ L.marker(coords).addTo(reportMapObj)
    .bindPopup('<b>'+selectedJob.client+'</b><br>'+selectedJob.address);
  setTimeout(()=>{
    try{
      reportMapObj.invalidateSize(true);
-     reportMapObj.setView([selectedJob.lat,selectedJob.lng],16,{animate:false});
+     reportMapObj.setView(coords,16,{animate:false});
    }catch(e){}
  },180);
 }
 
-let selectedJob={id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage',lat:45.6722,lng:9.9229};
+let selectedJob={...demoJobs[0]};
 let signatureTarget=null, modalDrawing=false, modalCtx=null;
 
 function selectJob(node){
  document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
- selectedJob={id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:parseFloat(node.dataset.lat),lng:parseFloat(node.dataset.lng)};
- el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request; updateSelectedJobMap(); if(fieldMapObj) fieldMapObj.setView([selectedJob.lat,selectedJob.lng],15);
+ const source=demoJobs.find(j=>j.id===node.dataset.id);
+ selectedJob=source?{...source}:{id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:null,lng:null,coordSource:'address'};
+ el('selectedClient').textContent=selectedJob.client;
+ el('selectedAddress').textContent=selectedJob.address;
+ el('selectedRequest').textContent=selectedJob.request;
+ if(el('jobAddressInput')) el('jobAddressInput').value=selectedJob.address||'';
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng)){
+   geocodeJob(selectedJob,true).then(ok=>{if(ok){updateSelectedJobMap();refreshFieldMap();}});
+ }else{
+   updateSelectedJobMap();
+   if(fieldMapObj){const c=activeCoords(selectedJob);if(c)fieldMapObj.setView(c,15);}
+ }
 }
-function openSelectedMap(){window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank')}
+function openSelectedMap(){
+ const c=activeCoords(selectedJob);
+ if(c) window.open('https://www.google.com/maps/dir/?api=1&destination='+c[0]+','+c[1],'_blank');
+ else window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank');
+}
 function openSigModal(target){
  signatureTarget=target;
  el('sigTitle').textContent=target==='operatore'?'Firma operatore':'Firma cliente';
