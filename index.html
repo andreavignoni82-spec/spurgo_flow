@@ -46,7 +46,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.6 - modalità ultra-operativa smartphone */
+/* Build 5.0.7 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -77,7 +77,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.6 - navigazione field-service persistente */
+/* Build 5.0.7 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -96,11 +96,50 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .sticky-signatures{bottom:74px}
 }
 
+
+/* Build 5.0.7 */
+.job-picker{display:grid;gap:9px;margin:12px 0}
+.job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
+.job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
+.job-choice .row{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.sig-modal{display:none;position:fixed;inset:0;z-index:200;background:#06182cf2;padding:14px;align-items:center;justify-content:center}
+.sig-modal.active{display:flex}
+.sig-card{width:min(680px,100%);background:#fff;color:#142438;border-radius:18px;padding:16px}
+.sig-card canvas{height:260px!important;border:2px solid #9fb0bd}
+.report.compact{font-size:11px;line-height:1.28;padding:18px}
+.report.compact h4{font-size:11px;margin:8px 0 5px;color:#15365d}
+.report.compact hr{border:0;border-top:1px solid #b9c6d1;margin:9px 0}
+.report.compact .report-head{padding-bottom:8px}
+.report.compact .grid2{gap:10px}
+.report.compact .grid3{gap:8px}
+.report.compact .card{padding:7px;border-radius:7px}
+.report.compact .sign{height:82px;padding:7px}
+.report-map{height:112px;border-radius:7px;background:linear-gradient(35deg,#dcebdd,#eef5ef);position:relative;overflow:hidden}
+.report-map:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(25deg,transparent 0 26px,#fff9 27px 30px)}
+.report-pin{position:absolute;z-index:2;left:48%;top:42%;font-size:26px}
+.report-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.report-photo{height:88px;border:1px solid #d4dde4;border-radius:7px;overflow:hidden;background:#f5f7f8;display:grid;place-items:center}
+.report-photo img{width:100%;height:100%;object-fit:cover}
+.report-bottom{display:grid;grid-template-columns:1fr 120px 1fr;gap:10px;align-items:center}
+.report-stamp{text-align:center;border:2px solid #315c92;border-radius:50%;width:88px;height:88px;margin:auto;display:grid;place-items:center;color:#315c92;font-weight:800}
+.finished-card{background:#eaf8ef;color:#177a3e;border:1px solid #bfe8ce;border-radius:12px;padding:12px;margin:10px 0;font-weight:800}
+@media(max-width:700px){.report.compact{padding:12px}.report-bottom{grid-template-columns:1fr 80px 1fr}.report-stamp{width:68px;height:68px;font-size:9px}}
+@media print{
+ @page{size:A4;margin:7mm}
+ .report.compact{font-size:9.3px;line-height:1.18;padding:0!important}
+ .report.compact h4{font-size:9.5px;margin:5px 0 3px}
+ .report.compact hr{margin:5px 0}
+ .report.compact .report-map{height:82px}
+ .report.compact .report-photo{height:62px}
+ .report.compact .sign{height:62px}
+ .report.compact .report-stamp{width:60px;height:60px;font-size:8px}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.6</div>
+<div class="version">v5.0 · build 5.0.7</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -110,9 +149,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.6<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.7<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.6</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.7</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
@@ -135,7 +174,14 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </main></div>
 
 <div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div></div><div><span class="build">v5.0</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
-<div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2><div class="op-card"><span class="badge urgent">URGENTE</span><h3>Condominio Belvedere</h3><p>Via Roma 24, 24067 Sarnico (BG)</p><p>Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Via+Roma+24+Sarnico')">Apri in mappa</button><button class="btn navy" onclick="startJob()">Inizia intervento</button></div></div>
+<div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
+<p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
+<div class="job-picker" id="jobPicker">
+ <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
+ <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
+ <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
+</div>
+<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div id="job" class="hidden">
 <h2>Intervento in corso · <span id="timer">00:00</span></h2>
 <div class="op-actions">
@@ -208,13 +254,13 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   <p class="muted">Operatore e cliente firmano direttamente sullo smartphone. Entrambe le firme vengono riportate nel rapportino PDF.</p>
   <div class="inline-grid">
     <div>
-      <b>FIRMA OPERATORE</b>
+      <b>FIRMA OPERATORE</b> <button class="btn ghost" onclick="openSigModal('operatore')">Apri firma</button>
       <input id="nomeOperatoreFirma" class="field" value="Luca" placeholder="Nome operatore">
       <div class="signature-wrap"><canvas id="firmaOperatore" class="signature-canvas"></canvas></div>
       <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaOperatore')">Cancella firma</button></div>
     </div>
     <div>
-      <b>FIRMA CLIENTE</b>
+      <b>FIRMA CLIENTE</b> <button class="btn ghost" onclick="openSigModal('cliente')">Apri firma</button>
       <input id="nomeClienteFirma" class="field" placeholder="Nome e cognome cliente">
       <div class="signature-wrap"><canvas id="firmaCliente" class="signature-canvas"></canvas></div>
       <div class="panel-actions"><button class="btn ghost" onclick="clearSignature('firmaCliente')">Cancella firma</button></div>
@@ -224,8 +270,8 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
 <div class="sticky-signatures">
- <button class="btn ghost" onclick="openOnly('firmePanel');setTimeout(()=>el('firmaOperatore').scrollIntoView({behavior:'smooth',block:'center'}),50)">✍️ Operatore <span id="opSigStatus" class="sig-status">firma</span></button>
- <button class="btn ghost" onclick="openOnly('firmePanel');setTimeout(()=>el('firmaCliente').scrollIntoView({behavior:'smooth',block:'center'}),50)">✍️ Cliente <span id="clSigStatus" class="sig-status">firma</span></button>
+ <button class="btn ghost" onclick="openSigModal('operatore')">✍️ Operatore <span id="opSigStatus" class="sig-status">firma</span></button>
+ <button class="btn ghost" onclick="openSigModal('cliente')">✍️ Cliente <span id="clSigStatus" class="sig-status">firma</span></button>
  <button class="btn finish" onclick="prepareAndShowReport()">TERMINA E GENERA RAPPORTINO</button>
 </div>
 <div class="mobile-bottom-space"></div>
@@ -271,13 +317,22 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </nav>
 </div>
 
+<div id="sigModal" class="sig-modal">
+ <div class="sig-card">
+  <div class="top"><div><h2 id="sigTitle" style="margin:0">Firma</h2><div class="muted">Firma direttamente con il dito sullo smartphone.</div></div><button class="btn ghost" onclick="closeSigModal()">✕</button></div>
+  <input id="sigName" class="field" placeholder="Nome e cognome">
+  <div class="signature-wrap"><canvas id="sigModalCanvas" class="signature-canvas"></canvas></div>
+  <div class="panel-actions"><button class="btn ghost" onclick="clearModalSignature()">Cancella</button><button class="btn primary" onclick="saveModalSignature()">CONFERMA FIRMA</button></div>
+ </div>
+</div>
+
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.6</span></div>
-<div class="report" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><img src="qr-demo-intervento.png" alt="QR intervento" style="width:86px;height:86px;border:1px solid #cbd6df;padding:4px;background:white"></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.7</span></div>
+<div class="report compact" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><img src="qr-demo-intervento.png" alt="QR intervento" style="width:86px;height:86px;border:1px solid #cbd6df;padding:4px;background:white"></div>
 <div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
-<div class="grid2"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b>Via Roma 24</b><br>24067 Sarnico (BG) — Italia<br>Lat: 45.6722 · Long: 9.9229</div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div></div></div><hr><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomalia">Nessuna anomalia segnalata.</p><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
-<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="grid3"><div class="card"><b>PRIMA</b><div id="reportFotoPrima" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DURANTE</b><div id="reportFotoDurante" style="margin-top:8px">Nessuna foto</div></div><div class="card"><b>DOPO</b><div id="reportFotoDopo" style="margin-top:8px">Nessuna foto</div></div></div>
-<div class="signs" style="margin-top:18px"><div class="sign"><b>FIRMA CLIENTE</b><br><span id="reportClienteNome">Cliente</span><br><div id="reportFirmaCliente" style="margin-top:6px">Firma non acquisita</div></div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Marco Rossi</span><br><div id="reportFirmaOperatore" style="margin-top:6px">Firma non acquisita</div></div></div>
+<div class="grid3"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b id="reportPosizione">Via Roma 24</b><br><span id="reportComune">24067 Sarnico (BG) — Italia</span><br>Lat: 45.6722 · Long: 9.9229<div class="report-map"><span class="report-pin">📍</span></div></div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div><hr><h4>RICHIESTA CLIENTE</h4><div id="reportRichiesta">Intasamento scarico garage</div></div><div><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomaliaTop">Nessuna anomalia segnalata.</p></div></div><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
+<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="report-photos"><div><b>PRIMA</b><div id="reportFotoPrima" class="report-photo">Nessuna foto</div></div><div><b>DURANTE</b><div id="reportFotoDurante" class="report-photo">Nessuna foto</div></div><div><b>DOPO</b><div id="reportFotoDopo" class="report-photo">Nessuna foto</div></div><div><b>ATTREZZATURA</b><div class="report-photo">Autobotte / attrezzatura</div></div></div>
+<div class="report-bottom" style="margin-top:10px"><div class="sign"><b>FIRMA CLIENTE</b><br><span id="reportClienteNome">Cliente</span><div id="reportFirmaCliente">Firma non acquisita</div></div><div class="report-stamp">SPURGO FLOW<br>S.R.L.</div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Operatore</span><div id="reportFirmaOperatore">Firma non acquisita</div></div></div>
 <p class="muted">QR predisposto: nella futura versione collegherà alla scheda cliente/intervento protetta.</p></div>
 <div class="share"><h2 style="margin-top:0">RAPPORTINO PDF E INVIO</h2><p class="muted">Genera/salva il PDF dal dispositivo oppure condividilo con Mail o WhatsApp tramite il menu di condivisione.</p><div class="sharegrid"><button class="btn navy" onclick="window.print()">▤ GENERA / SALVA PDF</button><button class="btn primary" onclick="shareMail()">✉ E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ WHATSAPP</button></div><div style="margin-top:10px"><button class="btn ghost" style="width:100%" onclick="shareNative()">⌯ CONDIVIDI RAPPORTINO</button></div></div></div>
 
@@ -331,6 +386,47 @@ document.querySelectorAll('#menu button').forEach(b=>{
 
 
 let jobRunning=false;
+
+let selectedJob={id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage'};
+let signatureTarget=null, modalDrawing=false, modalCtx=null;
+
+function selectJob(node){
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
+ selectedJob={id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request};
+ el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request;
+}
+function openSelectedMap(){window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank')}
+function openSigModal(target){
+ signatureTarget=target;
+ el('sigTitle').textContent=target==='operatore'?'Firma operatore':'Firma cliente';
+ el('sigName').value=target==='operatore'?(el('nomeOperatoreFirma').value||'Luca'):(el('nomeClienteFirma').value||'');
+ el('sigModal').classList.add('active');
+ setTimeout(initModalCanvas,60);
+}
+function closeSigModal(){el('sigModal').classList.remove('active')}
+function initModalCanvas(){
+ const c=el('sigModalCanvas'), ratio=window.devicePixelRatio||1, r=c.getBoundingClientRect();
+ c.width=Math.max(1,r.width*ratio); c.height=Math.max(1,r.height*ratio);
+ modalCtx=c.getContext('2d'); modalCtx.setTransform(ratio,0,0,ratio,0,0); modalCtx.lineWidth=2.5; modalCtx.lineCap='round'; modalCtx.strokeStyle='#071d35';
+ const point=e=>{const rr=c.getBoundingClientRect(),q=e.touches?e.touches[0]:e;return{x:q.clientX-rr.left,y:q.clientY-rr.top}};
+ const down=e=>{modalDrawing=true;let q=point(e);modalCtx.beginPath();modalCtx.moveTo(q.x,q.y);e.preventDefault()};
+ const move=e=>{if(!modalDrawing)return;let q=point(e);modalCtx.lineTo(q.x,q.y);modalCtx.stroke();e.preventDefault()};
+ const up=e=>{modalDrawing=false;e.preventDefault()};
+ c.onpointerdown=down;c.onpointermove=move;c.onpointerup=up;c.onpointercancel=up;
+}
+function clearModalSignature(){const c=el('sigModalCanvas'); if(modalCtx) modalCtx.clearRect(0,0,c.width,c.height)}
+function saveModalSignature(){
+ const data=el('sigModalCanvas').toDataURL('image/png'), name=(el('sigName').value||'').trim();
+ if(signatureTarget==='operatore'){
+   el('nomeOperatoreFirma').value=name||'Operatore'; el('firmaOperatore').dataset.signature=data;
+   el('opSigStatus').textContent='OK';el('opSigStatus').classList.add('ok');
+ }else{
+   el('nomeClienteFirma').value=name||'Cliente'; el('firmaCliente').dataset.signature=data;
+   el('clSigStatus').textContent='OK';el('clSigStatus').classList.add('ok');
+ }
+ closeSigModal();
+}
+
 function fieldNavigate(name){
  ['Interventi','Agenda','Mappa','Messaggi','Profilo'].forEach(n=>{
    const page=el('field'+n); if(page) page.classList.toggle('active',n===name);
@@ -450,17 +546,27 @@ function clearSignature(id){
 function copyPreviewToReport(srcId,dstId){
   const src=el(srcId),dst=el(dstId);
   const img=src && src.dataset.img;
-  dst.innerHTML=img?'<img src="'+img+'" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px">':'Nessuna foto';
+  dst.innerHTML=img?'<img src="'+img+'" alt="Foto intervento">':'Nessuna foto';
 }
 function prepareAndShowReport(){
-  jobRunning=false; sessionStorage.removeItem('sf_job_running');
+  if(!jobRunning){alert('Nessun intervento attivo.');return;}
+  if(!el('firmaOperatore').dataset.signature || !el('firmaCliente').dataset.signature){
+    alert('Per chiudere l’intervento servono entrambe le firme: operatore e cliente.');
+    return;
+  }
   clearInterval(timerInt);
+  jobRunning=false; sessionStorage.removeItem('sf_job_running'); sessionStorage.removeItem('sf_selected_job');
+  el('job').classList.add('hidden'); el('jobPicker').style.display='grid'; el('startBtn').disabled=false; el('startBtn').textContent='Inizia intervento';
+  el('selectedJobCard').insertAdjacentHTML('beforebegin','<div class="finished-card">✓ Intervento '+selectedJob.id+' terminato e rapportino generato.</div>');
+  if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request;
+  if(el('reportComune')) el('reportComune').textContent=selectedJob.address;
+
   const rel=el('relazioneGenerata').textContent.trim();
   el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
   el('reportAttivita').textContent=buildAttivitaText();
   const tipo=el('anomaliaTipo').value.trim();
   const anom=el('anomaliaTesto').value.trim();
-  el('reportAnomalia').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
+  if(el('reportAnomaliaTop')) el('reportAnomaliaTop').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
   copyPreviewToReport('prevPrima','reportFotoPrima');
   copyPreviewToReport('prevDurante','reportFotoDurante');
   copyPreviewToReport('prevDopo','reportFotoDopo');
@@ -469,19 +575,22 @@ function prepareAndShowReport(){
   el('reportOperatoreNome').textContent=opName;
   el('reportClienteNome').textContent=clName;
   try{
-    const data=el('firmaOperatore').toDataURL('image/png');
-    el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:70px;object-fit:contain">';
+    const data=el('firmaOperatore').dataset.signature || el('firmaOperatore').toDataURL('image/png');
+    el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:50px;object-fit:contain">';
   }catch(e){}
   try{
-    const data2=el('firmaCliente').toDataURL('image/png');
-    el('reportFirmaCliente').innerHTML='<img src="'+data2+'" style="max-width:100%;height:70px;object-fit:contain">';
+    const data2=el('firmaCliente').dataset.signature || el('firmaCliente').toDataURL('image/png');
+    el('reportFirmaCliente').innerHTML='<img src="'+data2+'" style="max-width:100%;height:50px;object-fit:contain">';
   }catch(e){}
   showReport();
 }
 
 function startJob(){
   jobRunning=true; sessionStorage.setItem('sf_job_running','1');
+  sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
   el('job').classList.remove('hidden');
+  el('jobPicker').style.display='none';
+  el('startBtn').disabled=true; el('startBtn').textContent='Intervento in corso';
   secs=0;
   clearInterval(timerInt);
   timerInt=setInterval(()=>{

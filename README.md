@@ -1,5 +1,5 @@
 # Spurgo Flow — Suite Beta v5.0
-Build 5.0.6
+Build 5.0.7
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -17,14 +17,14 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 > Questa è una demo statica. Sincronizzazione reale multi-dispositivo, autenticazione server, invio automatico email/WhatsApp con allegati e portale QR cliente richiederanno il backend previsto nella fase successiva.
 
 
-## Correzioni build 5.0.6
+## Correzioni build 5.0.7
 - Login corretto con riferimenti DOM espliciti.
 - Badge versione ridotto e non invasivo.
 - Cache PWA aggiornata.
 
 - Ripristinata icona PWA navy/autobotte della versione precedente.
 
-## Build 5.0.6
+## Build 5.0.7
 - Ripristinati i flussi operatore nella stessa pagina come v0.4.
 - Foto Prima/Durante/Dopo con fotocamera o libreria.
 - Relazione libera + dettatura + generazione relazione.
@@ -33,7 +33,7 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Firma operatore su schermo.
 - Tutti i dati alimentano il rapportino finale.
 
-## Build 5.0.6 — configurazione operatore consolidata
+## Build 5.0.7 — configurazione operatore consolidata
 - Tutto il flusso resta nella stessa pagina.
 - Descrizione libera predisposta per futura ottimizzazione AI.
 - Foto, attività e anomalie inline.
@@ -41,7 +41,7 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Rapportino completo con QR reale predisposto per futuro portale intervento.
 - Stampa/Salva PDF e condivisione Email/WhatsApp/menu nativo.
 
-## Build 5.0.6 — Ultra-operativa smartphone
+## Build 5.0.7 — Ultra-operativa smartphone
 - Pannelli Foto, Relazione, Attività e Anomalia espandibili nella stessa pagina.
 - Su smartphone resta aperto un pannello alla volta per ridurre lo scorrimento.
 - Riepilogo rapido dello stato di compilazione.
@@ -49,9 +49,16 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Accesso immediato a firma operatore e cliente.
 - Pulsante fisso Termina e genera rapportino.
 
-## Build 5.0.6
+## Build 5.0.7
 - Barra fissa operatore: Interventi, Agenda, Mappa, Messaggi, Profilo.
 - Sezioni separate con navigazione persistente.
 - Intervento/timer restano attivi durante la navigazione.
 - Ritorno rapido all'intervento in corso.
 - Agenda giornaliera, mappa/percorso, messaggi ufficio e profilo operatore demo.
+
+## Build 5.0.7
+- Selezione libera dell'intervento, indipendente da urgenza/orario.
+- Scheda intervento operativa nello stile della seconda immagine.
+- Firme operatore/cliente corrette con pad firma dedicato full-screen/modal.
+- Chiusura intervento reale: valida le firme, arresta timer, chiude scheda e genera rapportino.
+- Rapportino ridisegnato compatto A4: cliente, intervento, posizione/mappa, attività, richiesta, anomalie, relazione, 4 foto, firme, QR e invio.
