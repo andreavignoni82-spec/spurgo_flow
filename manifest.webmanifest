@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.7 - PDF iPhone + geocodifica civico precisa",
+  "description": "Spurgo Flow 6.1.7 - PDF iPhone fix + Geoapify address geocoding",
   "icons": [
     {
       "src": "icon-192.png",

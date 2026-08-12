@@ -387,23 +387,57 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.7 PDF + GEO PRECISION FIX ===== */
+/* ===== PDF / PRINT 6.1.7 ===== */
+@page{size:A4 portrait;margin:0}
 @media print{
-  @page{size:A4 portrait;margin:8mm}
-  html,body{background:#fff!important;width:100%!important;height:auto!important;overflow:visible!important}
-  body>*:not(#reportView){display:none!important}
-  #reportView{display:block!important;position:static!important;width:100%!important;min-height:0!important;background:#fff!important;padding:0!important;margin:0!important}
-  #reportView.hidden{display:block!important}
-  #reportView .report{display:block!important;max-width:none!important;width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important}
-  #reportView>.top,.report-actions-app,.share{display:none!important}
-  #reportRealMap{height:86px!important;min-height:86px!important}
-  .leaflet-control-container{display:none!important}
-  .report-photo{break-inside:avoid}
+  html,body{
+    width:210mm!important;
+    min-height:297mm!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  body>*{visibility:hidden!important}
+  #reportView,#reportView *{visibility:visible!important}
+  #reportView{
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    top:0!important;
+    width:210mm!important;
+    min-height:297mm!important;
+    padding:0!important;
+    margin:0!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  #reportView>.top,
+  #reportView .share,
+  #reportView .report-actions-app,
+  #reportView button{display:none!important}
+  #reportView .report{
+    display:block!important;
+    width:210mm!important;
+    max-width:210mm!important;
+    min-height:297mm!important;
+    box-sizing:border-box!important;
+    margin:0!important;
+    padding:9mm!important;
+    border:0!important;
+    border-radius:0!important;
+    box-shadow:none!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  #reportRealMap{
+    height:40mm!important;
+    min-height:40mm!important;
+    overflow:hidden!important;
+  }
+  img{max-width:100%!important}
 }
-.geo-quality{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 7px;font-size:10px;font-weight:800;margin-top:5px}
-.geo-quality.exact{background:#e8f7ee;color:#177a3e}
-.geo-quality.street{background:#fff2d9;color:#9a5a00}
-.geo-quality.approx{background:#fee9e7;color:#b42318}
 
 </style></head>
 <body>
@@ -1449,113 +1483,159 @@ function updateOperationalPointLabel(){
     host.innerHTML='';
   }
 }
-function normalizeGeoText(v){
- return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,' ').replace(/\s+/g,' ').trim();
+function parseItalianAddressForGeoapify(address){
+  const raw=String(address||'').trim();
+  const parts=raw.split(',').map(x=>x.trim()).filter(Boolean);
+  const first=parts[0]||'';
+  const cityPart=parts.slice(1).join(', ');
+
+  // Via/Piazza + civico, incluse lettere: "Via Cerro Alto 4a".
+  const hm=first.match(/^(.*?)[\s,]+(\d+[A-Za-z]?(?:\/[A-Za-z0-9]+)?)$/);
+  const street=hm?hm[1].trim():first;
+  const housenumber=hm?hm[2].trim():'';
+
+  const postcodeMatch=raw.match(/\b(\d{5})\b/);
+  const postcode=postcodeMatch?postcodeMatch[1]:'';
+
+  let city=cityPart
+    .replace(/\b\d{5}\b/g,'')
+    .replace(/\([A-Z]{2}\)/gi,'')
+    .replace(/\bItalia\b/gi,'')
+    .replace(/\bItaly\b/gi,'')
+    .replace(/^[\s,-]+|[\s,-]+$/g,'')
+    .trim();
+
+  return {raw,street,housenumber,postcode,city};
 }
-function parseItalianAddress(address){
- const raw=String(address||'').trim();
- const parts=raw.split(',').map(x=>x.trim()).filter(Boolean);
- let street=parts[0]||raw;
- let postcode='';
- let city='';
- for(const part of parts.slice(1)){
-   const cap=(part.match(/\b\d{5}\b/)||[])[0];
-   if(cap&&!postcode)postcode=cap;
-   let clean=part.replace(/\b\d{5}\b/g,'').replace(/\([A-Z]{2}\)/gi,'').replace(/\bitalia\b/gi,'').trim();
-   if(clean&&!city)city=clean;
- }
- // Handles strings like "24067 Sarnico (BG)" even when kept in the same segment.
- if(!city){
-   const m=raw.match(/(?:\b\d{5}\b\s*)?([^,]+?)\s*\([A-Z]{2}\)/i);
-   if(m)city=m[1].replace(/^.*?,/,'').trim();
- }
- const hm=street.match(/(?:^|\s)(\d+[a-zA-Z]?)(?:\s*[\/-]\s*\d+[a-zA-Z]?)?\s*$/);
- const houseNumber=hm?hm[1].toLowerCase():'';
- return {raw,street,city,postcode,houseNumber};
+
+function normalizeHouseNumber(v){
+  return String(v||'').toLowerCase().replace(/\s+/g,'').replace(/[^0-9a-z/]/g,'');
 }
-function geoCandidateScore(item,parsed){
- const a=item.address||{};
- let score=0;
- const wantedNo=normalizeGeoText(parsed.houseNumber);
- const gotNo=normalizeGeoText(a.house_number||a.housenumber||'');
- if(wantedNo&&gotNo){score += wantedNo===gotNo?100:-15}
- else if(wantedNo&&!gotNo) score-=20;
- const wantedRoad=normalizeGeoText(parsed.street.replace(/\s+\d+[a-zA-Z]?\s*$/,''));
- const gotRoad=normalizeGeoText(a.road||a.pedestrian||a.residential||a.place||'');
- if(wantedRoad&&gotRoad){if(gotRoad===wantedRoad)score+=35;else if(gotRoad.includes(wantedRoad)||wantedRoad.includes(gotRoad))score+=20}
- const wantedCity=normalizeGeoText(parsed.city);
- const gotCity=normalizeGeoText(a.city||a.town||a.village||a.municipality||'');
- if(wantedCity&&gotCity){score+=gotCity===wantedCity?25:(gotCity.includes(wantedCity)||wantedCity.includes(gotCity)?12:-10)}
- if(parsed.postcode&&a.postcode)score+=String(a.postcode)===parsed.postcode?20:-8;
- if(item.addresstype==='house'||item.type==='house')score+=15;
- if(Number.isFinite(Number(item.importance)))score+=Math.min(5,Number(item.importance)*5);
- return score;
-}
-async function fetchNominatim(url){
- const res=await fetch(url,{headers:{'Accept':'application/json','Accept-Language':'it'}});
- if(!res.ok)throw new Error('Servizio di geolocalizzazione non disponibile.');
- return await res.json();
-}
+
 async function geocodeAddress(address){
- const q=String(address||'').trim(); if(!q)throw new Error('Inserisci un indirizzo.');
- const parsed=parseItalianAddress(q);
- const key='sf_geo_v2_'+q.toLowerCase();
- try{const c=JSON.parse(localStorage.getItem(key)||'null');if(c&&Number.isFinite(c.lat)&&Number.isFinite(c.lng))return c}catch(e){}
- let data=[];
- // First choice: structured address lookup. The street field includes the house number.
- if(parsed.street&&parsed.city){
-   const params=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'8',countrycodes:'it',layer:'address',street:parsed.street,city:parsed.city});
-   if(parsed.postcode)params.set('postalcode',parsed.postcode);
-   try{data=await fetchNominatim('https://nominatim.openstreetmap.org/search?'+params.toString())}catch(e){data=[]}
- }
- // Fallback to free-form if structured search has no result.
- if(!data.length){
-   const params=new URLSearchParams({format:'jsonv2',addressdetails:'1',limit:'8',countrycodes:'it',layer:'address',q:q});
-   data=await fetchNominatim('https://nominatim.openstreetmap.org/search?'+params.toString());
- }
- if(!data.length)throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
- data.sort((a,b)=>geoCandidateScore(b,parsed)-geoCandidateScore(a,parsed));
- const best=data[0], a=best.address||{};
- const gotNo=String(a.house_number||a.housenumber||'').toLowerCase();
- const exactHouse=!!parsed.houseNumber && gotNo===parsed.houseNumber;
- const roadFound=!!(a.road||a.pedestrian||a.residential);
- const quality=exactHouse?'exact':(roadFound?'street':'approx');
- const out={
-   lat:parseFloat(best.lat),lng:parseFloat(best.lon),displayName:best.display_name,
-   quality,houseNumber:gotNo||'',requestedHouseNumber:parsed.houseNumber||'',
-   road:a.road||a.pedestrian||a.residential||'',city:a.city||a.town||a.village||a.municipality||'',postcode:a.postcode||''
- };
- try{localStorage.setItem(key,JSON.stringify(out))}catch(e){}
- return out;
+  const q=String(address||'').trim();
+  if(!q)throw new Error('Inserisci un indirizzo.');
+
+  const cfg=window.SPURGO_GEO_CONFIG||{};
+  const apiKey=String(cfg.geoapifyApiKey||'').trim();
+  if(!apiKey || apiKey.startsWith('INSERISCI_')){
+    throw new Error('Geoapify non configurato: inserisci la API key nel file geocoding-config.js.');
+  }
+
+  const parsed=parseItalianAddressForGeoapify(q);
+  const params=new URLSearchParams({
+    format:'json',
+    lang:'it',
+    limit:'5',
+    filter:'countrycode:it',
+    apiKey
+  });
+
+  // Ricerca strutturata: civico separato dalla via.
+  if(parsed.street)params.set('street',parsed.street);
+  if(parsed.housenumber)params.set('housenumber',parsed.housenumber);
+  if(parsed.city)params.set('city',parsed.city);
+  if(parsed.postcode)params.set('postcode',parsed.postcode);
+  params.set('country','Italy');
+
+  let res=await fetch('https://api.geoapify.com/v1/geocode/search?'+params.toString(),{
+    headers:{'Accept':'application/json'},
+    cache:'no-store'
+  });
+  if(!res.ok)throw new Error('Servizio Geoapify non disponibile ('+res.status+').');
+  let data=await res.json();
+  let results=Array.isArray(data.results)?data.results:[];
+
+  // Se la ricerca strutturata non trova nulla, prova una query testuale completa.
+  if(!results.length){
+    const fallback=new URLSearchParams({
+      text:q,
+      format:'json',
+      lang:'it',
+      limit:'5',
+      filter:'countrycode:it',
+      apiKey
+    });
+    res=await fetch('https://api.geoapify.com/v1/geocode/search?'+fallback.toString(),{
+      headers:{'Accept':'application/json'},
+      cache:'no-store'
+    });
+    if(!res.ok)throw new Error('Servizio Geoapify non disponibile ('+res.status+').');
+    data=await res.json();
+    results=Array.isArray(data.results)?data.results:[];
+  }
+
+  if(!results.length)throw new Error('Indirizzo non trovato. Verifica via, civico e comune.');
+
+  const wantedHN=normalizeHouseNumber(parsed.housenumber);
+  const wantedCity=String(parsed.city||'').toLowerCase();
+
+  // Punteggio: civico esatto prima di tutto, poi città e confidence.
+  const scored=results.map(r=>{
+    const foundHN=normalizeHouseNumber(r.housenumber);
+    const cityText=String(r.city||r.town||r.village||r.county||'').toLowerCase();
+    const confidence=Number(r.rank?.confidence||0);
+    let score=confidence;
+    if(wantedHN && foundHN===wantedHN)score+=100;
+    else if(wantedHN && !foundHN)score-=15;
+    if(wantedCity && cityText.includes(wantedCity))score+=20;
+    return {r,score};
+  }).sort((a,b)=>b.score-a.score);
+
+  const best=scored[0].r;
+  const exactHouse=!!(wantedHN && normalizeHouseNumber(best.housenumber)===wantedHN);
+
+  return {
+    lat:Number(best.lat),
+    lng:Number(best.lon),
+    displayName:best.formatted||best.address_line1||q,
+    houseNumber:best.housenumber||'',
+    street:best.street||'',
+    city:best.city||best.town||best.village||'',
+    postcode:best.postcode||'',
+    exactHouseNumber:exactHouse,
+    confidence:Number(best.rank?.confidence||0),
+    provider:'Geoapify'
+  };
 }
-function persistSelectedCoordinates(){
- const source=demoJobs.find(j=>j.id===selectedJob.id);if(source)Object.assign(source,selectedJob);
- const oi=typeof sfOfficeInterventions!=='undefined'?sfOfficeInterventions.find(i=>i.id===selectedJob.id):null;
- if(oi){oi.lat=selectedJob.lat;oi.lng=selectedJob.lng;oi.geocodedLabel=selectedJob.geocodedLabel;oi.geocodeQuality=selectedJob.geocodeQuality;if(typeof saveV6==='function')saveV6()}
-}
-async function geocodeJob(job,silent=false){
- if(!job||!job.address)return false;
- try{
-   if(!silent)setLocationStatus('Ricerca precisa di via e civico…');
-   const g=await geocodeAddress(job.address);
-   job.lat=g.lat;job.lng=g.lng;job.coordSource='geocoded';job.geocodedLabel=g.displayName;job.geocodeQuality=g.quality;
-   if(!silent){
-     if(g.quality==='exact')setLocationStatus('Civico verificato: '+g.displayName,'ok');
-     else if(g.quality==='street')setLocationStatus('Via trovata, ma il civico non è censito con precisione in OpenStreetMap. Puoi usare GPS o “Correggi punto operativo”.','warn');
-     else setLocationStatus('Posizione approssimata. Verifica il punto sulla mappa o usa il GPS.','warn');
-   }
-   return true;
- }catch(err){if(!silent)setLocationStatus(err.message||'Posizione non trovata.','err');return false}
+async function geocodeJob(job, silent=false){
+  if(!job || !job.address)return false;
+  try{
+    if(!silent)setLocationStatus('Ricerca civico con Geoapify…');
+    const g=await geocodeAddress(job.address);
+    job.lat=g.lat;
+    job.lng=g.lng;
+    job.coordSource='geoapify';
+    job.geocodedLabel=g.displayName;
+    job.geocodeProvider='Geoapify';
+    job.geocodeConfidence=g.confidence;
+    job.exactHouseNumber=g.exactHouseNumber;
+
+    if(!silent){
+      if(g.exactHouseNumber){
+        setLocationStatus('Civico verificato: '+g.displayName,'ok');
+      }else{
+        setLocationStatus('Posizione trovata, ma civico non confermato: '+g.displayName+'. Verifica il marker o usa GPS.','warn');
+      }
+    }
+    return true;
+  }catch(err){
+    if(!silent)setLocationStatus(err.message||'Posizione non trovata.','err');
+    return false;
+  }
 }
 async function geocodeSelectedJob(){
   const input=el('jobAddressInput');
   selectedJob.address=(input?input.value:selectedJob.address).trim();
   el('selectedAddress').textContent=selectedJob.address;
+
+  // Non cancellare il punto GPS operativo già acquisito.
   const ok=await geocodeJob(selectedJob,false);
   if(ok){
-    persistSelectedCoordinates();
+    const source=demoJobs.find(j=>j.id===selectedJob.id);
+    if(source)Object.assign(source,selectedJob);
     updateSelectedJobMap();
-    if(fieldMapObj)refreshFieldMap();
+    refreshFieldMap();
   }
   updateOperationalPointLabel();
 }
@@ -1702,7 +1782,7 @@ async function updateSelectedJobMap(){
  selectedMapObj._sfLayer.clearLayers();
  if(addressCoords)L.circleMarker(addressCoords,{radius:9,color:'#177a3e',fillColor:'#28a85a',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Indirizzo intervento</b><br>'+esc(selectedJob.address));
  if(opCoords)L.circleMarker(opCoords,{radius:10,color:'#b35c00',fillColor:'#ef8c24',fillOpacity:1,weight:3}).addTo(selectedMapObj._sfLayer).bindPopup('<b>Punto operativo</b>');
- selectedMapObj.setView(center,addressCoords||opCoords?16:12,{animate:false});requestAnimationFrame(()=>selectedMapObj.invalidateSize(true));setTimeout(()=>selectedMapObj.invalidateSize(true),120);setMapHealth('selectedJobMap',addressCoords||opCoords?(selectedJob.geocodeQuality==='exact'?'Mappa caricata · civico verificato':selectedJob.geocodeQuality==='street'?'Mappa caricata · civico da verificare':'Mappa caricata'):'Mappa visibile · indirizzo non localizzato',!!(addressCoords||opCoords));updateOperationalPointLabel();
+ selectedMapObj.setView(center,addressCoords||opCoords?16:12,{animate:false});requestAnimationFrame(()=>selectedMapObj.invalidateSize(true));setTimeout(()=>selectedMapObj.invalidateSize(true),120);setMapHealth('selectedJobMap',addressCoords||opCoords?'Mappa caricata':'Mappa visibile · indirizzo non localizzato',!!(addressCoords||opCoords));updateOperationalPointLabel();
 }
 async function updateReportMap(){
  if(!mapVisible('reportRealMap')||typeof L==='undefined')return;let c=activeCoords(selectedJob);if(!c&&selectedJob.address){await geocodeJob(selectedJob,true);c=activeCoords(selectedJob)};const center=c||[45.67,9.96];
@@ -1979,14 +2059,18 @@ function closeReport(){
 
 
 function preparePrint(){
-  try{if(reportMapObj)reportMapObj.invalidateSize(true)}catch(e){}
-  // IMPORTANT on iPhone/Safari: print must be called directly from the tap event.
-  window.print();
-}
-window.addEventListener('beforeprint',()=>{try{if(reportMapObj)reportMapObj.invalidateSize(true)}catch(e){}});
-
-function shareMail(){
-  location.href='mailto:?subject=Rapportino Spurgo Flow 2026-00051&body=In allegato/da condividere il rapportino dell’intervento n. 2026-00051.';
+  try{
+    populateReportFromSelected();
+    updateReportMap();
+    if(typeof reportMapObj!=='undefined' && reportMapObj){
+      try{reportMapObj.invalidateSize(true)}catch(e){}
+    }
+    // Chiamata DIRETTA nello stesso gesto utente: più affidabile su Safari/iPhone.
+    window.print();
+  }catch(err){
+    console.error('preparePrint',err);
+    alert('Impossibile aprire la stampa/PDF. Riprova dal pulsante GENERA / SALVA PDF.');
+  }
 }
 function shareWA(){
   window.open('https://wa.me/?text='+encodeURIComponent('Spurgo Flow — Rapportino intervento n. 2026-00051. Il PDF può essere condiviso dal dispositivo.'),'_blank');
@@ -2021,5 +2105,6 @@ if('serviceWorker' in navigator){
 }
 </script>
 <script src="firebase-config.js"></script>
+<script src="geocoding-config.js"></script>
 <script type="module" src="firebase-sync.js"></script>
 </body></html>

@@ -196,11 +196,14 @@ Cache:
 - `index.html`, `firebase-config.js`, `firebase-sync.js` e navigazioni non vengono più serviti dalla cache applicativa;
 - `skipWaiting()` + `clients.claim()` per attivare subito il nuovo service worker.
 
-## 6.1.7 — PDF + Geolocalizzazione precisa
-- Esportazione PDF: `window.print()` chiamato direttamente dal tap, senza timeout che su iOS può bloccare il dialogo.
-- CSS stampa A4 dedicato al solo rapportino.
-- Geocodifica Nominatim strutturata: `street` (con civico), `city`, CAP, countrycodes=it, addressdetails=1.
-- Valutazione di più risultati e priorità a house_number esatto.
-- Se il civico non è censito in OSM, l'app lo dichiara invece di fingere precisione.
-- Il punto GPS operativo non viene più cancellato quando si rilocalizza l'indirizzo.
-- Coordinate geocodificate persistite anche sull'intervento cloud.
+## 6.1.7 — PDF + Geoapify (ripartenza dalla 6.1.6 stabile)
+- Base: 6.1.6 Full Office Audit.
+- Scartate le modifiche della precedente 6.1.7.
+- PDF: `window.print()` chiamato direttamente dal tap, senza timeout.
+- Layout stampa A4 dedicato al solo rapportino.
+- Nuovo geocoder: Geoapify, non Nominatim.
+- Ricerca strutturata: via, numero civico, comune, CAP, Italia.
+- Valutazione di più risultati con priorità al civico esatto.
+- Se il civico non è confermato, Spurgo Flow lo dichiara esplicitamente.
+- Il GPS operativo non viene cancellato quando si rilocalizza l'indirizzo.
+- File `geocoding-config.js` separato.
