@@ -130,3 +130,13 @@ Caricare **tutto il contenuto di questa cartella** nella root del repository Git
 - Mappe separate dal login: un errore cartografico non può bloccare utente/password.
 - Dashboard, Control Room, Mappa operatore, scheda intervento e rapportino usano lo stesso modulo.
 - Controllo sintattico JavaScript eseguito prima del rilascio.
+
+## Hotfix mappe FM Foto — versione fissa 5.0.18
+- Mappa ricostruita copiando lo stesso schema funzionante di FM_FOTO_OPERATORE_V2_7_2_IPHONE_QUEUE_FIX.
+- Leaflet 1.9.4.
+- Tile: https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png.
+- Altezza smartphone: calc(100dvh - 250px), min-height 440px.
+- La mappa viene inizializzata/renderizzata solo dopo che la sezione è diventata visibile.
+- invalidateSize() dopo 100 ms, come nel progetto FM Foto.
+- Marker layer separato e fitBounds/setView identici alla logica FM Foto.
+- Versione applicazione mantenuta 5.0.18.
