@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite Beta v5.0</title>
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynMscXrdI3ZYG06f9HI3U0ZdeuPM=" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <style>
@@ -46,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.7 - modalità ultra-operativa smartphone */
+/* Build 5.0.8 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -77,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.7 - navigazione field-service persistente */
+/* Build 5.0.8 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -97,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.7 */
+/* Build 5.0.8 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -135,11 +136,77 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report.compact .report-stamp{width:60px;height:60px;font-size:8px}
 }
 
+
+/* Build 5.0.8 - mappe reali e rapportino fedele */
+.real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
+.real-map.small{height:180px}
+.real-map.report-map-real{height:145px;border-radius:7px}
+.map-caption{font-size:11px;color:#607080;margin-top:5px}
+.report.ref-layout{max-width:840px;background:#fff;color:#111;padding:18px 22px;font-family:Arial,Helvetica,sans-serif;font-size:10.4px;line-height:1.22}
+.ref-layout .report-head{display:grid;grid-template-columns:1.05fr 1.15fr 100px;gap:14px;align-items:start;border-bottom:2px solid #72829a;padding-bottom:10px}
+.ref-layout .report-logo{display:flex;align-items:center;gap:8px}
+.ref-layout .report-logo img{width:82px;height:62px;object-fit:contain}
+.ref-layout .report-title{font-size:17px;font-weight:900;line-height:1.15;padding-top:4px}
+.ref-layout .qrbox{text-align:center}
+.ref-layout .qrbox img{width:82px;height:82px;border:1px solid #9aa8b5;padding:3px;background:#fff}
+.ref-layout .qrbox small{display:block;font-size:8px;line-height:1.15;margin-top:3px}
+.ref-layout .two-col{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #aab5c0}
+.ref-layout .two-col>div{padding:10px 12px 10px 0}
+.ref-layout .two-col>div+div{border-left:1px solid #c7d0d7;padding-left:18px}
+.ref-layout h4{margin:0 0 6px;color:#143b72;font-size:10px;font-weight:900}
+.ref-layout .data-row{display:grid;grid-template-columns:115px 1fr;gap:6px;margin:2px 0}
+.ref-layout .mid-grid{display:grid;grid-template-columns:1.05fr .95fr .95fr;border-bottom:1px solid #aab5c0}
+.ref-layout .mid-grid>div{padding:10px 10px 10px 0}
+.ref-layout .mid-grid>div+div{border-left:1px solid #c7d0d7;padding-left:14px}
+.ref-layout .activities{list-style:none;margin:0;padding:0}
+.ref-layout .activities li{display:grid;grid-template-columns:17px 1fr auto;gap:6px;align-items:center;margin:4px 0}
+.ref-layout .check{width:14px;height:14px;border-radius:2px;background:#28a85a;color:#fff;font-size:10px;display:grid;place-items:center}
+.ref-layout .request-box{margin-top:10px;padding-top:8px;border-top:1px solid #c6d0d8}
+.ref-layout .relation{padding:10px 0;border-bottom:1px solid #aab5c0}
+.ref-layout .photos{padding:10px 0;border-bottom:1px solid #aab5c0}
+.ref-layout .photo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.ref-layout .photo-item{text-align:center;font-weight:800;font-size:9px}
+.ref-layout .photo-frame{height:86px;margin-top:5px;border:1px solid #ccd5dc;border-radius:6px;overflow:hidden;background:#f2f4f5;display:grid;place-items:center}
+.ref-layout .photo-frame img{width:100%;height:100%;object-fit:cover}
+.ref-layout .sign-row{display:grid;grid-template-columns:1fr 130px 1fr;gap:14px;align-items:center;padding:10px 0}
+.ref-layout .sign-box{border:1px solid #b7c1c9;border-radius:6px;padding:8px;height:100px}
+.ref-layout .sign-box .sigimg{height:52px;display:grid;align-items:center}
+.ref-layout .sign-box img{max-width:100%;max-height:52px;object-fit:contain}
+.ref-layout .stamp-circle{width:92px;height:92px;border:2px solid #32578d;border-radius:50%;margin:auto;display:grid;place-items:center;text-align:center;color:#32578d;font-weight:900;font-size:10px}
+.ref-layout .send-title{background:#219b4d;color:#fff;text-align:center;font-weight:900;font-size:16px;padding:8px;border-radius:5px;margin:8px 0 4px}
+.ref-layout .send-sub{text-align:center;font-size:8px;margin-bottom:7px}
+.ref-layout .send-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ref-layout .send-btn{border:1px solid #d0d7dc;border-radius:7px;padding:9px 7px;text-align:left;background:#fff;min-height:64px}
+.ref-layout .send-btn strong{display:block;font-size:10px;color:#17345e;margin-bottom:3px}
+.ref-layout .send-btn .green{color:#219b4d}
+.ref-layout .privacy{text-align:center;font-size:8px;margin-top:7px;color:#4a5965}
+@media print{
+ @page{size:A4 portrait;margin:5mm}
+ body{background:white!important}
+ #reportView{padding:0!important}
+ .report.ref-layout{width:200mm;max-width:200mm;height:auto;min-height:0;padding:5mm 6mm!important;font-size:8.8px;line-height:1.12}
+ .ref-layout .report-head{grid-template-columns:1fr 1.15fr 82px;gap:8px;padding-bottom:6px}
+ .ref-layout .report-logo img{width:70px;height:50px}
+ .ref-layout .report-title{font-size:14px}
+ .ref-layout .qrbox img{width:70px;height:70px}
+ .ref-layout .two-col>div,.ref-layout .mid-grid>div{padding-top:6px;padding-bottom:6px}
+ .ref-layout .real-map.report-map-real{height:90px}
+ .ref-layout .relation,.ref-layout .photos{padding:6px 0}
+ .ref-layout .photo-frame{height:58px}
+ .ref-layout .sign-row{padding:6px 0}
+ .ref-layout .sign-box{height:74px}
+ .ref-layout .sign-box .sigimg{height:34px}
+ .ref-layout .sign-box img{max-height:34px}
+ .ref-layout .stamp-circle{width:64px;height:64px;font-size:8px}
+ .ref-layout .send-title{font-size:12px;padding:5px}
+ .ref-layout .send-btn{min-height:46px;padding:5px}
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.7</div>
+<div class="version">v5.0 · build 5.0.8</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -149,14 +216,14 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.7<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.8<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.7</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.8</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
-<div class="card map"><h3 style="position:relative;z-index:2">Mappa interventi</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div></div></section>
+<div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
 
-<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card map" style="min-height:500px"><h3 style="position:relative;z-index:2">Situazione territoriale</h3><i class="pin"></i><i class="pin"></i><i class="pin"></i><i class="pin"></i></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
+<section id="control" class="section"><div class="top"><h1>Control Room</h1><span class="build">LIVE DEMO</span></div><div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div></div><div><div class="card"><h3>🔴 Nuova urgenza</h3><b>Condominio Belvedere — Sarnico</b><p>Allagamento autorimessa</p><p class="muted">Squadra suggerita: Marco + Autobotte 01 · 4,2 km</p><button class="btn primary">Assegna squadra</button></div><div class="card" style="margin-top:12px"><h3>Squadre</h3><p>🟢 Marco · AB01 — disponibile tra 18 min</p><p>🟠 Luca · AB02 — intervento in corso</p><p>⚪ Paolo · FV01 — disponibile</p></div></div></div></section>
 
 <section id="interventi" class="section"><div class="top"><h1>Interventi</h1><button class="btn primary" onclick="alert('Nuovo intervento: modulo demo predisposto')">+ Nuovo intervento</button></div><div class="card" style="margin-top:18px"><table class="table"><tr><th>ID</th><th>Cliente</th><th>Tipo</th><th>Stato</th><th>Operatore</th><th>Fatturazione</th></tr><tr><td>#0051</td><td>Condominio Belvedere</td><td>Disotturazione</td><td><span class="badge urgent">URGENTE</span></td><td>Marco</td><td>Da fatturare</td></tr><tr><td>#0050</td><td>Ristorante Al Lago</td><td>Pulizia fossa</td><td><span class="badge progress">IN CORSO</span></td><td>Luca</td><td>—</td></tr><tr><td>#0049</td><td>Azienda Bianchi</td><td>Lavaggio</td><td><span class="badge planned">PROGRAMMATO</span></td><td>Marco</td><td>—</td></tr></table></div></section>
 
@@ -177,11 +244,11 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
- <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
- <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
- <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
+ <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" data-lat="45.6722" data-lng="9.9229" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
+ <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" data-lat="45.6606" data-lng="10.0507" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
+ <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" data-lat="45.8270" data-lng="10.0996" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
 </div>
-<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
+<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p><div id="selectedJobMap" class="real-map small"></div><div class="map-caption">Posizione intervento</div><div class="actions"><button class="btn primary" onclick="openSelectedMap()">Apri in mappa</button><button class="btn navy" id="startBtn" onclick="startJob()">Inizia intervento</button></div></div>
 <div id="job" class="hidden">
 <h2>Intervento in corso · <span id="timer">00:00</span></h2>
 <div class="op-actions">
@@ -287,8 +354,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 <div id="fieldMappa" class="field-page">
  <h2>Mappa e percorso</h2>
- <div class="fake-map"><b>Interventi assegnati</b><i class="mapdot" style="left:24%;top:52%"></i><i class="mapdot" style="left:61%;top:29%;background:#e53e3e"></i><i class="mapdot" style="left:73%;top:67%;background:#28a85a"></i></div>
- <div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
+ <div id="fieldRealMap" class="real-map" style="height:360px"></div><div class="route-card"><b>Prossima destinazione</b><p>Ristorante Al Lago · Iseo</p><button class="btn primary" onclick="window.open('https://maps.google.com/?q=Iseo','_blank')">Avvia navigazione</button></div>
 </div>
 
 <div id="fieldMessaggi" class="field-page">
@@ -327,15 +393,93 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.7</span></div>
-<div class="report compact" id="report"><div class="report-head"><div><div class="brand" style="font-size:25px">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div><div><b>RAPPORTINO INTERVENTO</b><br>N. 2026-00051</div><img src="qr-demo-intervento.png" alt="QR intervento" style="width:86px;height:86px;border:1px solid #cbd6df;padding:4px;background:white"></div>
-<div class="grid2" style="margin-top:18px"><div><h4>DATI CLIENTE</h4><b>Condominio Belvedere</b><br>Via Roma 24<br>24067 Sarnico (BG) — Italia<br>Tel. 335 1234567</div><div><h4>DATI INTERVENTO</h4>Data: 12/08/2026<br>Ora inizio: 10:42<br>Ora fine: 11:36<br>Operatore: Marco Rossi<br>Mezzo: Autobotte 01</div></div><hr>
-<div class="grid3"><div><h4>POSIZIONE INTERVENTO</h4>📍 <b id="reportPosizione">Via Roma 24</b><br><span id="reportComune">24067 Sarnico (BG) — Italia</span><br>Lat: 45.6722 · Long: 9.9229<div class="report-map"><span class="report-pin">📍</span></div></div><div><h4>ATTIVITÀ ESEGUITE</h4><div id="reportAttivita">Nessuna attività selezionata.</div><hr><h4>RICHIESTA CLIENTE</h4><div id="reportRichiesta">Intasamento scarico garage</div></div><div><h4>ANOMALIE RISCONTRATE</h4><p id="reportAnomaliaTop">Nessuna anomalia segnalata.</p></div></div><hr><h4>RELAZIONE TECNICA</h4><p id="reportRelazione">Relazione non compilata.</p>
-<h4>DOCUMENTAZIONE FOTOGRAFICA</h4><div class="report-photos"><div><b>PRIMA</b><div id="reportFotoPrima" class="report-photo">Nessuna foto</div></div><div><b>DURANTE</b><div id="reportFotoDurante" class="report-photo">Nessuna foto</div></div><div><b>DOPO</b><div id="reportFotoDopo" class="report-photo">Nessuna foto</div></div><div><b>ATTREZZATURA</b><div class="report-photo">Autobotte / attrezzatura</div></div></div>
-<div class="report-bottom" style="margin-top:10px"><div class="sign"><b>FIRMA CLIENTE</b><br><span id="reportClienteNome">Cliente</span><div id="reportFirmaCliente">Firma non acquisita</div></div><div class="report-stamp">SPURGO FLOW<br>S.R.L.</div><div class="sign"><b>FIRMA OPERATORE</b><br><span id="reportOperatoreNome">Operatore</span><div id="reportFirmaOperatore">Firma non acquisita</div></div></div>
-<p class="muted">QR predisposto: nella futura versione collegherà alla scheda cliente/intervento protetta.</p></div>
-<div class="share"><h2 style="margin-top:0">RAPPORTINO PDF E INVIO</h2><p class="muted">Genera/salva il PDF dal dispositivo oppure condividilo con Mail o WhatsApp tramite il menu di condivisione.</p><div class="sharegrid"><button class="btn navy" onclick="window.print()">▤ GENERA / SALVA PDF</button><button class="btn primary" onclick="shareMail()">✉ E-MAIL</button><button class="btn primary" onclick="shareWA()">◉ WHATSAPP</button></div><div style="margin-top:10px"><button class="btn ghost" style="width:100%" onclick="shareNative()">⌯ CONDIVIDI RAPPORTINO</button></div></div></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.8</span></div>
+<div class="report ref-layout" id="report">
+  <div class="report-head">
+    <div class="report-logo">
+      <img src="icon-192.png" alt="Spurgo Flow">
+      <div><div class="brand" style="font-size:22px;line-height:1">SPURGO <b>FLOW</b></div><small>GESTIONE INTERVENTI DI SPURGO</small></div>
+    </div>
+    <div class="report-title">RAPPORTINO INTERVENTO<br><span id="reportNumber">N. 2024-00045</span></div>
+    <div class="qrbox"><img src="qr-demo-intervento.png" alt="QR intervento"><small>Scansiona per<br>visualizzare<br>la scheda intervento</small></div>
+  </div>
 
+  <div class="two-col">
+    <div>
+      <h4>DATI CLIENTE</h4>
+      <b id="reportClientName">Condominio Belvedere</b><br>
+      <span id="reportClientAddress">Via Roma 24<br>24067 Sarnico (BG) – Italia</span><br>
+      Amministratore: Mario Rossi<br>
+      Tel. 335 1234567
+    </div>
+    <div>
+      <h4>DATI INTERVENTO</h4>
+      <div class="data-row"><span>Data</span><b id="reportDate">11/06/2024</b></div>
+      <div class="data-row"><span>Orario inizio</span><b id="reportStart">10:42</b></div>
+      <div class="data-row"><span>Orario fine</span><b id="reportEnd">11:36</b></div>
+      <div class="data-row"><span>Durata</span><b id="reportDuration">00:54</b></div>
+      <div class="data-row"><span>Operatore</span><b id="reportOperator">Marco Rossi</b></div>
+      <div class="data-row"><span>Mezzo</span><b>Autobotte 01</b></div>
+    </div>
+  </div>
+
+  <div class="mid-grid">
+    <div>
+      <h4>POSIZIONE INTERVENTO</h4>
+      📍 <b id="reportPosizione">Via Roma 24</b><br>
+      <span id="reportComune">24067 Sarnico (BG) – Italia</span><br>
+      Lat: <span id="reportLat">45.6722</span> &nbsp; Long: <span id="reportLng">9.9229</span>
+      <div id="reportRealMap" class="real-map report-map-real" style="margin-top:7px"></div>
+    </div>
+    <div>
+      <h4>ATTIVITÀ ESEGUITE</h4>
+      <ul class="activities" id="reportActivitiesList">
+        <li><span class="check">✓</span><span>Aspirazione reflui</span><b>1,5 m³</b></li>
+        <li><span class="check">✓</span><span>Lavaggio alta pressione</span><b>32 m</b></li>
+        <li><span class="check">✓</span><span>Disotturazione tubazione</span><b></b></li>
+        <li><span class="check">✓</span><span>Pulizia pozzetto</span><b></b></li>
+        <li><span class="check">✓</span><span>Smaltimento reflui</span><b></b></li>
+      </ul>
+      <div class="request-box"><h4>RICHIESTA CLIENTE</h4><span id="reportRichiesta">Scarico completamente bloccato nei garage.<br>Acqua presente all'interno del pozzetto.</span></div>
+    </div>
+    <div>
+      <h4>ANOMALIE RISCONTRATE</h4>
+      <div style="display:grid;grid-template-columns:28px 1fr;gap:7px"><div style="font-size:24px">⚠</div><div id="reportAnomaliaTop">Possibile deformazione della tubazione a circa 18 metri dal pozzetto.<br>Si consiglia videoispezione.</div></div>
+    </div>
+  </div>
+
+  <div class="relation">
+    <h4>RELAZIONE TECNICA</h4>
+    <div id="reportRelazione">All'arrivo sul posto è stata riscontrata la completa ostruzione del pozzetto. È stata effettuata l'aspirazione di circa 1,5 m³ di materiale e successivamente il lavaggio ad alta pressione della tubazione per uno sviluppo di circa 32 metri. Durante le operazioni è stata rilevata una possibile deformazione della condotta a circa 18 metri dal pozzetto. Si consiglia l'esecuzione di una videoispezione per una valutazione completa.</div>
+  </div>
+
+  <div class="photos">
+    <h4>DOCUMENTAZIONE FOTOGRAFICA</h4>
+    <div class="photo-row">
+      <div class="photo-item">PRIMA<div id="reportFotoPrima" class="photo-frame">Nessuna foto</div></div>
+      <div class="photo-item">DURANTE<div id="reportFotoDurante" class="photo-frame">Nessuna foto</div></div>
+      <div class="photo-item">DOPO<div id="reportFotoDopo" class="photo-frame">Nessuna foto</div></div>
+      <div class="photo-item">ATTREZZATURA<div id="reportFotoAttrezzatura" class="photo-frame">Autobotte / attrezzatura</div></div>
+    </div>
+  </div>
+
+  <div class="sign-row">
+    <div class="sign-box"><h4>FIRMA CLIENTE</h4><b id="reportClienteNome">Cliente</b><div id="reportFirmaCliente" class="sigimg">Firma non acquisita</div><small id="reportClientSignTime"></small></div>
+    <div class="stamp-circle">SPURGO FLOW<br>S.R.L.</div>
+    <div class="sign-box"><h4>FIRMA OPERATORE</h4><b id="reportOperatoreNome">Operatore</b><div id="reportFirmaOperatore" class="sigimg">Firma non acquisita</div><small id="reportOpSignTime"></small></div>
+  </div>
+
+  <div class="send-title">INVIA RAPPORTINO</div>
+  <div class="send-sub">Scegli come inviare il rapportino n. 2024-00045</div>
+  <div class="send-row">
+    <button class="send-btn" onclick="shareMail()"><strong class="green">✉ INVIA VIA E-MAIL</strong>Invia il PDF del rapportino via e-mail al cliente.</button>
+    <button class="send-btn" onclick="shareWA()"><strong class="green">◉ INVIA VIA WHATSAPP</strong>Invia il PDF del rapportino via WhatsApp al cliente.</button>
+    <button class="send-btn" onclick="shareNative()"><strong>⌯ CONDIVIDI PDF</strong>Scarica o condividi il PDF con altre app.</button>
+  </div>
+  <div class="privacy">🔒 Il PDF è protetto e accessibile solo tramite QR Code.</div>
+</div>
+<div class="share"><button class="btn navy" style="width:100%" onclick="window.print()">▤ GENERA / SALVA PDF</button></div>
+</div>
 <script>
 let prevView='office', timerInt, secs=0;
 
@@ -351,7 +495,7 @@ function login(){
 
   if(u === 'ufficio' && p === 'ufficio123'){
     loginScreen.classList.add('hidden');
-    officeView.classList.remove('hidden');
+    officeView.classList.remove('hidden'); setTimeout(initAllMaps,120);
     operatorView.classList.add('hidden');
     return;
   }
@@ -359,7 +503,7 @@ function login(){
   if((u === 'marco' && p === 'marco123') || (u === 'luca' && p === 'luca123')){
     loginScreen.classList.add('hidden');
     officeView.classList.add('hidden');
-    operatorView.classList.remove('hidden');
+    operatorView.classList.remove('hidden'); setTimeout(initAllMaps,120);
     opName.textContent = 'Operatore: ' + u.charAt(0).toUpperCase() + u.slice(1); if(el('profileName')) el('profileName').textContent=u.charAt(0).toUpperCase()+u.slice(1);
     setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');},100);
     return;
@@ -387,13 +531,44 @@ document.querySelectorAll('#menu button').forEach(b=>{
 
 let jobRunning=false;
 
-let selectedJob={id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage'};
+
+let officeMapObj=null, controlMapObj=null, fieldMapObj=null, selectedMapObj=null, reportMapObj=null;
+const demoJobs=[
+ {client:'Condominio Belvedere',lat:45.6722,lng:9.9229,status:'Urgente'},
+ {client:'Ristorante Al Lago',lat:45.6606,lng:10.0507,status:'Programmato'},
+ {client:'Azienda Bianchi Srl',lat:45.8270,lng:10.0996,status:'Programmato'}
+];
+function makeLeafletMap(id, center, zoom=12, jobs=[]){
+ const node=el(id); if(!node || typeof L==='undefined') return null;
+ if(node._leaflet_id){try{node._leaflet_id=null;node.innerHTML=''}catch(e){}}
+ const map=L.map(id,{zoomControl:true}).setView(center,zoom);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
+ jobs.forEach(j=>L.marker([j.lat,j.lng]).addTo(map).bindPopup('<b>'+j.client+'</b><br>'+j.status));
+ setTimeout(()=>map.invalidateSize(),80);
+ return map;
+}
+function initAllMaps(){
+ officeMapObj=makeLeafletMap('officeMap',[45.70,10.02],10,demoJobs);
+ controlMapObj=makeLeafletMap('controlMap',[45.70,10.02],10,demoJobs);
+ fieldMapObj=makeLeafletMap('fieldRealMap',[45.70,10.02],10,demoJobs);
+ updateSelectedJobMap();
+}
+function updateSelectedJobMap(){
+ if(typeof selectedJob==='undefined') return;
+ selectedMapObj=makeLeafletMap('selectedJobMap',[selectedJob.lat,selectedJob.lng],15,[{client:selectedJob.client,lat:selectedJob.lat,lng:selectedJob.lng,status:'Intervento selezionato'}]);
+}
+function updateReportMap(){
+ if(!selectedJob || typeof L==='undefined') return;
+ reportMapObj=makeLeafletMap('reportRealMap',[selectedJob.lat,selectedJob.lng],15,[{client:selectedJob.client,lat:selectedJob.lat,lng:selectedJob.lng,status:'Intervento'}]);
+}
+
+let selectedJob={id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage',lat:45.6722,lng:9.9229};
 let signatureTarget=null, modalDrawing=false, modalCtx=null;
 
 function selectJob(node){
  document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
- selectedJob={id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request};
- el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request;
+ selectedJob={id:node.dataset.id,client:node.dataset.client,address:node.dataset.address,request:node.dataset.request,lat:parseFloat(node.dataset.lat),lng:parseFloat(node.dataset.lng)};
+ el('selectedClient').textContent=selectedJob.client; el('selectedAddress').textContent=selectedJob.address; el('selectedRequest').textContent=selectedJob.request; updateSelectedJobMap();
 }
 function openSelectedMap(){window.open('https://maps.google.com/?q='+encodeURIComponent(selectedJob.address),'_blank')}
 function openSigModal(target){
@@ -434,7 +609,7 @@ function fieldNavigate(name){
  document.querySelectorAll('#fieldNav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));
  const resume=el('resumeJob');
  if(resume) resume.classList.toggle('hidden',name==='Interventi'||!jobRunning);
- window.scrollTo({top:0,behavior:'smooth'});
+ window.scrollTo({top:0,behavior:'smooth'}); if(name==='Mappa'&&fieldMapObj)setTimeout(()=>fieldMapObj.invalidateSize(),80);
 }
 
 function openOnly(id){
@@ -503,6 +678,22 @@ function generaRelazione(){
   '\n\nANOMALIE / NOTE\n'+(el('anomaliaTesto').value.trim()||'Nessuna anomalia segnalata.');
   el('relazioneGenerata').textContent=testo; updateMobileSummary();
 }
+
+function renderReportActivities(){
+ const list=el('reportActivitiesList'); if(!list) return;
+ const selected=[...document.querySelectorAll('.chip.active')].map(x=>x.dataset.act);
+ if(!selected.length){list.innerHTML='<li>Nessuna attività selezionata</li>';return;}
+ const quantities={
+   'Aspirazione reflui':el('qtaMc').value?el('qtaMc').value+' m³':'',
+   'Lavaggio alta pressione':el('qtaMetri').value?el('qtaMetri').value+' m':'',
+   'Disotturazione tubazione':'',
+   'Pulizia pozzetto':'',
+   'Videoispezione':'',
+   'Pulizia fossa biologica':''
+ };
+ list.innerHTML=selected.map(a=>'<li><span class="check">✓</span><span>'+a+'</span><b>'+(quantities[a]||'')+'</b></li>').join('');
+}
+
 function buildAttivitaText(){
   const acts=[...document.querySelectorAll('.chip.active')].map(x=>x.dataset.act);
   let parts=acts.length?acts:['Nessuna attività selezionata'];
@@ -559,17 +750,23 @@ function prepareAndShowReport(){
   el('job').classList.add('hidden'); el('jobPicker').style.display='grid'; el('startBtn').disabled=false; el('startBtn').textContent='Inizia intervento';
   el('selectedJobCard').insertAdjacentHTML('beforebegin','<div class="finished-card">✓ Intervento '+selectedJob.id+' terminato e rapportino generato.</div>');
   if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request;
-  if(el('reportComune')) el('reportComune').textContent=selectedJob.address;
+  if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client;
+  if(el('reportClientAddress')) el('reportClientAddress').innerHTML=selectedJob.address.replace(', ','<br>')+' – Italia';
+  if(el('reportComune')) el('reportComune').textContent=selectedJob.address+' – Italia';
+  if(el('reportLat')) el('reportLat').textContent=selectedJob.lat.toFixed(4);
+  if(el('reportLng')) el('reportLng').textContent=selectedJob.lng.toFixed(4);
+  if(el('reportNumber')) el('reportNumber').textContent='N. '+selectedJob.id.replace('INT-','');
+  setTimeout(updateReportMap,120);
 
   const rel=el('relazioneGenerata').textContent.trim();
   el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
-  el('reportAttivita').textContent=buildAttivitaText();
+  
   const tipo=el('anomaliaTipo').value.trim();
   const anom=el('anomaliaTesto').value.trim();
   if(el('reportAnomaliaTop')) el('reportAnomaliaTop').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
   copyPreviewToReport('prevPrima','reportFotoPrima');
   copyPreviewToReport('prevDurante','reportFotoDurante');
-  copyPreviewToReport('prevDopo','reportFotoDopo');
+  copyPreviewToReport('prevDopo','reportFotoDopo'); renderReportActivities();
   const opName=(el('nomeOperatoreFirma').value||'Operatore').trim();
   const clName=(el('nomeClienteFirma').value||'Cliente').trim();
   el('reportOperatoreNome').textContent=opName;
@@ -639,7 +836,10 @@ function markSignatureStatus(canvasId,statusId){
 }
 setTimeout(()=>{markSignatureStatus('firmaOperatore','opSigStatus');markSignatureStatus('firmaCliente','clSigStatus');updateMobileSummary()},500);
 
+window.addEventListener('load',()=>setTimeout(initAllMaps,150));
+
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
-</script></body></html>
+</script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</body></html>
