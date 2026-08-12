@@ -47,7 +47,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .report{box-shadow:none!important;border:0!important;margin:0!important;max-width:none!important;padding:12mm!important}
 }
 
-/* Build 5.0.9 - modalità ultra-operativa smartphone */
+/* Build 5.0.10 - modalità ultra-operativa smartphone */
 .mobile-summary{display:none}
 .accordion-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;border:0;background:transparent;color:inherit;font-weight:900;font-size:16px;padding:0;cursor:pointer}
 .accordion-toggle .chev{transition:.2s transform}.accordion-toggle.open .chev{transform:rotate(180deg)}
@@ -78,7 +78,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.9 - navigazione field-service persistente */
+/* Build 5.0.10 - navigazione field-service persistente */
 .field-page{display:none;max-width:720px;margin:0 auto}.field-page.active{display:block}
 .field-nav{display:none}
 .resume-job{position:sticky;top:72px;z-index:25;background:#103c5e;color:#fff;border:1px solid #26658f;border-radius:10px;padding:10px 12px;margin:8px auto;max-width:720px;font-weight:800;cursor:pointer}
@@ -98,7 +98,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.9 */
+/* Build 5.0.10 */
 .job-picker{display:grid;gap:9px;margin:12px 0}
 .job-choice{background:#fff;color:#142438;border:2px solid transparent;border-radius:13px;padding:13px;cursor:pointer}
 .job-choice.selected{border-color:#28a85a;box-shadow:0 0 0 2px #28a85a22}
@@ -137,7 +137,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.9 - mappe reali e rapportino fedele */
+/* Build 5.0.10 - mappe reali e rapportino fedele */
 .real-map{height:300px;border-radius:12px;overflow:hidden;border:1px solid #d5dfe7;background:#eaf0f4}
 .real-map.small{height:180px}
 .real-map.report-map-real{height:145px;border-radius:7px}
@@ -203,7 +203,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* Build 5.0.9 - mappe responsive, agenda selezionabile, riapertura interventi */
+/* Build 5.0.10 - mappe responsive, agenda selezionabile, riapertura interventi */
 .real-map{
   width:100%;
   min-height:260px;
@@ -245,11 +245,32 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   .real-map.report-map-real{height:78px!important;min-height:78px!important}
 }
 
+
+/* Build 5.0.10 */
+.report-actions-app{display:block}
+#reportRealMap{
+  width:100%;
+  height:160px;
+  min-height:160px;
+  border:1px solid #c7d0d7;
+  border-radius:7px;
+  overflow:hidden;
+  background:#e9eef2;
+}
+#reportRealMap .leaflet-control-attribution{font-size:7px!important}
+@media print{
+  .report-actions-app{display:none!important}
+  #reportRealMap{
+    height:96px!important;
+    min-height:96px!important;
+  }
+}
+
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v5.0 · build 5.0.9</div>
+<div class="version">v5.0 · build 5.0.10</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="ufficio123">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <p class="muted">Demo: ufficio/ufficio123 · marco/marco123 · luca/luca123</p>
@@ -259,9 +280,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.9<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite Beta v5.0 · Build 5.0.10<br><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
-<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.9</span></div>
+<section id="dashboard" class="section active"><div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale</div></div><span class="build">v5.0 · Build 5.0.10</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong>7</strong></div><div class="card kpi">In corso<strong>3</strong></div><div class="card kpi">Completati<strong>4</strong></div><div class="card kpi">Squadre attive<strong>2</strong></div><div class="card kpi">Da fatturare<strong>6</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi recenti</h3><table class="table"><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Squadra</th></tr><tr><td><span class="badge urgent">URGENTE</span></td><td>Condominio Belvedere<br><small>Via Roma 24, Sarnico</small></td><td>10:30</td><td>Marco · AB01</td></tr><tr><td><span class="badge progress">IN CORSO</span></td><td>Ristorante Al Lago<br><small>Iseo</small></td><td>14:00</td><td>Luca · AB02</td></tr><tr><td><span class="badge planned">PROGRAMMATO</span></td><td>Azienda Bianchi Srl<br><small>Costa Volpino</small></td><td>16:30</td><td>Marco</td></tr></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div class="map-caption">Mappa reale OpenStreetMap con gli interventi demo.</div></div></div></section>
@@ -441,7 +462,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.9</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v5.0 · Build 5.0.10</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -517,16 +538,17 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
     <div class="sign-box"><h4>FIRMA OPERATORE</h4><b id="reportOperatoreNome">Operatore</b><div id="reportFirmaOperatore" class="sigimg">Firma non acquisita</div><small id="reportOpSignTime"></small></div>
   </div>
 
-  <div class="send-title">INVIA RAPPORTINO</div>
-  <div class="send-sub">Scegli come inviare il rapportino n. 2024-00045</div>
-  <div class="send-row">
-    <button class="send-btn" onclick="shareMail()"><strong class="green">✉ INVIA VIA E-MAIL</strong>Invia il PDF del rapportino via e-mail al cliente.</button>
-    <button class="send-btn" onclick="shareWA()"><strong class="green">◉ INVIA VIA WHATSAPP</strong>Invia il PDF del rapportino via WhatsApp al cliente.</button>
-    <button class="send-btn" onclick="shareNative()"><strong>⌯ CONDIVIDI PDF</strong>Scarica o condividi il PDF con altre app.</button>
-  </div>
-  <div class="privacy">🔒 Il PDF è protetto e accessibile solo tramite QR Code.</div>
+  
 </div>
-<div class="share"><button class="btn navy" style="width:100%" onclick="window.print()">▤ GENERA / SALVA PDF</button></div>
+<div class="share report-actions-app">
+  <h2 style="margin-top:0">Azioni rapportino</h2>
+  <div class="sharegrid">
+    <button class="btn navy" onclick="preparePrint()">▤ GENERA / SALVA PDF</button>
+    <button class="btn primary" onclick="shareMail()">✉ E-MAIL</button>
+    <button class="btn primary" onclick="shareWA()">◉ WHATSAPP</button>
+  </div>
+  <div style="margin-top:10px"><button class="btn ghost" style="width:100%" onclick="shareNative()">⌯ CONDIVIDI RAPPORTINO</button></div>
+</div>
 </div>
 <script>
 let prevView='office', timerInt, secs=0;
@@ -719,7 +741,28 @@ function updateSelectedJobMap(){
 }
 function updateReportMap(){
  if(!selectedJob || typeof L==='undefined') return;
- reportMapObj=makeLeafletMap('reportRealMap',[selectedJob.lat,selectedJob.lng],15,[{client:selectedJob.client,lat:selectedJob.lat,lng:selectedJob.lng,status:'Intervento'}]);
+ const node=el('reportRealMap');
+ if(!node) return;
+ if(reportMapObj){
+   try{reportMapObj.remove()}catch(e){}
+   reportMapObj=null;
+   node._leaflet_id=null;
+   node.innerHTML='';
+ }
+ reportMapObj=L.map('reportRealMap',{zoomControl:false,scrollWheelZoom:false,dragging:false,tap:false})
+   .setView([selectedJob.lat,selectedJob.lng],16);
+ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+   maxZoom:19,
+   attribution:'&copy; OpenStreetMap contributors'
+ }).addTo(reportMapObj);
+ L.marker([selectedJob.lat,selectedJob.lng]).addTo(reportMapObj)
+   .bindPopup('<b>'+selectedJob.client+'</b><br>'+selectedJob.address);
+ setTimeout(()=>{
+   try{
+     reportMapObj.invalidateSize(true);
+     reportMapObj.setView([selectedJob.lat,selectedJob.lng],16,{animate:false});
+   }catch(e){}
+ },180);
 }
 
 let selectedJob={id:'INT-2024-00045',client:'Condominio Belvedere',address:'Via Roma 24, 24067 Sarnico (BG)',request:'Intasamento scarico garage',lat:45.6722,lng:9.9229};
@@ -971,6 +1014,15 @@ function closeReport(){
     fieldNavigate('Interventi');
   }
   setTimeout(invalidateVisibleMaps,120);
+}
+
+
+function preparePrint(){
+  updateReportMap();
+  setTimeout(()=>{
+    try{ if(reportMapObj) reportMapObj.invalidateSize(true); }catch(e){}
+    setTimeout(()=>window.print(),450);
+  },250);
 }
 
 function shareMail(){
