@@ -1,4 +1,4 @@
-# Spurgo Flow — Beta v0.3 Premium
+# Spurgo Flow — Beta v0.4 Premium
 
 Versione dimostrativa PWA pronta per **GitHub Pages**.
 
@@ -7,7 +7,7 @@ Versione dimostrativa PWA pronta per **GitHub Pages**.
 - Operatore Marco: `marco` / `marco123`
 - Operatore Luca: `luca` / `luca123`
 
-## Novità v0.3
+## Novità v0.4
 - Nuova identità grafica blu navy / verde e nuova icona PWA
 - Login ridisegnato
 - Dashboard Ufficio in stile gestionale professionale con menu laterale
