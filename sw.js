@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.13-map-modal-zfix';
+const CACHE='spurgoflow-v6-6.1.14-interventions-estimate-multiassign';
 const LOCAL=['./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(LOCAL)))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

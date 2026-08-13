@@ -266,3 +266,15 @@ Base: 6.1.12.
 - Control Room: la mappa non può più sovrapporsi alla scheda intervento.
 - Popup e controlli Leaflet confinati sotto il livello UI.
 - Modali forzate sopra tutti i layer cartografici.
+
+## 6.1.14 — Interventi
+Base: 6.1.13.
+
+- Scheda Interventi: filtro data impostato automaticamente sul giorno corrente.
+- Nuovo campo `estimatedMinutes` / Tempo stimato.
+- Tempo stimato mostrato in elenco e dettaglio.
+- Assegnazione a uno o più operatori.
+- Assegnazione a squadra.
+- Possibilità di combinare squadra + operatori specifici.
+- Se si sceglie una squadra senza operatori manuali, vengono assegnati gli operatori attivi della squadra.
+- `operatorId` resta il responsabile primario per compatibilità; `assignedOperatorIds` contiene tutti gli operatori assegnati.

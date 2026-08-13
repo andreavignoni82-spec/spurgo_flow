@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.13",
+  "name": "Spurgo Flow 6.1.14",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Fix sovrapposizione mappe su scheda intervento",
+  "description": "Interventi oggi di default, tempo stimato, assegnazione multi-operatore/squadra",
   "icons": [
     {
       "src": "icon-192.png",

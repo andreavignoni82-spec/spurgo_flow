@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.13</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.14</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -387,7 +387,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.13 LIVE DATA / OPERATOR PRIVACY ===== */
+/* ===== 6.1.14 LIVE DATA / OPERATOR PRIVACY ===== */
 .msg-bubble,.msg-bubble *{color:#142438!important}
 .msg-bubble small{color:#667785!important}
 .live-empty{padding:18px;text-align:center;color:#72818d}
@@ -401,7 +401,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .report-list-row:last-child{border-bottom:0}
 @media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
 
-/* ===== 6.1.13 LE MIE COMMESSE ===== */
+/* ===== 6.1.14 LE MIE COMMESSE ===== */
 .my-jobs-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
 .my-jobs-count{background:#e8f7ee;color:#177a3e;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900}
 .job-choice{cursor:pointer;transition:.15s transform,.15s border-color,.15s box-shadow}
@@ -411,7 +411,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 
-/* ===== 6.1.13 AGENDA REDESIGN ===== */
+/* ===== 6.1.14 AGENDA REDESIGN ===== */
 .agenda-office-shell{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:14px}
 .agenda-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
 .agenda-view-switch{display:flex;border:1px solid #d7e1e8;border-radius:10px;overflow:hidden}
@@ -462,7 +462,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* 6.1.13 Dashboard/Control Room */
+/* 6.1.14 Dashboard/Control Room */
 .clickable-row{cursor:pointer}.clickable-row:hover{background:#f2f7fa}
 .control-job-card{cursor:pointer;border:1px solid #dce5eb;border-radius:12px;padding:12px;background:#fff}
 .intervention-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -470,7 +470,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .intervention-detail-box.full{grid-column:1/-1}
 @media(max-width:700px){.intervention-detail-grid{grid-template-columns:1fr}}
 
-/* ===== 6.1.13 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
+/* ===== 6.1.14 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
 
 /* Le mappe devono restare sempre sotto alla UI applicativa */
 .real-map,
@@ -525,11 +525,19 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   z-index:auto!important;
 }
 
+
+/* ===== 6.1.14 INTERVENTI ===== */
+.operator-multi-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:7px}
+.operator-check{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid #dce5eb;border-radius:9px;background:#fff}
+.operator-check input{width:18px;height:18px}
+.today-filter-note{font-size:11px;color:#657986;margin-top:5px}
+.estimate-pill{display:inline-flex;align-items:center;gap:5px;background:#eef5ff;color:#255f9a;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
+@media(max-width:700px){.operator-multi-list{grid-template-columns:1fr}}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.13 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.14 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -539,10 +547,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.13 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.14 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.13</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.14</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -616,7 +624,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.13</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.14</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -668,7 +676,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.13</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.14</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -845,7 +853,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.13</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.14</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -948,7 +956,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.13 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.14 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -1013,7 +1021,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.13 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.14 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1133,45 +1141,124 @@ function populateOfficeFilters(){
  ['intOperatorFilter','agendaOperator'].forEach(id=>{const n=el(id);if(n){const old=n.value;n.innerHTML=opHtml;n.value=old}});
 }
 
-function renderOfficeInterventions(){
- const host=el('officeInterventionList');if(!host)return;
- const q=(el('intSearch')?.value||'').toLowerCase(),st=el('intStatusFilter')?.value||'',op=el('intOperatorFilter')?.value||'';
- let rows=[...sfOfficeInterventions].sort((a,b)=>(b.date+b.time).localeCompare(a.date+a.time));
- rows=rows.filter(i=>(!q||[i.id,i.client,i.address,i.request].join(' ').toLowerCase().includes(q))&&(!st||i.status===st)&&(!op||i.operatorId===op));
- if(!rows.length){host.innerHTML='<div class="v6-empty">Nessun intervento corrispondente.</div>';return}
- host.innerHTML=rows.map(i=>{const o=getOperator(i.operatorId),v=getVehicle(i.vehicleId);return `<div class="v6-row">
-  <div class="v6-row-head"><div><b>${esc(i.id)}</b> · <b>${esc(i.client)}</b><div class="v6-meta">${esc(i.address)} · ${fmtDate(i.date)} ${esc(i.time||'')}</div></div><span class="v6-status ${statusClass(i.status)}">${esc(i.status)}</span></div>
-  <div class="v6-meta">${esc(i.type||'Intervento')} · ${esc(i.request||'')}<br>Operatore: <b>${esc(o?operatorName(o):'Da assegnare')}</b> · Mezzo: <b>${esc(v?v.name:'—')}</b></div>
-  <div class="v6-row-actions"><button class="btn ghost" onclick="openInterventionModal('${i.id}')">Modifica</button><button class="btn ghost" onclick="duplicateIntervention('${i.id}')">Duplica</button><button class="btn primary" onclick="openConversationFor('${i.operatorId||''}')">Messaggio operatore</button><button class="btn danger" onclick="deleteIntervention('${i.id}')">Elimina</button></div>
- </div>`}).join('');
+
+function formatEstimatedMinutes(mins){
+ const n=Math.max(0,parseInt(mins||0,10));
+ if(!n)return '';
+ const h=Math.floor(n/60),m=n%60;
+ if(h&&m)return `${h} h ${m} min`;
+ if(h)return `${h} h`;
+ return `${m} min`;
 }
 
-function openInterventionModal(id=null,agendaMode=false){
- const i=id?sfOfficeInterventions.find(x=>x.id===id):null;editingEntity={type:'intervention',id:id};
- const clients=optionList(sfClients,x=>x.id,x=>x.name,i?.clientId||'');
- const ops=optionList(sfOperators.filter(o=>o.active!==false),x=>x.id,x=>operatorName(x),i?.operatorId||'');
- const veh=optionList(sfVehicles,x=>x.id,x=>x.name,i?.vehicleId||'');
+function renderOfficeInterventions(){
+ const tbody=el('v6IntBody');if(!tbody)return;
+ const q=(el('v6IntSearch')?.value||'').toLowerCase();
+ const status=el('v6IntStatus')?.value||'';
+ const op=el('v6IntOperator')?.value||'';
+ const dateEl=el('v6IntDate');
+ if(dateEl && !dateEl.dataset.initialized){
+   dateEl.value=localDateKey();
+   dateEl.dataset.initialized='1';
+ }
+ const date=dateEl?.value||'';
+
+ const rows=sfOfficeInterventions.filter(i=>{
+   const operatorMatch=!op || i.operatorId===op || (Array.isArray(i.assignedOperatorIds)&&i.assignedOperatorIds.includes(op));
+   return (!q||[i.id,i.client,i.address,i.request,i.notes].join(' ').toLowerCase().includes(q))
+     &&(!status||i.status===status)
+     &&operatorMatch
+     &&(!date||i.date===date);
+ }).sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')));
+
+ tbody.innerHTML=rows.length?rows.map(i=>{
+   const o=getOperator(i.operatorId),v=getVehicle(i.vehicleId),t=sfTeams.find(x=>x.id===i.teamId);
+   const allOps=(i.assignedOperatorIds||[]).map(getOperator).filter(Boolean);
+   const assignee=allOps.length?allOps.map(operatorName).join(', '):(o?operatorName(o):'Da assegnare');
+   return `<tr class="clickable-row" onclick="openOfficeInterventionDetail('${i.id}')">
+     <td><b>${esc(i.id)}</b><br><small>${fmtDate(i.date)} · ${esc(i.time||'')}</small></td>
+     <td><b>${esc(i.client||'')}</b><br><small>${esc(i.address||'')}</small></td>
+     <td>${esc(i.request||'')}<br>${i.estimatedMinutes?`<span class="estimate-pill">⏱ ${esc(formatEstimatedMinutes(i.estimatedMinutes))}</span>`:''}</td>
+     <td><span class="v6-status ${statusClass(i.status)}">${esc(i.status)}</span></td>
+     <td>${esc(t?.name||'')}<br><small>${esc(assignee)}</small></td>
+     <td>${esc(v?.name||'')}</td>
+     <td><button class="btn ghost" onclick="event.stopPropagation();openInterventionModal('${i.id}')">Modifica</button></td>
+   </tr>`;
+ }).join(''):'<tr><td colspan="7" class="live-empty">Nessun intervento per i filtri selezionati.</td></tr>';
+}
+
+function openInterventionModal(id=null,fromAgenda=false){
+ const i=id?sfOfficeInterventions.find(x=>x.id===id):null;
+ editingEntity={type:'intervention',id};
+
+ const selectedOps=new Set(i?.assignedOperatorIds?.length?i.assignedOperatorIds:(i?.operatorId?[i.operatorId]:[]));
+
  showV6Modal(i?'Modifica intervento':'Nuovo intervento',`<div class="v6-form">
- <div><label>Cliente</label><select id="viClient" class="field" onchange="v6FillClientAddress()"><option value="">Seleziona cliente</option>${clients}</select></div>
- <div><label>Tipo</label><input id="viType" class="field" value="${esc(i?.type||'Spurgo')}" placeholder="Spurgo, lavaggio..."></div>
+ <div><label>Cliente</label><select id="viClient" class="field" onchange="v6FillClientAddress()"><option value="">Seleziona</option>${sfClients.map(c=>`<option value="${esc(c.id)}" ${i?.clientId===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select></div>
+ <div><label>Data</label><input id="viDate" class="field" type="date" value="${esc(i?.date||localDateKey())}"></div>
+ <div><label>Ora</label><input id="viTime" class="field" type="time" value="${esc(i?.time||'08:00')}"></div>
+ <div><label>Tempo stimato</label><select id="viEstimatedMinutes" class="field">
+   ${[30,45,60,90,120,180,240,300,360,480].map(v=>`<option value="${v}" ${(parseInt(i?.estimatedMinutes||60,10)===v)?'selected':''}>${formatEstimatedMinutes(v)}</option>`).join('')}
+ </select></div>
  <div class="full"><label>Indirizzo intervento</label><input id="viAddress" class="field" value="${esc(i?.address||'')}"></div>
- <div class="full"><label>Richiesta / descrizione</label><textarea id="viRequest" class="textarea">${esc(i?.request||'')}</textarea></div>
- <div><label>Data</label><input id="viDate" type="date" class="field" value="${esc(i?.date||TODAY_2026)}"></div>
- <div><label>Ora</label><input id="viTime" type="time" class="field" value="${esc(i?.time||'08:00')}"></div>
+ <div class="full"><label>Richiesta / attività</label><input id="viRequest" class="field" value="${esc(i?.request||'')}"></div>
  <div><label>Stato</label><select id="viStatus" class="field">${['Programmato','Urgente','In corso','Terminato','Annullato'].map(x=>`<option ${i?.status===x?'selected':''}>${x}</option>`).join('')}</select></div>
- <div><label>Priorità</label><select id="viPriority" class="field"><option ${i?.priority==='Normale'?'selected':''}>Normale</option><option ${i?.priority==='Urgente'?'selected':''}>Urgente</option></select></div>
- <div><label>Operatore</label><select id="viOperator" class="field"><option value="">Da assegnare</option>${ops}</select></div>
- <div><label>Mezzo</label><select id="viVehicle" class="field"><option value="">Nessuno</option>${veh}</select></div>
- <div class="full"><label>Note operative</label><textarea id="viNotes" class="textarea">${esc(i?.notes||'')}</textarea></div>
+ <div><label>Priorità</label><select id="viPriority" class="field">${['Normale','Urgente'].map(x=>`<option ${i?.priority===x?'selected':''}>${x}</option>`).join('')}</select></div>
+ <div><label>Squadra</label><select id="viTeam" class="field" onchange="prefillInterventionTeamOperators()"><option value="">Nessuna squadra</option>${sfTeams.map(t=>`<option value="${esc(t.id)}" ${i?.teamId===t.id?'selected':''}>${esc(t.name)}</option>`).join('')}</select></div>
+ <div><label>Mezzo</label><select id="viVehicle" class="field"><option value="">Nessuno</option>${sfVehicles.map(v=>`<option value="${esc(v.id)}" ${i?.vehicleId===v.id?'selected':''}>${esc(v.name)}</option>`).join('')}</select></div>
+ <div class="full"><label>Operatori assegnati</label><div class="operator-multi-list">${sfOperators.filter(o=>o.active!==false).map(o=>`<label class="operator-check"><input type="checkbox" class="vi-op-check" value="${esc(o.id)}" ${selectedOps.has(o.id)?'checked':''}><span>${esc(operatorName(o))}</span></label>`).join('')}</div></div>
+ <div class="full"><label>Note</label><textarea id="viNotes" class="textarea">${esc(i?.notes||'')}</textarea></div>
  </div><div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">Annulla</button><button class="btn primary" onclick="saveIntervention()">Salva intervento</button></div>`);
+
+ if(!i && fromAgenda && el('agendaDate')?.value && el('viDate'))el('viDate').value=el('agendaDate').value;
+}
+function prefillInterventionTeamOperators(){
+ const team=sfTeams.find(t=>t.id===el('viTeam')?.value);
+ if(!team)return;
+ const ids=new Set((team.operatorIds||[]).filter(id=>getOperator(id)?.active!==false));
+ document.querySelectorAll('.vi-op-check').forEach(cb=>{if(ids.has(cb.value))cb.checked=true});
+ const veh=sfVehicles.find(v=>v.name===team.vehicle||v.code===team.vehicle);
+ if(veh&&el('viVehicle'))el('viVehicle').value=veh.id;
 }
 function v6FillClientAddress(){const c=getClient(el('viClient').value);if(c&&!el('viAddress').value)el('viAddress').value=[c.address,c.city].filter(Boolean).join(', ')}
 function saveIntervention(){
- const client=getClient(el('viClient').value),existing=editingEntity.id?sfOfficeInterventions.find(x=>x.id===editingEntity.id):null;
- if(!client){alert('Seleziona un cliente.');return}
- const data={clientId:client.id,client:client.name,address:el('viAddress').value.trim()||[client.address,client.city].join(', '),request:el('viRequest').value.trim(),type:el('viType').value.trim(),date:el('viDate').value,time:el('viTime').value,status:el('viStatus').value,priority:el('viPriority').value,operatorId:el('viOperator').value,assignedOperatorIds:el('viOperator').value?[el('viOperator').value]:[],vehicleId:el('viVehicle').value,notes:el('viNotes').value.trim(),billing:existing?.billing||'—'};
- if(existing)Object.assign(existing,data);else sfOfficeInterventions.unshift({id:'INT-2026-'+String(52+sfOfficeInterventions.length).padStart(5,'0'),...data});
- saveV6();closeV6Modal();renderAllOfficeV6();syncOperatorJobs();
+ const existing=editingEntity.id?sfOfficeInterventions.find(x=>x.id===editingEntity.id):null;
+ const client=getClient(el('viClient').value);
+ const assignedOperatorIds=[...document.querySelectorAll('.vi-op-check:checked')].map(x=>x.value);
+ const teamId=el('viTeam')?.value||'';
+ const team=sfTeams.find(t=>t.id===teamId);
+
+ // Se viene scelta una squadra e nessun operatore manuale, usa gli operatori attivi della squadra.
+ if(team && !assignedOperatorIds.length){
+   (team.operatorIds||[]).forEach(id=>{if(getOperator(id)?.active!==false)assignedOperatorIds.push(id)});
+ }
+
+ const primaryOperatorId=assignedOperatorIds[0]||'';
+ const data={
+   clientId:client?.id||'',
+   client:client?.name||'',
+   address:el('viAddress').value.trim(),
+   request:el('viRequest').value.trim(),
+   date:el('viDate').value,
+   time:el('viTime').value,
+   estimatedMinutes:parseInt(el('viEstimatedMinutes')?.value||60,10),
+   status:el('viStatus').value,
+   priority:el('viPriority').value,
+   teamId,
+   operatorId:primaryOperatorId,
+   assignedOperatorIds:[...new Set(assignedOperatorIds)],
+   vehicleId:el('viVehicle').value,
+   notes:el('viNotes').value.trim()
+ };
+ if(!data.client||!data.date){alert('Seleziona cliente e data.');return}
+
+ if(existing)Object.assign(existing,data);
+ else sfOfficeInterventions.push({id:uniqueId('INT'),billing:'—',...data});
+
+ saveV6();
+ closeV6Modal();
+ renderAllOfficeV6();
+ syncOperatorJobs();
 }
 function duplicateIntervention(id){const x=sfOfficeInterventions.find(i=>i.id===id);if(!x)return;const c={...x,id:'INT-2026-'+String(100+sfOfficeInterventions.length).padStart(5,'0'),status:'Programmato',time:'08:00'};sfOfficeInterventions.unshift(c);saveV6();renderAllOfficeV6()}
 function deleteIntervention(id){if(!confirm('Eliminare questo intervento?'))return;sfOfficeInterventions=sfOfficeInterventions.filter(i=>i.id!==id);saveV6();renderAllOfficeV6();syncOperatorJobs()}
@@ -1464,8 +1551,10 @@ function operatorActiveJobs(operatorId){
  return sfOfficeInterventions.filter(i=>assignedToOperator(i,operatorId)&&!['Terminato','Annullato'].includes(i.status));
 }
 function interventionAssigneeLabel(i){
- const o=getOperator(i.operatorId),t=sfTeams.find(x=>x.id===i.teamId),v=getVehicle(i.vehicleId);
- return [t?.name,o?operatorName(o):'',v?.code||v?.name||''].filter(Boolean).join(' · ')||'Da assegnare';
+ const t=sfTeams.find(x=>x.id===i.teamId),v=getVehicle(i.vehicleId);
+ const ops=(i.assignedOperatorIds||[]).map(getOperator).filter(Boolean);
+ const opText=ops.length?ops.map(operatorName).join(', '):(getOperator(i.operatorId)?operatorName(getOperator(i.operatorId)):'');
+ return [t?.name||'',opText,v?.code||v?.name||''].filter(Boolean).join(' · ')||'Da assegnare';
 }
 function renderControlRoomV6(){
  const urgency=sfOfficeInterventions.filter(i=>i.status==='Urgente'&&!i.operatorId).sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')))[0];
@@ -1561,7 +1650,8 @@ function openOfficeInterventionDetail(id){
  <div class="intervention-detail-box"><small>Data / ora</small><b>${fmtDate(i.date)} · ${esc(i.time||'—')}</b></div>
  <div class="intervention-detail-box"><small>ID</small><b>${esc(i.id||'')}</b></div>
  <div class="intervention-detail-box full"><small>Indirizzo</small><b>${esc(i.address||'—')}</b></div>
- <div class="intervention-detail-box"><small>Operatore</small><b>${esc(o?operatorName(o):'Da assegnare')}</b></div>
+ <div class="intervention-detail-box"><small>Operatori</small><b>${esc(allAssigned.length?allAssigned.map(operatorName).join(', '):(o?operatorName(o):'Da assegnare'))}</b></div>
+ <div class="intervention-detail-box"><small>Tempo stimato</small><b>${esc(i.estimatedMinutes?formatEstimatedMinutes(i.estimatedMinutes):'Non definito')}</b></div>
  <div class="intervention-detail-box"><small>Squadra</small><b>${esc(t?.name||'Nessuna')}</b></div>
  <div class="intervention-detail-box"><small>Mezzo</small><b>${esc(v?.name||'Nessuno')}</b></div>
  <div class="intervention-detail-box full"><small>Note</small><div>${esc(i.notes||'Nessuna nota')}</div></div>
