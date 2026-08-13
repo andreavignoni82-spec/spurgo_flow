@@ -14,8 +14,8 @@ assert(finish.indexOf("alert('Intervento chiuso")>finish.indexOf('await window.S
 assert(cloud.includes('async function saveIntervention(record)'));
 assert(cloud.includes("setDoc(doc(db,'interventions',String(record.id))"));
 const agenda=html.slice(html.indexOf("let operatorAgendaView='day'"),html.indexOf('function backToOperatorJobs'));
-for(const token of ["assignedToOperator(i,id)","status!=='Annullato'",'agenda-timeline','agenda-week-grid',"onclick=\"openOperatorJob",'OGGI','GIORNO','SETTIMANA',"i.status==='Terminato'?'finished'"])assert(agenda.includes(token),token);
+for(const token of ["assignedToOperator(i,id)","status!=='Annullato'",'agenda-timeline','agenda-week-grid','data-intervention-id="${esc(i.id)}"','bindOperatorAgendaOpening(host)','OGGI','GIORNO','SETTIMANA',"i.status==='Terminato'?'finished'"])assert(agenda.includes(token),token);
 assert(html.includes("sessionStorage.setItem('sf_operator_agenda_view','day')"));
 assert(!html.includes("source.status='Riaperto'"),'aprire il rapportino terminato non deve riaprire lo stato');
 assert(html.includes("current.status='Riaperto'"),'riapertura esplicita preservata');
-console.log('v6.1.23.5: agenda personale e chiusura persistente verificate');
+console.log('v6.1.23.6: agenda personale e chiusura persistente verificate');
