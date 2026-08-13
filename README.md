@@ -1,9 +1,11 @@
-# Spurgo Flow — Suite v6.1.23.5
-Build 6.1.23.5
+# Spurgo Flow — Suite v6.1.23.6
+Build 6.1.23.6
 
-## 6.1.23.5 — Agenda personale e chiusura persistente
+## 6.1.23.6 — Apertura diretta intervento da Agenda operatore
 
-- Home operatore trasformata in Agenda personale Giorno/Settimana, filtrata per assegnazione diretta o squadra e con blocchi interamente cliccabili.
+- I blocchi Giorno/Settimana espongono il vero `intervention.id` e usano un unico handler delegato, affidabile anche su contenuti annidati e tap mobile.
+- `openOperatorIntervention(interventionId)` centralizza ricerca, controllo assegnazione diretta/multipla/squadra e caricamento del rapportino senza cambiare lo stato dell'intervento.
+- Gli interventi terminati restano apribili e gli ID mancanti o non assegnati producono messaggi controllati.
 - Chiusura centralizzata in `finishOperatorIntervention()`: aggiorna lo stesso intervento con rapportino completo, stato `Terminato` e `actualEnd` ISO reale.
 - Persistenza locale immediata e scrittura Firestore attesa prima di confermare il successo; in caso di errore la UI resta aperta e mostra un messaggio esplicito.
 - Unico pulsante touch-friendly `TERMINA INTERVENTO`; eliminata la precedente azione sticky duplicata.

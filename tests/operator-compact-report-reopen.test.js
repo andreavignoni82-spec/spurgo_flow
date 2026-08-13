@@ -21,7 +21,8 @@ assert(ordered.findIndex(j=>j.date==='2026-08-14')<ordered.findIndex(j=>j.status
 
 // E: whole compact row is keyboard/touch clickable and has no “Apri” action button.
 const compactTemplate=html.slice(html.indexOf('function syncOperatorJobs(){'),html.indexOf('function backToOperatorJobs'));
-assert(compactTemplate.includes('onclick="openOperatorJob'));
+assert(compactTemplate.includes('data-intervention-id="${esc(i.id)}"'));
+assert(compactTemplate.includes('bindOperatorAgendaOpening(host)'));
 assert(compactTemplate.includes('agenda-block'));
 assert(compactTemplate.includes('agenda-week-job'));
 assert(!compactTemplate.includes('Apri commessa'));
@@ -41,4 +42,4 @@ assert.strictEqual(new Set([updated.id]).size,1);
 // Operator navigation is retained only as dormant compatibility markup and hidden from UI.
 for(const id of ['#fieldAgenda','#fieldMappa','#fieldMessaggi','#fieldProfilo','#fieldNav'])assert(html.includes(id),id);
 assert(html.includes('display:none!important'));
-console.log('v6.1.23.5: agenda, privacy e riapertura sullo stesso interventionId verificati');
+console.log('v6.1.23.6: agenda, privacy e riapertura sullo stesso interventionId verificati');
