@@ -257,3 +257,12 @@ Base: 6.1.10.
 - Pannello dettaglio intervento.
 - Modifica intervento e messaggio all'operatore dal dettaglio.
 - Dati alimentati da Firebase/data layer esistente.
+
+## 6.1.13 — Map / Modal z-index Fix
+Base: 6.1.12.
+
+- Corretto stacking context di Leaflet.
+- Dashboard: la mappa non può più sovrapporsi alla scheda intervento.
+- Control Room: la mappa non può più sovrapporsi alla scheda intervento.
+- Popup e controlli Leaflet confinati sotto il livello UI.
+- Modali forzate sopra tutti i layer cartografici.

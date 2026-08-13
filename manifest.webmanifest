@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.12",
+  "name": "Spurgo Flow 6.1.13",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Dashboard e Control Room con apertura interventi",
+  "description": "Fix sovrapposizione mappe su scheda intervento",
   "icons": [
     {
       "src": "icon-192.png",
