@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.23.3-operator-provision-hotfix';
+const CACHE='spurgoflow-v6-6.1.23.4-operator-compact-report-reopen';
 const LOCAL=['./index.html','./planning.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 
 self.addEventListener('install',e=>{

@@ -1,5 +1,13 @@
-# Spurgo Flow — Suite v6.1.23.3
-Build 6.1.23.3
+# Spurgo Flow — Suite v6.1.23.4
+Build 6.1.23.4
+
+## 6.1.23.4 — Operatore compatto e rapportino riapribile
+
+- Home operatore ridotta alla lista ultra-compatta di tutti gli interventi assegnati, inclusi quelli di squadra, terminati e riaperti.
+- Ordinamento per urgenze attive, interventi odierni, futuri e infine passati/terminati in ordine decrescente.
+- Riapertura sullo stesso `interventionId` con ripristino completo di relazione, attività, quantità, anomalie, foto, posizione e firme.
+- Navigazione operatore secondaria nascosta per un flusso diretto lista → rapportino completo.
+
 
 ## 6.1.23.3 — Hotfix creazione operatori e account Auth orfani
 

@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.23.3",
+  "name": "Spurgo Flow 6.1.23.4",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Agenda giorno corrente, colori operatori/squadre e refresh Messaggi/Rapportini ogni 30 secondi",
+  "description": "Lista operatore ultra-compatta e rapportini completamente riapribili",
   "icons": [
     {
       "src": "icon-192.png",
