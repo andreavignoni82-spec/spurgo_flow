@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.22-agenda-colors-refresh30';
+const CACHE='spurgoflow-v6-6.1.23-agenda-colors-refresh30';
 const LOCAL=['./planning.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 
 self.addEventListener('install',e=>{
