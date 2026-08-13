@@ -310,3 +310,9 @@ Base: 6.1.18.
 - Click diretto sul blocco per aprire Modifica intervento, senza pannello dettagli separato.
 - Vista Settimana compatta, palette pastello persistente e layout responsive con scorrimento orizzontale.
 - Invariati Firebase, autenticazione, sincronizzazione e refresh Messaggi/Rapportini ogni 30 secondi.
+
+## 6.1.20 — Control Room, dispatch operativo dinamico
+
+- Control Room responsive a tutta larghezza con risorse, timeline giornaliera, viaggi, margini e criticità live.
+- Motore di planning deterministico e riutilizzabile con durata tecnica di fallback, stima geografica prudenziale dei viaggi e propagazione di anticipi/ritardi.
+- Urgenze prioritarie, suggerimenti fino a tre risorse e riassegnazione solo dopo conferma dell’ufficio, sugli stessi interventi sincronizzati dell’Agenda.
