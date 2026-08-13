@@ -164,11 +164,32 @@ async function provisionOperator(op,password){
  if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può creare operatori.");
  const secondary=initializeApp(cfg,'provision-'+Date.now());
  const secondaryAuth=getAuth(secondary);
+ let cred=null;
  try{
    const email=emailForUsername(op.username);
-   const cred=await createUserWithEmailAndPassword(secondaryAuth,email,password);
-   await setDoc(doc(db,'operators',op.id),clean({...op,cloudUid:cred.user.uid,cloudEmail:email}),{merge:true});
-   await setDoc(profileRef(cred.user.uid),{role:'operator',operatorId:op.id,username:op.username,active:true});
+   try{
+     cred=await createUserWithEmailAndPassword(secondaryAuth,email,password);
+   }catch(error){
+     if(error?.code==='auth/email-already-in-use'){
+       const controlled=new Error("Username già utilizzato nel sistema cloud. Scegli un altro username.");
+       controlled.code='SF_USERNAME_ALREADY_IN_USE';
+       throw controlled;
+     }
+     throw error;
+   }
+   try{
+     await setDoc(doc(db,'operators',op.id),clean({...op,cloudUid:cred.user.uid,cloudEmail:email}),{merge:true});
+     await setDoc(profileRef(cred.user.uid),{role:'operator',operatorId:op.id,username:op.username,active:true});
+   }catch(error){
+     // Compensazione limitata all'utente appena creato da questa operazione.
+     try{await deleteDoc(profileRef(cred.user.uid))}catch(rollbackError){console.warn('rollback profile',rollbackError)}
+     try{await deleteDoc(doc(db,'operators',op.id))}catch(rollbackError){console.warn('rollback operator',rollbackError)}
+     try{await deleteUser(cred.user)}catch(rollbackError){console.warn('rollback auth user',rollbackError)}
+     const controlled=new Error("Impossibile completare la creazione dell'operatore sul cloud.");
+     controlled.code='SF_OPERATOR_PROVISION_FAILED';
+     controlled.cause=error;
+     throw controlled;
+   }
    await signOut(secondaryAuth);
    return {uid:cred.user.uid,email};
  }finally{try{await deleteApp(secondary)}catch(e){}}
