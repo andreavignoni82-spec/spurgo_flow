@@ -29,6 +29,7 @@ service cloud.firestore {
       allow read, write: if isOffice();
     }
     match /resourceAvailability/{id} {
+      // Stessa policy delle configurazioni operative: solo profili Ufficio autenticati.
       allow read, write: if isOffice();
     }
 

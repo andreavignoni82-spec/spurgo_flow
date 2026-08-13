@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.1</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.2</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -528,7 +528,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.23.1 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.23.2 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -538,10 +538,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.23.1 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.23.2 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.1</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.2</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -601,7 +601,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.1</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.2</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -634,7 +634,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.1</span></div>
+ <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.2</span></div>
  <div class="msg-shell" style="margin-top:18px">
   <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
   <div class="msg-thread">
@@ -653,7 +653,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.1</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.2</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -830,7 +830,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.1</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.2</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -966,6 +966,7 @@ let sfVehicles=loadJson('sf_v6_vehicles',DEFAULT_VEHICLES);
 let sfOfficeInterventions=loadJson('sf_v6_interventions',DEFAULT_OFFICE_INTERVENTIONS);
 let sfMessages=loadJson('sf_v6_messages',DEFAULT_MESSAGES);
 let sfResourceAvailability=loadJson('sf_v6_resource_availability',[]);
+let sfResourceAvailabilitySynced=true;
 let officeMsgOperatorId=null;
 let editingEntity={type:null,id:null};
 
@@ -1631,7 +1632,7 @@ function isResourceAvailable(date,resourceId){return availabilityRecord(date,res
 function renderDailyAvailability(){
  const host=el('dailyAvailability'),date=el('controlDate')?.value||localDateKey();if(!host)return;
  const resources=smartPlannerResources(false);const active=resources.filter(r=>isResourceAvailable(date,r.id)).length;
- el('availabilitySummary').textContent=active===resources.length?'Tutte attive':active+' di '+resources.length+' attive';
+ el('availabilitySummary').textContent=sfResourceAvailabilitySynced?(active===resources.length?'Tutte attive':active+' di '+resources.length+' attive'):'Disponibilità giornaliera non sincronizzata · tutte disponibili';
  host.innerHTML=resources.map(r=>{const rec=availabilityRecord(date,r.id);return `<label class="availability-item"><input type="checkbox" ${rec?.available===false?'':'checked'} onchange="setDailyAvailability('${esc(r.id)}',this.checked)"><b>${esc(r.name)}</b><select onchange="setAvailabilityReason('${esc(r.id)}',this.value)"><option value="">Motivo facoltativo</option>${['Assente','Ferie','Malattia','Corso','Mezzo indisponibile','Altra attività'].map(x=>`<option ${rec?.reason===x?'selected':''}>${x}</option>`).join('')}</select></label>`}).join('');
 }
 function setDailyAvailability(resourceId,available){const date=el('controlDate').value;let rec=availabilityRecord(date,resourceId);if(!rec){rec={id:date+'__'+resourceId,date,resourceId,available:true,reason:''};sfResourceAvailability.push(rec)}rec.available=available;persistAvailability();}
@@ -1949,7 +1950,7 @@ window.SFState={
    if(name==='vehicles')sfVehicles=rows;
    if(name==='interventions')sfOfficeInterventions=rows;
    if(name==='messages')sfMessages=rows;
-   if(name==='resourceAvailability')sfResourceAvailability=rows;
+   if(name==='resourceAvailability'){sfResourceAvailability=rows;sfResourceAvailabilitySynced=true;}
    try{
      if(name==='operators'||name==='teams'){renderOfficePeople();renderDashboardV6();renderControlRoomV6();}
      if(['clients','vehicles','interventions','messages','resourceAvailability'].includes(name))renderAllOfficeV6();
@@ -1969,10 +1970,27 @@ function setCloudStatus(text,kind='sync'){
  });
 }
 window.addEventListener('sfcloudstatus',e=>setCloudStatus(e.detail.text,e.detail.kind));
+window.addEventListener('sfmoduleerror',e=>{
+ if(e.detail.module==='ResourceAvailability'){
+   sfResourceAvailabilitySynced=false;
+   sfResourceAvailability=[];
+   console.warn('[ResourceAvailability] fallback attivo: tutte le risorse attive sono disponibili');
+   try{renderDailyAvailability()}catch(error){console.warn('[ResourceAvailability] UI fallback non aggiornata',error)}
+ }
+});
 
 let prevView='office', timerInt, secs=0;
 
 const el = id => document.getElementById(id);
+
+async function startCloudData(info){
+ try{
+   await window.SFCloud.startRealtime(info);
+ }catch(e){
+   console.error('[PrimaryData] Caricamento Firestore non riuscito',e);
+   setCloudStatus('☁ Dati principali non sincronizzati','err');
+ }
+}
 
 async function login(){
   const u=el('user').value.trim().toLowerCase();
@@ -1986,7 +2004,7 @@ async function login(){
       if(info.role==='office'){
         loginScreen.classList.add('hidden');officeView.classList.remove('hidden');operatorView.classList.add('hidden');
         initializeOfficeModules();
-        await window.SFCloud.startRealtime(info);
+        await startCloudData(info);
         setTimeout(()=>renderOfficeMap(),140);
         return;
       }
@@ -2003,7 +2021,7 @@ async function login(){
           const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
           if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
         }catch(e){sessionStorage.removeItem('sf_selected_job')}
-        await window.SFCloud.startRealtime(info);
+        await startCloudData(info);
         syncOperatorJobs();renderOperatorMessages();updateMessageBadges();
         setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');updateSelectedJobMap()},140);
         return;

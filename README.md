@@ -1,5 +1,25 @@
-# Spurgo Flow — Suite v6.1.23.1
-Build 6.1.23.1
+# Spurgo Flow — Suite v6.1.23.2
+Build 6.1.23.2
+
+## 6.1.23.2 — Hotfix permessi disponibilità risorse
+
+- Aggiunta/confermata l'autorizzazione Firestore per la disponibilità giornaliera delle risorse in `resourceAvailability/{id}`, limitata agli utenti Firebase autenticati con profilo `office`.
+- Isolati autenticazione, caricamento dei dati principali e sincronizzazione dei moduli secondari: un errore di disponibilità non viene più mostrato come errore di accesso cloud.
+- In caso di errore del modulo Resource Availability, operatori e squadre attivi restano tutti disponibili per default e Control Room mostra un avviso non bloccante.
+- **Distribuire `firestore.rules` su Firebase**: la modifica locale non aggiorna automaticamente le regole del progetto in produzione.
+
+### Verifica accessi Firestore
+
+| Collection | Lettura | Scrittura | Regola | Utilizzata da |
+| --- | --- | --- | --- | --- |
+| `profiles/{uid}` | utente stesso / Ufficio | Ufficio | presente | login e ruoli |
+| `operators/{id}` | Ufficio / operatore stesso | Ufficio | presente | operatori, Agenda, Smart Dispatch |
+| `teams/{id}` | Ufficio | Ufficio | presente | squadre, Control Room, Smart Dispatch |
+| `clients/{id}` | Ufficio | Ufficio | presente | interventi |
+| `vehicles/{id}` | Ufficio | Ufficio | presente | flotta e planning |
+| `interventions/{id}` | Ufficio / operatore assegnato | Ufficio / operatore assegnato | presente | interventi, Agenda, Control Room, rapportini |
+| `messages/{id}` | Ufficio / operatore assegnato | Ufficio / operatore assegnato | presente | messaggi |
+| `resourceAvailability/{id}` | Ufficio | Ufficio | presente | disponibilità giornaliera, Smart Dispatch |
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 

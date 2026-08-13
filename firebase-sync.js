@@ -12,6 +12,7 @@ import {
 const cfg=window.SPURGO_FIREBASE_CONFIG||{};
 const configured=!!(cfg.enabled && cfg.apiKey && !String(cfg.apiKey).startsWith("INSERISCI_"));
 const emit=(text,kind)=>window.dispatchEvent(new CustomEvent("sfcloudstatus",{detail:{text,kind}}));
+const emitModuleError=(module,error)=>window.dispatchEvent(new CustomEvent("sfmoduleerror",{detail:{module,error}}));
 let app=null,auth=null,db=null,currentInfo=null,unsubs=[],syncTimer=null;
 
 function emailForUsername(username){return String(username||'').trim().toLowerCase()+'@spurgoflow.app'}
@@ -70,9 +71,11 @@ async function syncFromGlobals(){
          replaceCollection('clients',state.clients),
          replaceCollection('vehicles',state.vehicles),
          replaceCollection('interventions',state.interventions),
-         replaceCollection('messages',state.messages),
-         replaceCollection('resourceAvailability',state.resourceAvailability||[])
+         replaceCollection('messages',state.messages)
        ]);
+       try{
+         await replaceCollection('resourceAvailability',state.resourceAvailability||[]);
+       }catch(e){handleModuleError('ResourceAvailability',e)}
      }else if(currentInfo.role==='operator'){
        const opid=currentInfo.operatorId;
        await upsertAllowed('messages',state.messages.filter(x=>x.operatorId===opid));
@@ -83,13 +86,21 @@ async function syncFromGlobals(){
  },250);
 }
 
-function listenCollection(name,qry=null){
+function handleModuleError(module,error){
+ const denied=error?.code==='permission-denied';
+ console.warn(`[${module}] Firestore ${denied?'permission denied':'operation failed'}`,error);
+ emitModuleError(module,error);
+}
+function listenCollection(name,qry=null,{optional=false,module=name}={}){
  const ref=qry||collection(db,name);
  const u=onSnapshot(ref,snap=>{
    const rows=snap.docs.map(d=>({id:d.id,...d.data()}));
    window.SFState?.applyCloud(name,rows);
    emit("☁ Online · tempo reale","ok");
- },err=>{console.error('listener '+name,err);emit("☁ Listener interrotto","err")});
+ },err=>{
+   if(optional)handleModuleError(module,err);
+   else{console.error('listener '+name,err);emit("☁ Listener interrotto","err")}
+ });
  unsubs.push(u);
 }
 function listenDocument(name,id){
@@ -104,9 +115,10 @@ function listenDocument(name,id){
  });
  unsubs.push(u);
 }
-async function seedOfficeIfEmpty(){
+async function seedOfficeIfEmpty(names){
  const state=window.SFState.snapshot();
- for(const [name,rows] of Object.entries(state)){
+ for(const name of names){
+   const rows=state[name]||[];
    const snap=await getDocs(collection(db,name));
    if(snap.empty && rows.length)await upsertAllowed(name,rows);
  }
@@ -115,8 +127,13 @@ async function seedOfficeIfEmpty(){
 async function startRealtime(info){
  currentInfo=info;stopListeners();
  if(info.role==='office'){
-   await seedOfficeIfEmpty();
-   ['operators','teams','clients','vehicles','interventions','messages','resourceAvailability'].forEach(n=>listenCollection(n));
+   const primary=['operators','teams','clients','vehicles','interventions','messages'];
+   await seedOfficeIfEmpty(primary);
+   primary.forEach(n=>listenCollection(n));
+   try{
+     await seedOfficeIfEmpty(['resourceAvailability']);
+     listenCollection('resourceAvailability',null,{optional:true,module:'ResourceAvailability'});
+   }catch(e){handleModuleError('ResourceAvailability',e)}
  }else{
    const opid=info.operatorId;
    listenDocument('operators',opid);
@@ -129,6 +146,7 @@ async function login(username,password){
  if(!configured)throw new Error("Firebase non configurato.");
  const email=emailForUsername(username);
  const cred=await signInWithEmailAndPassword(auth,email,password);
+ if(!auth.currentUser||auth.currentUser.uid!==cred.user.uid)throw new Error("Sessione Firebase Authentication non disponibile.");
  const profile=await getProfile(cred.user.uid);
  if(profile.role==='operator'){
    const opSnap=await getDoc(doc(db,'operators',profile.operatorId));
@@ -204,5 +222,6 @@ if(configured){
 window.SFCloud={
  enabled:configured,
  get ready(){return !!(configured&&currentInfo)},
+ get authenticatedUser(){return auth?.currentUser||null},
  login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient
 };
