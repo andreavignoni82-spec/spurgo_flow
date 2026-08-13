@@ -4,8 +4,6 @@
   root.SFPlanning=api;
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   'use strict';
-  const WORKDAY=Object.freeze({morningStart:'07:00',morningEnd:'12:00',afternoonStart:'13:00',afternoonEnd:'17:00'});
-  const SMART_SLOT_CONFIG=Object.freeze({minimumSafeBuffer:20,minimumTightBuffer:10,maxSuggestions:5,searchDays:7});
   const CONFIG=Object.freeze({
     fallbackDurationMinutes:60,
     missingCoordinatesTravelMinutes:30,
@@ -13,15 +11,11 @@
     travelBufferMinutes:8,
     warningMarginMinutes:15,
     criticalDelayMinutes:30,
-    dayStartMinutes:7*60,
-    dayEndMinutes:17*60,
-    lunchStartMinutes:12*60,
-    lunchEndMinutes:13*60,
-    minimumBufferMinutes:SMART_SLOT_CONFIG.minimumTightBuffer,
-    minimumSafeBuffer:SMART_SLOT_CONFIG.minimumSafeBuffer,
-    minimumTightBuffer:SMART_SLOT_CONFIG.minimumTightBuffer,
-    searchDays:SMART_SLOT_CONFIG.searchDays,
-    maxSuggestions:SMART_SLOT_CONFIG.maxSuggestions,
+    dayStartMinutes:6*60,
+    dayEndMinutes:20*60,
+    minimumBufferMinutes:15,
+    searchDays:7,
+    maxSuggestions:3,
     slotStepMinutes:5
   });
   const minute=(value,date)=>{
@@ -112,45 +106,32 @@
     if(!(jobDraft?.address||coordinates(jobDraft)))return {suggestions:[],error:'Inserisci un indirizzo o le coordinate dell’intervento.'};
     const d=Number(jobDraft.estimatedMinutes);
     if(!Number.isFinite(d)||d<=0)return {suggestions:[],error:'Indica la durata stimata prima di cercare uno slot.'};
-    const availability=options.resourceAvailability||(()=>true);
     const resources=(options.resources||[]).filter(r=>r.available!==false),jobs=options.jobs||[],cache=new Map(),urgent=String(jobDraft.priority||jobDraft.status||'').toLowerCase().includes('urgent');
     if(!resources.length)return {suggestions:[],error:'Nessuna risorsa attiva disponibile.'};
-    const startDate=new Date((jobDraft.date||options.startDate||dateKey(new Date()))+'T12:00:00'),days=(jobDraft.date||jobDraft.fixedTime)?1:config.searchDays,candidates=[];
+    const startDate=new Date((jobDraft.date||options.startDate||dateKey(new Date()))+'T12:00:00'),days=jobDraft.fixedTime?1:(urgent?1:config.searchDays),candidates=[];
     const travel=(a,b)=>{if(!a||!b)return {minutes:0,estimated:false};const key=[a.id||a.address||JSON.stringify(coordinates(a)),b.id||b.address||JSON.stringify(coordinates(b))].join('>');if(!cache.has(key))cache.set(key,estimateTravelMinutes(a,b,config));return cache.get(key)};
     for(let di=0;di<days;di++){
       const day=new Date(startDate);day.setDate(day.getDate()+di);const date=dateKey(day);
       for(const resource of resources){
-        if(!availability(date,resource.id,resource))continue;
         const rows=buildSchedule(jobs.filter(j=>j.date===date&&j.status!=='Annullato'&&(options.resourceId?options.resourceId(j)===resource.id:j.resourceId===resource.id)),{config});
         const load=rows.reduce((n,x)=>n+x.durationMinutes+x.travelMinutes,0);
         for(let gi=0;gi<=rows.length;gi++){
           const previous=rows[gi-1]||null,next=rows[gi]||null,from=previous?.job||resource.location||null;
           const before=travel(from,jobDraft),after=travel(jobDraft,next?.job),earliest=(previous?previous.end:config.dayStartMinutes)+before.minutes+(previous?config.minimumBufferMinutes:0);
           const latest=(next?next.plannedStart-after.minutes-config.minimumBufferMinutes:config.dayEndMinutes)-d;
-          const range=jobDraft.preferredRange;
-          const segments=[[config.dayStartMinutes,config.lunchStartMinutes],[config.lunchEndMinutes,config.dayEndMinutes]];
-          const starts=jobDraft.fixedTime?[minute(jobDraft.time,date)]:segments.map(([a])=>Math.ceil(Math.max(earliest,a,range?.from??a)/config.slotStepMinutes)*config.slotStepMinutes);
-          for(const start of starts){
+          let start=jobDraft.fixedTime?minute(jobDraft.time,date):Math.ceil(earliest/config.slotStepMinutes)*config.slotStepMinutes;
+          const range=jobDraft.preferredRange;if(!jobDraft.fixedTime&&range?.from!=null&&start<range.from)start=range.from;
           if(start===null)continue;
-          const segment=segments.find(([a,b])=>start>=a&&start+d<=b);
-          const inRange=!range||(start>=range.from&&start+d<=range.to);
-          const impact=Math.max(0,start-latest,earliest-start),outsideWorkday=!segment;
-          if((outsideWorkday||!inRange)&&!urgent)continue;
-          const problematic=impact>0||outsideWorkday||!inRange;
-          const constraintMatch=(!jobDraft.date||date===jobDraft.date)&&inRange&&!outsideWorkday;
-          const effectiveLatest=Math.min(latest,segment?.[1]-d??latest);
-          const operationalMargin=Math.max(0,effectiveLatest-start);
-          const classification=problematic?'SCONSIGLIATO':operationalMargin>=config.minimumSafeBuffer?'SICURO':operationalMargin>=config.minimumTightBuffer?'STRETTO':'SCONSIGLIATO';
+          const impact=Math.max(0,start-latest),problematic=impact>0||start<config.dayStartMinutes||start+d>config.dayEndMinutes;
+          if(problematic&&!urgent&&candidates.some(c=>!c.problematic))continue;
+          const constraintMatch=(!jobDraft.date||date===jobDraft.date)&&(!range||(start>=range.from&&start+d<=range.to));
           const c={date,start,time:clock(start),end:start+d,endTime:clock(start+d),durationMinutes:d,resource,previous:previous?.job||null,next:next?.job||null,travelBeforeMinutes:before.minutes,travelAfterMinutes:after.minutes,totalTravelMinutes:before.minutes+after.minutes,travelEstimated:before.estimated||after.estimated,coordinatesIncomplete:!coordinates(jobDraft),marginBefore:Math.max(0,start-earliest),marginAfter:Math.max(0,latest-start),impactMinutes:impact,impacted:impact&&next?[{job:next.job,delayMinutes:impact}]:[],problematic,constraintMatch,urgent,resourceLoadMinutes:load,resourceJobCount:rows.length,idleMinutes:Math.max(0,start-earliest)};
-          c.classification=classification;c.operationalMargin=operationalMargin;c.operationalException=urgent&&problematic;
           c.score=scoreSlotCandidate(c)+(urgent?(di*10000+start)*10:di*30);c.reason=explainCandidate(c);candidates.push(c);
-          }
         }
       }
     }
-    const rank={SICURO:0,STRETTO:1,SCONSIGLIATO:2};
-    candidates.sort((a,b)=>(urgent?0:rank[a.classification]-rank[b.classification])||a.score-b.score||a.date.localeCompare(b.date)||a.start-b.start||String(a.resource.id).localeCompare(String(b.resource.id)));
+    candidates.sort((a,b)=>a.score-b.score||a.date.localeCompare(b.date)||a.start-b.start||String(a.resource.id).localeCompare(String(b.resource.id)));
     return {suggestions:candidates.slice(0,config.maxSuggestions),cacheEntries:cache.size,error:jobDraft.fixedTime&&!candidates.some(c=>!c.problematic)?'Nessuna risorsa può garantire questo appuntamento':null};
   }
-  return {CONFIG,WORKDAY,SMART_SLOT_CONFIG,minute,estimateTravelMinutes,buildSchedule,resourceAvailability,scoreResourceForJob,findResourceAlternatives,findScheduleGaps,scoreSlotCandidate,findBestSlots};
+  return {CONFIG,SMART_SLOT_CONFIG:CONFIG,minute,estimateTravelMinutes,buildSchedule,resourceAvailability,scoreResourceForJob,findResourceAlternatives,findScheduleGaps,scoreSlotCandidate,findBestSlots};
 });

@@ -28,9 +28,6 @@ service cloud.firestore {
     match /vehicles/{id} {
       allow read, write: if isOffice();
     }
-    match /resourceAvailability/{id} {
-      allow read, write: if isOffice();
-    }
 
     match /interventions/{id} {
       allow read: if isOffice() || (isOperator() && resource.data.operatorId == operatorId());
