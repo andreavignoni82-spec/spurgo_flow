@@ -1,15 +1,14 @@
-# Spurgo Flow — Suite v6.1.23.6
-Build 6.1.23.6
+# Spurgo Flow — Suite v6.1.23.8
+Build 6.1.23.8
 
-## 6.1.23.6 — Apertura diretta intervento da Agenda operatore
+## 6.1.23.8 — Ciclo vita sicuro operatori
 
-- I blocchi Giorno/Settimana espongono il vero `intervention.id` e usano un unico handler delegato, affidabile anche su contenuti annidati e tap mobile.
-- `openOperatorIntervention(interventionId)` centralizza ricerca, controllo assegnazione diretta/multipla/squadra e caricamento del rapportino senza cambiare lo stato dell'intervento.
-- Gli interventi terminati restano apribili e gli ID mancanti o non assegnati producono messaggi controllati.
-- Chiusura centralizzata in `finishOperatorIntervention()`: aggiorna lo stesso intervento con rapportino completo, stato `Terminato` e `actualEnd` ISO reale.
-- Persistenza locale immediata e scrittura Firestore attesa prima di confermare il successo; in caso di errore la UI resta aperta e mostra un messaggio esplicito.
-- Unico pulsante touch-friendly `TERMINA INTERVENTO`; eliminata la precedente azione sticky duplicata.
-- Rapportini terminati ancora visibili e modificabili senza cambiare stato; `Riaperto` viene impostato soltanto tramite l'azione esplicita.
+- La normale gestione Ufficio ora **disattiva** l’operatore: `operators/{id}`, `cloudUid`, `cloudEmail`, profilo Firebase, password, appartenenze alle squadre e storico interventi restano invariati; viene aggiornato soltanto `active`.
+- La riattivazione riporta `active` a `true` sul record e sul profilo esistenti, senza creare un nuovo utente Firebase Authentication e senza cambiare le credenziali.
+- Dopo un login Firebase valido, un operatore con `active === false` viene immediatamente disconnesso. I record senza `active` sono trattati come attivi per compatibilità.
+- Operatori disattivati e squadre senza componenti attivi sono esclusi da Control Room, disponibilità, inserimento rapido, Smart Slot e nuove assegnazioni, ma gli ID storici non vengono rimossi.
+- Se Firebase Authentication contiene già lo username, la creazione non collega automaticamente l’account e mostra istruzioni leggibili per risolvere l’account orfano.
+- **Limite Firebase Client SDK:** l’Ufficio non può eliminare arbitrariamente un altro utente Authentication. Senza un backend protetto con Admin SDK, “Elimina definitivamente account” conserva la scheda disattivata e indica esplicitamente l’email da rimuovere dalla console Firebase; non viene mai dichiarato un successo parziale.
 
 
 ## 6.1.23.3 — Hotfix creazione operatori e account Auth orfani

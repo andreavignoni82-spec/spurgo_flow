@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.23.6-operator-agenda-open-fix';
+const CACHE='spurgoflow-v6-6.1.23.8-operator-lifecycle-hotfix';
 const LOCAL=['./index.html','./planning.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 
 self.addEventListener('install',e=>{

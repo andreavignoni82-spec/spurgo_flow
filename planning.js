@@ -96,7 +96,8 @@
   const dateKey=d=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
   const clock=n=>`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;
   function plannerResources(teams=[],operators=[]){
-    const teamRows=teams.filter(t=>t.active!==false).map(t=>({id:'team:'+t.id,name:t.name,available:true,vehicle:t.vehicle,skills:(t.operatorIds||[]).map(id=>operators.find(o=>o.id===id)?.ruolo||'')}));
+    const activeOperator=id=>operators.find(o=>o.id===id&&o.active!==false);
+    const teamRows=teams.filter(t=>t.active!==false&&(t.operatorIds||[]).some(activeOperator)).map(t=>({id:'team:'+t.id,name:t.name,available:true,vehicle:t.vehicle,skills:(t.operatorIds||[]).map(activeOperator).filter(Boolean).map(o=>o.ruolo||'')}));
     const operatorRows=operators.filter(o=>o.active!==false).map(o=>({id:'op:'+o.id,name:[o.nome,o.cognome].filter(Boolean).join(' ')||o.name||o.id,available:true,role:o.ruolo,vehicle:o.mezzo}));
     return teamRows.concat(operatorRows);
   }

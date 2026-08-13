@@ -79,7 +79,7 @@ function scenario({authError,failAt}={}){
   const catchAt=addSource.indexOf('}catch(err)');
   assert(addSource.indexOf("['opNome','opCognome','opUsername','opPassword','opTelefono','opRuolo']")<catchAt);
   assert(!addSource.slice(catchAt).includes(".value=''"));
-  assert.match(addSource,/SF_USERNAME_ALREADY_IN_USE[\s\S]*Username già utilizzato nel sistema cloud\. Scegli un altro username\./);
+  assert.match(addSource,/SF_USERNAME_ALREADY_IN_USE[\s\S]*Esiste già un account cloud con questo username[\s\S]*Eliminalo da Firebase Authentication oppure utilizza un username diverso\./);
   assert.doesNotMatch(addSource,/Firebase: Error|Errore: /);
 
   console.log('v6.1.23.3: provisioning, duplicati, rollback, normalizzazione e conservazione form verificati');
