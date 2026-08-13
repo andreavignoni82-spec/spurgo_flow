@@ -1,12 +1,13 @@
-# Spurgo Flow — Suite v6.1.23.4
-Build 6.1.23.4
+# Spurgo Flow — Suite v6.1.23.5
+Build 6.1.23.5
 
-## 6.1.23.4 — Operatore compatto e rapportino riapribile
+## 6.1.23.5 — Agenda personale e chiusura persistente
 
-- Home operatore ridotta alla lista ultra-compatta di tutti gli interventi assegnati, inclusi quelli di squadra, terminati e riaperti.
-- Ordinamento per urgenze attive, interventi odierni, futuri e infine passati/terminati in ordine decrescente.
-- Riapertura sullo stesso `interventionId` con ripristino completo di relazione, attività, quantità, anomalie, foto, posizione e firme.
-- Navigazione operatore secondaria nascosta per un flusso diretto lista → rapportino completo.
+- Home operatore trasformata in Agenda personale Giorno/Settimana, filtrata per assegnazione diretta o squadra e con blocchi interamente cliccabili.
+- Chiusura centralizzata in `finishOperatorIntervention()`: aggiorna lo stesso intervento con rapportino completo, stato `Terminato` e `actualEnd` ISO reale.
+- Persistenza locale immediata e scrittura Firestore attesa prima di confermare il successo; in caso di errore la UI resta aperta e mostra un messaggio esplicito.
+- Unico pulsante touch-friendly `TERMINA INTERVENTO`; eliminata la precedente azione sticky duplicata.
+- Rapportini terminati ancora visibili e modificabili senza cambiare stato; `Riaperto` viene impostato soltanto tramite l'azione esplicita.
 
 
 ## 6.1.23.3 — Hotfix creazione operatori e account Auth orfani

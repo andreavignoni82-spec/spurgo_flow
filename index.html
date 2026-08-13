@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.4</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.5</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -411,7 +411,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 
-/* ===== 6.1.23.4 OPERATORE ULTRA-COMPATTO ===== */
+/* ===== 6.1.23.5 OPERATORE ULTRA-COMPATTO ===== */
 .operator-shell{padding:12px;overflow-x:hidden}
 .operator-shell .operator-head{max-width:620px;margin:auto;padding:4px 0 8px}
 #fieldInterventi{width:100%;margin:auto}
@@ -436,6 +436,18 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .op-actions{position:static;grid-template-columns:repeat(4,1fr);padding:5px 0}
  .inline-panel{display:block!important}
 }
+
+/* ===== 6.1.23.5 AGENDA PERSONALE OPERATORE ===== */
+.operator-shell #fieldInterventi{max-width:none!important;color:#142438;background:#f4f6f8;border-radius:16px;padding:14px;margin-top:12px}
+.operator-agenda-title{margin:0 0 10px;color:#142438;font-size:20px}
+.operator-agenda-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.operator-agenda-toolbar .field{width:auto;min-width:145px;margin:0}
+.operator-agenda-toolbar .btn{padding:10px 13px}
+.operator-agenda-toolbar .agenda-view-switch{margin-left:auto}
+.operator-personal-agenda .agenda-block.finished,.operator-personal-agenda .agenda-week-job.finished{opacity:.58;filter:saturate(.65)}
+.operator-personal-agenda .agenda-block{touch-action:manipulation}
+.operator-report-finish{width:100%;margin-top:16px;min-height:54px;position:relative;z-index:2}
+@media(max-width:600px){.operator-shell{padding-bottom:18px}.operator-agenda-toolbar .agenda-view-switch{width:100%;margin-left:0}.operator-personal-agenda.timeline-wrap{max-height:none}.operator-report-finish{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 6px 20px #0005}}
 
 /* ===== 6.1.23 AGENDA OPERATIVA ===== */
 .content{min-width:0;max-width:calc(100vw - 245px)}
@@ -554,7 +566,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.23.4 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.23.5 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -564,10 +576,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.23.4 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.23.5 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.4</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.5</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -627,7 +639,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.4</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.5</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -660,7 +672,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.4</span></div>
+ <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.5</span></div>
  <div class="msg-shell" style="margin-top:18px">
   <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
   <div class="msg-thread">
@@ -679,13 +691,9 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.4</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
-<div id="fieldInterventi" class="field-page active" style="max-width:620px"><h1 class="operator-list-title">I MIEI INTERVENTI</h1>
-<div class="job-picker" id="jobPicker">
- <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
- <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
- <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
-</div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.5</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="fieldInterventi" class="field-page active"><h1 class="operator-agenda-title">AGENDA PERSONALE</h1>
+<div id="jobPicker" class="operator-personal-agenda"></div>
 <div class="op-card hidden" id="selectedJobCard"><button class="btn ghost operator-back-list" onclick="backToOperatorJobs()">← I miei interventi</button><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p>
 <div class="location-tools">
   <label for="jobAddressInput">Indirizzo intervento</label>
@@ -790,12 +798,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   </div>
 </div>
 
-<button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
-<div class="sticky-signatures">
- <button class="btn ghost" onclick="openSigModal('operatore')">✍️ Operatore <span id="opSigStatus" class="sig-status">firma</span></button>
- <button class="btn ghost" onclick="openSigModal('cliente')">✍️ Cliente <span id="clSigStatus" class="sig-status">firma</span></button>
- <button class="btn finish" onclick="prepareAndShowReport()">TERMINA E GENERA RAPPORTINO</button>
-</div>
+<button id="finishOperatorButton" class="btn danger operator-report-finish" onclick="finishOperatorIntervention()">TERMINA INTERVENTO</button>
 <div class="mobile-bottom-space"></div>
 </div></div>
 
@@ -855,7 +858,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.4</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.5</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -1848,22 +1851,38 @@ function sortOperatorJobs(rows){
    return ba===3?bv.localeCompare(av):av.localeCompare(bv);
  });
 }
+let operatorAgendaView='day';
+function operatorAgendaRows(){
+ const id=currentOperatorId();
+ return sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato');
+}
+function setOperatorPersonalAgendaView(view){
+ operatorAgendaView=view==='week'?'week':'day';
+ sessionStorage.setItem('sf_operator_agenda_view',operatorAgendaView);
+ syncOperatorJobs();
+}
+function operatorAgendaToday(){
+ sessionStorage.setItem('sf_operator_agenda_date',localDateKey());
+ operatorAgendaView='day';sessionStorage.setItem('sf_operator_agenda_view','day');syncOperatorJobs();
+}
+function operatorAgendaLabel(i,operator){
+ const team=sfTeams.find(t=>t.id===i.teamId&&(t.operatorIds||[]).includes(operator.id));
+ return team?.name||operatorName(operator);
+}
 function syncOperatorJobs(){
- const id=currentOperatorId(),host=el('jobPicker');if(!host||!id)return;
- const assigned=sortOperatorJobs(sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato'));
- host.style.display='grid';
- host.innerHTML=assigned.length?assigned.map(i=>{
-   const urgent=operatorJobBucket(i)===0;
-   const team=sfTeams.find(t=>t.id===i.teamId);
-   return `<article class="job-choice operator-compact-job ${urgent?'urgent-job':''}" data-id="${esc(i.id)}" tabindex="0" role="button" onclick="openOperatorJob('${esc(i.id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openOperatorJob('${esc(i.id)}')}">
-    <div class="compact-job-line"><span class="compact-job-date">${esc(fmtDate(i.date))}</span><b>${esc(i.time||'—')}</b><strong>${esc(i.client||'Cliente')}</strong><span class="compact-spacer"></span><span class="badge compact-status ${urgent?'urgent':i.status==='Terminato'?'done':i.status==='In corso'?'progress':'planned'}">${esc(String(i.status||'PROGRAMMATO').toUpperCase())}</span></div>
-    <div class="compact-job-line"><span class="compact-address">${esc(i.address||'Indirizzo non indicato')}</span></div>
-    <div class="compact-job-line"><span>${esc(i.type||i.request||'Intervento')}</span>${team?`<span>· ${esc(team.name)}</span>`:''}</div>
-   </article>`;
- }).join(''):'<div class="v6-empty" style="background:white;border-radius:8px">Nessun intervento assegnato al tuo account.</div>';
- selectedJob=null;
- el('selectedJobCard')?.classList.add('hidden');
- el('job')?.classList.add('hidden');
+ const id=currentOperatorId(),host=el('jobPicker'),operator=getOperator(id);if(!host||!id)return;
+ const selected=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
+ operatorAgendaView=sessionStorage.getItem('sf_operator_agenda_view')||'day';
+ const rows=operatorAgendaRows(),toolbar=`<div class="operator-agenda-toolbar"><input id="operatorAgendaDate" type="date" class="field" value="${esc(selected)}" onchange="setOperatorAgendaDate(this.value)"><button class="btn ghost" onclick="operatorAgendaToday()">OGGI</button><div class="agenda-view-switch"><button class="${operatorAgendaView==='day'?'active':''}" onclick="setOperatorPersonalAgendaView('day')">GIORNO</button><button class="${operatorAgendaView==='week'?'active':''}" onclick="setOperatorPersonalAgendaView('week')">SETTIMANA</button></div></div>`;
+ if(operatorAgendaView==='week'){
+   const base=weekStart(selected);let body='<div class="agenda-week-grid">';
+   for(let x=0;x<7;x++){const d=new Date(base);d.setDate(base.getDate()+x);const key=formatDateInput(d),jobs=rows.filter(i=>i.date===key).sort((a,b)=>(a.time||'').localeCompare(b.time||''));body+=`<section class="agenda-week-day"><h3>${d.toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'2-digit'})}</h3>${jobs.map(i=>{const color=agendaColorForIntervention(i),done=i.status==='Terminato';return `<button class="agenda-week-job ${done?'finished':''}" style="${agendaColorStyle(color)}" onclick="openOperatorJob('${esc(i.id)}')"><time>${esc(agendaTimeLabel(i))}</time><strong>${esc(i.client||'Cliente')}</strong><small>${esc(i.type||i.request||'Intervento')} · ${esc(i.status||'Programmato')}</small></button>`}).join('')||'<div class="v6-meta">Nessun intervento</div>'}</section>`}host.innerHTML=toolbar+body+'</div>';return;
+ }
+ const jobs=rows.filter(i=>i.date===selected).sort((a,b)=>(a.time||'').localeCompare(b.time||'')),hours=Array.from({length:15},(_,x)=>x+6),placed=agendaLayoutLanes(jobs),lanes=Math.max(1,...placed.map(x=>x.lane+1)),height=Math.max(76,lanes*62+12),color=agendaResourceColor('op:'+id),style=agendaColorStyle(color);
+ const head=`<div class="agenda-timeline-head"><div class="agenda-resource-head">Operatore / squadra</div><div class="agenda-hour-axis">${hours.map((h,x)=>`<span class="agenda-hour" style="left:${x*80}px">${String(h).padStart(2,'0')}:00</span>`).join('')}</div></div>`;
+ const blocks=placed.map(({i,lane,left,width})=>`<button class="agenda-block ${i.status==='Terminato'?'finished':''}" style="left:${left}px;width:${width}px;top:${8+lane*62}px;${agendaColorStyle(agendaColorForIntervention(i))}" onclick="openOperatorJob('${esc(i.id)}')" title="${esc(i.client||'Intervento')}"><time>${esc(agendaTimeLabel(i))}</time><strong>${esc(i.client||'Cliente')}</strong><small>${esc(i.type||i.request||'Intervento')} · ${esc(i.status||'Programmato')}</small></button>`).join('');
+ host.innerHTML=toolbar+`<div class="timeline-wrap"><div class="agenda-timeline">${head}<div class="agenda-timeline-row" style="min-height:${height}px;${style}"><div class="agenda-resource" style="${style}"><strong>${esc(jobs.find(i=>i.teamId)?operatorAgendaLabel(jobs.find(i=>i.teamId),operator):operatorName(operator))}</strong><small>Agenda personale</small></div><div class="agenda-track" style="min-height:${height}px;--agenda-row:${color.bg}55">${blocks}</div></div></div></div>`;
+ selectedJob=null;el('selectedJobCard')?.classList.add('hidden');el('job')?.classList.add('hidden');
 }
 function backToOperatorJobs(){
  collectReportForm(selectedJob);
@@ -1907,10 +1926,9 @@ async function openOperatorJob(id){
  selectedJob={...source};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
  populateReportForm(source);
  el('selectedClient').textContent=source.client||'';el('selectedAddress').textContent=source.address||'';el('selectedRequest').textContent=source.request||'';if(el('jobAddressInput'))el('jobAddressInput').value=source.address||'';
- if(source.status==='Terminato'){source.reopenedFromStatus='Terminato';source.status='Riaperto';selectedJob.status='Riaperto';saveV6()}
  if(el('jobPicker'))el('jobPicker').style.display='none';el('selectedJobCard')?.classList.remove('hidden');el('job')?.classList.remove('hidden');
  jobRunning=true;sessionStorage.setItem('sf_job_running','1');sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
- if(el('startBtn')){el('startBtn').disabled=true;el('startBtn').textContent=source.reopenedFromStatus?'Rapportino riaperto':'Rapportino operativo'}
+ if(el('startBtn')){el('startBtn').disabled=source.status!=='Terminato';el('startBtn').textContent=source.status==='Terminato'?'Riapri intervento':'Rapportino operativo'}
  updateSelectedJobMap();setTimeout(()=>el('selectedJobCard')?.scrollIntoView({block:'start'}),30);
 }
 function selectOfficeAssignedJob(node,id){return openOperatorJob(id)}
@@ -1945,7 +1963,7 @@ function renderOperatorAgendaFromOffice(){
 
 function setOperatorAgendaDate(date){
  sessionStorage.setItem('sf_operator_agenda_date',date);
- renderOperatorAgendaFromOffice();
+ syncOperatorJobs();
 }
 function shiftOperatorAgenda(delta){
  const current=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
@@ -2077,6 +2095,7 @@ async function login(){
         if(el('profileName'))el('profileName').textContent=fullName;
         if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
         sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
+        sessionStorage.setItem('sf_operator_agenda_date',localDateKey());sessionStorage.setItem('sf_operator_agenda_view','day');
         try{
           const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
           if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
@@ -2105,6 +2124,7 @@ async function login(){
     if(el('profileName'))el('profileName').textContent=fullName;
     if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
     sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
+    sessionStorage.setItem('sf_operator_agenda_date',localDateKey());sessionStorage.setItem('sf_operator_agenda_view','day');
     try{
       const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
       if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
@@ -2676,71 +2696,40 @@ function copyPreviewToReport(srcId,dstId){
   const img=src && src.dataset.img;
   dst.innerHTML=img?'<img src="'+img+'" alt="Foto intervento">':'Nessuna foto';
 }
-function prepareAndShowReport(){
-  if(!jobRunning){alert('Nessun intervento attivo.');return;}
-  if(!el('firmaOperatore').dataset.signature || !el('firmaCliente').dataset.signature){
-    alert('Per chiudere l’intervento servono entrambe le firme: operatore e cliente.');
-    return;
-  }
-  clearInterval(timerInt);
-  jobRunning=false; sessionStorage.removeItem('sf_job_running'); sessionStorage.removeItem('sf_selected_job');
-  el('job').classList.add('hidden'); el('jobPicker').style.display='grid'; el('startBtn').disabled=false; el('startBtn').textContent='Inizia intervento';
-  el('selectedJobCard').insertAdjacentHTML('beforebegin','<div class="finished-card">✓ Intervento '+selectedJob.id+' terminato e rapportino generato.</div>');
-  const now=new Date();
-  const closedLabel=now.toLocaleDateString('it-IT')+' '+now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
-  const completedRecord={...selectedJob,status:'Terminato',closedAt:closedLabel,reportNo:String(selectedJob.id||'').replace('INT-','')};
-  const cloudInt=sfOfficeInterventions.find(x=>x.id===selectedJob.id);
-  if(cloudInt){
-    const relTxt=el('relazioneGenerata').textContent.trim();
-    const relationSnap=(relTxt&&!relTxt.startsWith('La relazione generata'))?relTxt:(el('relazioneInput').value.trim()||'Relazione non compilata.');
-    const tipoSnap=el('anomaliaTipo').value.trim(),anomSnap=el('anomaliaTesto').value.trim();
-    cloudInt.status='Terminato';cloudInt.closedAt=closedLabel;cloudInt.reportNo=completedRecord.reportNo;
-    const formSnapshot=collectReportForm(selectedJob)?.reportData||{};
-    cloudInt.reportData={
-      ...formSnapshot,
-      relation:relationSnap,
-      anomaly:(tipoSnap||anomSnap)?((tipoSnap?tipoSnap+': ':'')+(anomSnap||'Anomalia segnalata.')):'Nessuna anomalia segnalata.',
-      operatorName:(el('nomeOperatoreFirma').value||'Operatore').trim(),
-      customerSigner:(el('nomeClienteFirma').value||'Cliente').trim(),
-      operatorSignature:el('firmaOperatore').dataset.signature||'',
-      customerSignature:el('firmaCliente').dataset.signature||'',
-      operatorSignTime:el('reportOpSignTime')?.textContent||closedLabel,
-      customerSignTime:el('reportClientSignTime')?.textContent||closedLabel,
-      generatedAt:new Date().toISOString()
-    };
-    saveV6();
-  }
-  completedJobs=completedJobs.filter(x=>x.id!==completedRecord.id);
-  completedJobs.unshift(completedRecord);
-  renderCompletedJobs();
-  renderOfficeReports();
-  populateReportFromSelected();
-
-  const rel=el('relazioneGenerata').textContent.trim();
-  el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
-  
-  const tipo=el('anomaliaTipo').value.trim();
-  const anom=el('anomaliaTesto').value.trim();
-  if(el('reportAnomaliaTop')) el('reportAnomaliaTop').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
-  copyPreviewToReport('prevPrima','reportFotoPrima');
-  copyPreviewToReport('prevDurante','reportFotoDurante');
-  copyPreviewToReport('prevDopo','reportFotoDopo'); renderReportActivities();
-  const opName=(el('nomeOperatoreFirma').value||'Operatore').trim();
-  const clName=(el('nomeClienteFirma').value||'Cliente').trim();
-  el('reportOperatoreNome').textContent=opName;
-  el('reportClienteNome').textContent=clName;
-  try{
-    const data=el('firmaOperatore').dataset.signature || el('firmaOperatore').toDataURL('image/png');
-    el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:50px;object-fit:contain">';
-  }catch(e){}
-  try{
-    const data2=el('firmaCliente').dataset.signature || el('firmaCliente').toDataURL('image/png');
-    el('reportFirmaCliente').innerHTML='<img src="'+data2+'" style="max-width:100%;height:50px;object-fit:contain">';
-  }catch(e){}
-  showReport();
+async function finishOperatorIntervention(){
+ const button=el('finishOperatorButton');
+ if(button?.disabled)return;
+ if(!jobRunning||!selectedJob?.id){alert('Nessun intervento attivo: impossibile salvare la chiusura.');return false}
+ if(!el('firmaOperatore')?.dataset.signature||!el('firmaCliente')?.dataset.signature){alert('Per chiudere l’intervento servono entrambe le firme: operatore e cliente.');return false}
+ const interventionId=String(selectedJob.id),current=sfOfficeInterventions.find(i=>String(i.id)===interventionId);
+ if(!current||!assignedToOperator(current,currentOperatorId())){alert('Errore: interventionId non trovato o non assegnato. La chiusura non è stata eseguita.');return false}
+ if(!confirm('Confermi la chiusura definitiva dell’intervento?'))return false;
+ const previous=JSON.parse(JSON.stringify(current)),now=new Date(),actualEnd=now.toISOString(),closedLabel=now.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+ try{
+   if(button){button.disabled=true;button.textContent='SALVATAGGIO…'}
+   const saved=collectReportForm(current);if(!saved)throw new Error('Salvataggio rapportino non riuscito.');
+   const relTxt=el('relazioneGenerata')?.textContent.trim()||'',relation=(relTxt&&!relTxt.startsWith('La relazione generata'))?relTxt:(el('relazioneInput')?.value.trim()||saved.reportData?.relation||'Relazione non compilata.');
+   const anomalyType=el('anomaliaTipo')?.value.trim()||'',anomalyText=el('anomaliaTesto')?.value.trim()||'';
+   Object.assign(current,{status:'Terminato',actualEnd,closedAt:closedLabel,reportNo:current.reportNo||interventionId.replace('INT-',''),reportData:{...saved.reportData,relation,anomaly:(anomalyType||anomalyText)?`${anomalyType?anomalyType+': ':''}${anomalyText||'Anomalia segnalata.'}`:'Nessuna anomalia segnalata.',operatorName:(el('nomeOperatoreFirma')?.value||'Operatore').trim(),customerSigner:(el('nomeClienteFirma')?.value||'Cliente').trim(),operatorSignature:el('firmaOperatore').dataset.signature,customerSignature:el('firmaCliente').dataset.signature,operatorSignTime:saved.reportData?.operatorSignTime||closedLabel,customerSignTime:saved.reportData?.customerSignTime||closedLabel,generatedAt:actualEnd}});
+   localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
+   if(window.SFCloud?.ready){
+     if(typeof window.SFCloud.saveIntervention!=='function')throw new Error('Sincronizzazione Firebase non disponibile.');
+     await window.SFCloud.saveIntervention(current);
+   }
+   saveV6();selectedJob={...current};clearInterval(timerInt);jobRunning=false;sessionStorage.removeItem('sf_job_running');sessionStorage.removeItem('sf_selected_job');
+   completedJobs=completedJobs.filter(x=>x.id!==interventionId);completedJobs.unshift({...current});
+   renderCompletedJobs();renderAllOfficeV6();syncOperatorJobs();populateReportFromSelected();applyReportSnapshot(current);showReport();
+   alert('Intervento chiuso e salvato correttamente.');return true;
+ }catch(error){
+   Object.keys(current).forEach(k=>delete current[k]);Object.assign(current,previous);localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
+   console.error('Chiusura intervento fallita',error);alert('Chiusura non salvata: '+(error?.message||'errore sconosciuto')+' Riprova senza chiudere la pagina.');return false;
+ }finally{if(button){button.disabled=false;button.textContent='TERMINA INTERVENTO'}}
 }
 
 function startJob(){
+  const current=sfOfficeInterventions.find(i=>i.id===selectedJob?.id);
+  if(current?.status==='Terminato'){current.status='Riaperto';current.reopenedAt=new Date().toISOString();selectedJob={...current};saveV6();syncOperatorJobs()}
+  if(current&&!current.actualStart){current.actualStart=new Date().toISOString();saveV6()}
   jobRunning=true; sessionStorage.setItem('sf_job_running','1');
   sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
   el('job').classList.remove('hidden');
