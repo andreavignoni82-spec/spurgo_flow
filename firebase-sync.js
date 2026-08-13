@@ -12,18 +12,13 @@ import {
 const cfg=window.SPURGO_FIREBASE_CONFIG||{};
 const configured=!!(cfg.enabled && cfg.apiKey && !String(cfg.apiKey).startsWith("INSERISCI_"));
 const emit=(text,kind)=>window.dispatchEvent(new CustomEvent("sfcloudstatus",{detail:{text,kind}}));
-const emitModuleError=(module,error)=>window.dispatchEvent(new CustomEvent("sfmoduleerror",{detail:{module,error}}));
 let app=null,auth=null,db=null,currentInfo=null,unsubs=[],syncTimer=null;
 
 function emailForUsername(username){return String(username||'').trim().toLowerCase()+'@spurgoflow.app'}
-function clean(value){
- if(Array.isArray(value))return value.map(clean).filter(v=>v!==undefined);
- if(value && typeof value==='object'){
-  const out={};
-  Object.entries(value).forEach(([key,item])=>{if(item!==undefined&&key!=='password')out[key]=clean(item)});
-  return out;
- }
- return value;
+function clean(obj){
+ const out={};
+ Object.entries(obj||{}).forEach(([k,v])=>{if(v!==undefined && k!=='password')out[k]=v});
+ return out;
 }
 function profileRef(uid){return doc(db,'profiles',uid)}
 async function getProfile(uid){
@@ -55,17 +50,6 @@ async function saveClient(record){
  return true;
 }
 
-async function saveIntervention(record){
- if(!configured)return true;
- if(!currentInfo)throw new Error("Sessione cloud non disponibile.");
- if(!record?.id)throw new Error("ID intervento mancante.");
- if(currentInfo.role==='operator' && record.operatorId!==currentInfo.operatorId && !(record.assignedOperatorIds||[]).includes(currentInfo.operatorId)){
-   throw new Error("Intervento non assegnato all'operatore autenticato.");
- }
- await setDoc(doc(db,'interventions',String(record.id)),clean(record),{merge:true});
- return true;
-}
-
 async function deleteClient(id){
  if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare clienti.");
  await deleteDoc(doc(db,'clients',String(id)));
@@ -86,11 +70,9 @@ async function syncFromGlobals(){
          replaceCollection('clients',state.clients),
          replaceCollection('vehicles',state.vehicles),
          replaceCollection('interventions',state.interventions),
-         replaceCollection('messages',state.messages)
+         replaceCollection('messages',state.messages),
+         replaceCollection('resourceAvailability',state.resourceAvailability||[])
        ]);
-       try{
-         await replaceCollection('resourceAvailability',state.resourceAvailability||[]);
-       }catch(e){handleModuleError('ResourceAvailability',e)}
      }else if(currentInfo.role==='operator'){
        const opid=currentInfo.operatorId;
        await upsertAllowed('messages',state.messages.filter(x=>x.operatorId===opid));
@@ -101,21 +83,13 @@ async function syncFromGlobals(){
  },250);
 }
 
-function handleModuleError(module,error){
- const denied=error?.code==='permission-denied';
- console.warn(`[${module}] Firestore ${denied?'permission denied':'operation failed'}`,error);
- emitModuleError(module,error);
-}
-function listenCollection(name,qry=null,{optional=false,module=name}={}){
+function listenCollection(name,qry=null){
  const ref=qry||collection(db,name);
  const u=onSnapshot(ref,snap=>{
    const rows=snap.docs.map(d=>({id:d.id,...d.data()}));
    window.SFState?.applyCloud(name,rows);
    emit("☁ Online · tempo reale","ok");
- },err=>{
-   if(optional)handleModuleError(module,err);
-   else{console.error('listener '+name,err);emit("☁ Listener interrotto","err")}
- });
+ },err=>{console.error('listener '+name,err);emit("☁ Listener interrotto","err")});
  unsubs.push(u);
 }
 function listenDocument(name,id){
@@ -130,10 +104,9 @@ function listenDocument(name,id){
  });
  unsubs.push(u);
 }
-async function seedOfficeIfEmpty(names){
+async function seedOfficeIfEmpty(){
  const state=window.SFState.snapshot();
- for(const name of names){
-   const rows=state[name]||[];
+ for(const [name,rows] of Object.entries(state)){
    const snap=await getDocs(collection(db,name));
    if(snap.empty && rows.length)await upsertAllowed(name,rows);
  }
@@ -142,13 +115,8 @@ async function seedOfficeIfEmpty(names){
 async function startRealtime(info){
  currentInfo=info;stopListeners();
  if(info.role==='office'){
-   const primary=['operators','teams','clients','vehicles','interventions','messages'];
-   await seedOfficeIfEmpty(primary);
-   primary.forEach(n=>listenCollection(n));
-   try{
-     await seedOfficeIfEmpty(['resourceAvailability']);
-     listenCollection('resourceAvailability',null,{optional:true,module:'ResourceAvailability'});
-   }catch(e){handleModuleError('ResourceAvailability',e)}
+   await seedOfficeIfEmpty();
+   ['operators','teams','clients','vehicles','interventions','messages','resourceAvailability'].forEach(n=>listenCollection(n));
  }else{
    const opid=info.operatorId;
    listenDocument('operators',opid);
@@ -161,18 +129,12 @@ async function login(username,password){
  if(!configured)throw new Error("Firebase non configurato.");
  const email=emailForUsername(username);
  const cred=await signInWithEmailAndPassword(auth,email,password);
- if(!auth.currentUser||auth.currentUser.uid!==cred.user.uid)throw new Error("Sessione Firebase Authentication non disponibile.");
  const profile=await getProfile(cred.user.uid);
  if(profile.role==='operator'){
    const opSnap=await getDoc(doc(db,'operators',profile.operatorId));
    if(!opSnap.exists())throw new Error("Scheda operatore non trovata.");
    const operator={id:opSnap.id,...opSnap.data()};
-   if(operator.active===false){
-     await signOut(auth);
-     const error=new Error("Account operatore disattivato. Contattare l'Ufficio.");
-     error.code='SF_OPERATOR_DISABLED';
-     throw error;
-   }
+   if(operator.active===false)throw new Error("Operatore disattivato.");
    return {role:'operator',operatorId:profile.operatorId,operator};
  }
  if(profile.role==='office')return {role:'office'};
@@ -184,32 +146,11 @@ async function provisionOperator(op,password){
  if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può creare operatori.");
  const secondary=initializeApp(cfg,'provision-'+Date.now());
  const secondaryAuth=getAuth(secondary);
- let cred=null;
  try{
    const email=emailForUsername(op.username);
-   try{
-     cred=await createUserWithEmailAndPassword(secondaryAuth,email,password);
-   }catch(error){
-     if(error?.code==='auth/email-already-in-use'){
-       const controlled=new Error("Username già utilizzato nel sistema cloud. Scegli un altro username.");
-       controlled.code='SF_USERNAME_ALREADY_IN_USE';
-       throw controlled;
-     }
-     throw error;
-   }
-   try{
-     await setDoc(doc(db,'operators',op.id),clean({...op,cloudUid:cred.user.uid,cloudEmail:email}),{merge:true});
-     await setDoc(profileRef(cred.user.uid),{role:'operator',operatorId:op.id,username:op.username,active:true});
-   }catch(error){
-     // Compensazione limitata all'utente appena creato da questa operazione.
-     try{await deleteDoc(profileRef(cred.user.uid))}catch(rollbackError){console.warn('rollback profile',rollbackError)}
-     try{await deleteDoc(doc(db,'operators',op.id))}catch(rollbackError){console.warn('rollback operator',rollbackError)}
-     try{await deleteUser(cred.user)}catch(rollbackError){console.warn('rollback auth user',rollbackError)}
-     const controlled=new Error("Impossibile completare la creazione dell'operatore sul cloud.");
-     controlled.code='SF_OPERATOR_PROVISION_FAILED';
-     controlled.cause=error;
-     throw controlled;
-   }
+   const cred=await createUserWithEmailAndPassword(secondaryAuth,email,password);
+   await setDoc(doc(db,'operators',op.id),clean({...op,cloudUid:cred.user.uid,cloudEmail:email}),{merge:true});
+   await setDoc(profileRef(cred.user.uid),{role:'operator',operatorId:op.id,username:op.username,active:true});
    await signOut(secondaryAuth);
    return {uid:cred.user.uid,email};
  }finally{try{await deleteApp(secondary)}catch(e){}}
@@ -226,18 +167,29 @@ async function changeOperatorPassword(op,oldPassword,newPassword){
 }
 
 
-async function setOperatorActive(op,active){
- if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può aggiornare operatori.");
- await setDoc(doc(db,'operators',op.id),{active},{merge:true});
- if(op.cloudUid)await setDoc(profileRef(op.cloudUid),{active},{merge:true});
- return true;
+async function deleteOperatorData(op){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
+ if(op.cloudUid){
+   try{await deleteDoc(profileRef(op.cloudUid))}catch(e){console.warn('delete profile',e)}
+ }
+ await deleteDoc(doc(db,'operators',op.id));
 }
 
-async function deleteOperatorAccount(op){
- const email=op.cloudEmail||emailForUsername(op.username);
- const error=new Error(`Account applicativo disattivato. Per eliminare definitivamente l'utente cloud, rimuovere ${email} da Firebase Authentication.`);
- error.code='SF_ADMIN_SDK_REQUIRED';
- throw error;
+async function deleteOperatorAccount(op,password){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
+ const secondary=initializeApp(cfg,'delete-'+Date.now());
+ const a=getAuth(secondary);
+ try{
+   const email=op.cloudEmail||emailForUsername(op.username);
+   const cred=await signInWithEmailAndPassword(a,email,password);
+   const uid=cred.user.uid;
+   await deleteUser(cred.user);
+   try{await deleteDoc(profileRef(uid))}catch(e){console.warn('delete profile',e)}
+   await deleteDoc(doc(db,'operators',op.id));
+   return true;
+ }finally{
+   try{await deleteApp(secondary)}catch(e){}
+ }
 }
 
 if(configured){
@@ -252,6 +204,5 @@ if(configured){
 window.SFCloud={
  enabled:configured,
  get ready(){return !!(configured&&currentInfo)},
- get authenticatedUser(){return auth?.currentUser||null},
- login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,setOperatorActive,deleteOperatorAccount,saveClient,deleteClient,saveIntervention
+ login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient
 };

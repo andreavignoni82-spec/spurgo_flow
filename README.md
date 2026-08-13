@@ -1,42 +1,7 @@
-# Spurgo Flow — Suite v6.1.23.9
-Build 6.1.23.9
+# Spurgo Flow — Suite v6.1.22-R1
+Build 6.1.22-R1
 
-## 6.1.23.9 — Hotfix rapportino end-to-end
-
-- Le firme operatore e cliente sono validate contro canvas vuoti e persistite in `intervention.reportData` al momento della conferma.
-- Un unico view model persistito alimenta anteprima, archivio Ufficio, condivisione e PDF.
-- Il rapportino rimane visibile anche dopo la riapertura dello stesso intervento; foto e firme sono conservate con merge.
-- Il salvataggio di chiusura attende la scrittura Firestore prima di mostrare il successo.
-
-## 6.1.23.8 — Ciclo vita sicuro operatori
-
-- La normale gestione Ufficio ora **disattiva** l’operatore: `operators/{id}`, `cloudUid`, `cloudEmail`, profilo Firebase, password, appartenenze alle squadre e storico interventi restano invariati; viene aggiornato soltanto `active`.
-- La riattivazione riporta `active` a `true` sul record e sul profilo esistenti, senza creare un nuovo utente Firebase Authentication e senza cambiare le credenziali.
-- Dopo un login Firebase valido, un operatore con `active === false` viene immediatamente disconnesso. I record senza `active` sono trattati come attivi per compatibilità.
-- Operatori disattivati e squadre senza componenti attivi sono esclusi da Control Room, disponibilità, inserimento rapido, Smart Slot e nuove assegnazioni, ma gli ID storici non vengono rimossi.
-- Se Firebase Authentication contiene già lo username, la creazione non collega automaticamente l’account e mostra istruzioni leggibili per risolvere l’account orfano.
-- **Limite Firebase Client SDK:** l’Ufficio non può eliminare arbitrariamente un altro utente Authentication. Senza un backend protetto con Admin SDK, “Elimina definitivamente account” conserva la scheda disattivata e indica esplicitamente l’email da rimuovere dalla console Firebase; non viene mai dichiarato un successo parziale.
-
-
-## 6.1.23.3 — Hotfix creazione operatori e account Auth orfani
-
-- Gestito `auth/email-already-in-use` con un errore applicativo leggibile, senza esporre dettagli Firebase all'Ufficio.
-- Normalizzato lo username e rafforzato il controllo duplicati locale su `username` e `cloudEmail` sincronizzati.
-- Aggiunto rollback compensativo di profilo, operatore e solo account Auth appena creato se il provisioning Firestore fallisce.
-- Conservati tutti i dati del form in caso di errore, così è possibile correggere username o password e riprovare.
-
-### Verifica accessi Firestore
-
-| Collection | Lettura | Scrittura | Regola | Utilizzata da |
-| --- | --- | --- | --- | --- |
-| `profiles/{uid}` | utente stesso / Ufficio | Ufficio | presente | login e ruoli |
-| `operators/{id}` | Ufficio / operatore stesso | Ufficio | presente | operatori, Agenda, Smart Dispatch |
-| `teams/{id}` | Ufficio | Ufficio | presente | squadre, Control Room, Smart Dispatch |
-| `clients/{id}` | Ufficio | Ufficio | presente | interventi |
-| `vehicles/{id}` | Ufficio | Ufficio | presente | flotta e planning |
-| `interventions/{id}` | Ufficio / operatore assegnato | Ufficio / operatore assegnato | presente | interventi, Agenda, Control Room, rapportini |
-| `messages/{id}` | Ufficio / operatore assegnato | Ufficio / operatore assegnato | presente | messaggi |
-| `resourceAvailability/{id}` | Ufficio | Ufficio | presente | disponibilità giornaliera, Smart Dispatch |
+> Recovery R1: base applicativa stabile v6.1.22 ripristinata dal commit `868a56b53138c2ce7ece03988bb51de3e8f0b18f`, senza integrazioni dalle release v6.1.23.x.
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -370,17 +335,3 @@ Base: 6.1.18.
 - Inserimento rapido telefonico con fino a cinque slot, classificazione SICURO/STRETTO/SCONSIGLIATO, filtri risorsa e applicazione non automatica.
 - Disponibilità giornaliera di operatori e squadre, persistita nello stato Firebase esistente e aggiornata in tempo reale.
 - Verifica del percorso precedente → nuovo → successivo, urgenze evidenziate e cache temporanea delle tratte.
-
-## 6.1.23 — Fix Inserimento rapido / Smart Dispatch
-
-- Inserimento rapido mostra contemporaneamente tutte le squadre e tutti gli operatori attivi, con identificativi `team:<id>` e `op:<id>` distinti.
-- La data indicata è ora l'inizio della ricerca su sette giorni; l'opzione **Solo questo giorno** limita esplicitamente la ricerca.
-- Gli slot odierni rispettano ora corrente, viaggio, buffer operativo, arrotondamento, pausa 12:00–13:00 e fine giornata alle 17:00.
-- Aggiunti messaggi diagnostici, statistiche non invasive del planner e test di regressione dedicati.
-
-
-## 6.1.23.1 — Hotfix login cloud / SFPlanning
-
-- Confermata `plannerResources` come API pubblica unica di `planning.js`, mantenendo squadre e operatori attivi come risorse individuali.
-- Separata l'autenticazione cloud dall'inizializzazione difensiva del planner: una cache PWA mista non può più trasformare un errore della Control Room in un errore di login.
-- Aggiornata la cache applicativa e aggiunto un controllo automatico fra le chiamate `SFPlanning.*` e le esportazioni reali.
