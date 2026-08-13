@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.19</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.20</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -387,7 +387,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.19 LIVE DATA / OPERATOR PRIVACY ===== */
+/* ===== 6.1.20 LIVE DATA / OPERATOR PRIVACY ===== */
 .msg-bubble,.msg-bubble *{color:#142438!important}
 .msg-bubble small{color:#667785!important}
 .live-empty{padding:18px;text-align:center;color:#72818d}
@@ -401,7 +401,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .report-list-row:last-child{border-bottom:0}
 @media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
 
-/* ===== 6.1.19 LE MIE COMMESSE ===== */
+/* ===== 6.1.20 LE MIE COMMESSE ===== */
 .my-jobs-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
 .my-jobs-count{background:#e8f7ee;color:#177a3e;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900}
 .job-choice{cursor:pointer;transition:.15s transform,.15s border-color,.15s box-shadow}
@@ -411,7 +411,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 
-/* ===== 6.1.19 AGENDA OPERATIVA ===== */
+/* ===== 6.1.20 AGENDA OPERATIVA ===== */
 .content{min-width:0;max-width:calc(100vw - 245px)}
 #agenda{min-width:0;padding:0!important}
 .agenda-page{box-sizing:border-box;width:100%;max-width:100%;min-width:0;padding:14px 16px 20px}
@@ -446,15 +446,18 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 @media(max-width:900px){.side{min-width:0;max-width:100vw;overflow:hidden}.menu{max-width:100%;overflow:auto}.content{max-width:100vw}.agenda-page{padding:10px}.timeline-wrap{max-height:calc(100vh - 170px)}.agenda-timeline-head,.agenda-timeline-row{grid-template-columns:145px 1120px}.agenda-timeline{min-width:1265px}.agenda-resource-head,.agenda-resource{padding:0 9px}.agenda-week-grid{grid-template-columns:repeat(7,160px)}}
 @media(max-width:600px){.agenda-toolbar{position:sticky;top:0;z-index:20;flex-wrap:wrap;padding:6px 0;background:#f4f6f8}.agenda-toolbar .field{flex:1;min-width:135px}.agenda-view-switch{width:100%}.agenda-view-switch button{flex:1}.timeline-wrap{max-height:calc(100vh - 205px)}.agenda-timeline-head,.agenda-timeline-row{grid-template-columns:120px 1120px}.agenda-timeline{min-width:1240px}.agenda-resource strong{font-size:11px}}
 
-/* 6.1.19 Dashboard/Control Room */
+/* 6.1.20 Control Room */
 .clickable-row{cursor:pointer}.clickable-row:hover{background:#f2f7fa}
 .control-job-card{cursor:pointer;border:1px solid #dce5eb;border-radius:12px;padding:12px;background:#fff}
+.control-page{max-width:none}.control-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.control-toolbar .field{width:auto;margin:0}.live-badge{background:#e8f8ee;color:#177a3e;border-radius:99px;padding:7px 10px;font-size:11px;font-weight:900}.control-grid{display:grid;grid-template-columns:230px minmax(560px,1fr) 320px;gap:12px;margin-top:14px;align-items:start}.control-panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.control-panel h3{margin:0;padding:13px;border-bottom:1px solid var(--line);font-size:13px}.control-resources,.control-timeline-body{display:grid}.control-resource-card{height:88px;padding:9px;border-bottom:1px solid #e7ecef;border-left:5px solid var(--agenda-border);background:var(--agenda-bg)}.control-resource-card strong,.control-resource-card small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.control-resource-card small{font-size:10px;margin-top:4px}.resource-state{display:inline-block;border-radius:99px;padding:3px 6px;background:#fff9;font-size:9px;font-weight:900}.resource-state.critical,.resource-state.delay{background:#fee2e2;color:#a71919}.control-scroll{overflow-x:auto}.control-axis,.control-track{width:1120px;position:relative;background-image:repeating-linear-gradient(to right,transparent 0,transparent 79px,#e8ecef 79px,#e8ecef 80px)}.control-axis{height:42px;border-bottom:1px solid var(--line)}.control-track{height:88px;border-bottom:1px solid #e7ecef}.control-job{position:absolute;top:22px;height:55px;border:1px solid var(--agenda-border);border-left:4px solid var(--agenda-border);border-radius:8px;background:var(--agenda-bg);color:var(--agenda-ink);padding:5px;overflow:hidden;text-align:left;font-size:10px;font-weight:800;cursor:pointer}.control-job.delay,.control-job.critical{box-shadow:inset 0 -5px #dc3c3c}.control-job.warning{box-shadow:inset 0 -5px #e6a021}.control-travel{position:absolute;top:5px;height:13px;border-radius:4px;background:repeating-linear-gradient(135deg,#93a4b2 0 5px,#d9e0e5 5px 10px);font-size:8px;text-align:center;overflow:hidden}.control-free{position:absolute;top:5px;height:13px;border-radius:4px;background:#dff4e7;color:#27633e;font-size:8px;text-align:center;overflow:hidden}.critical-list{padding:10px;display:grid;gap:8px;max-height:calc(100vh - 190px);overflow:auto}.critical-card{border:1px solid #e2e7eb;border-left:5px solid #e5a126;border-radius:9px;padding:9px;background:#fff}.critical-card.urgent,.critical-card.critical{border-left-color:#dc3c3c;background:#fff7f7}.critical-card b,.critical-card small{display:block}.critical-card small{margin-top:4px;color:#60717e}.critical-card .btn{margin-top:7px;padding:8px;font-size:10px}.alternative-row{padding:10px;border:1px solid var(--line);border-radius:9px;margin:8px 0}.control-legend{display:flex;gap:12px;flex-wrap:wrap;padding:8px 13px;font-size:10px}.control-legend i{display:inline-block;width:18px;height:8px;border-radius:3px;margin-right:4px}.control-map-secondary{margin:12px}.control-map-secondary summary{cursor:pointer;font-weight:800}
+@media(max-width:1200px){.control-grid{grid-template-columns:220px minmax(500px,1fr)}.control-critical{grid-column:1/-1}.critical-list{max-height:none;grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.control-grid{grid-template-columns:125px minmax(0,1fr);gap:5px}.control-resource-card{padding:7px}.control-resource-card small{white-space:normal;line-height:1.15}.control-critical{grid-column:1/-1}.critical-list{grid-template-columns:1fr}.control-page{margin:0 -8px}.control-toolbar{padding:0 8px}.control-map-secondary{display:none}}
 .intervention-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .intervention-detail-box{background:#f7fafc;border:1px solid #dce5eb;border-radius:10px;padding:10px}
 .intervention-detail-box.full{grid-column:1/-1}
 @media(max-width:700px){.intervention-detail-grid{grid-template-columns:1fr}}
 
-/* ===== 6.1.19 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
+/* ===== 6.1.20 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
 
 /* Le mappe devono restare sempre sotto alla UI applicativa */
 .real-map,
@@ -510,7 +513,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* ===== 6.1.19 INTERVENTI ===== */
+/* ===== 6.1.20 INTERVENTI ===== */
 .operator-multi-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:7px}
 .operator-check{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid #dce5eb;border-radius:9px;background:#fff}
 .operator-check input{width:18px;height:18px}
@@ -521,7 +524,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.19 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.20 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -531,21 +534,19 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.19 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.20 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.19</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.20</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
 </section>
 
-<section id="control" class="section">
-<div class="top"><div><h1>Control Room</h1><div class="muted">Assegnazioni e disponibilità in tempo reale</div></div><span class="build">LIVE</span></div>
-<div class="grid2" style="margin-top:18px"><div class="card"><h3>Situazione territoriale</h3><div id="controlMap" class="real-map" style="height:500px"></div><div id="controlMapHealth" class="map-health">Situazione territoriale: in attesa</div></div>
-<div><div class="card"><h3>Urgenze da assegnare</h3><div id="controlUrgencyCard" class="live-empty">Nessuna urgenza da assegnare.</div></div>
-<div class="card" style="margin-top:12px"><h3>Operatori attivi</h3><div id="controlActiveOperators" class="control-status-list"></div></div>
-<div class="card" style="margin-top:12px"><h3>Squadre disponibili</h3><div id="controlTeams" class="control-status-list"></div></div></div></div>
+<section id="control" class="section control-page">
+<div class="control-toolbar"><div style="margin-right:auto"><h1 style="margin:0">Control Room</h1><div class="muted">Dispatch operativo dinamico</div></div><input id="controlDate" class="field" type="date" onchange="renderControlRoomV6()"><button class="btn ghost" onclick="controlToday()">OGGI</button><span id="controlUpdated" class="muted">—</span><span class="live-badge">● LIVE</span><button class="btn ghost" onclick="renderControlRoomV6()">Aggiorna ora</button></div>
+<div class="control-grid"><section class="control-panel"><h3>RISORSE</h3><div id="controlResources" class="control-resources"></div></section><section class="control-panel"><h3>TIMELINE DINAMICA</h3><div class="control-scroll"><div id="controlTimeline"></div></div><div class="control-legend"><span><i style="background:#d9e0e5"></i>Viaggio stimato</span><span><i style="background:#dff4e7"></i>Margine</span><span><i style="background:#dc3c3c"></i>Ritardo</span></div></section><section class="control-panel control-critical"><h3>CRITICITÀ &amp; SUGGERIMENTI</h3><div id="controlCritical" class="critical-list"></div></section></div>
+<details class="card control-map-secondary"><summary>Mappa territoriale (vista secondaria)</summary><div id="controlMap" class="real-map" style="height:320px;margin-top:12px"></div><div id="controlMapHealth" class="map-health">Situazione territoriale: in attesa</div></details>
 </section>
 
 
@@ -596,7 +597,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.19</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.20</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -629,7 +630,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.19</span></div>
+ <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.20</span></div>
  <div class="msg-shell" style="margin-top:18px">
   <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
   <div class="msg-thread">
@@ -648,7 +649,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.19</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.20</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
 <p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
 <div class="job-picker" id="jobPicker">
@@ -825,7 +826,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.19</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.20</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -914,6 +915,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="planning.js"></script>
 <script>
 
 const DEFAULT_OPERATORS=[
@@ -928,7 +930,7 @@ const DEFAULT_TEAMS=[
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
 let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.19 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.20 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -993,7 +995,7 @@ async function addOperator(){
  }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.19 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.20 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1549,31 +1551,48 @@ function interventionAssigneeLabel(i){
  const opText=ops.length?ops.map(operatorName).join(', '):(getOperator(i.operatorId)?operatorName(getOperator(i.operatorId)):'');
  return [t?.name||'',opText,v?.code||v?.name||''].filter(Boolean).join(' · ')||'Da assegnare';
 }
-function renderControlRoomV6(){
- const urgency=sfOfficeInterventions.filter(i=>i.status==='Urgente'&&!i.operatorId).sort((a,b)=>((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||'')))[0];
- const card=el('controlUrgencyCard');
- if(card){
-   card.className=urgency?'':'live-empty';
-   card.innerHTML=urgency?`<div class="control-job-card" onclick="openInterventionModal('${urgency.id}')"><b>${esc(urgency.client)}</b><p>${esc(urgency.request||'')}</p><p class="muted">${esc(urgency.address||'')}</p><button class="btn primary" onclick="event.stopPropagation();openAssignTeamModal('${urgency.id}')">Assegna squadra</button></div>`:'Nessuna urgenza non assegnata.';
- }
- const ops=el('controlActiveOperators');
- if(ops){
-   const active=sfOperators.filter(o=>o.active!==false);
-   ops.innerHTML=active.length?active.map(o=>{
-      const jobs=operatorActiveJobs(o.id),running=jobs.find(i=>i.status==='In corso');
-      return `<div class="control-person"><div><span class="live-dot ${running?'orange':'green'}"></span><b>${esc(operatorName(o))}</b><br><small>${esc(o.mezzo||'Nessun mezzo')}</small></div><small>${esc(running?'In intervento: '+running.client:(jobs.length?'Assegnati '+jobs.length+' interventi':'Disponibile'))}</small></div>`;
-   }).join(''):'<div class="live-empty">Nessun operatore attivo.</div>';
- }
- const teams=el('controlTeams');
- if(teams){
-   const valid=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false));
-   teams.innerHTML=valid.length?valid.map(t=>{
-     const members=(t.operatorIds||[]).map(getOperator).filter(o=>o&&o.active!==false);
-     const busy=members.some(o=>operatorActiveJobs(o.id).some(i=>i.status==='In corso'));
-     return `<div class="control-person"><div><span class="live-dot ${busy?'orange':'green'}"></span><b>${esc(t.name)}</b><br><small>${esc(members.map(operatorName).join(', ')||'Nessun operatore')}</small></div><small>${esc(t.vehicle||'')} · ${busy?'occupata':'disponibile'}</small></div>`;
-   }).join(''):'<div class="live-empty">Nessuna squadra con operatori attivi.</div>';
- }
+function controlToday(){if(el('controlDate'))el('controlDate').value=localDateKey();renderControlRoomV6()}
+function controlMinuteLabel(value){const n=Math.max(0,Math.round(value||0));return `${String(Math.floor(n/60)%24).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`}
+function controlResourcesForDate(rows){return officeAgendaResources(rows).map(r=>({...r,available:r.id!=='unassigned'}))}
+function controlSchedules(rows,resources,nowMinutes){
+ const result={};resources.forEach(r=>{result[r.id]=SFPlanning.buildSchedule(rows.filter(i=>agendaResourceId(i)===r.id),{nowMinutes})});return result;
 }
+function deriveControlState(schedule,now){
+ if(schedule.some(x=>x.severity==='critical'))return'CRITICO';
+ const running=schedule.find(x=>x.job.status==='In corso');if(running)return'IN INTERVENTO';
+ const next=schedule.find(x=>x.start>=now||x.end>=now);
+ if(next?.delta>0)return'IN RITARDO';
+ const travelling=schedule.find(x=>x.index>0&&now>=x.arrival-x.travelMinutes&&now<x.arrival);if(travelling)return'IN VIAGGIO';
+ return next?'DISPONIBILE':'LIBERO';
+}
+function controlAlternatives(job,resources,schedules,now){
+ return SFPlanning.findResourceAlternatives(resources.filter(r=>r.id!==agendaResourceId(job)&&r.id!=='unassigned'),job,schedules,{nowMinutes:now,limit:3});
+}
+function renderControlRoomV6(){
+ const dateInput=el('controlDate');if(!dateInput)return;if(!dateInput.value)dateInput.value=localDateKey();
+ const date=dateInput.value,nowDate=new Date(),now=date===localDateKey()?nowDate.getHours()*60+nowDate.getMinutes():SFPlanning.CONFIG.dayStartMinutes;
+ const rows=sfOfficeInterventions.filter(i=>i.date===date&&i.status!=='Annullato').sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+ const resources=controlResourcesForDate(rows),schedules=controlSchedules(rows,resources,now),hours=Array.from({length:15},(_,i)=>i+6);
+ el('controlUpdated').textContent='Aggiornato '+nowDate.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+ el('controlResources').innerHTML=resources.map(r=>{const s=schedules[r.id],state=deriveControlState(s,now),current=s.find(x=>x.job.status==='In corso'),next=s.find(x=>x.start>=now&&x.job.status!=='Terminato'),available=s.length?s[s.length-1].end:now;return `<div class="control-resource-card" style="${agendaColorStyle(r.color)}"><strong>${esc(r.name)}</strong><span class="resource-state ${state==='CRITICO'?'critical':state==='IN RITARDO'?'delay':''}">${state}</span><small>${current?'Ora: '+esc(current.job.client):'Prossimo: '+esc(next?.job.client||'—')}</small><small>Disponibile ${controlMinuteLabel(available)}</small></div>`}).join('');
+ const axis=`<div class="control-axis">${hours.map((h,i)=>`<span class="agenda-hour" style="left:${i*80}px">${String(h).padStart(2,'0')}:00</span>`).join('')}</div>`;
+ const tracks=resources.map(r=>`<div class="control-track">${schedules[r.id].map(x=>{const color=agendaColorForIntervention(x.job),left=Math.max(0,(x.start-SFPlanning.CONFIG.dayStartMinutes)*AGENDA_PX_PER_MINUTE),width=Math.max(48,x.durationMinutes*AGENDA_PX_PER_MINUTE),travelLeft=Math.max(0,(x.arrival-x.travelMinutes-SFPlanning.CONFIG.dayStartMinutes)*AGENDA_PX_PER_MINUTE),travelWidth=x.travelMinutes*AGENDA_PX_PER_MINUTE,free=x.margin>0?Math.min(x.margin*AGENDA_PX_PER_MINUTE,left):0;return `${x.index?`<span class="control-travel" style="left:${travelLeft}px;width:${travelWidth}px" title="${esc(x.travelReason)}">${x.travelMinutes} min</span>`:''}${free?`<span class="control-free" style="left:${Math.max(0,left-free)}px;width:${free}px">margine ${x.margin}</span>`:''}<button class="control-job ${x.severity}" style="left:${left}px;width:${width}px;${agendaColorStyle(color)}" onclick="openInterventionModal('${x.job.id}')"><b>${controlMinuteLabel(x.start)} ${esc(x.job.client||'Intervento')}</b><br>${x.durationFallback?'~ stima tecnica ':''}${x.delta>0?'· +'+x.delta+' min':''}</button>`}).join('')}</div>`).join('');
+ el('controlTimeline').innerHTML=axis+tracks;
+ const issues=[];
+ rows.filter(j=>String(j.priority||j.status).toLowerCase().includes('urgent')).forEach(job=>{const alternatives=controlAlternatives(job,resources,schedules,now);issues.push({rank:0,cls:'urgent',html:`<b>URGENZA · ${esc(job.client||'Intervento')}</b><small>${esc(job.address||'Posizione non disponibile')}</small>${alternatives.slice(0,2).map((a,i)=>`<small>${i?'Seconda alternativa':'Migliore risorsa'}: <b>${esc(a.resource.name)}</b> · arrivo ${controlMinuteLabel(a.arrival)} · viaggio stimato ${a.travelMinutes} min${a.impacted.length?' · compromette '+esc(a.impacted[0].job.client):''}</small>`).join('')||'<small>Nessuna risorsa disponibile.</small>'}`})});
+ resources.forEach(r=>schedules[r.id].forEach(x=>{if(['warning','delay','critical'].includes(x.severity)){const labels={warning:'MARGINE INSUFFICIENTE',delay:'IN RITARDO',critical:'CRITICO'};issues.push({rank:x.severity==='critical'?1:x.severity==='delay'?2:3,cls:x.severity,html:`<b>${labels[x.severity]} · ${esc(x.job.client||'Intervento')}</b><small>${esc(r.name)} · arrivo ${controlMinuteLabel(x.arrival)} · ${x.delta>0?'ritardo '+x.delta:'margine '+x.margin} min${x.travelEstimated?' · viaggio stimato':''}${x.overlap?' · sovrapposizione':''}</small>${['delay','critical'].includes(x.severity)?`<button class="btn ghost" onclick="openControlAlternatives('${x.job.id}')">TROVA ALTERNATIVA</button>`:''}`})}}));
+ issues.sort((a,b)=>a.rank-b.rank);el('controlCritical').innerHTML=issues.length?issues.map(x=>`<article class="critical-card ${x.cls}">${x.html}</article>`).join(''):'<div class="live-empty">Nessuna criticità: pianificazione regolare.</div>';
+}
+function openControlAlternatives(jobId){
+ const job=sfOfficeInterventions.find(x=>x.id===jobId);if(!job)return;const date=job.date,now=date===localDateKey()?new Date().getHours()*60+new Date().getMinutes():SFPlanning.CONFIG.dayStartMinutes,rows=sfOfficeInterventions.filter(i=>i.date===date&&i.status!=='Annullato'),resources=controlResourcesForDate(rows),schedules=controlSchedules(rows,resources,now),alts=controlAlternatives(job,resources,schedules,now);
+ showV6Modal('Alternative per '+(job.client||job.id),`${alts.length?alts.map(a=>`<div class="alternative-row"><b>${esc(a.resource.name)}</b><div class="v6-meta">Arrivo ${controlMinuteLabel(a.arrival)} · viaggio stimato ${a.travelMinutes} min · margine ${a.margin} min<br>Impatto: ${a.impacted.length?esc(a.impacted.map(x=>x.job.client).join(', ')):'nessun appuntamento compromesso'}</div><button class="btn primary" onclick="confirmControlReassignment('${job.id}','${a.resource.id}')">RIASSEGNA</button></div>`).join(''):'<div class="live-empty">Nessuna alternativa migliorativa disponibile.</div>'}<div class="panel-actions"><button class="btn ghost" onclick="closeV6Modal()">ANNULLA</button></div>`);
+}
+function confirmControlReassignment(jobId,resourceId){
+ const job=sfOfficeInterventions.find(x=>x.id===jobId);if(!job||!confirm('Confermare la riassegnazione?'))return;
+ if(resourceId.startsWith('team:')){const t=sfTeams.find(x=>x.id===resourceId.slice(5));if(!t)return;job.teamId=t.id;job.assignedOperatorIds=(t.operatorIds||[]).filter(id=>getOperator(id)?.active!==false);job.operatorId=job.assignedOperatorIds[0]||''}else{const id=resourceId.replace('op:','');job.teamId='';job.operatorId=id;job.assignedOperatorIds=[id]}
+ saveV6();closeV6Modal();renderAllOfficeV6();syncOperatorJobs();
+}
+
 function openAssignTeamModal(interventionId){
  const i=sfOfficeInterventions.find(x=>x.id===interventionId);if(!i)return;
  const teams=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false));
@@ -1969,7 +1988,7 @@ document.querySelectorAll('#menu button').forEach(b=>{
 });
 
 
-/* ===== 6.1.19 AUTO-AGGIORNAMENTO MESSAGGI / RAPPORTINI ===== */
+/* ===== 6.1.20 AUTO-AGGIORNAMENTO MESSAGGI / RAPPORTINI ===== */
 let officeAutoRefreshTimer=null;
 function refreshMessagesAndReports(){
  try{
