@@ -16,10 +16,14 @@ const emitModuleError=(module,error)=>window.dispatchEvent(new CustomEvent("sfmo
 let app=null,auth=null,db=null,currentInfo=null,unsubs=[],syncTimer=null;
 
 function emailForUsername(username){return String(username||'').trim().toLowerCase()+'@spurgoflow.app'}
-function clean(obj){
- const out={};
- Object.entries(obj||{}).forEach(([k,v])=>{if(v!==undefined && k!=='password')out[k]=v});
- return out;
+function clean(value){
+ if(Array.isArray(value))return value.map(clean).filter(v=>v!==undefined);
+ if(value && typeof value==='object'){
+  const out={};
+  Object.entries(value).forEach(([key,item])=>{if(item!==undefined&&key!=='password')out[key]=clean(item)});
+  return out;
+ }
+ return value;
 }
 function profileRef(uid){return doc(db,'profiles',uid)}
 async function getProfile(uid){
