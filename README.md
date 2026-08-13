@@ -301,3 +301,12 @@ Base: 6.1.17.
 - Cliente, indirizzo, tipologia e stato restano disponibili in forma secondaria compatta.
 - Vista settimanale e Agenda operatore adottano la stessa gerarchia visiva.
 - Invariati Firebase, autenticazione, sincronizzazione realtime e refresh Messaggi/Rapportini ogni 30 secondi.
+## 6.1.19 — Riprogettazione completa scheda Agenda
+Base: 6.1.18.
+
+- Agenda a tutta larghezza con soli controlli data, Oggi e Giorno/Settimana.
+- Vista Giorno trasformata in timeline operativa 06:00–20:00 con righe sticky per operatori e squadre.
+- Interventi posizionati in base all'orario e dimensionati con la durata stimata quando disponibile.
+- Click diretto sul blocco per aprire Modifica intervento, senza pannello dettagli separato.
+- Vista Settimana compatta, palette pastello persistente e layout responsive con scorrimento orizzontale.
+- Invariati Firebase, autenticazione, sincronizzazione e refresh Messaggi/Rapportini ogni 30 secondi.
