@@ -316,3 +316,12 @@ Base: 6.1.18.
 - Control Room responsive a tutta larghezza con risorse, timeline giornaliera, viaggi, margini e criticità live.
 - Motore di planning deterministico e riutilizzabile con durata tecnica di fallback, stima geografica prudenziale dei viaggi e propagazione di anticipi/ritardi.
 - Urgenze prioritarie, suggerimenti fino a tre risorse e riassegnazione solo dopo conferma dell’ufficio, sugli stessi interventi sincronizzati dell’Agenda.
+
+
+## 6.1.21 — Smart Slot & Route Planner
+
+- Motore centrale `findBestSlots` con buffer e orari operativi configurabili, cache temporanea delle tratte, scoring deterministico di percorso completo, margini, impatto e bilanciamento.
+- Pianificazione intelligente nei form nuovo/modifica: fino a tre proposte, anteprima prima/nuovo/dopo e applicazione al form senza salvataggio automatico.
+- Supporto per urgenze, appuntamenti fissi, fasce preferite e fallback dichiarato per coordinate incomplete.
+- Inserimento rapido dalla Control Room, collegato allo stesso motore e al normale form precompilato.
+- Agenda e Control Room si aggiornano dagli stessi interventi condivisi dopo il salvataggio.
