@@ -51,6 +51,17 @@ async function saveClient(record){
  return true;
 }
 
+async function saveIntervention(record){
+ if(!configured)return true;
+ if(!currentInfo)throw new Error("Sessione cloud non disponibile.");
+ if(!record?.id)throw new Error("ID intervento mancante.");
+ if(currentInfo.role==='operator' && record.operatorId!==currentInfo.operatorId && !(record.assignedOperatorIds||[]).includes(currentInfo.operatorId)){
+   throw new Error("Intervento non assegnato all'operatore autenticato.");
+ }
+ await setDoc(doc(db,'interventions',String(record.id)),clean(record),{merge:true});
+ return true;
+}
+
 async function deleteClient(id){
  if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare clienti.");
  await deleteDoc(doc(db,'clients',String(id)));
@@ -244,5 +255,5 @@ window.SFCloud={
  enabled:configured,
  get ready(){return !!(configured&&currentInfo)},
  get authenticatedUser(){return auth?.currentUser||null},
- login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient
+ login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient,saveIntervention
 };

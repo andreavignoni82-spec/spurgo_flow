@@ -22,7 +22,8 @@ assert(ordered.findIndex(j=>j.date==='2026-08-14')<ordered.findIndex(j=>j.status
 // E: whole compact row is keyboard/touch clickable and has no “Apri” action button.
 const compactTemplate=html.slice(html.indexOf('function syncOperatorJobs(){'),html.indexOf('function backToOperatorJobs'));
 assert(compactTemplate.includes('onclick="openOperatorJob'));
-assert(compactTemplate.includes('role="button"'));
+assert(compactTemplate.includes('agenda-block'));
+assert(compactTemplate.includes('agenda-week-job'));
 assert(!compactTemplate.includes('Apri commessa'));
 
 // F/G/H/I/L/M/N/O/P: one existing id is loaded, fully populated, merged and saved in place.
@@ -30,7 +31,7 @@ assert(html.includes('function resetReportForm()'));
 assert(html.includes('function populateReportForm(job)'));
 assert(html.includes('function collectReportForm(job)'));
 assert(html.includes("sfOfficeInterventions.find(x=>x.id===job.id)"));
-assert(html.includes("source.status='Riaperto'"));
+assert(html.includes("current.status='Riaperto'"));
 for(const token of ['relationInput','activities','quantities','photos','operatorSignature','customerSignature','opLat','opLng'])assert(html.includes(token),token);
 const original={id:'INT-1',status:'Terminato',reportData:{relation:'prima',photos:{prima:'data:image/png;base64,x'},materials:['A'],operatorSignature:'op',customerSignature:'cl'}};
 const updated={...original,status:'Riaperto',reportData:{...original.reportData,relation:'modificata'}};
@@ -40,4 +41,4 @@ assert.strictEqual(new Set([updated.id]).size,1);
 // Operator navigation is retained only as dormant compatibility markup and hidden from UI.
 for(const id of ['#fieldAgenda','#fieldMappa','#fieldMessaggi','#fieldProfilo','#fieldNav'])assert(html.includes(id),id);
 assert(html.includes('display:none!important'));
-console.log('v6.1.23.4: lista compatta, privacy, ordinamento e riapertura sullo stesso interventionId verificati');
+console.log('v6.1.23.5: agenda, privacy e riapertura sullo stesso interventionId verificati');

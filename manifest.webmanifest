@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.23.4",
+  "name": "Spurgo Flow 6.1.23.5",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Lista operatore ultra-compatta e rapportini completamente riapribili",
+  "description": "Agenda personale operatore e chiusura intervento persistente",
   "icons": [
     {
       "src": "icon-192.png",

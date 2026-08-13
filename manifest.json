@@ -1,5 +1,5 @@
 {
-  "name": "Spurgo Flow 6.1.23.4",
+  "name": "Spurgo Flow 6.1.23.5",
   "short_name": "SpurgoFlow",
   "start_url": "./",
   "scope": "./",
@@ -21,5 +21,5 @@
       "purpose": "any maskable"
     }
   ],
-  "version": "6.1.23.4"
+  "version": "6.1.23.5"
 }
