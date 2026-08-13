@@ -1,5 +1,5 @@
-# Spurgo Flow — Suite v6.1.23
-Build 6.1.23
+# Spurgo Flow — Suite v6.1.23.1
+Build 6.1.23.1
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -340,3 +340,10 @@ Base: 6.1.18.
 - La data indicata è ora l'inizio della ricerca su sette giorni; l'opzione **Solo questo giorno** limita esplicitamente la ricerca.
 - Gli slot odierni rispettano ora corrente, viaggio, buffer operativo, arrotondamento, pausa 12:00–13:00 e fine giornata alle 17:00.
 - Aggiunti messaggi diagnostici, statistiche non invasive del planner e test di regressione dedicati.
+
+
+## 6.1.23.1 — Hotfix login cloud / SFPlanning
+
+- Confermata `plannerResources` come API pubblica unica di `planning.js`, mantenendo squadre e operatori attivi come risorse individuali.
+- Separata l'autenticazione cloud dall'inizializzazione difensiva del planner: una cache PWA mista non può più trasformare un errore della Control Room in un errore di login.
+- Aggiornata la cache applicativa e aggiunto un controllo automatico fra le chiamate `SFPlanning.*` e le esportazioni reali.
