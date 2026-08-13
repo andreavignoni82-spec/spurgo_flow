@@ -1,5 +1,5 @@
 {
-  "name": "Spurgo Flow 6.1.23.8",
+  "name": "Spurgo Flow 6.1.23.9",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
@@ -19,5 +19,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "version": "6.1.23.9"
 }

@@ -1,4 +1,4 @@
-const CACHE='spurgoflow-v6-6.1.23.8-operator-lifecycle-hotfix';
+const CACHE='spurgoflow-v6-6.1.23.9-report-signature-pdf-hotfix';
 const LOCAL=['./index.html','./planning.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
 
 self.addEventListener('install',e=>{

@@ -1,5 +1,12 @@
-# Spurgo Flow — Suite v6.1.23.8
-Build 6.1.23.8
+# Spurgo Flow — Suite v6.1.23.9
+Build 6.1.23.9
+
+## 6.1.23.9 — Hotfix rapportino end-to-end
+
+- Le firme operatore e cliente sono validate contro canvas vuoti e persistite in `intervention.reportData` al momento della conferma.
+- Un unico view model persistito alimenta anteprima, archivio Ufficio, condivisione e PDF.
+- Il rapportino rimane visibile anche dopo la riapertura dello stesso intervento; foto e firme sono conservate con merge.
+- Il salvataggio di chiusura attende la scrittura Firestore prima di mostrare il successo.
 
 ## 6.1.23.8 — Ciclo vita sicuro operatori
 
