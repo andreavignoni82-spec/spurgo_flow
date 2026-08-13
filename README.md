@@ -1,12 +1,12 @@
-# Spurgo Flow — Suite v6.1.23.2
-Build 6.1.23.2
+# Spurgo Flow — Suite v6.1.23.3
+Build 6.1.23.3
 
-## 6.1.23.2 — Hotfix permessi disponibilità risorse
+## 6.1.23.3 — Hotfix creazione operatori e account Auth orfani
 
-- Aggiunta/confermata l'autorizzazione Firestore per la disponibilità giornaliera delle risorse in `resourceAvailability/{id}`, limitata agli utenti Firebase autenticati con profilo `office`.
-- Isolati autenticazione, caricamento dei dati principali e sincronizzazione dei moduli secondari: un errore di disponibilità non viene più mostrato come errore di accesso cloud.
-- In caso di errore del modulo Resource Availability, operatori e squadre attivi restano tutti disponibili per default e Control Room mostra un avviso non bloccante.
-- **Distribuire `firestore.rules` su Firebase**: la modifica locale non aggiorna automaticamente le regole del progetto in produzione.
+- Gestito `auth/email-already-in-use` con un errore applicativo leggibile, senza esporre dettagli Firebase all'Ufficio.
+- Normalizzato lo username e rafforzato il controllo duplicati locale su `username` e `cloudEmail` sincronizzati.
+- Aggiunto rollback compensativo di profilo, operatore e solo account Auth appena creato se il provisioning Firestore fallisce.
+- Conservati tutti i dati del form in caso di errore, così è possibile correggere username o password e riprovare.
 
 ### Verifica accessi Firestore
 
