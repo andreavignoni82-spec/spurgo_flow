@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.15",
+  "name": "Spurgo Flow 6.1.17",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Fix elenco interventi e collegamenti Dashboard/Control Room",
+  "description": "Agenda giorno corrente, colori operatori/squadre e refresh Messaggi/Rapportini ogni 30 secondi",
   "icons": [
     {
       "src": "icon-192.png",
