@@ -1,5 +1,5 @@
-# Spurgo Flow — Suite v6.1.22
-Build 6.1.22
+# Spurgo Flow — Suite v6.1.23
+Build 6.1.23
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -333,3 +333,10 @@ Base: 6.1.18.
 - Inserimento rapido telefonico con fino a cinque slot, classificazione SICURO/STRETTO/SCONSIGLIATO, filtri risorsa e applicazione non automatica.
 - Disponibilità giornaliera di operatori e squadre, persistita nello stato Firebase esistente e aggiornata in tempo reale.
 - Verifica del percorso precedente → nuovo → successivo, urgenze evidenziate e cache temporanea delle tratte.
+
+## 6.1.23 — Fix Inserimento rapido / Smart Dispatch
+
+- Inserimento rapido mostra contemporaneamente tutte le squadre e tutti gli operatori attivi, con identificativi `team:<id>` e `op:<id>` distinti.
+- La data indicata è ora l'inizio della ricerca su sette giorni; l'opzione **Solo questo giorno** limita esplicitamente la ricerca.
+- Gli slot odierni rispettano ora corrente, viaggio, buffer operativo, arrotondamento, pausa 12:00–13:00 e fine giornata alle 17:00.
+- Aggiunti messaggi diagnostici, statistiche non invasive del planner e test di regressione dedicati.
