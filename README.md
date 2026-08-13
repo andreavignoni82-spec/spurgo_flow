@@ -289,3 +289,5 @@ Base: 6.1.14.
 - Multi-assegnazione operatori/squadre mantenuta.
 - Righe intervento nuovamente cliccabili.
 - Dashboard e Control Room continuano ad aprire il dettaglio dello stesso record intervento.
+
+Test integrazione Codex GitHub - 13/08/2026
