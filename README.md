@@ -291,3 +291,23 @@ Base: 6.1.14.
 - Dashboard e Control Room continuano ad aprire il dettaglio dello stesso record intervento.
 
 Test integrazione Codex GitHub - 13/08/2026
+
+## 6.1.18 — Ottimizzazione grafica e operativa Agenda
+Base: 6.1.17.
+
+- Orario e operatore/squadra diventano gli elementi dominanti delle schede Agenda.
+- Vista giornaliera più compatta, ordinata cronologicamente e ottimizzata per smartphone.
+- Colori persistenti per risorsa convertiti in una palette pastello professionale.
+- Cliente, indirizzo, tipologia e stato restano disponibili in forma secondaria compatta.
+- Vista settimanale e Agenda operatore adottano la stessa gerarchia visiva.
+- Invariati Firebase, autenticazione, sincronizzazione realtime e refresh Messaggi/Rapportini ogni 30 secondi.
+
+## 6.1.19 — Riprogettazione completa scheda Agenda
+Base: 6.1.18.
+
+- Agenda a tutta larghezza con soli controlli data, Oggi e Giorno/Settimana.
+- Vista Giorno trasformata in timeline operativa 06:00–20:00 con righe sticky per operatori e squadre.
+- Interventi posizionati in base all'orario e dimensionati con la durata stimata quando disponibile.
+- Click diretto sul blocco per aprire Modifica intervento, senza pannello dettagli separato.
+- Vista Settimana compatta, palette pastello persistente e layout responsive con scorrimento orizzontale.
+- Invariati Firebase, autenticazione, sincronizzazione e refresh Messaggi/Rapportini ogni 30 secondi.
