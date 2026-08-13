@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.11",
+  "name": "Spurgo Flow 6.1.12",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Spurgo Flow 6.1.11 - Agenda operatore e ufficio redesign",
+  "description": "Dashboard e Control Room con apertura interventi",
   "icons": [
     {
       "src": "icon-192.png",
