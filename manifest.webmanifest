@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 6.1.14",
+  "name": "Spurgo Flow 6.1.15",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Interventi oggi di default, tempo stimato, assegnazione multi-operatore/squadra",
+  "description": "Fix elenco interventi e collegamenti Dashboard/Control Room",
   "icons": [
     {
       "src": "icon-192.png",

@@ -278,3 +278,14 @@ Base: 6.1.13.
 - Possibilità di combinare squadra + operatori specifici.
 - Se si sceglie una squadra senza operatori manuali, vengono assegnati gli operatori attivi della squadra.
 - `operatorId` resta il responsabile primario per compatibilità; `assignedOperatorIds` contiene tutti gli operatori assegnati.
+
+## 6.1.15 — Interventions Render Fix
+Base: 6.1.14.
+
+- Corretto il renderer della sezione Interventi: usa la struttura reale `officeInterventionList`.
+- Ripristinata visualizzazione interventi.
+- Filtro data di default sul giorno corrente mantenuto.
+- Tempo stimato mantenuto.
+- Multi-assegnazione operatori/squadre mantenuta.
+- Righe intervento nuovamente cliccabili.
+- Dashboard e Control Room continuano ad aprire il dettaglio dello stesso record intervento.
