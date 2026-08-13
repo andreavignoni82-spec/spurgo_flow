@@ -1,7 +1,5 @@
-# Spurgo Flow — Suite v6.1.22-R1
-Build 6.1.22-R1
-
-> Recovery R1: base applicativa stabile v6.1.22 ripristinata dal commit `868a56b53138c2ce7ece03988bb51de3e8f0b18f`, senza integrazioni dalle release v6.1.23.x.
+# Spurgo Flow — Suite Beta v5.0
+Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
 
@@ -320,18 +318,12 @@ Base: 6.1.18.
 - Urgenze prioritarie, suggerimenti fino a tre risorse e riassegnazione solo dopo conferma dell’ufficio, sugli stessi interventi sincronizzati dell’Agenda.
 
 
-## 6.1.22 — Smart Slot & Route Planner
+## 6.1.21 — Smart Slot & Route Planner
+
+> **Recovery v6.1.21-R1:** codice applicativo ripristinato integralmente dal commit `0a4cad6849798ac0adc5791e59b3ec0aabf62b08`; rollback limitato al codice, senza modifiche ai dati Firebase.
 
 - Motore centrale `findBestSlots` con buffer e orari operativi configurabili, cache temporanea delle tratte, scoring deterministico di percorso completo, margini, impatto e bilanciamento.
 - Pianificazione intelligente nei form nuovo/modifica: fino a tre proposte, anteprima prima/nuovo/dopo e applicazione al form senza salvataggio automatico.
 - Supporto per urgenze, appuntamenti fissi, fasce preferite e fallback dichiarato per coordinate incomplete.
 - Inserimento rapido dalla Control Room, collegato allo stesso motore e al normale form precompilato.
 - Agenda e Control Room si aggiornano dagli stessi interventi condivisi dopo il salvataggio.
-
-
-## 6.1.22 — Inserimento rapido · Smart Dispatch Real Time
-
-- Giornata centralizzata 07:00–12:00 / 13:00–17:00, pausa inviolabile e buffer configurabili.
-- Inserimento rapido telefonico con fino a cinque slot, classificazione SICURO/STRETTO/SCONSIGLIATO, filtri risorsa e applicazione non automatica.
-- Disponibilità giornaliera di operatori e squadre, persistita nello stato Firebase esistente e aggiornata in tempo reale.
-- Verifica del percorso precedente → nuovo → successivo, urgenze evidenziate e cache temporanea delle tratte.

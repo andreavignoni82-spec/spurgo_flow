@@ -70,8 +70,7 @@ async function syncFromGlobals(){
          replaceCollection('clients',state.clients),
          replaceCollection('vehicles',state.vehicles),
          replaceCollection('interventions',state.interventions),
-         replaceCollection('messages',state.messages),
-         replaceCollection('resourceAvailability',state.resourceAvailability||[])
+         replaceCollection('messages',state.messages)
        ]);
      }else if(currentInfo.role==='operator'){
        const opid=currentInfo.operatorId;
@@ -116,7 +115,7 @@ async function startRealtime(info){
  currentInfo=info;stopListeners();
  if(info.role==='office'){
    await seedOfficeIfEmpty();
-   ['operators','teams','clients','vehicles','interventions','messages','resourceAvailability'].forEach(n=>listenCollection(n));
+   ['operators','teams','clients','vehicles','interventions','messages'].forEach(n=>listenCollection(n));
  }else{
    const opid=info.operatorId;
    listenDocument('operators',opid);
