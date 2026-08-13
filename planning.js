@@ -95,16 +95,6 @@
   }
   const dateKey=d=>{const x=new Date(d);return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`};
   const clock=n=>`${String(Math.floor(n/60)).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;
-  function plannerResources(teams=[],operators=[]){
-    const activeOperator=id=>operators.find(o=>o.id===id&&o.active!==false);
-    const teamRows=teams.filter(t=>t.active!==false&&(t.operatorIds||[]).some(activeOperator)).map(t=>({id:'team:'+t.id,name:t.name,available:true,vehicle:t.vehicle,skills:(t.operatorIds||[]).map(activeOperator).filter(Boolean).map(o=>o.ruolo||'')}));
-    const operatorRows=operators.filter(o=>o.active!==false).map(o=>({id:'op:'+o.id,name:[o.nome,o.cognome].filter(Boolean).join(' ')||o.name||o.id,available:true,role:o.ruolo,vehicle:o.mezzo}));
-    return teamRows.concat(operatorRows);
-  }
-  function assignmentForResource(resourceId,teams=[]){
-    if(String(resourceId).startsWith('team:')){const teamId=resourceId.slice(5),team=teams.find(t=>String(t.id)===teamId);return {teamId,operatorIds:[...(team?.operatorIds||[])]}}
-    return {teamId:'',operatorIds:String(resourceId).startsWith('op:')?[resourceId.slice(3)]:[]};
-  }
   function scoreSlotCandidate(c){
     return (c.constraintMatch?0:1200)+(c.problematic?5000:0)+(c.impactMinutes||0)*80+
       c.totalTravelMinutes*8-Math.min(c.marginBefore+c.marginAfter,180)*2+
@@ -124,23 +114,18 @@
     if(!Number.isFinite(d)||d<=0)return {suggestions:[],error:'Indica la durata stimata prima di cercare uno slot.'};
     const availability=options.resourceAvailability||(()=>true);
     const resources=(options.resources||[]).filter(r=>r.available!==false),jobs=options.jobs||[],cache=new Map(),urgent=String(jobDraft.priority||jobDraft.status||'').toLowerCase().includes('urgent');
-    if(!resources.length)return {suggestions:[],error:'Nessuna risorsa selezionata.'};
-    const enforceNow=options.now instanceof Date,now=enforceNow?options.now:new Date(),startKey=options.startDate||jobDraft.date||dateKey(now);
-    const startDate=new Date(startKey+'T12:00:00'),days=(options.onlyThisDay||jobDraft.fixedTime)?1:config.searchDays,candidates=[];
-    let availableResources=0;
+    if(!resources.length)return {suggestions:[],error:'Nessuna risorsa attiva disponibile.'};
+    const startDate=new Date((jobDraft.date||options.startDate||dateKey(new Date()))+'T12:00:00'),days=(jobDraft.date||jobDraft.fixedTime)?1:config.searchDays,candidates=[];
     const travel=(a,b)=>{if(!a||!b)return {minutes:0,estimated:false};const key=[a.id||a.address||JSON.stringify(coordinates(a)),b.id||b.address||JSON.stringify(coordinates(b))].join('>');if(!cache.has(key))cache.set(key,estimateTravelMinutes(a,b,config));return cache.get(key)};
     for(let di=0;di<days;di++){
       const day=new Date(startDate);day.setDate(day.getDate()+di);const date=dateKey(day);
       for(const resource of resources){
         if(!availability(date,resource.id,resource))continue;
-        availableResources++;
         const rows=buildSchedule(jobs.filter(j=>j.date===date&&j.status!=='Annullato'&&(options.resourceId?options.resourceId(j)===resource.id:j.resourceId===resource.id)),{config});
         const load=rows.reduce((n,x)=>n+x.durationMinutes+x.travelMinutes,0);
         for(let gi=0;gi<=rows.length;gi++){
           const previous=rows[gi-1]||null,next=rows[gi]||null,from=previous?.job||resource.location||null;
-          const before=travel(from,jobDraft),after=travel(jobDraft,next?.job);
-          const todayMinimum=enforceNow&&date===dateKey(now)?now.getHours()*60+now.getMinutes()+before.minutes+config.minimumBufferMinutes:config.dayStartMinutes;
-          const earliest=Math.max((previous?previous.end:config.dayStartMinutes)+before.minutes+(previous?config.minimumBufferMinutes:0),todayMinimum);
+          const before=travel(from,jobDraft),after=travel(jobDraft,next?.job),earliest=(previous?previous.end:config.dayStartMinutes)+before.minutes+(previous?config.minimumBufferMinutes:0);
           const latest=(next?next.plannedStart-after.minutes-config.minimumBufferMinutes:config.dayEndMinutes)-d;
           const range=jobDraft.preferredRange;
           const segments=[[config.dayStartMinutes,config.lunchStartMinutes],[config.lunchEndMinutes,config.dayEndMinutes]];
@@ -152,7 +137,6 @@
           const impact=Math.max(0,start-latest,earliest-start),outsideWorkday=!segment;
           if((outsideWorkday||!inRange)&&!urgent)continue;
           const problematic=impact>0||outsideWorkday||!inRange;
-          if(problematic&&!urgent)continue;
           const constraintMatch=(!jobDraft.date||date===jobDraft.date)&&inRange&&!outsideWorkday;
           const effectiveLatest=Math.min(latest,segment?.[1]-d??latest);
           const operationalMargin=Math.max(0,effectiveLatest-start);
@@ -166,9 +150,7 @@
     }
     const rank={SICURO:0,STRETTO:1,SCONSIGLIATO:2};
     candidates.sort((a,b)=>(urgent?0:rank[a.classification]-rank[b.classification])||a.score-b.score||a.date.localeCompare(b.date)||a.start-b.start||String(a.resource.id).localeCompare(String(b.resource.id)));
-    const stats={resources:resources.length,excludedByAvailability:resources.length*days-availableResources,candidates:candidates.length,safe:candidates.filter(c=>c.classification==='SICURO').length,tight:candidates.filter(c=>c.classification==='STRETTO').length,discouraged:candidates.filter(c=>c.classification==='SCONSIGLIATO').length};
-    const noSlotError=!availableResources?'Tutte le risorse risultano non disponibili':!candidates.length?(options.onlyThisDay?'Nessuno slot disponibile nel giorno selezionato':'Nessuno slot disponibile nei prossimi 7 giorni'):null;
-    return {suggestions:candidates.slice(0,config.maxSuggestions),cacheEntries:cache.size,stats,error:jobDraft.fixedTime&&!candidates.some(c=>!c.problematic)?'Nessuna risorsa può garantire questo appuntamento':noSlotError};
+    return {suggestions:candidates.slice(0,config.maxSuggestions),cacheEntries:cache.size,error:jobDraft.fixedTime&&!candidates.some(c=>!c.problematic)?'Nessuna risorsa può garantire questo appuntamento':null};
   }
-  return {CONFIG,WORKDAY,SMART_SLOT_CONFIG,minute,estimateTravelMinutes,buildSchedule,resourceAvailability,plannerResources,assignmentForResource,scoreResourceForJob,findResourceAlternatives,findScheduleGaps,scoreSlotCandidate,findBestSlots};
+  return {CONFIG,WORKDAY,SMART_SLOT_CONFIG,minute,estimateTravelMinutes,buildSchedule,resourceAvailability,scoreResourceForJob,findResourceAlternatives,findScheduleGaps,scoreSlotCandidate,findBestSlots};
 });

@@ -1,25 +1,14 @@
 {
-  "name": "Spurgo Flow 6.1.23.9",
-  "short_name": "SpurgoFlow",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f4f7fb",
-  "theme_color": "#061a33",
-  "description": "PWA per la gestione degli interventi di aziende di spurghi",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "version": "6.1.23.9"
+  "name":"Spurgo Flow",
+  "short_name":"SpurgoFlow",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f4f7fb",
+  "theme_color":"#061a33",
+  "description":"PWA per la gestione degli interventi di aziende di spurghi",
+  "icons":[
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
 }

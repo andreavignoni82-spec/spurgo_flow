@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.9</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.22-R1</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -387,7 +387,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .cloud-err{color:#f05c5c!important;font-weight:800}
 .cloud-sync{color:#4ca5ff!important;font-weight:800}
 
-/* ===== 6.1.23 LIVE DATA / OPERATOR PRIVACY ===== */
+/* ===== 6.1.22 LIVE DATA / OPERATOR PRIVACY ===== */
 .msg-bubble,.msg-bubble *{color:#142438!important}
 .msg-bubble small{color:#667785!important}
 .live-empty{padding:18px;text-align:center;color:#72818d}
@@ -401,7 +401,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .report-list-row:last-child{border-bottom:0}
 @media(max-width:700px){.report-list-row{grid-template-columns:1fr 1fr}.report-list-row .wide{grid-column:1/-1}}
 
-/* ===== 6.1.23 LE MIE COMMESSE ===== */
+/* ===== 6.1.22 LE MIE COMMESSE ===== */
 .my-jobs-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0 12px}
 .my-jobs-count{background:#e8f7ee;color:#177a3e;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:900}
 .job-choice{cursor:pointer;transition:.15s transform,.15s border-color,.15s box-shadow}
@@ -411,47 +411,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 
-/* ===== 6.1.23.9 OPERATORE ULTRA-COMPATTO ===== */
-.operator-shell{padding:12px;overflow-x:hidden}
-.operator-shell .operator-head{max-width:620px;margin:auto;padding:4px 0 8px}
-#fieldInterventi{width:100%;margin:auto}
-.operator-list-title{margin:8px 0 6px;font-size:18px;letter-spacing:.02em}
-.job-picker{display:grid;gap:5px;width:100%}
-.job-choice.operator-compact-job{min-height:58px;margin:0;padding:7px 9px;border:1px solid #31506b;border-left:4px solid #1684d6;border-radius:8px;background:#fff;color:#142438;overflow:hidden}
-.job-choice.operator-compact-job.urgent-job{border-left-color:#e53e3e;background:#fff8f7}
-.compact-job-line{display:flex;align-items:center;gap:7px;min-width:0;font-size:12px;line-height:1.25}
-.compact-job-line+ .compact-job-line{margin-top:2px}
-.compact-job-line strong{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.compact-job-line .compact-spacer{flex:1}
-.compact-job-line .compact-address{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.compact-job-date{font-size:10px;color:#637381;white-space:nowrap}
-.compact-status{font-size:9px;padding:3px 5px;flex:0 0 auto}
-.operator-back-list{margin:8px 0;padding:8px 10px}
-.operator-shell .completed-section,.operator-shell #fieldAgenda,.operator-shell #fieldMappa,.operator-shell #fieldMessaggi,.operator-shell #fieldProfilo,.operator-shell #fieldNav,.operator-shell #resumeJob{display:none!important}
-@media(max-width:700px){
- .operator-shell{padding:8px 8px 18px}
- .operator-shell .operator-head{position:static;padding:2px 0 6px}
- .operator-shell .build{display:none}
- .job-choice.operator-compact-job{min-height:56px;padding:6px 8px}
- .op-actions{position:static;grid-template-columns:repeat(4,1fr);padding:5px 0}
- .inline-panel{display:block!important}
-}
-
-/* ===== 6.1.23.9 AGENDA PERSONALE OPERATORE ===== */
-.operator-shell #fieldInterventi{max-width:none!important;color:#142438;background:#f4f6f8;border-radius:16px;padding:14px;margin-top:12px}
-.operator-agenda-title{margin:0 0 10px;color:#142438;font-size:20px}
-.operator-agenda-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
-.operator-agenda-toolbar .field{width:auto;min-width:145px;margin:0}
-.operator-agenda-toolbar .btn{padding:10px 13px}
-.operator-agenda-toolbar .agenda-view-switch{margin-left:auto}
-.operator-personal-agenda .agenda-block.finished,.operator-personal-agenda .agenda-week-job.finished{opacity:.58;filter:saturate(.65)}
-.operator-personal-agenda .agenda-block,.operator-personal-agenda .agenda-week-job{z-index:2;cursor:pointer;touch-action:manipulation;pointer-events:auto}
-.operator-personal-agenda .agenda-week-job{position:relative}
-.operator-personal-agenda .agenda-block>*,.operator-personal-agenda .agenda-week-job>*{pointer-events:none}
-.operator-report-finish{width:100%;margin-top:16px;min-height:54px;position:relative;z-index:2}
-@media(max-width:600px){.operator-shell{padding-bottom:18px}.operator-agenda-toolbar .agenda-view-switch{width:100%;margin-left:0}.operator-personal-agenda.timeline-wrap{max-height:none}.operator-report-finish{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 6px 20px #0005}}
-
-/* ===== 6.1.23 AGENDA OPERATIVA ===== */
+/* ===== 6.1.22 AGENDA OPERATIVA ===== */
 .content{min-width:0;max-width:calc(100vw - 245px)}
 #agenda{min-width:0;padding:0!important}
 .agenda-page{box-sizing:border-box;width:100%;max-width:100%;min-width:0;padding:14px 16px 20px}
@@ -486,7 +446,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 @media(max-width:900px){.side{min-width:0;max-width:100vw;overflow:hidden}.menu{max-width:100%;overflow:auto}.content{max-width:100vw}.agenda-page{padding:10px}.timeline-wrap{max-height:calc(100vh - 170px)}.agenda-timeline-head,.agenda-timeline-row{grid-template-columns:145px 1120px}.agenda-timeline{min-width:1265px}.agenda-resource-head,.agenda-resource{padding:0 9px}.agenda-week-grid{grid-template-columns:repeat(7,160px)}}
 @media(max-width:600px){.agenda-toolbar{position:sticky;top:0;z-index:20;flex-wrap:wrap;padding:6px 0;background:#f4f6f8}.agenda-toolbar .field{flex:1;min-width:135px}.agenda-view-switch{width:100%}.agenda-view-switch button{flex:1}.timeline-wrap{max-height:calc(100vh - 205px)}.agenda-timeline-head,.agenda-timeline-row{grid-template-columns:120px 1120px}.agenda-timeline{min-width:1240px}.agenda-resource strong{font-size:11px}}
 
-/* 6.1.23 Control Room */
+/* 6.1.22 Control Room */
 .clickable-row{cursor:pointer}.clickable-row:hover{background:#f2f7fa}
 .control-job-card{cursor:pointer;border:1px solid #dce5eb;border-radius:12px;padding:12px;background:#fff}
 .control-page{max-width:none}.control-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.control-toolbar .field{width:auto;margin:0}.live-badge{background:#e8f8ee;color:#177a3e;border-radius:99px;padding:7px 10px;font-size:11px;font-weight:900}.control-grid{display:grid;grid-template-columns:230px minmax(560px,1fr) 320px;gap:12px;margin-top:14px;align-items:start}.control-panel{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.control-panel h3{margin:0;padding:13px;border-bottom:1px solid var(--line);font-size:13px}.control-resources,.control-timeline-body{display:grid}.control-resource-card{height:88px;padding:9px;border-bottom:1px solid #e7ecef;border-left:5px solid var(--agenda-border);background:var(--agenda-bg)}.control-resource-card strong,.control-resource-card small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.control-resource-card small{font-size:10px;margin-top:4px}.resource-state{display:inline-block;border-radius:99px;padding:3px 6px;background:#fff9;font-size:9px;font-weight:900}.resource-state.critical,.resource-state.delay{background:#fee2e2;color:#a71919}.control-scroll{overflow-x:auto}.control-axis,.control-track{width:1120px;position:relative;background-image:repeating-linear-gradient(to right,transparent 0,transparent 79px,#e8ecef 79px,#e8ecef 80px)}.control-axis{height:42px;border-bottom:1px solid var(--line)}.control-track{height:88px;border-bottom:1px solid #e7ecef}.control-job{position:absolute;top:22px;height:55px;border:1px solid var(--agenda-border);border-left:4px solid var(--agenda-border);border-radius:8px;background:var(--agenda-bg);color:var(--agenda-ink);padding:5px;overflow:hidden;text-align:left;font-size:10px;font-weight:800;cursor:pointer}.control-job.delay,.control-job.critical{box-shadow:inset 0 -5px #dc3c3c}.control-job.warning{box-shadow:inset 0 -5px #e6a021}.control-travel{position:absolute;top:5px;height:13px;border-radius:4px;background:repeating-linear-gradient(135deg,#93a4b2 0 5px,#d9e0e5 5px 10px);font-size:8px;text-align:center;overflow:hidden}.control-free{position:absolute;top:5px;height:13px;border-radius:4px;background:#dff4e7;color:#27633e;font-size:8px;text-align:center;overflow:hidden}.critical-list{padding:10px;display:grid;gap:8px;max-height:calc(100vh - 190px);overflow:auto}.critical-card{border:1px solid #e2e7eb;border-left:5px solid #e5a126;border-radius:9px;padding:9px;background:#fff}.critical-card.urgent,.critical-card.critical{border-left-color:#dc3c3c;background:#fff7f7}.critical-card b,.critical-card small{display:block}.critical-card small{margin-top:4px;color:#60717e}.critical-card .btn{margin-top:7px;padding:8px;font-size:10px}.alternative-row{padding:10px;border:1px solid var(--line);border-radius:9px;margin:8px 0}.control-legend{display:flex;gap:12px;flex-wrap:wrap;padding:8px 13px;font-size:10px}.control-legend i{display:inline-block;width:18px;height:8px;border-radius:3px;margin-right:4px}.control-map-secondary{margin:12px}.control-map-secondary summary{cursor:pointer;font-weight:800}
@@ -498,7 +458,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .intervention-detail-box.full{grid-column:1/-1}
 @media(max-width:700px){.intervention-detail-grid{grid-template-columns:1fr}}
 
-/* ===== 6.1.23 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
+/* ===== 6.1.22 FIX SOVRAPPOSIZIONE MAPPE / MODALI ===== */
 
 /* Le mappe devono restare sempre sotto alla UI applicativa */
 .real-map,
@@ -554,7 +514,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 }
 
 
-/* ===== 6.1.23 INTERVENTI ===== */
+/* ===== 6.1.22 INTERVENTI ===== */
 .operator-multi-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:7px}
 .operator-check{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid #dce5eb;border-radius:9px;background:#fff}
 .operator-check input{width:18px;height:18px}
@@ -562,13 +522,13 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .estimate-pill{display:inline-flex;align-items:center;gap:5px;background:#eef5ff;color:#255f9a;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:800}
 @media(max-width:700px){.operator-multi-list{grid-template-columns:1fr}}
 
-/* 6.1.23 Smart Dispatch */
+/* 6.1.22 Smart Dispatch */
 .availability-panel{margin-top:12px;padding:12px}.availability-panel summary{cursor:pointer}.availability-list,.resource-picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin-top:10px}.availability-item{display:grid;grid-template-columns:auto 1fr;gap:3px 8px;align-items:center;padding:9px;border:1px solid #dfe8ed;border-radius:10px;background:#f9fcfd}.availability-item input{width:20px;height:20px;grid-row:1/3}.availability-item select{font-size:11px;padding:5px}.quick-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.quick-form .full{grid-column:1/-1}.quick-form label{display:block;font-size:11px;font-weight:800;margin-bottom:4px}.quick-actions{position:sticky;bottom:0;background:#fff;padding-top:10px}.quick-results{display:grid;gap:8px;margin-top:10px}.quick-slot{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid #dbe5eb;border-left:6px solid #efb84d;border-radius:12px;padding:11px;background:#fff}.quick-slot.top{border-left-color:#59ad7c;background:#f7fff9}.quick-slot.discouraged{border-left-color:#d87575;background:#fff8f8}.slot-state{font-size:10px;font-weight:900}.urgent-exception{color:#b42318;font-weight:900}@media(max-width:650px){.quick-form{grid-template-columns:1fr}.quick-form .full{grid-column:auto}.quick-slot{grid-template-columns:1fr}.availability-list,.resource-picker{grid-template-columns:1fr}}
 </style></head>
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.23.9 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.22-R1 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -578,10 +538,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.23.9 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.22-R1 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.9</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.22-R1</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -641,7 +601,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.9</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.22-R1</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -674,7 +634,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.9</span></div>
+ <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.22-R1</span></div>
  <div class="msg-shell" style="margin-top:18px">
   <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
   <div class="msg-thread">
@@ -693,10 +653,15 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.9</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
-<div id="fieldInterventi" class="field-page active"><h1 class="operator-agenda-title">AGENDA PERSONALE</h1>
-<div id="jobPicker" class="operator-personal-agenda"></div>
-<div class="op-card hidden" id="selectedJobCard"><button class="btn ghost operator-back-list" onclick="backToOperatorJobs()">← I miei interventi</button><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.22-R1</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="fieldInterventi" class="field-page active" style="max-width:620px"><h2>I miei interventi</h2>
+<p class="muted" style="color:#c8d6e2">Scegli liberamente quale intervento aprire. Urgenza e orario sono informazioni, non vincoli.</p>
+<div class="job-picker" id="jobPicker">
+ <div class="job-choice selected" data-id="INT-2024-00045" data-client="Condominio Belvedere" data-address="Via Roma 24, 24067 Sarnico (BG)" data-request="Intasamento scarico garage" onclick="selectJob(this)"><div class="row"><b>Condominio Belvedere</b><span class="badge urgent">URGENTE</span></div><small>10:30 · Via Roma 24, Sarnico</small></div>
+ <div class="job-choice" data-id="INT-2024-00046" data-client="Ristorante Al Lago" data-address="Lungolago, Iseo (BS)" data-request="Pulizia fossa biologica" onclick="selectJob(this)"><div class="row"><b>Ristorante Al Lago</b><span class="badge planned">14:00</span></div><small>Pulizia fossa biologica · Iseo</small></div>
+ <div class="job-choice" data-id="INT-2024-00047" data-client="Azienda Bianchi Srl" data-address="Costa Volpino (BG)" data-request="Lavaggio tubazione" onclick="selectJob(this)"><div class="row"><b>Azienda Bianchi Srl</b><span class="badge planned">16:30</span></div><small>Lavaggio tubazione · Costa Volpino</small></div>
+</div>
+<div class="op-card" id="selectedJobCard"><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p>
 <div class="location-tools">
   <label for="jobAddressInput">Indirizzo intervento</label>
   <input id="jobAddressInput" class="field" value="Via Roma 24, 24067 Sarnico (BG), Italia">
@@ -800,7 +765,12 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
   </div>
 </div>
 
-<button id="finishOperatorButton" class="btn danger operator-report-finish" onclick="finishOperatorIntervention()">TERMINA INTERVENTO</button>
+<button class="btn danger" style="width:100%;margin-top:16px" onclick="prepareAndShowReport()">TERMINA INTERVENTO</button>
+<div class="sticky-signatures">
+ <button class="btn ghost" onclick="openSigModal('operatore')">✍️ Operatore <span id="opSigStatus" class="sig-status">firma</span></button>
+ <button class="btn ghost" onclick="openSigModal('cliente')">✍️ Cliente <span id="clSigStatus" class="sig-status">firma</span></button>
+ <button class="btn finish" onclick="prepareAndShowReport()">TERMINA E GENERA RAPPORTINO</button>
+</div>
 <div class="mobile-bottom-space"></div>
 </div></div>
 
@@ -860,7 +830,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.9</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.22-R1</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -962,9 +932,9 @@ const DEFAULT_TEAMS=[
  {id:'team-b',name:'Squadra B',vehicle:'Autobotte 02',operatorIds:['op-luca']}
 ];
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
-let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS).map(o=>({...o,active:o.active!==false})), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
+let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
-/* ===== DATA LAYER 6.1.23 — ripristino completo ===== */
+/* ===== DATA LAYER 6.1.22 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
  {id:'cl-belvedere',name:'Condominio Belvedere',address:'Via Roma 24',city:'Sarnico (BG)',phone:'035 1234567',email:'amministrazione@belvedere.test',contact:'Mario Rossi',notes:'4 pozzetti · autorimessa interrata'},
  {id:'cl-lago',name:'Ristorante Al Lago',address:'Lungolago',city:'Iseo (BS)',phone:'030 1234567',email:'info@allago.test',contact:'Responsabile sala',notes:'Fossa biologica'},
@@ -996,7 +966,6 @@ let sfVehicles=loadJson('sf_v6_vehicles',DEFAULT_VEHICLES);
 let sfOfficeInterventions=loadJson('sf_v6_interventions',DEFAULT_OFFICE_INTERVENTIONS);
 let sfMessages=loadJson('sf_v6_messages',DEFAULT_MESSAGES);
 let sfResourceAvailability=loadJson('sf_v6_resource_availability',[]);
-let sfResourceAvailabilitySynced=true;
 let officeMsgOperatorId=null;
 let editingEntity={type:null,id:null};
 
@@ -1008,20 +977,14 @@ function saveOfficePeople(){
 function esc(t){return String(t??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function operatorName(o){return (o.nome+' '+o.cognome).trim()}
 function renderOperatorChecks(){const h=el('teamOperatorChecks');if(!h)return;h.innerHTML=sfOperators.filter(o=>o.active!==false).map(o=>`<label class="check-row"><input type="checkbox" class="team-op-check" value="${esc(o.id)}"><span>${esc(operatorName(o))}</span></label>`).join('')||'<div class="muted">Crea prima almeno un operatore.</div>'}
-function renderOperators(){const h=el('operatorList');if(!h)return;el('operatorCount').textContent=sfOperators.length+' operatori';h.innerHTML=sfOperators.map(o=>`<div class="person-card"><div class="head"><div><b>${esc(operatorName(o))}</b><div class="person-meta">@${esc(o.username)} · ${esc(o.mezzo||'Nessun mezzo')}</div></div><span class="small-pill ${o.active!==false?'green':'orange'}">${o.active!==false?'ATTIVO':'DISATTIVATO'}</span></div><div class="person-meta">${esc(o.ruolo||'Operatore')} ${o.telefono?'· '+esc(o.telefono):''}</div><div class="manage-actions"><button class="btn ghost" onclick="editOperator('${o.id}')">MODIFICA</button><button class="btn ghost" onclick="changeOperatorPassword('${o.id}')">Password</button><button class="btn ${o.active!==false?'ghost':'primary'}" onclick="toggleOperator('${o.id}')">${o.active!==false?'DISATTIVA':'RIATTIVA'}</button>${o.active===false?`<button class="btn danger" onclick="deleteOperator('${o.id}')">ELIMINA DEFINITIVAMENTE ACCOUNT</button>`:''}</div></div>`).join('');renderOperatorChecks()}
-function renderTeams(){const h=el('teamList');if(!h)return;el('teamCount').textContent=sfTeams.length+' squadre';h.innerHTML=sfTeams.map(t=>{const members=(t.operatorIds||[]).map(id=>sfOperators.find(o=>o.id===id)).filter(Boolean),names=members.map(operatorName),active=members.filter(o=>o.active!==false).length;return `<div class="team-card"><div class="head"><div><b>${esc(t.name)}</b><div class="team-meta">${esc(t.vehicle||'Nessun mezzo')}</div></div><span class="small-pill ${active?'green':'orange'}">${active?active+' ATTIVI':'NON DISPONIBILE'}</span></div><div class="team-meta">${names.length?esc(names.join(', ')):'Nessun operatore assegnato'}</div><div class="manage-actions"><button class="btn ghost" onclick="editTeam('${t.id}')">Modifica</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Elimina</button></div></div>`}).join('')}
+function renderOperators(){const h=el('operatorList');if(!h)return;el('operatorCount').textContent=sfOperators.length+' operatori';h.innerHTML=sfOperators.map(o=>`<div class="person-card"><div class="head"><div><b>${esc(operatorName(o))}</b><div class="person-meta">@${esc(o.username)} · ${esc(o.mezzo||'Nessun mezzo')}</div></div><span class="small-pill ${o.active!==false?'green':'orange'}">${o.active!==false?'ATTIVO':'DISATTIVATO'}</span></div><div class="person-meta">${esc(o.ruolo||'Operatore')} ${o.telefono?'· '+esc(o.telefono):''}</div><div class="manage-actions"><button class="btn ghost" onclick="editOperator('${o.id}')">Modifica</button><button class="btn ghost" onclick="changeOperatorPassword('${o.id}')">Password</button><button class="btn ghost" onclick="toggleOperator('${o.id}')">${o.active!==false?'Disattiva':'Riattiva'}</button><button class="btn danger" onclick="deleteOperator('${o.id}')">Elimina</button></div></div>`).join('');renderOperatorChecks()}
+function renderTeams(){const h=el('teamList');if(!h)return;el('teamCount').textContent=sfTeams.length+' squadre';h.innerHTML=sfTeams.map(t=>{const names=t.operatorIds.map(id=>sfOperators.find(o=>o.id===id)).filter(Boolean).map(operatorName);return `<div class="team-card"><div class="head"><div><b>${esc(t.name)}</b><div class="team-meta">${esc(t.vehicle||'Nessun mezzo')}</div></div><span class="small-pill green">${names.length} operatori</span></div><div class="team-meta">${names.length?esc(names.join(', ')):'Nessun operatore assegnato'}</div><div class="manage-actions"><button class="btn ghost" onclick="editTeam('${t.id}')">Modifica</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Elimina</button></div></div>`}).join('')}
 function renderOfficePeople(){renderOperators();renderTeams()}
 function uniqueId(prefix){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)}
-function normalizeOperatorUsername(value){return String(value||'').trim().toLowerCase()}
-function operatorUsernameFromEmail(value){return normalizeOperatorUsername(String(value||'').split('@')[0])}
-function hasOperatorUsername(username){
- const normalized=normalizeOperatorUsername(username);
- return sfOperators.some(o=>normalizeOperatorUsername(o.username)===normalized||operatorUsernameFromEmail(o.cloudEmail)===normalized);
-}
 async function addOperator(){
- const nome=el('opNome').value.trim(),cognome=el('opCognome').value.trim(),username=normalizeOperatorUsername(el('opUsername').value),password=el('opPassword').value;
+ const nome=el('opNome').value.trim(),cognome=el('opCognome').value.trim(),username=el('opUsername').value.trim().toLowerCase(),password=el('opPassword').value;
  if(!nome||!username||!password){el('operatorFormMsg').textContent='Nome, username e password sono obbligatori.';return}
- if(hasOperatorUsername(username)){el('operatorFormMsg').textContent='Username già assegnato a un operatore.';return}
+ if(sfOperators.some(o=>o.username.toLowerCase()===username)){el('operatorFormMsg').textContent='Username già esistente.';return}
  const op={id:uniqueId('op'),nome,cognome,username,telefono:el('opTelefono').value.trim(),mezzo:el('opMezzo').value,ruolo:el('opRuolo').value.trim()||'Operatore',active:true};
  try{
    if(window.SFCloud?.enabled){
@@ -1033,15 +996,11 @@ async function addOperator(){
    }
    sfOperators.push(op);saveOfficePeople();renderOfficePeople();
    ['opNome','opCognome','opUsername','opPassword','opTelefono','opRuolo'].forEach(id=>el(id).value='');el('opMezzo').value='';
-   el('operatorFormMsg').textContent='Operatore creato correttamente.';
- }catch(err){
-   el('operatorFormMsg').textContent=err?.code==='SF_USERNAME_ALREADY_IN_USE'
-     ?'Esiste già un account cloud con questo username. L’account potrebbe appartenere a un operatore eliminato in precedenza. Eliminalo da Firebase Authentication oppure utilizza un username diverso.'
-     :'Impossibile completare la creazione dell\'operatore sul cloud.';
- }
+   el('operatorFormMsg').textContent=window.SFCloud?.enabled?'Operatore creato e abilitato su tutti i dispositivi.':'Operatore creato in modalità locale.';
+ }catch(err){el('operatorFormMsg').textContent='Errore: '+(err.message||err)}
 }
 
-/* ===== OPERATORI & SQUADRE 6.1.23 ===== */
+/* ===== OPERATORI & SQUADRE 6.1.22 ===== */
 async function editOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
  const nome=prompt('Nome',o.nome||'');if(nome===null)return;
@@ -1068,29 +1027,43 @@ async function changeOperatorPassword(id){
  }
 }
 
-async function toggleOperator(id){
+function toggleOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
- const active=o.active===false;
- if(!active&&!confirm('Disattivare '+operatorName(o)+'? L’operatore resterà nello storico e non potrà accedere o ricevere nuovi interventi.'))return;
- try{
-   if(window.SFCloud?.enabled)await window.SFCloud.setOperatorActive(o,active);
-   o.active=active;
-   saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
-   alert(active?'Operatore riattivato. Le credenziali e il profilo cloud esistenti sono stati mantenuti.':'Operatore disattivato. Profilo, account cloud e storico sono stati mantenuti.');
- }catch(e){alert('Aggiornamento operatore non riuscito: '+(e.message||e))}
+ o.active=o.active===false?true:false;
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
 }
 
 async function deleteOperator(id){
- const o=sfOperators.find(x=>x.id===id);if(!o||o.active!==false)return;
- const warning='Questa operazione elimina definitivamente l’account.\nUsare solo quando l’operatore non deve più essere recuperato.';
- if(!confirm(warning))return;
- if(window.SFCloud?.enabled){
-   try{await window.SFCloud.deleteOperatorAccount(o)}catch(e){alert(e.message);return}
+ const o=sfOperators.find(x=>x.id===id);if(!o)return;
+
+ const activeJobs=sfOfficeInterventions.filter(i=>i.operatorId===id && !['Terminato','Annullato'].includes(i.status));
+ if(activeJobs.length){
+   alert('Non puoi eliminare '+operatorName(o)+': ha '+activeJobs.length+' interventi attivi assegnati. Riassegnali prima.');
+   return;
  }
- // In modalità locale non esiste un account Firebase: la rimozione resta esplicita e non altera lo storico.
- sfOperators=sfOperators.filter(x=>x.id!==id);
- saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
- alert('Account locale eliminato definitivamente. Gli interventi storici conservano il riferimento operatore.');
+ if(!confirm('Eliminare definitivamente '+operatorName(o)+'?'))return;
+
+ try{
+   if(window.SFCloud?.enabled && o.cloudUid){
+     const pwd=prompt('Inserisci la password attuale dell’operatore per eliminare anche il suo account Firebase:');
+     if(!pwd)return;
+     await window.SFCloud.deleteOperatorAccount(o,pwd);
+   }else if(window.SFCloud?.enabled){
+     await window.SFCloud.deleteOperatorData(o);
+   }
+
+   sfOperators=sfOperators.filter(x=>x.id!==id);
+   sfTeams.forEach(t=>t.operatorIds=(t.operatorIds||[]).filter(x=>x!==id));
+   sfMessages=sfMessages.filter(m=>m.operatorId!==id);
+   sfOfficeInterventions.forEach(i=>{if(i.operatorId===id)i.operatorId=''});
+
+   saveOfficePeople();saveV6();
+   renderOfficePeople();renderAllOfficeV6();
+   alert('Operatore eliminato.');
+ }catch(e){
+   console.error(e);
+   alert('Eliminazione non riuscita: '+(e.message||e));
+ }
 }
 
 function addTeam(){
@@ -1251,24 +1224,15 @@ function toggleCustomRange(){el('viCustomRange')?.classList.toggle('hidden',el('
 function preferredRangeFromForm(){
  const mode=el('viPreferredRange')?.value;
  if(mode==='morning')return {from:7*60,to:12*60};if(mode==='afternoon')return {from:13*60,to:17*60};
- if(mode==='custom'&&planningReady())return {from:SFPlanning.minute(el('viRangeFrom')?.value),to:SFPlanning.minute(el('viRangeTo')?.value)};return null;
-}
-function planningReady(){
- return typeof window.SFPlanning!=='undefined'&&typeof window.SFPlanning.plannerResources==='function';
-}
-function plannerUnavailable(context){
- console.warn(`SFPlanning non disponibile (${context}): inizializzazione rimandata.`);
- const status=el('smartPlannerStatus'),critical=el('controlCritical');
- if(status)status.textContent='Pianificazione in inizializzazione';
- if(critical)critical.innerHTML='<div class="live-empty">Pianificazione in inizializzazione</div>';
+ if(mode==='custom')return {from:SFPlanning.minute(el('viRangeFrom')?.value),to:SFPlanning.minute(el('viRangeTo')?.value)};return null;
 }
 function smartPlannerResources(){
- if(!planningReady()){plannerUnavailable('risorse');return []}
- return window.SFPlanning.plannerResources(sfTeams,sfOperators).map(r=>({...r,vehicleId:r.id.startsWith('team:')?sfVehicles.find(v=>v.name===r.vehicle||v.code===r.vehicle)?.id||'':''}));
+ const teams=sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false)).map(t=>({id:'team:'+t.id,name:t.name,available:true,vehicle:t.vehicle,skills:(t.operatorIds||[]).map(id=>getOperator(id)?.ruolo||''),vehicleId:sfVehicles.find(v=>v.name===t.vehicle||v.code===t.vehicle)?.id||''}));
+ const teamOps=new Set(sfTeams.flatMap(t=>t.operatorIds||[]));
+ return teams.concat(sfOperators.filter(o=>o.active!==false&&!teamOps.has(o.id)).map(o=>({id:'op:'+o.id,name:operatorName(o),available:true,role:o.ruolo,vehicle:o.mezzo})));
 }
 function smartDraftFromForm(){return {id:editingEntity.id||'draft',address:el('viAddress')?.value.trim(),estimatedMinutes:Number(el('viEstimatedMinutes')?.value),date:el('viDate')?.value,time:el('viTime')?.value,priority:el('viPriority')?.value,fixedTime:el('viTimeMode')?.value==='fixed',preferredRange:preferredRangeFromForm()}}
 function runSmartPlanner(){
- if(!planningReady()){plannerUnavailable('Smart Planner');return}
  const result=SFPlanning.findBestSlots(smartDraftFromForm(),{resources:smartPlannerResources(),jobs:sfOfficeInterventions.filter(j=>j.id!==editingEntity.id),resourceId:agendaResourceId,resourceAvailability:isResourceAvailable});smartSlotSuggestions=result.suggestions;
  const status=el('smartPlannerStatus'),host=el('smartPlannerResults');if(status)status.textContent=result.error||`${result.suggestions.length} proposte · calcolo locale deterministico · ${result.cacheEntries} tratte in cache temporanea`;
  if(!host)return;host.innerHTML=result.suggestions.map((s,n)=>`<article class="slot-card ${n===0&&!s.problematic?'recommended':''}"><small>PROPOSTA ${n+1}${n===0&&!s.problematic?' — CONSIGLIATA':''}</small><b>${fmtDate(s.date)} · ${esc(s.time)}</b><b>${esc(s.resource.name)}</b><small>Viaggio: ${s.totalTravelMinutes} min · durata: ${s.durationMinutes} min · fine ${s.endTime}</small><small>Margine prima: ${s.marginBefore} min · dopo: ${s.marginAfter} min</small><small>Impatto: ${s.problematic?'ritardo previsto +'+s.impactMinutes+' min':'nessuno'}</small><small>${s.coordinatesIncomplete?'Percorso stimato — coordinate incomplete':''}</small><div class="slot-preview">PRIMA · ${esc(s.previous?.id||'inizio giornata')}<br>NUOVO · ${s.time}–${s.endTime}<br>DOPO · ${esc(s.next?.id||'fine giornata')}<br>Stato: ${s.problematic?'ATTENZIONE':'OK'}</div><small><b>Motivo:</b> ${esc(s.reason)}</small><button class="btn primary" type="button" onclick="applySmartSlot(${n})">APPLICA</button></article>`).join('')||'<div class="planner-status">Nessuna proposta disponibile. Verifica i dati richiesti.</div>';
@@ -1283,15 +1247,15 @@ function quickResourceChecks(){return smartPlannerResources(false).map(r=>`<labe
 function openQuickPlanner(){const today=el('controlDate')?.value||localDateKey();showV6Modal('Inserimento rapido · Smart Dispatch',`<div class="quick-form">
  <div><label>Cliente (facoltativo)</label><input id="quickClient" class="field" placeholder="Nome cliente"></div><div><label>Indirizzo / luogo *</label><input id="quickAddress" class="field" placeholder="Via, comune"></div>
  <div><label>Tipologia *</label><select id="quickType" class="field"><option value="">Seleziona</option>${['Videoispezione','Spurgo','Disotturazione','Autobotte','Altro'].map(x=>`<option>${x}</option>`).join('')}</select></div><div><label>Durata stimata *</label><select id="quickDuration" class="field"><option value="">Durata</option>${[30,45,60,90,120,180,240].map(x=>`<option value="${x}">${x} min</option>`).join('')}</select></div>
- <div><label>Priorità *</label><select id="quickPriority" class="field"><option>Normale</option><option>Urgente</option></select></div><div><label>Data di partenza</label><input id="quickDate" class="field" type="date" value="${today}"><label style="margin-top:5px"><input id="quickOnlyDay" type="checkbox"> Solo questo giorno</label></div>
+ <div><label>Priorità *</label><select id="quickPriority" class="field"><option>Normale</option><option>Urgente</option></select></div><div><label>Giorno richiesto</label><input id="quickDate" class="field" type="date" value="${today}"><label style="margin-top:5px"><input id="quickAnyDay" type="checkbox" onchange="el('quickDate').disabled=this.checked"> Cerca nei prossimi 7 giorni</label></div>
  <div><label>Fascia richiesta</label><select id="quickRange" class="field"><option value="">Qualsiasi</option><option value="morning">Mattina</option><option value="afternoon">Pomeriggio</option></select></div><div><label>Orario fisso</label><input id="quickTime" class="field" type="time"></div>
  <div><label>Mezzo / attrezzatura</label><input id="quickEquipment" class="field" placeholder="Se richiesto"></div><div><label>Competenza</label><input id="quickSkill" class="field" placeholder="Se richiesta"></div><div class="full"><label>Note operative</label><textarea id="quickNotes" class="textarea"></textarea></div>
  <details class="full"><summary><b>Risorse considerate</b> · tutte attive</summary><div class="resource-picker">${quickResourceChecks()}</div></details>
  <div class="full quick-actions"><button class="btn primary" style="width:100%" onclick="runQuickPlanner()">TROVA DISPONIBILITÀ</button><div id="quickResult" class="quick-results"><div class="planner-status">Compila indirizzo, tipologia, durata e priorità.</div></div></div></div>`)}
-function quickDraft(){const range=el('quickRange').value;return {address:el('quickAddress').value.trim(),type:el('quickType').value,estimatedMinutes:Number(el('quickDuration').value),priority:el('quickPriority').value,time:el('quickTime').value,fixedTime:!!el('quickTime').value,preferredRange:range==='morning'?{from:7*60,to:12*60}:range==='afternoon'?{from:13*60,to:17*60}:null}}
-function runQuickPlanner(){if(!planningReady()){plannerUnavailable('Smart Dispatch');return}const draft=quickDraft(),host=el('quickResult');if(!draft.address){host.innerHTML='<div class="planner-status">Inserisci indirizzo</div>';return}if(!draft.type){host.innerHTML='<div class="planner-status">Seleziona tipologia</div>';return}if(!draft.estimatedMinutes){host.innerHTML='<div class="planner-status">Inserisci durata</div>';return}const selected=new Set([...document.querySelectorAll('.quick-resource:checked')].map(x=>x.value));if(!selected.size){host.innerHTML='<div class="planner-status">Nessuna risorsa selezionata</div>';return}const resources=smartPlannerResources().filter(r=>selected.has(r.id)&&resourceCompatible(r,draft));const r=SFPlanning.findBestSlots(draft,{resources,jobs:sfOfficeInterventions,resourceId:agendaResourceId,startDate:el('quickDate').value,onlyThisDay:el('quickOnlyDay').checked,now:new Date(),resourceAvailability:isResourceAvailable});const safe=r.suggestions.filter(s=>s.classification!=='SCONSIGLIATO'),discouraged=r.suggestions.filter(s=>s.classification==='SCONSIGLIATO'),list=safe.concat(discouraged);quickSlotSuggestions=list;host.innerHTML=(safe.length?'':discouraged.length?'<b>Nessuno slot sicuro disponibile</b><small>Prime alternative</small>':'')+(list.map((s,n)=>`<article class="quick-slot ${n<3&&s.classification!=='SCONSIGLIATO'?'top':''} ${s.classification==='SCONSIGLIATO'?'discouraged':''}"><div><span class="slot-state">${s.urgent?'URGENZA · ':''}${n===0&&s.classification!=='SCONSIGLIATO'?'CONSIGLIATO · ':'ALTERNATIVA · '}${s.classification}</span><b>${fmtDate(s.date)} · ${s.time}</b><b>${esc(s.resource.name)}</b><small>${s.durationMinutes} min · ${s.problematic?'Impatto +'+s.impactMinutes+' min':'Margine '+s.operationalMargin+' min'}</small>${s.operationalException?'<small class="urgent-exception">Eccezione operativa: verificare gli appuntamenti successivi</small>':''}</div><button class="btn primary" onclick="openQuickSuggestionForm(${n})">APPLICA SLOT</button></article>`).join('')||`<div class="planner-status">${esc(r.error||'Nessuno slot disponibile nei prossimi 7 giorni')}</div>`)}
+function quickDraft(){const range=el('quickRange').value;return {address:el('quickAddress').value.trim(),type:el('quickType').value,estimatedMinutes:Number(el('quickDuration').value),priority:el('quickPriority').value,date:el('quickAnyDay').checked?'':el('quickDate').value,time:el('quickTime').value,fixedTime:!!el('quickTime').value,preferredRange:range==='morning'?{from:7*60,to:12*60}:range==='afternoon'?{from:13*60,to:17*60}:null}}
+function runQuickPlanner(){const draft=quickDraft();if(!draft.type){el('quickResult').innerHTML='<div class="planner-status">Seleziona la tipologia di intervento.</div>';return}const selected=new Set([...document.querySelectorAll('.quick-resource:checked')].map(x=>x.value));const resources=smartPlannerResources(false).filter(r=>selected.has(r.id)&&resourceCompatible(r,draft));const r=SFPlanning.findBestSlots(draft,{resources,jobs:sfOfficeInterventions,resourceId:agendaResourceId,startDate:el('quickDate').value,resourceAvailability:isResourceAvailable});quickSlotSuggestions=r.suggestions;const safe=r.suggestions.filter(s=>s.classification!=='SCONSIGLIATO'),discouraged=r.suggestions.filter(s=>s.classification==='SCONSIGLIATO');let list=safe.concat(discouraged);el('quickResult').innerHTML=(safe.length?'':`<b>Nessuno slot sicuro disponibile</b>${discouraged.length?'<small>Prime alternative</small>':''}`)+(list.map((s,n)=>`<article class="quick-slot ${n<3&&s.classification!=='SCONSIGLIATO'?'top':''} ${s.classification==='SCONSIGLIATO'?'discouraged':''}"><div><span class="slot-state">${s.urgent?'URGENZA · ':''}${n===0&&s.classification!=='SCONSIGLIATO'?'CONSIGLIATO · ':'ALTERNATIVA · '}${s.classification}</span><b>${fmtDate(s.date)} · ${s.time}</b><b>${esc(s.resource.name)}</b><small>${s.durationMinutes} min · ${s.problematic?'Impatto +'+s.impactMinutes+' min':'Margine '+s.operationalMargin+' min'}</small>${s.operationalException?'<small class="urgent-exception">Eccezione operativa: verificare gli appuntamenti successivi</small>':''}</div><button class="btn primary" onclick="openQuickSuggestionForm(${n})">APPLICA SLOT</button></article>`).join('')||`<div class="planner-status">${esc(r.error||'Nessuna disponibilità nelle condizioni richieste.')}</div>`)}
 function resourceCompatible(resource,draft){const skill=el('quickSkill')?.value.trim().toLowerCase(),equipment=el('quickEquipment')?.value.trim().toLowerCase();if(!skill&&!equipment)return true;const text=[resource.skills,resource.role,resource.vehicle,resource.vehicleName].flat().filter(Boolean).join(' ').toLowerCase();return (!skill||text.includes(skill))&&(!equipment||text.includes(equipment))}
-function openQuickSuggestionForm(index){const s=quickSlotSuggestions[index];if(!s)return;const data={client:el('quickClient').value,address:el('quickAddress').value,type:el('quickType').value,duration:el('quickDuration').value,priority:el('quickPriority').value,timeMode:el('quickTime').value?'fixed':'flexible',range:el('quickRange').value,notes:el('quickNotes').value,equipment:el('quickEquipment').value};closeV6Modal();openInterventionModal();el('viAddress').value=data.address;el('viRequest').value=data.type;el('viEstimatedMinutes').value=data.duration;el('viPriority').value=data.priority;el('viStatus').value=data.priority==='Urgente'?'Urgente':'Programmato';el('viDate').value=s.date;el('viTime').value=s.time;el('viTimeMode').value=data.timeMode;el('viPreferredRange').value=data.range||'none';el('viNotes').value=[data.notes,data.equipment&&'Attrezzatura: '+data.equipment].filter(Boolean).join('\n');document.querySelectorAll('.vi-op-check').forEach(x=>x.checked=false);if(s.resource.id.startsWith('team:')){el('viTeam').value=s.resource.id.slice(5);prefillInterventionTeamOperators()}else{el('viTeam').value='';const cb=document.querySelector(`.vi-op-check[value="${s.resource.id.slice(3)}"]`);if(cb)cb.checked=true}}
+function openQuickSuggestionForm(index){const s=quickSlotSuggestions[index];if(!s)return;const data={client:el('quickClient').value,address:el('quickAddress').value,type:el('quickType').value,duration:el('quickDuration').value,priority:el('quickPriority').value,timeMode:el('quickTime').value?'fixed':'flexible',range:el('quickRange').value,notes:el('quickNotes').value,equipment:el('quickEquipment').value};closeV6Modal();openInterventionModal();el('viAddress').value=data.address;el('viRequest').value=data.type;el('viEstimatedMinutes').value=data.duration;el('viPriority').value=data.priority;el('viStatus').value=data.priority==='Urgente'?'Urgente':'Programmato';el('viDate').value=s.date;el('viTime').value=s.time;el('viTimeMode').value=data.timeMode;el('viPreferredRange').value=data.range||'none';el('viNotes').value=[data.notes,data.equipment&&'Attrezzatura: '+data.equipment].filter(Boolean).join('\n');document.querySelectorAll('.vi-op-check').forEach(x=>x.checked=false);if(s.resource.id.startsWith('team:')){el('viTeam').value=s.resource.id.slice(5);prefillInterventionTeamOperators()}else{const cb=document.querySelector(`.vi-op-check[value="${s.resource.id.slice(3)}"]`);if(cb)cb.checked=true}}
 function prefillInterventionTeamOperators(){
  const team=sfTeams.find(t=>t.id===el('viTeam')?.value);
  if(!team)return;
@@ -1399,7 +1363,7 @@ function agendaResourceId(i){
 }
 function officeAgendaResources(rows){
  const resources=[];
- sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false)).forEach(t=>resources.push({id:'team:'+t.id,name:t.name,meta:'Squadra',color:agendaResourceColor('team:'+t.id)}));
+ sfTeams.forEach(t=>resources.push({id:'team:'+t.id,name:t.name,meta:'Squadra',color:agendaResourceColor('team:'+t.id)}));
  sfOperators.filter(o=>o.active!==false).forEach(o=>resources.push({id:'op:'+o.id,name:operatorName(o),meta:o.mezzo||o.ruolo||'Operatore',color:agendaResourceColor('op:'+o.id)}));
  if(rows.some(i=>agendaResourceId(i)==='unassigned'))resources.push({id:'unassigned',name:'Da assegnare',meta:'Interventi non assegnati',color:agendaResourceColor('unassigned')});
  return resources;
@@ -1625,9 +1589,7 @@ function localDateKey(d=new Date()){
 }
 function assignedToOperator(i,operatorId){
  if(!i||!operatorId)return false;
- if(i.operatorId===operatorId || (Array.isArray(i.assignedOperatorIds)&&i.assignedOperatorIds.includes(operatorId)))return true;
- const team=sfTeams.find(t=>t.id===i.teamId);
- return !!(team&&Array.isArray(team.operatorIds)&&team.operatorIds.includes(operatorId));
+ return i.operatorId===operatorId || (Array.isArray(i.assignedOperatorIds)&&i.assignedOperatorIds.includes(operatorId));
 }
 function operatorActiveJobs(operatorId){
  return sfOfficeInterventions.filter(i=>assignedToOperator(i,operatorId)&&!['Terminato','Annullato'].includes(i.status));
@@ -1660,7 +1622,7 @@ function isResourceAvailable(date,resourceId){return availabilityRecord(date,res
 function renderDailyAvailability(){
  const host=el('dailyAvailability'),date=el('controlDate')?.value||localDateKey();if(!host)return;
  const resources=smartPlannerResources(false);const active=resources.filter(r=>isResourceAvailable(date,r.id)).length;
- el('availabilitySummary').textContent=sfResourceAvailabilitySynced?(active===resources.length?'Tutte attive':active+' di '+resources.length+' attive'):'Disponibilità giornaliera non sincronizzata · tutte disponibili';
+ el('availabilitySummary').textContent=active===resources.length?'Tutte attive':active+' di '+resources.length+' attive';
  host.innerHTML=resources.map(r=>{const rec=availabilityRecord(date,r.id);return `<label class="availability-item"><input type="checkbox" ${rec?.available===false?'':'checked'} onchange="setDailyAvailability('${esc(r.id)}',this.checked)"><b>${esc(r.name)}</b><select onchange="setAvailabilityReason('${esc(r.id)}',this.value)"><option value="">Motivo facoltativo</option>${['Assente','Ferie','Malattia','Corso','Mezzo indisponibile','Altra attività'].map(x=>`<option ${rec?.reason===x?'selected':''}>${x}</option>`).join('')}</select></label>`}).join('');
 }
 function setDailyAvailability(resourceId,available){const date=el('controlDate').value;let rec=availabilityRecord(date,resourceId);if(!rec){rec={id:date+'__'+resourceId,date,resourceId,available:true,reason:''};sfResourceAvailability.push(rec)}rec.available=available;persistAvailability();}
@@ -1668,7 +1630,6 @@ function setAvailabilityReason(resourceId,reason){const date=el('controlDate').v
 function persistAvailability(){localStorage.setItem('sf_v6_resource_availability',JSON.stringify(sfResourceAvailability));window.SFCloud?.syncFromGlobals?.();renderDailyAvailability();}
 function renderControlRoomV6(){
  const dateInput=el('controlDate');if(!dateInput)return;if(!dateInput.value)dateInput.value=localDateKey();
- if(!planningReady()){plannerUnavailable('Control Room');return}
  renderDailyAvailability();
  const date=dateInput.value,nowDate=new Date(),now=date===localDateKey()?nowDate.getHours()*60+nowDate.getMinutes():SFPlanning.CONFIG.dayStartMinutes;
  const rows=sfOfficeInterventions.filter(i=>i.date===date&&i.status!=='Annullato').sort((a,b)=>(a.time||'').localeCompare(b.time||''));
@@ -1723,16 +1684,8 @@ function confirmTeamAssignment(interventionId){
  if(!i.assignedOperatorIds.includes(operatorId))i.assignedOperatorIds.unshift(operatorId);
  saveV6();closeV6Modal();renderAllOfficeV6();syncOperatorJobs();
 }
-function normalizeReportData(data={}){
- return {relation:'',activities:[],anomalies:'',materials:[],quantities:{mc:'',metri:'',ore:''},photos:{prima:'',durante:'',dopo:'',anomalia:''},location:null,operatorSignature:'',customerSignature:'',operatorSignedAt:'',customerSignedAt:'',notes:'',...data,quantities:{mc:'',metri:'',ore:'',...(data.quantities||{})},photos:{prima:'',durante:'',dopo:'',anomalia:'',...(data.photos||{})}};
-}
-function hasReportData(i){const d=i?.reportData;if(!d)return false;return Boolean(d.generatedAt||d.relation||d.activities?.length||d.operatorSignature||d.customerSignature||Object.values(d.photos||{}).some(Boolean))}
-function buildReportViewModel(i){
- const d=normalizeReportData(i?.reportData),team=sfTeams.find(t=>t.id===i?.teamId),vehicle=sfVehicles.find(v=>v.id===i?.vehicleId);
- return {id:String(i?.id||''),number:String(i?.reportNo||i?.id||'').replace('INT-',''),date:i?.date?fmtDate(i.date):(i?.closedAt||'—'),time:i?.time||'—',client:i?.client||'—',address:i?.address||'—',operator:d.operatorName||operatorName(getOperator(i?.operatorId)||{})||'—',team:team?.name||'—',vehicle:vehicle?.name||i?.vehicle||'—',type:i?.type||i?.request||'—',request:i?.request||'',status:i?.status||'—',start:i?.actualStart||i?.startedAt||'',end:i?.actualEnd||i?.endedAt||'',relation:d.relation||'Relazione non disponibile.',activities:d.activities||[],anomalies:d.anomalies||d.anomaly||d.anomalyText||'Nessuna anomalia segnalata.',materials:d.materials||[],quantities:d.quantities,notes:d.notes||i?.notes||'',photos:d.photos,location:d.location||((Number.isFinite(i?.opLat)&&Number.isFinite(i?.opLng))?{lat:i.opLat,lng:i.opLng}:null),operatorName:d.operatorName||'Operatore',customerSigner:d.customerSigner||'Cliente',operatorSignature:d.operatorSignature||'',customerSignature:d.customerSignature||'',operatorSignedAt:d.operatorSignedAt||d.operatorSignTime||'',customerSignedAt:d.customerSignedAt||d.customerSignTime||''};
-}
 function reportArchiveItems(){
- return sfOfficeInterventions.filter(i=>hasReportData(i)).sort((a,b)=>String(b.closedAt||b.date||'').localeCompare(String(a.closedAt||a.date||'')));
+ return sfOfficeInterventions.filter(i=>i.status==='Terminato'&&(i.reportNo||i.reportData)).sort((a,b)=>String(b.closedAt||b.date||'').localeCompare(String(a.closedAt||a.date||'')));
 }
 function renderOfficeReports(){
  const host=el('officeReportsList');if(!host)return;
@@ -1740,8 +1693,7 @@ function renderOfficeReports(){
  if(el('reportArchiveCount'))el('reportArchiveCount').textContent=list.length+' rapportini';
  host.innerHTML=list.length?list.map(i=>{
    const o=getOperator(i.operatorId);
-   const vm=buildReportViewModel(i);
-   return `<div class="report-list-row"><b>${esc(vm.number)}</b><div class="wide"><b>${esc(vm.client)}</b><br><small>${esc(vm.address)}</small></div><span>${esc(vm.date)} · ${esc(vm.status)}</span><span>${esc(vm.operator)}<br><small>Operatore: ${vm.operatorSignature?'Sì':'No'} · Cliente: ${vm.customerSignature?'Sì':'No'}</small></span><button class="btn primary" onclick="openReportPreview('${i.id}')">Apri</button></div>`;
+   return `<div class="report-list-row"><b>${esc(i.reportNo||String(i.id||'').replace('INT-',''))}</b><div class="wide"><b>${esc(i.client||'')}</b><br><small>${esc(i.address||'')}</small></div><span>${esc(i.closedAt||fmtDate(i.date))}</span><span>${esc(o?operatorName(o):(i.reportData?.operatorName||'—'))}</span><button class="btn primary" onclick="viewOfficeGeneratedReport('${i.id}')">Apri</button></div>`;
  }).join(''):'<div class="live-empty">Nessun rapportino generato.</div>';
 }
 function applyReportSnapshot(i){
@@ -1755,14 +1707,12 @@ function applyReportSnapshot(i){
  if(el('reportOpSignTime'))el('reportOpSignTime').textContent=d.operatorSignTime||'';
  if(el('reportClientSignTime'))el('reportClientSignTime').textContent=d.customerSignTime||'';
 }
-async function openReportPreview(interventionId){
- const i=sfOfficeInterventions.find(x=>String(x.id)===String(interventionId));
- if(!i||!hasReportData(i)){alert('Rapportino non disponibile o non ancora persistito.');return false}
- selectedJob=JSON.parse(JSON.stringify(i));
- renderReport(buildReportViewModel(i));showReport();return true;
+async function viewOfficeGeneratedReport(id){
+ const i=sfOfficeInterventions.find(x=>x.id===id);if(!i)return;
+ selectedJob={...i};
+ if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
+ populateReportFromSelected();applyReportSnapshot(i);showReport();
 }
-async function viewOfficeGeneratedReport(id){return openReportPreview(id)}
-
 
 
 function openOfficeInterventionDetail(id){
@@ -1832,122 +1782,69 @@ function updateMessageBadges(){
  const id=currentOperatorId(),operatorUnread=sfMessages.filter(m=>m.operatorId===id&&m.from==='office'&&!m.readByOperator).length;if(el('operatorMsgBadge'))el('operatorMsgBadge').textContent=operatorUnread;
  const navBadge=document.querySelector('#fieldNav [data-page="Messaggi"] .badge-nav');if(navBadge)navBadge.textContent=operatorUnread;
 }
-function operatorJobSortValue(i){return `${i.date||'0000-00-00'}T${i.time||'00:00'}`}
-function operatorJobBucket(i,today=localDateKey()){
- const active=!['Terminato','Annullato'].includes(i.status);
- const urgent=active&&(i.status==='Urgente'||/urgent|emerg/i.test(i.priority||''));
- if(urgent)return 0;
- if(i.date===today)return 1;
- if(active&&String(i.date||'')>today)return 2;
- return 3;
-}
-function sortOperatorJobs(rows){
- const today=localDateKey();
- return [...rows].sort((a,b)=>{
-   const ba=operatorJobBucket(a,today),bb=operatorJobBucket(b,today);
-   if(ba!==bb)return ba-bb;
-   const av=operatorJobSortValue(a),bv=operatorJobSortValue(b);
-   return ba===3?bv.localeCompare(av):av.localeCompare(bv);
- });
-}
-let operatorAgendaView='day';
-function operatorAgendaRows(){
- const id=currentOperatorId();
- return sfOfficeInterventions.filter(i=>assignedToOperator(i,id)&&i.status!=='Annullato');
-}
-function setOperatorPersonalAgendaView(view){
- operatorAgendaView=view==='week'?'week':'day';
- sessionStorage.setItem('sf_operator_agenda_view',operatorAgendaView);
- syncOperatorJobs();
-}
-function operatorAgendaToday(){
- sessionStorage.setItem('sf_operator_agenda_date',localDateKey());
- operatorAgendaView='day';sessionStorage.setItem('sf_operator_agenda_view','day');syncOperatorJobs();
-}
-function operatorAgendaLabel(i,operator){
- const team=sfTeams.find(t=>t.id===i.teamId&&(t.operatorIds||[]).includes(operator.id));
- return team?.name||operatorName(operator);
-}
 function syncOperatorJobs(){
- const id=currentOperatorId(),host=el('jobPicker'),operator=getOperator(id);if(!host||!id)return;
- const selected=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
- operatorAgendaView=sessionStorage.getItem('sf_operator_agenda_view')||'day';
- const rows=operatorAgendaRows(),toolbar=`<div class="operator-agenda-toolbar"><input id="operatorAgendaDate" type="date" class="field" value="${esc(selected)}" onchange="setOperatorAgendaDate(this.value)"><button class="btn ghost" onclick="operatorAgendaToday()">OGGI</button><div class="agenda-view-switch"><button class="${operatorAgendaView==='day'?'active':''}" onclick="setOperatorPersonalAgendaView('day')">GIORNO</button><button class="${operatorAgendaView==='week'?'active':''}" onclick="setOperatorPersonalAgendaView('week')">SETTIMANA</button></div></div>`;
- if(operatorAgendaView==='week'){
-   const base=weekStart(selected);let body='<div class="agenda-week-grid">';
-   for(let x=0;x<7;x++){const d=new Date(base);d.setDate(base.getDate()+x);const key=formatDateInput(d),jobs=rows.filter(i=>i.date===key).sort((a,b)=>(a.time||'').localeCompare(b.time||''));body+=`<section class="agenda-week-day"><h3>${d.toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'2-digit'})}</h3>${jobs.map(i=>{const color=agendaColorForIntervention(i),done=i.status==='Terminato';return `<button type="button" class="agenda-week-job ${done?'finished':''}" data-intervention-id="${esc(i.id)}" style="${agendaColorStyle(color)}"><time>${esc(agendaTimeLabel(i))}</time><strong>${esc(i.client||'Cliente')}</strong><small><span class="operator-agenda-status">${esc(i.status||'Programmato')}</span> · ${esc(i.type||i.request||'Intervento')}</small></button>`}).join('')||'<div class="v6-meta">Nessun intervento</div>'}</section>`}host.innerHTML=toolbar+body+'</div>';bindOperatorAgendaOpening(host);return;
- }
- const jobs=rows.filter(i=>i.date===selected).sort((a,b)=>(a.time||'').localeCompare(b.time||'')),hours=Array.from({length:15},(_,x)=>x+6),placed=agendaLayoutLanes(jobs),lanes=Math.max(1,...placed.map(x=>x.lane+1)),height=Math.max(76,lanes*62+12),color=agendaResourceColor('op:'+id),style=agendaColorStyle(color);
- const head=`<div class="agenda-timeline-head"><div class="agenda-resource-head">Operatore / squadra</div><div class="agenda-hour-axis">${hours.map((h,x)=>`<span class="agenda-hour" style="left:${x*80}px">${String(h).padStart(2,'0')}:00</span>`).join('')}</div></div>`;
- const blocks=placed.map(({i,lane,left,width})=>`<button type="button" class="agenda-block ${i.status==='Terminato'?'finished':''}" data-intervention-id="${esc(i.id)}" style="left:${left}px;width:${width}px;top:${8+lane*62}px;${agendaColorStyle(agendaColorForIntervention(i))}" title="${esc(i.client||'Intervento')}"><time>${esc(agendaTimeLabel(i))}</time><strong>${esc(i.client||'Cliente')}</strong><small><span class="operator-agenda-status">${esc(i.status||'Programmato')}</span> · ${esc(i.type||i.request||'Intervento')}</small></button>`).join('');
- host.innerHTML=toolbar+`<div class="timeline-wrap"><div class="agenda-timeline">${head}<div class="agenda-timeline-row" style="min-height:${height}px;${style}"><div class="agenda-resource" style="${style}"><strong>${esc(jobs.find(i=>i.teamId)?operatorAgendaLabel(jobs.find(i=>i.teamId),operator):operatorName(operator))}</strong><small>Agenda personale</small></div><div class="agenda-track" style="min-height:${height}px;--agenda-row:${color.bg}55">${blocks}</div></div></div></div>`;
- bindOperatorAgendaOpening(host);
- selectedJob=null;el('selectedJobCard')?.classList.add('hidden');el('job')?.classList.add('hidden');
-}
-function backToOperatorJobs(){
- collectReportForm(selectedJob);
- el('selectedJobCard')?.classList.add('hidden');el('job')?.classList.add('hidden');
- if(el('jobPicker'))el('jobPicker').style.display='grid';
- syncOperatorJobs();window.scrollTo({top:0,behavior:'smooth'});
-}
-function resetReportForm(){
- ['prevPrima','prevDurante','prevDopo','prevAnomalia'].forEach((id,index)=>{const n=el(id);if(n){delete n.dataset.img;n.textContent=index===3?'Nessuna foto anomalia':`Nessuna foto ${['PRIMA','DURANTE','DOPO'][index]}`}});
- document.querySelectorAll('#job .chip').forEach(n=>n.classList.remove('active'));
- ['relazioneInput','qtaMc','qtaMetri','qtaOre','anomaliaTipo','anomaliaTesto','nomeClienteFirma'].forEach(id=>{if(el(id))el(id).value=''});
- if(el('relazioneGenerata'))el('relazioneGenerata').textContent='La relazione generata comparirà qui.';
- ['firmaOperatore','firmaCliente'].forEach(id=>{const n=el(id);if(n){delete n.dataset.signature;n.getContext('2d').clearRect(0,0,n.width,n.height)}});
- ['opSigStatus','clSigStatus'].forEach(id=>{if(el(id)){el(id).textContent='firma';el(id).classList.remove('ok')}});
- ['panelFoto','panelRelazione','panelAttivita','panelAnomalia','firmePanel'].forEach(id=>el(id)?.classList.add('active'));
-}
-function setStoredPhoto(id,data,empty){const n=el(id);if(!n)return;if(data){n.dataset.img=data;n.innerHTML=`<img src="${data}" alt="Foto intervento">`}else{delete n.dataset.img;n.textContent=empty}}
-function populateReportForm(job){
- resetReportForm();const d=job?.reportData||{};
- if(el('relazioneInput'))el('relazioneInput').value=d.relationInput||d.relation||'';
- if(el('relazioneGenerata')&&d.relation)el('relazioneGenerata').textContent=d.relation;
- (d.activities||[]).forEach(a=>{const chip=[...document.querySelectorAll('#job .chip')].find(n=>n.dataset.act===a);chip?.classList.add('active')});
- if(el('qtaMc'))el('qtaMc').value=d.quantities?.mc??'';if(el('qtaMetri'))el('qtaMetri').value=d.quantities?.metri??'';if(el('qtaOre'))el('qtaOre').value=d.quantities?.ore??'';
- if(el('anomaliaTipo'))el('anomaliaTipo').value=d.anomalyType||'';if(el('anomaliaTesto'))el('anomaliaTesto').value=d.anomalyText||(!d.anomalyType&&d.anomaly&&d.anomaly!=='Nessuna anomalia segnalata.'?d.anomaly:'');
- setStoredPhoto('prevPrima',d.photos?.prima,'Nessuna foto PRIMA');setStoredPhoto('prevDurante',d.photos?.durante,'Nessuna foto DURANTE');setStoredPhoto('prevDopo',d.photos?.dopo,'Nessuna foto DOPO');setStoredPhoto('prevAnomalia',d.photos?.anomalia,'Nessuna foto anomalia');
- if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=d.operatorName||operatorName(getOperator(currentOperatorId())||{nome:'Operatore',cognome:''});if(el('nomeClienteFirma'))el('nomeClienteFirma').value=d.customerSigner||'';
- [['firmaOperatore',d.operatorSignature,'opSigStatus'],['firmaCliente',d.customerSignature,'clSigStatus']].forEach(([id,sig,status])=>{if(sig&&el(id)){const canvas=el(id);canvas.dataset.signature=sig;el(status).textContent=id==='firmaOperatore'?'Firma operatore acquisita':'Firma cliente acquisita';el(status).classList.add('ok');const img=new Image();img.onload=()=>{const ctx=canvas.getContext('2d');ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height)};img.src=sig}});
- if(Number.isFinite(job?.opLat)&&Number.isFinite(job?.opLng)){selectedJob.opLat=job.opLat;selectedJob.opLng=job.opLng}
- updateMobileSummary();
-}
-function collectReportForm(job){
- if(!job?.id)return null;const current=sfOfficeInterventions.find(x=>x.id===job.id);if(!current)return null;
- const old=current.reportData||{},relationGenerated=el('relazioneGenerata')?.textContent.trim()||'',relationInput=el('relazioneInput')?.value||'';
- current.opLat=selectedJob?.opLat;current.opLng=selectedJob?.opLng;current.coordSource=selectedJob?.coordSource||current.coordSource;
- current.reportData=normalizeReportData({...old,relationInput,relation:relationGenerated&&!relationGenerated.startsWith('La relazione generata')?relationGenerated:(relationInput||old.relation||''),activities:[...document.querySelectorAll('#job .chip.active')].map(n=>n.dataset.act),anomalies:el('anomaliaTesto')?.value||old.anomalies||'',materials:old.materials||[],quantities:{mc:el('qtaMc')?.value||'',metri:el('qtaMetri')?.value||'',ore:el('qtaOre')?.value||''},anomalyType:el('anomaliaTipo')?.value||'',anomalyText:el('anomaliaTesto')?.value||'',photos:{prima:el('prevPrima')?.dataset.img||old.photos?.prima||'',durante:el('prevDurante')?.dataset.img||old.photos?.durante||'',dopo:el('prevDopo')?.dataset.img||old.photos?.dopo||'',anomalia:el('prevAnomalia')?.dataset.img||old.photos?.anomalia||''},location:(Number.isFinite(current.opLat)&&Number.isFinite(current.opLng))?{lat:current.opLat,lng:current.opLng,source:current.coordSource||'operator'}:(old.location||null),notes:current.notes||old.notes||'',operatorName:el('nomeOperatoreFirma')?.value||old.operatorName||'',customerSigner:el('nomeClienteFirma')?.value||old.customerSigner||'',operatorSignature:el('firmaOperatore')?.dataset.signature||old.operatorSignature||'',customerSignature:el('firmaCliente')?.dataset.signature||old.customerSignature||''});
- saveV6();return current;
-}
-function bindOperatorAgendaOpening(host){
- if(host.dataset.operatorAgendaOpeningBound)return;
- host.dataset.operatorAgendaOpeningBound='1';
- host.addEventListener('click',event=>{
-   const block=event.target.closest('[data-intervention-id]');
-   if(!block||!host.contains(block))return;
-   event.preventDefault();
-   openOperatorIntervention(block.dataset.interventionId);
- });
-}
-async function openOperatorIntervention(interventionId){
- const id=String(interventionId),operatorId=currentOperatorId();
- const source=sfOfficeInterventions.find(x=>String(x.id)===id);
- if(!source){console.warn('[OperatorAgenda] intervention not found:',id);alert('Intervento non trovato o non più disponibile.');return false}
- if(!assignedToOperator(source,operatorId)){alert('Intervento non assegnato a questo operatore.');return false}
- selectedJob={...source};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
- populateReportForm(source);
- el('selectedClient').textContent=source.client||'';el('selectedAddress').textContent=source.address||'';el('selectedRequest').textContent=source.request||'';if(el('jobAddressInput'))el('jobAddressInput').value=source.address||'';
- if(el('jobPicker'))el('jobPicker').style.display='none';el('selectedJobCard')?.classList.remove('hidden');el('job')?.classList.remove('hidden');
- jobRunning=true;sessionStorage.setItem('sf_job_running','1');sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
- if(el('startBtn')){el('startBtn').disabled=source.status!=='Terminato';el('startBtn').textContent=source.status==='Terminato'?'Riapri intervento':'Rapportino operativo'}
- updateSelectedJobMap();setTimeout(()=>el('selectedJobCard')?.scrollIntoView({block:'start'}),30);
- return true;
-}
-function openOperatorJob(id){return openOperatorIntervention(id)}
-function selectOfficeAssignedJob(node,id){return openOperatorJob(id)}
-function reopenCompletedJob(id){return openOperatorJob(id)}
+ const id=currentOperatorId(),host=el('jobPicker');if(!host||!id)return;
 
+ const assigned=sfOfficeInterventions
+   .filter(i=>assignedToOperator(i,id)&&i.status!=='Terminato'&&i.status!=='Annullato')
+   .sort((a,b)=>{
+     const urgentA=a.status==='Urgente'?0:1,urgentB=b.status==='Urgente'?0:1;
+     if(urgentA!==urgentB)return urgentA-urgentB;
+     return ((a.date||'')+(a.time||'')).localeCompare((b.date||'')+(b.time||''));
+   });
+
+ host.innerHTML=
+   `<div class="my-jobs-head"><div><h2 style="margin:0">Le mie commesse</h2><div class="operator-job-lock">Visualizzi solo gli interventi assegnati al tuo account.</div></div><span class="my-jobs-count">${assigned.length} assegnati</span></div>`+
+   (assigned.length?assigned.map(i=>`
+     <div class="job-choice" data-id="${esc(i.id)}" onclick="selectOfficeAssignedJob(this,'${i.id}')">
+       <div class="row">
+         <div><b>${esc(i.client)}</b><br><small>${esc(i.id)}</small></div>
+         <span class="badge ${i.status==='Urgente'?'urgent':'planned'}">${esc(i.status.toUpperCase())}</span>
+       </div>
+       <div class="v6-meta">${fmtDate(i.date)} · ${esc(i.time||'')}<br>${esc(i.address||'')}<br>${esc(i.request||'')}</div>
+       <div class="choose-row">
+         <small>${esc(interventionAssigneeLabel(i))}</small>
+         <button type="button" class="choose-btn">Apri commessa</button>
+       </div>
+     </div>`).join('')
+    :'<div class="v6-empty" style="background:white;border-radius:12px">Nessuna commessa assegnata al tuo account.</div>');
+
+ // Non selezionare automaticamente una commessa: la scelta è sempre dell'operatore.
+ selectedJob=null;
+ if(el('job'))el('job').classList.add('hidden');
+ renderOperatorAgendaFromOffice();
+ renderCompletedJobs();
+}
+function selectOfficeAssignedJob(node,id){
+ const operatorId=currentOperatorId();
+ const i=sfOfficeInterventions.find(x=>x.id===id);
+
+ if(!i || !assignedToOperator(i,operatorId)){
+   alert('Questa commessa non è assegnata al tuo account.');
+   return;
+ }
+ if(['Terminato','Annullato'].includes(i.status)){
+   alert('Questa commessa non è più attiva.');
+   return;
+ }
+
+ document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected'));
+ if(node)node.classList.add('selected');
+
+ selectedJob={...i};
+ el('selectedClient').textContent=i.client||'';
+ el('selectedAddress').textContent=i.address||'';
+ el('selectedRequest').textContent=i.request||'';
+ if(el('jobAddressInput'))el('jobAddressInput').value=i.address||'';
+
+ if(el('jobPicker'))el('jobPicker').style.display='block';
+ if(el('job'))el('job').classList.remove('hidden');
+
+ sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ updateSelectedJobMap();
+
+ setTimeout(()=>el('job')?.scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
 function renderOperatorAgendaFromOffice(){
  const host=el('fieldAgenda');if(!host)return;
  const id=currentOperatorId();
@@ -1977,7 +1874,7 @@ function renderOperatorAgendaFromOffice(){
 
 function setOperatorAgendaDate(date){
  sessionStorage.setItem('sf_operator_agenda_date',date);
- syncOperatorJobs();
+ renderOperatorAgendaFromOffice();
 }
 function shiftOperatorAgenda(delta){
  const current=sessionStorage.getItem('sf_operator_agenda_date')||localDateKey();
@@ -2015,11 +1912,6 @@ function renderAllOfficeV6(){
  renderOfficeReports();
 }
 
-function initializeOfficeModules(){
- try{renderOfficePeople();renderAllOfficeV6()}
- catch(e){console.error('Modulo applicativo non inizializzato:',e);plannerUnavailable('avvio applicazione')}
-}
-
 
 
 /* ===== MULTI-DISPOSITIVO 6.1: bridge stato ↔ Firebase ===== */
@@ -2042,7 +1934,7 @@ window.SFState={
    if(name==='vehicles')sfVehicles=rows;
    if(name==='interventions')sfOfficeInterventions=rows;
    if(name==='messages')sfMessages=rows;
-   if(name==='resourceAvailability'){sfResourceAvailability=rows;sfResourceAvailabilitySynced=true;}
+   if(name==='resourceAvailability')sfResourceAvailability=rows;
    try{
      if(name==='operators'||name==='teams'){renderOfficePeople();renderDashboardV6();renderControlRoomV6();}
      if(['clients','vehicles','interventions','messages','resourceAvailability'].includes(name))renderAllOfficeV6();
@@ -2062,27 +1954,10 @@ function setCloudStatus(text,kind='sync'){
  });
 }
 window.addEventListener('sfcloudstatus',e=>setCloudStatus(e.detail.text,e.detail.kind));
-window.addEventListener('sfmoduleerror',e=>{
- if(e.detail.module==='ResourceAvailability'){
-   sfResourceAvailabilitySynced=false;
-   sfResourceAvailability=[];
-   console.warn('[ResourceAvailability] fallback attivo: tutte le risorse attive sono disponibili');
-   try{renderDailyAvailability()}catch(error){console.warn('[ResourceAvailability] UI fallback non aggiornata',error)}
- }
-});
 
 let prevView='office', timerInt, secs=0;
 
 const el = id => document.getElementById(id);
-
-async function startCloudData(info){
- try{
-   await window.SFCloud.startRealtime(info);
- }catch(e){
-   console.error('[PrimaryData] Caricamento Firestore non riuscito',e);
-   setCloudStatus('☁ Dati principali non sincronizzati','err');
- }
-}
 
 async function login(){
   const u=el('user').value.trim().toLowerCase();
@@ -2095,8 +1970,8 @@ async function login(){
       window.SFState.cloudLoginApplied(info);
       if(info.role==='office'){
         loginScreen.classList.add('hidden');officeView.classList.remove('hidden');operatorView.classList.add('hidden');
-        initializeOfficeModules();
-        await startCloudData(info);
+        renderOfficePeople();renderAllOfficeV6();
+        await window.SFCloud.startRealtime(info);
         setTimeout(()=>renderOfficeMap(),140);
         return;
       }
@@ -2109,12 +1984,11 @@ async function login(){
         if(el('profileName'))el('profileName').textContent=fullName;
         if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
         sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
-        sessionStorage.setItem('sf_operator_agenda_date',localDateKey());sessionStorage.setItem('sf_operator_agenda_view','day');
         try{
           const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
           if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
         }catch(e){sessionStorage.removeItem('sf_selected_job')}
-        await startCloudData(info);
+        await window.SFCloud.startRealtime(info);
         syncOperatorJobs();renderOperatorMessages();updateMessageBadges();
         setTimeout(()=>{setupSignature('firmaOperatore');setupSignature('firmaCliente');updateSelectedJobMap()},140);
         return;
@@ -2123,24 +1997,21 @@ async function login(){
     }
   }catch(e){
     setCloudStatus('☁ Errore cloud','err');
-    alert(e?.code==='SF_OPERATOR_DISABLED'?"Account operatore disattivato. Contattare l'Ufficio.":'Accesso cloud non riuscito: '+(e.message||e));
+    alert('Accesso cloud non riuscito: '+(e.message||e));
     return;
   }
   // Fallback locale se Firebase non è configurato.
   if(u==='ufficio'&&p==='ufficio123'){
     loginScreen.classList.add('hidden');officeView.classList.remove('hidden');operatorView.classList.add('hidden');
-    initializeOfficeModules();setCloudStatus('☁ Modalità locale','off');setTimeout(()=>renderOfficeMap(),140);return;
+    renderOfficePeople();renderAllOfficeV6();setCloudStatus('☁ Modalità locale','off');setTimeout(()=>renderOfficeMap(),140);return;
   }
-  const knownOperator=sfOperators.find(o=>o.username.toLowerCase()===u&&o.password===p);
-  if(knownOperator?.active===false){alert('Account operatore disattivato. Contattare l’Ufficio.');return}
-  const matchedOperator=knownOperator;
+  const matchedOperator=sfOperators.find(o=>o.active!==false&&o.username.toLowerCase()===u&&o.password===p);
   if(matchedOperator){
     loginScreen.classList.add('hidden');officeView.classList.add('hidden');operatorView.classList.remove('hidden');
     const fullName=operatorName(matchedOperator);opName.textContent='Operatore: '+fullName;
     if(el('profileName'))el('profileName').textContent=fullName;
     if(el('nomeOperatoreFirma'))el('nomeOperatoreFirma').value=fullName;
     sessionStorage.setItem('sf_current_operator_id',matchedOperator.id);
-    sessionStorage.setItem('sf_operator_agenda_date',localDateKey());sessionStorage.setItem('sf_operator_agenda_view','day');
     try{
       const saved=JSON.parse(sessionStorage.getItem('sf_selected_job')||'null');
       if(saved && !assignedToOperator(saved,matchedOperator.id))sessionStorage.removeItem('sf_selected_job');
@@ -2180,7 +2051,7 @@ document.querySelectorAll('#menu button').forEach(b=>{
 });
 
 
-/* ===== 6.1.23 AUTO-AGGIORNAMENTO MESSAGGI / RAPPORTINI ===== */
+/* ===== 6.1.22 AUTO-AGGIORNAMENTO MESSAGGI / RAPPORTINI ===== */
 let officeAutoRefreshTimer=null;
 function refreshMessagesAndReports(){
  try{
@@ -2478,15 +2349,31 @@ async function viewCompletedReport(id){
  selectedJob={...j};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
  populateReportFromSelected();applyReportSnapshot(j);showReport();
 }
-async function reopenCompletedJob(id){return openOperatorJob(id)}
-function renderReport(vm){
- const set=(id,value)=>{if(el(id))el(id).textContent=value||'—'};set('reportRichiesta',vm.request);set('reportClientName',vm.client);set('reportClientAddress',vm.address);set('reportComune',vm.address);set('reportNumber','N. '+vm.number);set('reportDate',vm.date);set('reportStart',vm.start?new Date(vm.start).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}):'—');set('reportEnd',vm.end?new Date(vm.end).toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'}):'—');set('reportOperator',vm.operator);set('reportRelazione',vm.relation);set('reportAnomaliaTop',vm.anomalies);set('reportOperatoreNome',vm.operatorName);set('reportClienteNome',vm.customerSigner);set('reportOpSignTime',vm.operatorSignedAt);set('reportClientSignTime',vm.customerSignedAt);
- if(el('reportFirmaOperatore'))el('reportFirmaOperatore').innerHTML=vm.operatorSignature?`<img src="${vm.operatorSignature}" alt="Firma operatore">`:'Non acquisita';if(el('reportFirmaCliente'))el('reportFirmaCliente').innerHTML=vm.customerSignature?`<img src="${vm.customerSignature}" alt="Firma cliente">`:'Non acquisita';
- const q=vm.quantities||{},labels={mc:q.mc?`${q.mc} m³`:'',metri:q.metri?`${q.metri} m`:'',ore:q.ore?`${q.ore} h`:''};if(el('reportActivitiesList'))el('reportActivitiesList').innerHTML=(vm.activities.length?vm.activities:['Nessuna attività registrata']).map((a,n)=>`<li><span class="check">✓</span><span>${esc(a)}</span><b>${esc(Object.values(labels)[n]||'')}</b></li>`).join('');
- [['reportFotoPrima','prima'],['reportFotoDurante','durante'],['reportFotoDopo','dopo']].forEach(([id,key])=>{if(el(id))el(id).innerHTML=vm.photos[key]?`<img src="${vm.photos[key]}" alt="Foto ${key}">`:'Nessuna foto'});setTimeout(updateReportMap,120);
+async function reopenCompletedJob(id){
+ const operatorId=currentOperatorId(),j=sfOfficeInterventions.find(x=>x.id===id)||completedJobs.find(x=>x.id===id);
+ if(!j||!assignedToOperator(j,operatorId)){alert('Questa commessa non appartiene al tuo account.');return}
+ selectedJob={...j};if(!Number.isFinite(selectedJob.lat)||!Number.isFinite(selectedJob.lng))await geocodeJob(selectedJob,true);
+ const cloud=sfOfficeInterventions.find(x=>x.id===id);if(cloud){cloud.status='In corso';saveV6()}
+ completedJobs=completedJobs.filter(x=>x.id!==id);renderCompletedJobs();
+ el('selectedClient').textContent=selectedJob.client;el('selectedAddress').textContent=selectedJob.address;el('selectedRequest').textContent=selectedJob.request;
+ el('jobPicker').style.display='none';el('job').classList.remove('hidden');el('startBtn').disabled=true;el('startBtn').textContent='Intervento riaperto';
+ jobRunning=true;sessionStorage.setItem('sf_job_running','1');sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
+ const oldNotice=el('reopenNotice');if(oldNotice)oldNotice.remove();
+ el('job').insertAdjacentHTML('afterbegin','<div id="reopenNotice" class="edit-note">Intervento terminato riaperto per modifiche.</div>');
+ updateSelectedJobMap();setTimeout(()=>el('job').scrollIntoView({behavior:'smooth',block:'start'}),100);
 }
-function populateReportFromSelected(){renderReport(buildReportViewModel(selectedJob))}
-
+function populateReportFromSelected(){
+ if(el('reportRichiesta')) el('reportRichiesta').textContent=selectedJob.request||'';
+ if(el('reportClientName')) el('reportClientName').textContent=selectedJob.client||'';
+ if(el('reportClientAddress')) el('reportClientAddress').innerHTML=(selectedJob.address||'').replace(', ','<br>')+' – Italia';
+ if(el('reportComune')) el('reportComune').textContent=(selectedJob.address||'')+' – Italia';
+ const rc=activeCoords(selectedJob);
+ if(el('reportLat')) el('reportLat').textContent=rc?Number(rc[0]).toFixed(4):'—';
+ if(el('reportLng')) el('reportLng').textContent=rc?Number(rc[1]).toFixed(4):'—';
+ if(el('reportNumber')) el('reportNumber').textContent='N. '+String(selectedJob.reportNo||selectedJob.id||'').replace('INT-','');
+ if(el('reportPointType')) el('reportPointType').textContent=(Number.isFinite(selectedJob.opLat)&&Number.isFinite(selectedJob.opLng))?'Punto operativo corretto':'Coordinate dell’indirizzo';
+ setTimeout(updateReportMap,120);
+}
 
 async function initAllMaps(){
  if(el('jobAddressInput'))el('jobAddressInput').value=selectedJob.address||'';
@@ -2517,7 +2404,7 @@ async function updateReportMap(){
 }
 
 let selectedJob={...demoJobs[0]};
-let signatureTarget=null, modalDrawing=false, modalHasInk=false, modalCtx=null;
+let signatureTarget=null, modalDrawing=false, modalCtx=null;
 
 function selectJob(node){
  document.querySelectorAll('.job-choice').forEach(x=>x.classList.remove('selected')); node.classList.add('selected');
@@ -2549,26 +2436,26 @@ function openSigModal(target){
 function closeSigModal(){el('sigModal').classList.remove('active')}
 function initModalCanvas(){
  const c=el('sigModalCanvas'), ratio=window.devicePixelRatio||1, r=c.getBoundingClientRect();
- c.width=Math.max(1,r.width*ratio); c.height=Math.max(1,r.height*ratio); modalHasInk=false;
+ c.width=Math.max(1,r.width*ratio); c.height=Math.max(1,r.height*ratio);
  modalCtx=c.getContext('2d'); modalCtx.setTransform(ratio,0,0,ratio,0,0); modalCtx.lineWidth=2.5; modalCtx.lineCap='round'; modalCtx.strokeStyle='#071d35';
  const point=e=>{const rr=c.getBoundingClientRect(),q=e.touches?e.touches[0]:e;return{x:q.clientX-rr.left,y:q.clientY-rr.top}};
  const down=e=>{modalDrawing=true;let q=point(e);modalCtx.beginPath();modalCtx.moveTo(q.x,q.y);e.preventDefault()};
- const move=e=>{if(!modalDrawing)return;let q=point(e);modalCtx.lineTo(q.x,q.y);modalCtx.stroke();modalHasInk=true;e.preventDefault()};
+ const move=e=>{if(!modalDrawing)return;let q=point(e);modalCtx.lineTo(q.x,q.y);modalCtx.stroke();e.preventDefault()};
  const up=e=>{modalDrawing=false;e.preventDefault()};
  c.onpointerdown=down;c.onpointermove=move;c.onpointerup=up;c.onpointercancel=up;
 }
-function clearModalSignature(){const c=el('sigModalCanvas'); if(modalCtx) modalCtx.clearRect(0,0,c.width,c.height);modalHasInk=false}
-async function saveModalSignature(){
- if(!modalHasInk){alert('Firma non acquisita.');return false}
- const data=el('sigModalCanvas').toDataURL('image/png'),name=(el('sigName').value||'').trim(),current=sfOfficeInterventions.find(i=>i.id===selectedJob?.id);
- if(!current){alert('Firma non salvata: intervento non trovato.');return false}
- const key=signatureTarget==='operatore'?'operatorSignature':'customerSignature',signedKey=signatureTarget==='operatore'?'operatorSignedAt':'customerSignedAt';
- current.reportData=normalizeReportData(current.reportData);current.reportData[key]=data;current.reportData[signedKey]=new Date().toISOString();
- if(signatureTarget==='operatore'){current.reportData.operatorName=name||'Operatore';el('nomeOperatoreFirma').value=current.reportData.operatorName;el('firmaOperatore').dataset.signature=data;el('opSigStatus').textContent='Firma operatore acquisita';el('opSigStatus').classList.add('ok')}
- else{current.reportData.customerSigner=name||'Cliente';el('nomeClienteFirma').value=current.reportData.customerSigner;el('firmaCliente').dataset.signature=data;el('clSigStatus').textContent='Firma cliente acquisita';el('clSigStatus').classList.add('ok')}
- try{localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));if(window.SFCloud?.ready)await window.SFCloud.saveIntervention(current);selectedJob={...current};closeSigModal();return true}catch(error){alert('Firma non salvata: '+(error?.message||error));return false}
+function clearModalSignature(){const c=el('sigModalCanvas'); if(modalCtx) modalCtx.clearRect(0,0,c.width,c.height)}
+function saveModalSignature(){
+ const data=el('sigModalCanvas').toDataURL('image/png'), name=(el('sigName').value||'').trim();
+ if(signatureTarget==='operatore'){
+   el('nomeOperatoreFirma').value=name||'Operatore'; el('firmaOperatore').dataset.signature=data;
+   el('opSigStatus').textContent='OK';el('opSigStatus').classList.add('ok');
+ }else{
+   el('nomeClienteFirma').value=name||'Cliente'; el('firmaCliente').dataset.signature=data;
+   el('clSigStatus').textContent='OK';el('clSigStatus').classList.add('ok');
+ }
+ closeSigModal();
 }
-
 
 function fieldNavigate(name){
  ['Interventi','Agenda','Mappa','Messaggi','Profilo'].forEach(n=>{
@@ -2700,48 +2587,76 @@ function setupSignature(id){
 }
 function clearSignature(id){
   const c=el(id),ctx=c.getContext('2d');
-  ctx.clearRect(0,0,c.width,c.height);delete c.dataset.signature;
-  const status=id==='firmaOperatore'?el('opSigStatus'):el('clSigStatus');if(status){status.textContent='firma';status.classList.remove('ok')}
+  ctx.clearRect(0,0,c.width,c.height);
 }
 function copyPreviewToReport(srcId,dstId){
   const src=el(srcId),dst=el(dstId);
   const img=src && src.dataset.img;
   dst.innerHTML=img?'<img src="'+img+'" alt="Foto intervento">':'Nessuna foto';
 }
-async function finishOperatorIntervention(){
- const button=el('finishOperatorButton');
- if(button?.disabled)return;
- if(!jobRunning||!selectedJob?.id){alert('Nessun intervento attivo: impossibile salvare la chiusura.');return false}
- if(!el('firmaOperatore')?.dataset.signature||!el('firmaCliente')?.dataset.signature){alert('Per chiudere l’intervento servono entrambe le firme: operatore e cliente.');return false}
- const interventionId=String(selectedJob.id),current=sfOfficeInterventions.find(i=>String(i.id)===interventionId);
- if(!current||!assignedToOperator(current,currentOperatorId())){alert('Errore: interventionId non trovato o non assegnato. La chiusura non è stata eseguita.');return false}
- if(!confirm('Confermi la chiusura definitiva dell’intervento?'))return false;
- const previous=JSON.parse(JSON.stringify(current)),now=new Date(),actualEnd=now.toISOString(),closedLabel=now.toLocaleString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
- try{
-   if(button){button.disabled=true;button.textContent='SALVATAGGIO…'}
-   const saved=collectReportForm(current);if(!saved)throw new Error('Salvataggio rapportino non riuscito.');
-   const relTxt=el('relazioneGenerata')?.textContent.trim()||'',relation=(relTxt&&!relTxt.startsWith('La relazione generata'))?relTxt:(el('relazioneInput')?.value.trim()||saved.reportData?.relation||'Relazione non compilata.');
-   const anomalyType=el('anomaliaTipo')?.value.trim()||'',anomalyText=el('anomaliaTesto')?.value.trim()||'';
-   Object.assign(current,{status:'Terminato',actualEnd,closedAt:closedLabel,reportNo:current.reportNo||interventionId.replace('INT-',''),reportData:{...saved.reportData,relation,anomaly:(anomalyType||anomalyText)?`${anomalyType?anomalyType+': ':''}${anomalyText||'Anomalia segnalata.'}`:'Nessuna anomalia segnalata.',operatorName:(el('nomeOperatoreFirma')?.value||'Operatore').trim(),customerSigner:(el('nomeClienteFirma')?.value||'Cliente').trim(),operatorSignature:el('firmaOperatore').dataset.signature,customerSignature:el('firmaCliente').dataset.signature,operatorSignedAt:saved.reportData?.operatorSignedAt||closedLabel,customerSignedAt:saved.reportData?.customerSignedAt||closedLabel,generatedAt:actualEnd}});
-   localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
-   if(window.SFCloud?.ready){
-     if(typeof window.SFCloud.saveIntervention!=='function')throw new Error('Sincronizzazione Firebase non disponibile.');
-     await window.SFCloud.saveIntervention(current);
-   }
-   saveV6();selectedJob={...current};clearInterval(timerInt);jobRunning=false;sessionStorage.removeItem('sf_job_running');sessionStorage.removeItem('sf_selected_job');
-   completedJobs=completedJobs.filter(x=>x.id!==interventionId);completedJobs.unshift({...current});
-   renderCompletedJobs();renderAllOfficeV6();syncOperatorJobs();populateReportFromSelected();applyReportSnapshot(current);showReport();
-   alert('Intervento chiuso e salvato correttamente.');return true;
- }catch(error){
-   Object.keys(current).forEach(k=>delete current[k]);Object.assign(current,previous);localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
-   console.error('Chiusura intervento fallita',error);alert('Chiusura non salvata: '+(error?.message||'errore sconosciuto')+' Riprova senza chiudere la pagina.');return false;
- }finally{if(button){button.disabled=false;button.textContent='TERMINA INTERVENTO'}}
+function prepareAndShowReport(){
+  if(!jobRunning){alert('Nessun intervento attivo.');return;}
+  if(!el('firmaOperatore').dataset.signature || !el('firmaCliente').dataset.signature){
+    alert('Per chiudere l’intervento servono entrambe le firme: operatore e cliente.');
+    return;
+  }
+  clearInterval(timerInt);
+  jobRunning=false; sessionStorage.removeItem('sf_job_running'); sessionStorage.removeItem('sf_selected_job');
+  el('job').classList.add('hidden'); el('jobPicker').style.display='grid'; el('startBtn').disabled=false; el('startBtn').textContent='Inizia intervento';
+  el('selectedJobCard').insertAdjacentHTML('beforebegin','<div class="finished-card">✓ Intervento '+selectedJob.id+' terminato e rapportino generato.</div>');
+  const now=new Date();
+  const closedLabel=now.toLocaleDateString('it-IT')+' '+now.toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  const completedRecord={...selectedJob,status:'Terminato',closedAt:closedLabel,reportNo:String(selectedJob.id||'').replace('INT-','')};
+  const cloudInt=sfOfficeInterventions.find(x=>x.id===selectedJob.id);
+  if(cloudInt){
+    const relTxt=el('relazioneGenerata').textContent.trim();
+    const relationSnap=(relTxt&&!relTxt.startsWith('La relazione generata'))?relTxt:(el('relazioneInput').value.trim()||'Relazione non compilata.');
+    const tipoSnap=el('anomaliaTipo').value.trim(),anomSnap=el('anomaliaTesto').value.trim();
+    cloudInt.status='Terminato';cloudInt.closedAt=closedLabel;cloudInt.reportNo=completedRecord.reportNo;
+    cloudInt.reportData={
+      relation:relationSnap,
+      anomaly:(tipoSnap||anomSnap)?((tipoSnap?tipoSnap+': ':'')+(anomSnap||'Anomalia segnalata.')):'Nessuna anomalia segnalata.',
+      operatorName:(el('nomeOperatoreFirma').value||'Operatore').trim(),
+      customerSigner:(el('nomeClienteFirma').value||'Cliente').trim(),
+      operatorSignature:el('firmaOperatore').dataset.signature||'',
+      customerSignature:el('firmaCliente').dataset.signature||'',
+      operatorSignTime:el('reportOpSignTime')?.textContent||closedLabel,
+      customerSignTime:el('reportClientSignTime')?.textContent||closedLabel,
+      generatedAt:new Date().toISOString()
+    };
+    saveV6();
+  }
+  completedJobs=completedJobs.filter(x=>x.id!==completedRecord.id);
+  completedJobs.unshift(completedRecord);
+  renderCompletedJobs();
+  renderOfficeReports();
+  populateReportFromSelected();
+
+  const rel=el('relazioneGenerata').textContent.trim();
+  el('reportRelazione').textContent=(rel && !rel.startsWith('La relazione generata'))?rel:(el('relazioneInput').value.trim()||'Relazione non compilata.');
+  
+  const tipo=el('anomaliaTipo').value.trim();
+  const anom=el('anomaliaTesto').value.trim();
+  if(el('reportAnomaliaTop')) el('reportAnomaliaTop').textContent=(tipo||anom)?((tipo?tipo+': ':'')+(anom||'Anomalia segnalata.')):'Nessuna anomalia segnalata.';
+  copyPreviewToReport('prevPrima','reportFotoPrima');
+  copyPreviewToReport('prevDurante','reportFotoDurante');
+  copyPreviewToReport('prevDopo','reportFotoDopo'); renderReportActivities();
+  const opName=(el('nomeOperatoreFirma').value||'Operatore').trim();
+  const clName=(el('nomeClienteFirma').value||'Cliente').trim();
+  el('reportOperatoreNome').textContent=opName;
+  el('reportClienteNome').textContent=clName;
+  try{
+    const data=el('firmaOperatore').dataset.signature || el('firmaOperatore').toDataURL('image/png');
+    el('reportFirmaOperatore').innerHTML='<img src="'+data+'" style="max-width:100%;height:50px;object-fit:contain">';
+  }catch(e){}
+  try{
+    const data2=el('firmaCliente').dataset.signature || el('firmaCliente').toDataURL('image/png');
+    el('reportFirmaCliente').innerHTML='<img src="'+data2+'" style="max-width:100%;height:50px;object-fit:contain">';
+  }catch(e){}
+  showReport();
 }
 
 function startJob(){
-  const current=sfOfficeInterventions.find(i=>i.id===selectedJob?.id);
-  if(current?.status==='Terminato'){current.status='Riaperto';current.reopenedAt=new Date().toISOString();selectedJob={...current};saveV6();syncOperatorJobs()}
-  if(current&&!current.actualStart){current.actualStart=new Date().toISOString();saveV6()}
   jobRunning=true; sessionStorage.setItem('sf_job_running','1');
   sessionStorage.setItem('sf_selected_job',JSON.stringify(selectedJob));
   el('job').classList.remove('hidden');
@@ -2869,12 +2784,12 @@ async function shareMail(){
   }
 }
 function shareWA(){
-  window.open('https://wa.me/?text='+encodeURIComponent(`Spurgo Flow — Rapportino intervento ${buildReportViewModel(selectedJob).number}. Il PDF può essere generato dall’anteprima.`),'_blank');
+  window.open('https://wa.me/?text='+encodeURIComponent('Spurgo Flow — Rapportino intervento n. 2026-00051. Il PDF può essere condiviso dal dispositivo.'),'_blank');
 }
 async function shareNative(){
   if(navigator.share){
     try{
-      await navigator.share({title:'Rapportino Spurgo Flow',text:'Rapportino intervento '+buildReportViewModel(selectedJob).number});
+      await navigator.share({title:'Rapportino Spurgo Flow',text:'Rapportino intervento n. 2026-00051'});
     }catch(e){}
   }else{
     window.print();

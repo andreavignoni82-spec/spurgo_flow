@@ -17,7 +17,7 @@ assert(P.findBestSlots(draft(120),options()).suggestions.every(s=>s.durationMinu
 assert(P.findBestSlots(draft(60,{preferredRange:{from:420,to:720}}),options()).suggestions.every(s=>s.start>=420&&s.end<=720)); // L
 assert(P.findBestSlots(draft(60,{preferredRange:{from:780,to:1020}}),options()).suggestions.every(s=>s.start>=780&&s.end<=1020)); // M
 const full=[];for(const id of resources.map(x=>x.id))for(const [time,dur] of [['07:00',300],['13:00',240]])full.push({id:id+time,date,time,estimatedMinutes:dur,status:'Programmato',resourceId:id,lat:45,lng:9});
-r=P.findBestSlots(draft(),options(full,{onlyThisDay:true}));assert(!r.suggestions.some(s=>s.classification==='SICURO')); // N
+r=P.findBestSlots(draft(),options(full));assert(!r.suggestions.some(s=>s.classification==='SICURO')); // N
 r=P.findBestSlots({...draft(),date:''},options(full));assert(r.suggestions.some(s=>s.date>date)); // O
 r=P.findBestSlots(draft(60,{priority:'Urgente',time:'16:30',fixedTime:true}),options());assert(r.suggestions.every(s=>s.urgent));assert(r.suggestions.some(s=>s.operationalException)); // P
 r=P.findBestSlots(draft(),options([],{resourceAvailability:(d,id)=>id!=='op:a'}));assert(r.suggestions.every(s=>s.resource.id!=='op:a')); // Q
@@ -26,4 +26,4 @@ const immutable=draft();P.findBestSlots(immutable,options());assert.strictEqual(
 let active=false;r=P.findBestSlots(draft(),options([],{resourceAvailability:(d,id)=>id!=='op:a'||active}));assert(r.suggestions.every(s=>s.resource.id!=='op:a'));active=true;r=P.findBestSlots(draft(),options([],{resourceAvailability:(d,id)=>id!=='op:a'||active}));assert(r.suggestions.some(s=>s.resource.id==='op:a')); // T
 assert.deepStrictEqual(P.WORKDAY,{morningStart:'07:00',morningEnd:'12:00',afternoonStart:'13:00',afternoonEnd:'17:00'});
 assert.deepStrictEqual(P.SMART_SLOT_CONFIG,{minimumSafeBuffer:20,minimumTightBuffer:10,maxSuggestions:5,searchDays:7});
-console.log('Smart Dispatch v6.1.23: scenari A–T superati');
+console.log('Smart Dispatch v6.1.22: scenari A–T superati');
