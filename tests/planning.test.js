@@ -30,11 +30,11 @@ const travel=P.estimateTravelMinutes({},{});assert.strictEqual(travel.minutes,P.
 const missing=base('L','08:00');delete missing.estimatedMinutes;schedule=P.buildSchedule([missing]);assert.strictEqual(schedule[0].durationMinutes,P.CONFIG.fallbackDurationMinutes);assert.strictEqual(schedule[0].durationFallback,true);assert.strictEqual(missing.estimatedMinutes,undefined);
 console.log('Scenari A, B, C, D, E, F, G, H, I, L superati');
 
-// v6.1.21 Smart Slot Planner: scenari A–N e applicazione non persistente.
+// v6.1.22 Smart Slot Planner: scenari A–N e applicazione non persistente.
 const resources=[{id:'near',name:'Squadra A'},{id:'far',name:'Squadra B'}];
 const jobs=[base('P','08:00',{resourceId:'near'}),base('N','11:00',{resourceId:'near',lat:45,lng:9.03})];
 let result=P.findBestSlots({address:'Iseo',lat:45,lng:9.01,estimatedMinutes:60},{resources,jobs,resourceId:j=>j.resourceId,startDate:'2026-08-13',config:cfg});
-assert.strictEqual(result.suggestions.length,3); // A
+assert.strictEqual(result.suggestions.length,5); // A
 assert(result.suggestions.every(s=>s.date>='2026-08-13')); // B/N
 result=P.findBestSlots({address:'Iseo',estimatedMinutes:60,date:'2026-08-13',preferredRange:{from:14*60,to:17*60}},{resources,jobs,resourceId:j=>j.resourceId,config:cfg});
 assert(result.suggestions.some(s=>s.constraintMatch));assert(result.suggestions.every(s=>s.coordinatesIncomplete)); // C/L
