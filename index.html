@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.6</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v6.1.23.8</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
@@ -411,7 +411,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 .job-choice .choose-btn{background:#0b2948;color:#fff;border:0;border-radius:8px;padding:8px 12px;font-weight:800}
 .operator-job-lock{font-size:11px;color:#9fb2c3;margin:4px 0 12px}
 
-/* ===== 6.1.23.6 OPERATORE ULTRA-COMPATTO ===== */
+/* ===== 6.1.23.8 OPERATORE ULTRA-COMPATTO ===== */
 .operator-shell{padding:12px;overflow-x:hidden}
 .operator-shell .operator-head{max-width:620px;margin:auto;padding:4px 0 8px}
 #fieldInterventi{width:100%;margin:auto}
@@ -437,7 +437,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
  .inline-panel{display:block!important}
 }
 
-/* ===== 6.1.23.6 AGENDA PERSONALE OPERATORE ===== */
+/* ===== 6.1.23.8 AGENDA PERSONALE OPERATORE ===== */
 .operator-shell #fieldInterventi{max-width:none!important;color:#142438;background:#f4f6f8;border-radius:16px;padding:14px;margin-top:12px}
 .operator-agenda-title{margin:0 0 10px;color:#142438;font-size:20px}
 .operator-agenda-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
@@ -568,7 +568,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v6.1.23.6 · MULTI-DISPOSITIVO</div>
+<div class="version">v6.1.23.8 · MULTI-DISPOSITIVO</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -578,10 +578,10 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <aside class="side"><div class="logo">SPURGO <b>FLOW</b><div style="font-size:10px;font-weight:500">SUITE AZIENDALE</div></div>
 <div class="menu" id="menu">
 <button class="active" data-sec="dashboard">⌂ Dashboard</button><button data-sec="control">◎ Control Room</button><button data-sec="interventi">▣ Interventi</button><button data-sec="agenda">▦ Agenda</button><button data-sec="clienti">♙ Clienti & Impianti</button><button data-sec="flotta">▱ Mezzi & Flotta</button><button data-sec="squadre">♟ Squadre & Operatori</button><button data-sec="messaggiUfficio">➤ Messaggi <span id="officeMsgBadge" class="nav-mini-badge">0</span></button><button data-sec="rapportini">▤ Rapportini</button><button data-sec="statistiche">▥ Statistiche</button>
-</div><div class="sidefoot">Suite v6.1.23.6 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
+</div><div class="sidefoot">Suite v6.1.23.8 · Multi-dispositivo<div id="cloudStatusOffice" class="cloud-sync" style="margin-top:6px">☁ Verifica Firebase…</div><button class="btn ghost" onclick="logout()" style="margin-top:8px">Esci</button></div></aside>
 <main class="content">
 <section id="dashboard" class="section active">
-<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.6</span></div>
+<div class="top"><div><h1>Dashboard</h1><div class="muted">Centro operativo aziendale · dati reali</div></div><span class="build">v6.1.23.8</span></div>
 <div class="kpis"><div class="card kpi">Interventi oggi<strong id="dashToday">0</strong></div><div class="card kpi">In corso<strong id="dashProgress">0</strong></div><div class="card kpi">Completati<strong id="dashDone">0</strong></div><div class="card kpi">Squadre attive<strong id="dashTeams">0</strong></div><div class="card kpi">Da fatturare<strong id="dashBilling">0</strong></div></div>
 <div class="grid2"><div class="card"><h3>Interventi attivi / recenti</h3><table class="table"><thead><tr><th>Stato</th><th>Cliente</th><th>Ora</th><th>Assegnazione</th></tr></thead><tbody id="dashRecentRows"></tbody></table></div>
 <div class="card"><h3>Mappa interventi</h3><div id="officeMap" class="real-map"></div><div id="officeMapHealth" class="map-health">Mappa interventi: in attesa</div><div class="map-caption">Interventi presenti nel sistema.</div></div></div>
@@ -641,7 +641,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.6</span></div>
+  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.23.8</span></div>
   <div class="manage-grid" style="margin-top:18px">
     <div class="card">
       <h3 style="margin-top:0">+ Nuovo operatore</h3>
@@ -674,7 +674,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 
 
 <section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.6</span></div>
+ <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.23.8</span></div>
  <div class="msg-shell" style="margin-top:18px">
   <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
   <div class="msg-thread">
@@ -693,7 +693,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="statistiche" class="section"><h1>Statistiche & KPI</h1><div class="kpis"><div class="card kpi">Interventi mese<strong>128</strong></div><div class="card kpi">Tempo medio<strong>58m</strong></div><div class="card kpi">Urgenze<strong>21</strong></div><div class="card kpi">Da preventivare<strong>9</strong></div><div class="card kpi">Da fatturare<strong>€ 8.450</strong></div></div><div class="grid2"><div class="card"><h3>Produttività squadre</h3><p>Marco <b>44 interventi</b></p><div class="meter"><i style="width:88%"></i></div><p>Luca <b>39 interventi</b></p><div class="meter"><i style="width:78%"></i></div></div><div class="card"><h3>Tipologia lavori</h3><p>Disotturazione 34%</p><p>Spurgo 29%</p><p>Lavaggio 22%</p><p>Videoispezione 15%</p></div></div></section>
 </main></div>
 
-<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.6</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
+<div id="operator" class="operator-shell hidden"><div class="operator-head"><div><b style="font-size:22px">SPURGO <span style="color:#4bd27a">FLOW</span></b><div id="opname"></div><div id="cloudStatusOperator" class="cloud-sync" style="font-size:10px;margin-top:3px">☁ Verifica Firebase…</div></div><div><span class="build">v6.1.23.8</span> <button class="btn ghost" onclick="logout()">Esci</button></div></div>
 <div id="fieldInterventi" class="field-page active"><h1 class="operator-agenda-title">AGENDA PERSONALE</h1>
 <div id="jobPicker" class="operator-personal-agenda"></div>
 <div class="op-card hidden" id="selectedJobCard"><button class="btn ghost operator-back-list" onclick="backToOperatorJobs()">← I miei interventi</button><span id="selectedBadge" class="badge urgent">SELEZIONATO</span><h3 id="selectedClient">Condominio Belvedere</h3><p id="selectedAddress">Via Roma 24, 24067 Sarnico (BG)</p><p id="selectedRequest">Intasamento scarico garage</p>
@@ -860,7 +860,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </div>
 
 <div id="reportView" class="hidden" style="min-height:100vh;background:#e9eef2;padding:20px">
-<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.6</span></div>
+<div class="top" style="max-width:900px;margin:auto"><button class="btn navy" onclick="closeReport()">← Torna</button><span class="build">Spurgo Flow Suite Beta v6.1.23.8</span></div>
 <div class="report ref-layout" id="report">
   <div class="report-head">
     <div class="report-logo">
@@ -962,7 +962,7 @@ const DEFAULT_TEAMS=[
  {id:'team-b',name:'Squadra B',vehicle:'Autobotte 02',operatorIds:['op-luca']}
 ];
 function loadJson(key,fallback){try{const raw=localStorage.getItem(key);return raw?JSON.parse(raw):JSON.parse(JSON.stringify(fallback))}catch(e){return JSON.parse(JSON.stringify(fallback))}}
-let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
+let sfOperators=loadJson('sf_operators',DEFAULT_OPERATORS).map(o=>({...o,active:o.active!==false})), sfTeams=loadJson('sf_teams',DEFAULT_TEAMS);
 
 /* ===== DATA LAYER 6.1.23 — ripristino completo ===== */
 const DEFAULT_CLIENTS=[
@@ -1008,8 +1008,8 @@ function saveOfficePeople(){
 function esc(t){return String(t??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function operatorName(o){return (o.nome+' '+o.cognome).trim()}
 function renderOperatorChecks(){const h=el('teamOperatorChecks');if(!h)return;h.innerHTML=sfOperators.filter(o=>o.active!==false).map(o=>`<label class="check-row"><input type="checkbox" class="team-op-check" value="${esc(o.id)}"><span>${esc(operatorName(o))}</span></label>`).join('')||'<div class="muted">Crea prima almeno un operatore.</div>'}
-function renderOperators(){const h=el('operatorList');if(!h)return;el('operatorCount').textContent=sfOperators.length+' operatori';h.innerHTML=sfOperators.map(o=>`<div class="person-card"><div class="head"><div><b>${esc(operatorName(o))}</b><div class="person-meta">@${esc(o.username)} · ${esc(o.mezzo||'Nessun mezzo')}</div></div><span class="small-pill ${o.active!==false?'green':'orange'}">${o.active!==false?'ATTIVO':'DISATTIVATO'}</span></div><div class="person-meta">${esc(o.ruolo||'Operatore')} ${o.telefono?'· '+esc(o.telefono):''}</div><div class="manage-actions"><button class="btn ghost" onclick="editOperator('${o.id}')">Modifica</button><button class="btn ghost" onclick="changeOperatorPassword('${o.id}')">Password</button><button class="btn ghost" onclick="toggleOperator('${o.id}')">${o.active!==false?'Disattiva':'Riattiva'}</button><button class="btn danger" onclick="deleteOperator('${o.id}')">Elimina</button></div></div>`).join('');renderOperatorChecks()}
-function renderTeams(){const h=el('teamList');if(!h)return;el('teamCount').textContent=sfTeams.length+' squadre';h.innerHTML=sfTeams.map(t=>{const names=t.operatorIds.map(id=>sfOperators.find(o=>o.id===id)).filter(Boolean).map(operatorName);return `<div class="team-card"><div class="head"><div><b>${esc(t.name)}</b><div class="team-meta">${esc(t.vehicle||'Nessun mezzo')}</div></div><span class="small-pill green">${names.length} operatori</span></div><div class="team-meta">${names.length?esc(names.join(', ')):'Nessun operatore assegnato'}</div><div class="manage-actions"><button class="btn ghost" onclick="editTeam('${t.id}')">Modifica</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Elimina</button></div></div>`}).join('')}
+function renderOperators(){const h=el('operatorList');if(!h)return;el('operatorCount').textContent=sfOperators.length+' operatori';h.innerHTML=sfOperators.map(o=>`<div class="person-card"><div class="head"><div><b>${esc(operatorName(o))}</b><div class="person-meta">@${esc(o.username)} · ${esc(o.mezzo||'Nessun mezzo')}</div></div><span class="small-pill ${o.active!==false?'green':'orange'}">${o.active!==false?'ATTIVO':'DISATTIVATO'}</span></div><div class="person-meta">${esc(o.ruolo||'Operatore')} ${o.telefono?'· '+esc(o.telefono):''}</div><div class="manage-actions"><button class="btn ghost" onclick="editOperator('${o.id}')">MODIFICA</button><button class="btn ghost" onclick="changeOperatorPassword('${o.id}')">Password</button><button class="btn ${o.active!==false?'ghost':'primary'}" onclick="toggleOperator('${o.id}')">${o.active!==false?'DISATTIVA':'RIATTIVA'}</button>${o.active===false?`<button class="btn danger" onclick="deleteOperator('${o.id}')">ELIMINA DEFINITIVAMENTE ACCOUNT</button>`:''}</div></div>`).join('');renderOperatorChecks()}
+function renderTeams(){const h=el('teamList');if(!h)return;el('teamCount').textContent=sfTeams.length+' squadre';h.innerHTML=sfTeams.map(t=>{const members=(t.operatorIds||[]).map(id=>sfOperators.find(o=>o.id===id)).filter(Boolean),names=members.map(operatorName),active=members.filter(o=>o.active!==false).length;return `<div class="team-card"><div class="head"><div><b>${esc(t.name)}</b><div class="team-meta">${esc(t.vehicle||'Nessun mezzo')}</div></div><span class="small-pill ${active?'green':'orange'}">${active?active+' ATTIVI':'NON DISPONIBILE'}</span></div><div class="team-meta">${names.length?esc(names.join(', ')):'Nessun operatore assegnato'}</div><div class="manage-actions"><button class="btn ghost" onclick="editTeam('${t.id}')">Modifica</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Elimina</button></div></div>`}).join('')}
 function renderOfficePeople(){renderOperators();renderTeams()}
 function uniqueId(prefix){return prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7)}
 function normalizeOperatorUsername(value){return String(value||'').trim().toLowerCase()}
@@ -1036,7 +1036,7 @@ async function addOperator(){
    el('operatorFormMsg').textContent='Operatore creato correttamente.';
  }catch(err){
    el('operatorFormMsg').textContent=err?.code==='SF_USERNAME_ALREADY_IN_USE'
-     ?'Username già utilizzato nel sistema cloud. Scegli un altro username.'
+     ?'Esiste già un account cloud con questo username. L’account potrebbe appartenere a un operatore eliminato in precedenza. Eliminalo da Firebase Authentication oppure utilizza un username diverso.'
      :'Impossibile completare la creazione dell\'operatore sul cloud.';
  }
 }
@@ -1068,43 +1068,29 @@ async function changeOperatorPassword(id){
  }
 }
 
-function toggleOperator(id){
+async function toggleOperator(id){
  const o=sfOperators.find(x=>x.id===id);if(!o)return;
- o.active=o.active===false?true:false;
- saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+ const active=o.active===false;
+ if(!active&&!confirm('Disattivare '+operatorName(o)+'? L’operatore resterà nello storico e non potrà accedere o ricevere nuovi interventi.'))return;
+ try{
+   if(window.SFCloud?.enabled)await window.SFCloud.setOperatorActive(o,active);
+   o.active=active;
+   saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+   alert(active?'Operatore riattivato. Le credenziali e il profilo cloud esistenti sono stati mantenuti.':'Operatore disattivato. Profilo, account cloud e storico sono stati mantenuti.');
+ }catch(e){alert('Aggiornamento operatore non riuscito: '+(e.message||e))}
 }
 
 async function deleteOperator(id){
- const o=sfOperators.find(x=>x.id===id);if(!o)return;
-
- const activeJobs=sfOfficeInterventions.filter(i=>i.operatorId===id && !['Terminato','Annullato'].includes(i.status));
- if(activeJobs.length){
-   alert('Non puoi eliminare '+operatorName(o)+': ha '+activeJobs.length+' interventi attivi assegnati. Riassegnali prima.');
-   return;
+ const o=sfOperators.find(x=>x.id===id);if(!o||o.active!==false)return;
+ const warning='Questa operazione elimina definitivamente l’account.\nUsare solo quando l’operatore non deve più essere recuperato.';
+ if(!confirm(warning))return;
+ if(window.SFCloud?.enabled){
+   try{await window.SFCloud.deleteOperatorAccount(o)}catch(e){alert(e.message);return}
  }
- if(!confirm('Eliminare definitivamente '+operatorName(o)+'?'))return;
-
- try{
-   if(window.SFCloud?.enabled && o.cloudUid){
-     const pwd=prompt('Inserisci la password attuale dell’operatore per eliminare anche il suo account Firebase:');
-     if(!pwd)return;
-     await window.SFCloud.deleteOperatorAccount(o,pwd);
-   }else if(window.SFCloud?.enabled){
-     await window.SFCloud.deleteOperatorData(o);
-   }
-
-   sfOperators=sfOperators.filter(x=>x.id!==id);
-   sfTeams.forEach(t=>t.operatorIds=(t.operatorIds||[]).filter(x=>x!==id));
-   sfMessages=sfMessages.filter(m=>m.operatorId!==id);
-   sfOfficeInterventions.forEach(i=>{if(i.operatorId===id)i.operatorId=''});
-
-   saveOfficePeople();saveV6();
-   renderOfficePeople();renderAllOfficeV6();
-   alert('Operatore eliminato.');
- }catch(e){
-   console.error(e);
-   alert('Eliminazione non riuscita: '+(e.message||e));
- }
+ // In modalità locale non esiste un account Firebase: la rimozione resta esplicita e non altera lo storico.
+ sfOperators=sfOperators.filter(x=>x.id!==id);
+ saveOfficePeople();renderOfficePeople();renderAllOfficeV6();
+ alert('Account locale eliminato definitivamente. Gli interventi storici conservano il riferimento operatore.');
 }
 
 function addTeam(){
@@ -1413,7 +1399,7 @@ function agendaResourceId(i){
 }
 function officeAgendaResources(rows){
  const resources=[];
- sfTeams.forEach(t=>resources.push({id:'team:'+t.id,name:t.name,meta:'Squadra',color:agendaResourceColor('team:'+t.id)}));
+ sfTeams.filter(t=>(t.operatorIds||[]).some(id=>getOperator(id)?.active!==false)).forEach(t=>resources.push({id:'team:'+t.id,name:t.name,meta:'Squadra',color:agendaResourceColor('team:'+t.id)}));
  sfOperators.filter(o=>o.active!==false).forEach(o=>resources.push({id:'op:'+o.id,name:operatorName(o),meta:o.mezzo||o.ruolo||'Operatore',color:agendaResourceColor('op:'+o.id)}));
  if(rows.some(i=>agendaResourceId(i)==='unassigned'))resources.push({id:'unassigned',name:'Da assegnare',meta:'Interventi non assegnati',color:agendaResourceColor('unassigned')});
  return resources;
@@ -2126,7 +2112,7 @@ async function login(){
     }
   }catch(e){
     setCloudStatus('☁ Errore cloud','err');
-    alert('Accesso cloud non riuscito: '+(e.message||e));
+    alert(e?.code==='SF_OPERATOR_DISABLED'?"Account operatore disattivato. Contattare l'Ufficio.":'Accesso cloud non riuscito: '+(e.message||e));
     return;
   }
   // Fallback locale se Firebase non è configurato.
@@ -2134,7 +2120,9 @@ async function login(){
     loginScreen.classList.add('hidden');officeView.classList.remove('hidden');operatorView.classList.add('hidden');
     initializeOfficeModules();setCloudStatus('☁ Modalità locale','off');setTimeout(()=>renderOfficeMap(),140);return;
   }
-  const matchedOperator=sfOperators.find(o=>o.active!==false&&o.username.toLowerCase()===u&&o.password===p);
+  const knownOperator=sfOperators.find(o=>o.username.toLowerCase()===u&&o.password===p);
+  if(knownOperator?.active===false){alert('Account operatore disattivato. Contattare l’Ufficio.');return}
+  const matchedOperator=knownOperator;
   if(matchedOperator){
     loginScreen.classList.add('hidden');officeView.classList.add('hidden');operatorView.classList.remove('hidden');
     const fullName=operatorName(matchedOperator);opName.textContent='Operatore: '+fullName;

@@ -163,7 +163,12 @@ async function login(username,password){
    const opSnap=await getDoc(doc(db,'operators',profile.operatorId));
    if(!opSnap.exists())throw new Error("Scheda operatore non trovata.");
    const operator={id:opSnap.id,...opSnap.data()};
-   if(operator.active===false)throw new Error("Operatore disattivato.");
+   if(operator.active===false){
+     await signOut(auth);
+     const error=new Error("Account operatore disattivato. Contattare l'Ufficio.");
+     error.code='SF_OPERATOR_DISABLED';
+     throw error;
+   }
    return {role:'operator',operatorId:profile.operatorId,operator};
  }
  if(profile.role==='office')return {role:'office'};
@@ -217,29 +222,18 @@ async function changeOperatorPassword(op,oldPassword,newPassword){
 }
 
 
-async function deleteOperatorData(op){
- if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
- if(op.cloudUid){
-   try{await deleteDoc(profileRef(op.cloudUid))}catch(e){console.warn('delete profile',e)}
- }
- await deleteDoc(doc(db,'operators',op.id));
+async function setOperatorActive(op,active){
+ if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può aggiornare operatori.");
+ await setDoc(doc(db,'operators',op.id),{active},{merge:true});
+ if(op.cloudUid)await setDoc(profileRef(op.cloudUid),{active},{merge:true});
+ return true;
 }
 
-async function deleteOperatorAccount(op,password){
- if(!configured||currentInfo?.role!=='office')throw new Error("Solo l'Ufficio cloud può eliminare operatori.");
- const secondary=initializeApp(cfg,'delete-'+Date.now());
- const a=getAuth(secondary);
- try{
-   const email=op.cloudEmail||emailForUsername(op.username);
-   const cred=await signInWithEmailAndPassword(a,email,password);
-   const uid=cred.user.uid;
-   await deleteUser(cred.user);
-   try{await deleteDoc(profileRef(uid))}catch(e){console.warn('delete profile',e)}
-   await deleteDoc(doc(db,'operators',op.id));
-   return true;
- }finally{
-   try{await deleteApp(secondary)}catch(e){}
- }
+async function deleteOperatorAccount(op){
+ const email=op.cloudEmail||emailForUsername(op.username);
+ const error=new Error(`Account applicativo disattivato. Per eliminare definitivamente l'utente cloud, rimuovere ${email} da Firebase Authentication.`);
+ error.code='SF_ADMIN_SDK_REQUIRED';
+ throw error;
 }
 
 if(configured){
@@ -255,5 +249,5 @@ window.SFCloud={
  enabled:configured,
  get ready(){return !!(configured&&currentInfo)},
  get authenticatedUser(){return auth?.currentUser||null},
- login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,deleteOperatorAccount,deleteOperatorData,saveClient,deleteClient,saveIntervention
+ login,logout,startRealtime,syncFromGlobals,provisionOperator,changeOperatorPassword,setOperatorActive,deleteOperatorAccount,saveClient,deleteClient,saveIntervention
 };
