@@ -9,6 +9,7 @@ import { normalizeMessage, validateMessage } from '../../../domain/messages/mess
 import { semanticMerge } from '../../repositories/memory/base-memory-repository.js';
 import { RepositoryError, mapRepositoryError } from '../errors.js';
 const failure=(error,operation,idField,id)=>{if(error instanceof RepositoryError)return error;if(error?.code==='already-exists')return new RepositoryError('DUPLICATE_ID',`Duplicate ${idField}: ${id}`,{cause:error});if(error?.code==='not-found')return new RepositoryError('MISSING_ID',`Missing ${idField}: ${id}`,{cause:error});const mapped=mapRepositoryError(error);mapped.operation=operation;return mapped};
+const unique=rows=>[...new Map(rows.map(row=>[String(row.id),row])).values()];
 export class FirebaseRepositoryAdapter{
  constructor({collection,idField='id',client,normalize=clone,validate=()=>true}){if(!client)throw new Error('Firebase client is required');Object.assign(this,{collection,idField,client,normalize,validate})}
  #read(value){if(!value)return null;return clone(this.normalize(value))}
@@ -23,8 +24,8 @@ export function createFirebaseRepositories({client}){
  const make=(name,idField='id')=>new FirebaseRepositoryAdapter({collection:name,idField,client,normalize:definitions[name][0],validate:definitions[name][1]});
  const interventions=make('interventions');
  interventions.queryByDate=async date=>(await client.adapter.query('interventions','date',date)).map(value=>clone(normalizeIntervention(value)));
- interventions.queryByOperator=async id=>(await client.adapter.queryArray('interventions','assignedOperatorIds',id)).map(value=>clone(normalizeIntervention(value)));
- interventions.queryByTeam=async id=>(await client.adapter.queryArray('interventions','assignedTeamIds',id)).map(value=>clone(normalizeIntervention(value)));
+ interventions.queryByOperator=async id=>unique([...(await client.adapter.query('interventions','operatorId',id)),...(await client.adapter.queryArray('interventions','assignedOperatorIds',id))]).map(value=>clone(normalizeIntervention(value)));
+ interventions.queryByTeam=async id=>unique([...(await client.adapter.query('interventions','teamId',id)),...(await client.adapter.queryArray('interventions','assignedTeamIds',id))]).map(value=>clone(normalizeIntervention(value)));
  const teams=make('teams');teams.queryByOperator=async id=>(await client.adapter.queryArray('teams','operatorIds',id)).map(value=>clone(normalizeTeam(value)));
  const reports=make('reports','interventionId');reports.getByInterventionId=id=>reports.getById(id);reports.save=async(id,report)=>await reports.getById(id)?reports.update(id,report):reports.create({...report,interventionId:id});
  return{clients:make('clients'),operators:make('operators'),teams,vehicles:make('vehicles'),interventions,reports,messages:make('messages')};
