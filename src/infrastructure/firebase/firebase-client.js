@@ -21,8 +21,13 @@ export function createFirebaseClient(config={}){
   const saveProfile=(uid,profile)=>setDoc(doc(firestore,'profiles',uid),profile,{merge:true});
   async function provisionUser(email,password,profile={}){
     const secondaryApp=initializeApp(appConfig,`spurgoflow-provision-${crypto.randomUUID()}`),secondaryAuth=getAuth(secondaryApp);
-    try{if(config.useEmulator===true)connectAuthEmulator(secondaryAuth,`http://${config.host}:${config.authPort}`,{disableWarnings:true});const credential=await createUserWithEmailAndPassword(secondaryAuth,email,password);await saveProfile(credential.user.uid,profile);return Object.freeze({uid:credential.user.uid,email:credential.user.email,...profile});}
-    finally{try{await signOut(secondaryAuth)}catch{}await deleteApp(secondaryApp)}
+    try{
+      if(config.useEmulator===true)connectAuthEmulator(secondaryAuth,`http://${config.host}:${config.authPort}`,{disableWarnings:true});
+      const credential=await createUserWithEmailAndPassword(secondaryAuth,email,password);
+      const finalProfile={...profile,...(profile.role==='operator'?{operatorId:credential.user.uid}: {})};
+      await saveProfile(credential.user.uid,finalProfile);
+      return Object.freeze({uid:credential.user.uid,email:credential.user.email,...finalProfile});
+    } finally {try{await signOut(secondaryAuth)}catch{}await deleteApp(secondaryApp)}
   }
   return Object.freeze({app,auth,firestore,adapter,loadProfile,saveProfile,provisionUser,config:Object.freeze({...config}),close:()=>deleteApp(app)});
 }
