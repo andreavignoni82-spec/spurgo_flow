@@ -1,1 +1,6 @@
-:root { --color-brand: #102a43; --color-accent: #2f80ed; --color-surface: #fff; --color-bg: #f5f7fa; --space-4: 1rem; --radius: .75rem; }
+:root{
+ --color-brand:#061a33;--color-brand-2:#0b3157;--color-accent:#0b8f64;--color-accent-2:#16a36f;
+ --color-blue:#1677d2;--color-danger:#dc2626;--color-warning:#f59e0b;--color-surface:#fff;--color-bg:#f4f7fb;
+ --color-text:#102a43;--color-muted:#627d98;--color-line:#dbe4ee;--space-4:1rem;--radius:.8rem;
+ --shadow:0 8px 28px rgba(16,42,67,.09);--nav-height:64px
+}
