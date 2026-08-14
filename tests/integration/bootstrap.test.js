@@ -20,7 +20,7 @@ test('bootstrap mounts the explicit dashboard route and visible shell', async ()
   assert.ok(application.router);
   assert.equal(app.querySelector('[data-feature]')?.dataset.feature, 'dashboard');
   assert.match(app.textContent, /Foundation v8 avviata correttamente/);
-  assert.match(app.textContent, /v8\.0\.0-alpha\.1-hotfix1/);
+  assert.match(app.textContent, /v8\.0\.0-alpha\.2/);
 });
 
 test('bootstrap rejects clearly when #app is absent', async () => {
@@ -40,5 +40,5 @@ test('a failed feature renders a visible fallback instead of a blank page', asyn
   });
   assert.equal(await router.navigate('broken'), false);
   assert.match(app.textContent, /SPURGO FLOW 8.*Feature non disponibile/s);
-  assert.match(app.textContent, /v8\.0\.0-alpha\.1/);
+  assert.match(app.textContent, /v8\.0\.0-alpha\.2/);
 });

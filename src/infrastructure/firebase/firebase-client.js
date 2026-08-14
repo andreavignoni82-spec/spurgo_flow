@@ -1,0 +1,1 @@
+export function createFirebaseTestClient({config,adapter}){if(!config?.useEmulator)throw new Error('Firebase is opt-in and requires a test/emulator configuration');if(!adapter)throw new Error('Firebase test adapter is required');return Object.freeze({config:{...config},adapter});}

@@ -1,0 +1,6 @@
+import { assertValid, validId, validTimestamp } from '../shared/validators.js'; import { clean,clone } from '../shared/utils.js';
+export function normalizeReport(input){const v=clean(clone(input)); for(const k of ['activities','anomalies','materials','photos'])v[k]=[...(v[k]??[])]; return v;}
+export function validateSignature(v,type){const e=[];if(!v?.dataUrl)e.push('Signature.dataUrl is required');if(!validTimestamp(v?.signedAt))e.push('Signature.signedAt is invalid');if(v?.signerType!==type)e.push(`Signature.signerType must be ${type}`);assertValid(e);return true;}
+export function validatePhoto(v){const e=[];if(!validId(v?.id))e.push('Photo.id is required');if(!v?.data&&!v?.url)e.push('Photo.data or Photo.url is required');assertValid(e);return true;}
+export function validateReport(v){const e=[];if(!validId(v.interventionId))e.push('Report.interventionId is required');for(const k of ['activities','anomalies','materials','photos'])if(!Array.isArray(v[k]))e.push(`Report.${k} must be an array`);assertValid(e);if(v.operatorSignature)validateSignature(v.operatorSignature,'operator');if(v.customerSignature)validateSignature(v.customerSignature,'customer');v.photos.forEach(validatePhoto);return true;}
+export const cloneReport=clone; export const ReportIdentity=Object.freeze({field:'interventionId',immutable:true});
