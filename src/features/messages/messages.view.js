@@ -1,0 +1,14 @@
+const esc = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+const name = row => row.name || row.nome || [row.firstName || row.nome, row.lastName || row.cognome].filter(Boolean).join(' ') || row.id;
+
+export function renderMessages(container, model, handlers) {
+  const users = model.operators.map(operator => `<button class="sf-messages-recipient ${String(operator.id) === model.selectedId ? 'is-active' : ''}" data-recipient-id="${esc(operator.id)}"><b>${esc(name(operator))}</b><small>${esc(operator.ruolo || 'Operatore')}${operator.unread ? ` · ${operator.unread} nuovi` : ''}</small></button>`).join('');
+  const bubbles = model.messages.map(message => `<article class="sf-messages-item sf-messages-item--${message.from === 'office' ? 'office' : 'operator'}" data-message-id="${esc(message.id)}"><p>${esc(message.text)}</p><small>${message.from === 'office' ? 'Ufficio' : esc(model.selectedName)} · ${esc(model.formatDate(message.createdAt))}</small></article>`).join('');
+  container.innerHTML = `<div class="sf-messages"><header class="sf-messages-header"><div><h1>Messaggi operatori</h1><p>Comunicazioni operative individuali tra Ufficio e operatori</p></div><span>v7.0.0-alpha.9 · MESSAGES MODULE</span></header>${model.fatalError ? `<div class="sf-messages-fatal">Modulo Messaggi temporaneamente non disponibile</div>` : `<div class="sf-messages-shell"><aside class="sf-messages-users"><b>Operatori</b>${users || '<p>Nessun operatore attivo.</p>'}</aside><section class="sf-messages-thread"><div class="sf-messages-thread-head"><div><b>${esc(model.selectedName || 'Seleziona un operatore')}</b><small>${esc(model.selectedRole)}</small></div><button type="button" data-action="read" ${model.selectedId ? '' : 'disabled'}>Segna letto</button></div><div class="sf-messages-list">${model.selectedId ? (bubbles || '<p>Nessun messaggio.</p>') : '<p>Seleziona un operatore per aprire la conversazione.</p>'}</div><form class="sf-messages-form"><textarea name="text" placeholder="Scrivi un messaggio operativo..." ${model.selectedId ? '' : 'disabled'}>${esc(model.draft)}</textarea><button type="submit" ${model.sending || !model.selectedId ? 'disabled' : ''}>${model.sending ? 'Invio…' : 'Invia'}</button></form><div class="sf-messages-error" role="alert">${esc(model.error)}</div></section></div>`}</div>`;
+  if (model.fatalError) return;
+  container.querySelectorAll('[data-recipient-id]').forEach(button => button.addEventListener('click', () => handlers.select(button.dataset.recipientId)));
+  container.querySelector('[data-action="read"]')?.addEventListener('click', handlers.markRead);
+  const form = container.querySelector('.sf-messages-form');
+  form?.querySelector('textarea').addEventListener('input', event => handlers.draft(event.target.value));
+  form?.addEventListener('submit', event => { event.preventDefault(); handlers.submit(); });
+}

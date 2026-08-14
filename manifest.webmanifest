@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 7.0.0-alpha.8 Control Room Module",
+  "name": "Spurgo Flow 7.0.0-alpha.9 Messages Module",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Agenda giorno corrente, colori operatori/squadre e refresh Messaggi/Rapportini ogni 30 secondi",
+  "description": "Messaggi operatori isolati con persistenza repository e aggiornamento realtime",
   "icons": [
     {
       "src": "icon-192.png",

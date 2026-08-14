@@ -1,5 +1,14 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.9 · Messages Module
+
+Messaggi preserves the v6.1.21 office/operator DTO and is autonomous behind `MessagesRepository`.
+Operator and team lookups pass only through their repositories; persistence, read updates and canonical
+message identity pass only through `MessagesRepository`. Successful creates emit `message:created` after
+persistence. Realtime notifications and the lifecycle-owned 30-second fallback refresh update only this
+feature, and unmount clears every subscription and interval. The local form prevents duplicate sends and
+retains its text on failure. No Firebase, legacy global or other feature dependency is present.
+
 ## v7.0.0-alpha.8 · Control Room Module
 
 Control Room is an autonomous monitoring and suggestion feature. It reads interventions through
