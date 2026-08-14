@@ -5,6 +5,9 @@ import { fleetFeature } from './features/fleet/fleet.feature.js';
 import { peopleFeature } from './features/people/people.feature.js';
 import { interventionsFeature } from './features/interventions/interventions.feature.js';
 import { agendaFeature } from './features/agenda/agenda.feature.js';
+import { controlRoomFeature } from './features/control-room/control-room.feature.js';
+import { PlanningService } from './services/planning-service.js';
+import { MapsService } from './services/maps-service.js';
 import { LegacyAdapter } from './services/legacy-adapter.js';
 import { ClientsRepository } from './services/repositories/clients-repository.js';
 import { InterventionsRepository } from './services/repositories/interventions-repository.js';
@@ -37,8 +40,8 @@ const auth = new AuthService({ auth: {
   createOperatorAccount: ({ username, password, operator }) => window.SFCloud?.enabled ? window.SFCloud.provisionOperator({ ...operator, username }, password) : Promise.resolve({ email: `${username}@local`, localPassword: password }),
   signIn: credentials => window.SFCloud.login(credentials.username, credentials.password), signOut: () => window.SFCloud.logout()
 } });
-const services = { auth, logger: console };
-const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature }, repositories, services });
+const services = { auth, logger: console, confirm: message => window.confirm(message), planning: new PlanningService(window.SFPlanning), maps: new MapsService({ renderControlRoom: () => window.renderControlMap?.() }) };
+const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, control: controlRoomFeature }, repositories, services });
 services.interventions = new InterventionsService({ repository: repositories.interventions, eventBus: app.eventBus });
 window.SFInterventionsBridge = new InterventionsLegacyBridge(services.interventions);
 
@@ -54,7 +57,8 @@ document.querySelectorAll('#menu [data-sec]').forEach(button => button.addEventL
   else if (button.dataset.sec === 'squadre') app.router.navigate('people', document.getElementById('squadre'));
   else if (button.dataset.sec === 'interventi') app.router.navigate('interventions', document.getElementById('interventi'));
   else if (button.dataset.sec === 'agenda') app.router.navigate('agenda', document.getElementById('agenda'));
-  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); agendaFeature.unmount(); }
+  else if (button.dataset.sec === 'control') app.router.navigate('control', document.getElementById('control'));
+  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); agendaFeature.unmount(); controlRoomFeature.unmount(); }
 }));
 
 app.eventBus.on('client:interventionRequested', ({ id }) => adapter.openInterventionForClient(id));
