@@ -8,4 +8,5 @@ window.SPURGO_FIREBASE_CONFIG = {
   appId: "1:821174687910:web:3b2f0f3b35dff054e9fc67"
 };
 window.__SPURGO_FLOW_FIREBASE__ = { ...window.SPURGO_FIREBASE_CONFIG, useEmulator: false };
-window.__SPURGO_FLOW_ENV__ = { dataDriver: 'firebase', firebase: window.__SPURGO_FLOW_FIREBASE__, fallbackToMemory: false };
+window.__SPURGO_FLOW_GOOGLE_MAPS__ = { enabled: true, apiKey: window.SPURGO_FIREBASE_CONFIG.apiKey };
+window.__SPURGO_FLOW_ENV__ = { dataDriver: 'firebase', firebase: window.__SPURGO_FLOW_FIREBASE__, googleMaps: window.__SPURGO_FLOW_GOOGLE_MAPS__, fallbackToMemory: false };
