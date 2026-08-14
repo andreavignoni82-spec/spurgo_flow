@@ -1,0 +1,1 @@
+export function validateIntervention(value={}) { const errors={}; if(!value.clientId)errors.clientId='Seleziona cliente'; if(!value.date)errors.date='Seleziona data'; return {valid:Object.keys(errors).length===0,errors,value}; }

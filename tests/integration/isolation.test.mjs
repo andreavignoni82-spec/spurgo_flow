@@ -10,10 +10,16 @@ const mount = (name, callback = () => rendered.push(name)) =>
   boundary.run(name, callback, { textContent: '' });
 
 mount('Agenda', () => { throw new Error('Agenda failure'); });
+const interventionsContainer = { textContent: '' };
+boundary.run('interventions', () => { throw new Error('Interventions failure'); }, interventionsContainer);
 mount('Dashboard');
 mount('Control Room');
+mount('Clients');
+mount('Fleet');
+mount('People');
 mount('Login');
-assert.deepEqual(rendered, ['Dashboard', 'Control Room', 'Login']);
+assert.equal(interventionsContainer.textContent, 'Modulo temporaneamente non disponibile');
+assert.deepEqual(rendered, ['Dashboard', 'Control Room', 'Clients', 'Fleet', 'People', 'Login']);
 
 const eventBus = new EventBus();
 let eventDelivered = false;

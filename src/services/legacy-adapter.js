@@ -19,6 +19,10 @@ export class LegacyAdapter {
   }
 
   interventions() { return this.#collection('interventions', 'sfOfficeInterventions'); }
+  interventionById(id) { return this.interventions().find(row => String(row.id) === String(id)); }
+  createIntervention(row) { return this.globals.SFState?.createIntervention(row); }
+  updateIntervention(id, patch) { return this.globals.SFState?.updateIntervention(id, patch); }
+  removeIntervention(id) { return this.globals.SFState?.removeIntervention(id); }
   operators() { return this.#collection('operators', 'sfOperators'); }
   operatorById(id) { return this.operators().find(operator => String(operator.id) === String(id)); }
   createOperator(operator) { return this.globals.SFState?.createOperator(operator); }
