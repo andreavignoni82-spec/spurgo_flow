@@ -1,0 +1,2 @@
+html { font-family: var(--sf-font-family); color: var(--sf-color-text); }
+*, *::before, *::after { box-sizing: border-box; }

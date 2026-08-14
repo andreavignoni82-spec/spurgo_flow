@@ -1,0 +1,5 @@
+.sf-module-fallback {
+  padding: var(--sf-space-3);
+  border-radius: var(--sf-radius-md);
+  background: var(--sf-color-surface);
+}
