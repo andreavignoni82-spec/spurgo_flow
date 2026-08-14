@@ -1,4 +1,4 @@
-const STORE_KEY='spurgoflow-auth-v1';
+const STORE_KEY='spurgoflow-auth-v2';
 const memoryStore=new Map();
 const encoder=new TextEncoder();
 const hex=bytes=>Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
@@ -10,11 +10,11 @@ export function createMemoryAuthAdapter(){
  let current=null;const listeners=new Set();const publish=()=>listeners.forEach(listener=>listener(current));
  return Object.freeze({
   async login(email,password){
-   if(email==='ufficio@office.spurgoflow.test'){if(password!=='ufficio')throw new Error('Credenziali Ufficio non valide');current=Object.freeze({uid:'memory:office',email,role:'office'});publish();return current}
-   const account=readStore()[email];if(!account)throw new Error('Account operatore non registrato');const hash=await digest(password,account.salt);if(hash!==account.hash)throw new Error('Credenziali operatore non valide');current=Object.freeze({uid:account.uid,email,role:'operator'});publish();return current;
+   if(email==='ufficio@spurgoflow.app'){if(password!=='ufficio')throw new Error('Credenziali Ufficio non valide');current=Object.freeze({uid:'memory:office',email,role:'office'});publish();return current}
+   const account=readStore()[email];if(!account)throw new Error('Account operatore non registrato');const hash=await digest(password,account.salt);if(hash!==account.hash)throw new Error('Credenziali operatore non valide');current=Object.freeze({uid:account.uid,email,role:'operator',operatorId:account.operatorId??account.uid,active:account.active!==false,username:account.username});publish();return current;
   },
   async logout(){current=null;publish()},currentIdentity:()=>current,onAuthChanged(callback){listeners.add(callback);callback(current);return()=>listeners.delete(callback)},
-  async createTestAccount(email,password){if(!email||!password||password.length<6)throw new Error('Password operatore: minimo 6 caratteri');const store=readStore();if(store[email])throw new Error('Username operatore già registrato');const salt=randomSalt(),hash=await digest(password,salt),uid=`memory:${crypto.randomUUID?.()||Date.now()}`;store[email]={uid,email,salt,hash};writeStore(store);return Object.freeze({uid,email,role:'operator'})},
+  async createTestAccount(email,password,profile={}){if(!email||!password||password.length<6)throw new Error('Password operatore: minimo 6 caratteri');const store=readStore();if(store[email])throw new Error('Username operatore già registrato');const salt=randomSalt(),hash=await digest(password,salt),uid=`memory:${crypto.randomUUID?.()||Date.now()}`;store[email]={uid,email,salt,hash,operatorId:profile.operatorId??uid,active:profile.active!==false,username:profile.username};writeStore(store);return Object.freeze({uid,email,role:profile.role??'operator',operatorId:profile.operatorId??uid,active:profile.active!==false,username:profile.username})},
   health:()=>Object.freeze({status:'local',mode:'memory'})
  })
 }

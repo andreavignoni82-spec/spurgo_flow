@@ -1,14 +1,13 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { mapAuthError } from './errors.js';
-
-const identity = user => user ? Object.freeze({ uid: user.uid, email: user.email }) : null;
-export function createFirebaseAuthAdapter({ auth, useEmulator }) {
-  if (useEmulator !== true) throw new Error('Firebase production is disabled in v8 alpha.3');
+const basic=user=>user?{uid:user.uid,email:user.email}:null;
+export function createFirebaseAuthAdapter({auth,provisionUser,loadProfile}){
+  const withProfile=async user=>{if(!user)return null;const profile=await loadProfile?.(user.uid);if(!profile)throw new Error('Profilo utente non configurato.');return Object.freeze({...basic(user),...profile})};
   return Object.freeze({
-    async login(email, password) { try { return identity((await signInWithEmailAndPassword(auth, email, password)).user); } catch (error) { throw mapAuthError(error); } },
-    async logout() { try { await signOut(auth); } catch (error) { throw mapAuthError(error); } },
-    currentIdentity: () => identity(auth.currentUser),
-    onAuthChanged: callback => onAuthStateChanged(auth, user => callback(identity(user))),
-    async createTestAccount(email, password) { try { return identity((await createUserWithEmailAndPassword(auth, email, password)).user); } catch (error) { throw mapAuthError(error); } },
+    async login(email,password){try{return await withProfile((await signInWithEmailAndPassword(auth,email,password)).user)}catch(error){throw mapAuthError(error)}},
+    async logout(){try{await signOut(auth)}catch(error){throw mapAuthError(error)}},
+    currentIdentity:()=>basic(auth.currentUser),
+    onAuthChanged:callback=>onAuthStateChanged(auth,async user=>{try{callback(await withProfile(user))}catch{callback(basic(user))}}),
+    async createTestAccount(email,password,profile={}){try{if(!provisionUser)throw new Error('Account provisioning is not configured');return await provisionUser(email,password,profile)}catch(error){throw mapAuthError(error)}}
   });
 }

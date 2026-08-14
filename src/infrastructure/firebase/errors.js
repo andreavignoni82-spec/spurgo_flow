@@ -1,17 +1,4 @@
-export class RepositoryError extends Error {
-  constructor(code, message, options) { super(message, options); this.name = 'RepositoryError'; this.code = code; }
-}
-export class AuthError extends Error {
-  constructor(code, message, options) { super(message, options); this.name = 'AuthError'; this.code = code; }
-}
-export function mapRepositoryError(error) {
-  if (error instanceof RepositoryError) return error;
-  const code = error?.code === 'unavailable' || error?.code === 'firestore/unavailable' ? 'DATA_UNAVAILABLE' : 'DATA_ERROR';
-  return new RepositoryError(code, code === 'DATA_UNAVAILABLE' ? 'Data service is unavailable' : 'Data operation failed', { cause: error });
-}
-export function mapAuthError(error) {
-  if (error instanceof AuthError) return error;
-  const codes = { 'auth/invalid-credential': 'INVALID_CREDENTIALS', 'auth/wrong-password': 'INVALID_CREDENTIALS', 'auth/user-not-found': 'INVALID_CREDENTIALS', 'auth/user-disabled': 'USER_DISABLED' };
-  const code = codes[error?.code] ?? 'AUTH_ERROR';
-  return new AuthError(code, code === 'INVALID_CREDENTIALS' ? 'Invalid credentials' : code === 'USER_DISABLED' ? 'User is disabled' : 'Authentication failed', { cause: error });
-}
+export class RepositoryError extends Error { constructor(code,message,options){super(message,options);this.name='RepositoryError';this.code=code;} }
+export class AuthError extends Error { constructor(code,message,options){super(message,options);this.name='AuthError';this.code=code;} }
+export function mapRepositoryError(error){if(error instanceof RepositoryError)return error;const code=error?.code==='unavailable'||error?.code==='firestore/unavailable'?'DATA_UNAVAILABLE':error?.code==='permission-denied'||error?.code==='firestore/permission-denied'?'PERMISSION_DENIED':'DATA_ERROR';const messages={DATA_UNAVAILABLE:'Servizio dati non disponibile',PERMISSION_DENIED:'Permessi insufficienti',DATA_ERROR:'Errore durante l’operazione dati'};return new RepositoryError(code,messages[code],{cause:error});}
+export function mapAuthError(error){if(error instanceof AuthError)return error;if(error?.message==='Profilo utente non configurato.')return new AuthError('PROFILE_MISSING',error.message,{cause:error});const codes={'auth/invalid-credential':'INVALID_CREDENTIALS','auth/wrong-password':'INVALID_CREDENTIALS','auth/user-not-found':'INVALID_CREDENTIALS','auth/user-disabled':'USER_DISABLED','auth/email-already-in-use':'EMAIL_IN_USE','auth/weak-password':'WEAK_PASSWORD','auth/network-request-failed':'NETWORK_ERROR','auth/too-many-requests':'TOO_MANY_REQUESTS'};const code=codes[error?.code]??'AUTH_ERROR';const messages={INVALID_CREDENTIALS:'Credenziali non valide',USER_DISABLED:'Utente disabilitato',EMAIL_IN_USE:'Username operatore già registrato',WEAK_PASSWORD:'Password troppo debole',NETWORK_ERROR:'Connessione a Firebase non disponibile',TOO_MANY_REQUESTS:'Troppi tentativi. Riprova più tardi.',AUTH_ERROR:'Errore di autenticazione'};return new AuthError(code,messages[code],{cause:error});}
