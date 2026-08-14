@@ -1,5 +1,12 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.3 · Clients Module
+
+Clienti is now an autonomous feature mounted by the v7 router and protected by `FeatureBoundary`.
+Its list, search, create, edit and delete workflows use only `ClientsRepository`; the repository's
+legacy adapter preserves the `sf_v6_clients` records and Firebase collection without schema changes.
+The feature emits `client:created`, `client:updated` and `client:deleted` with `{ id }` payloads.
+
 ## v7.0.0-alpha.2 · Dashboard Module
 
 The Dashboard is the first migrated v7 feature. It implements the v7 lifecycle contract in

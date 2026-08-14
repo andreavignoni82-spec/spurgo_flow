@@ -1,8 +1,8 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.2 · DASHBOARD MODULE`. The Dashboard is isolated behind
+**Current modular release:** `v7.0.0-alpha.3 · CLIENTS MODULE`. Dashboard remains unchanged and Clienti is isolated behind
 the v7 router, repository contracts, EventBus, and FeatureBoundary; all remaining pages continue
-to run through the v6.1.21-R1 compatibility application.
+to run through the v6.1.21-R1 compatibility application. Client CRUD uses `ClientsRepository`, scoped UI, lifecycle cleanup and domain events.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
