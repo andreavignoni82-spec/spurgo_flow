@@ -1,3 +1,3 @@
-export const VERSION = 'v8.5.3';
-export const BUILD_LABEL = 'v8.5.3 · GOOGLE SMART SCHEDULER';
+export const VERSION = 'v8.5.4';
+export const BUILD_LABEL = 'v8.5.4 · HYBRID MAPS FALLBACK';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
