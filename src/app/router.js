@@ -1,15 +1,17 @@
 import { createLifecycle } from '../core/lifecycle.js';
 export class Router {
-  #routes; #container; #context; #boundary; #active;
-  constructor({ routes, container, context, errorBoundary }) { this.#routes = new Map(Object.entries(routes)); this.#container = container; this.#context = context; this.#boundary = errorBoundary; }
+  #routes; #container; #context; #boundary; #active; #onMountError;
+  constructor({ routes, container, context, errorBoundary, onMountError = () => {} }) { this.#routes = new Map(Object.entries(routes)); this.#container = container; this.#context = context; this.#boundary = errorBoundary; this.#onMountError = onMountError; }
   async navigate(route) {
     await this.#deactivate();
     const feature = this.#routes.get(route);
     if (!feature) return false;
     const lifecycle = createLifecycle();
     this.#active = { feature, lifecycle };
-    await this.#boundary.runAsync(() => feature.mount(this.#container, { ...this.#context, lifecycle, signal: lifecycle.signal }), { featureId: feature.id, phase: 'mount' });
-    return true;
+    let mounted = false;
+    await this.#boundary.runAsync(async () => { await feature.mount(this.#container, { ...this.#context, lifecycle, signal: lifecycle.signal }); mounted = true; }, { featureId: feature.id, phase: 'mount' });
+    if (!mounted) { this.#active = undefined; lifecycle.abort(); this.#onMountError(feature); }
+    return mounted;
   }
   async #deactivate() {
     if (!this.#active) return;

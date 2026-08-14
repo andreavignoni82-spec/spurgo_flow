@@ -1,4 +1,4 @@
 {
-  "name": "Spurgo Flow 8", "short_name": "SF8", "start_url": "/", "display": "standalone",
+  "name": "Spurgo Flow 8", "short_name": "SF8", "start_url": "./", "scope": "./", "display": "standalone",
   "background_color": "#f5f7fa", "theme_color": "#102a43", "icons": []
 }
