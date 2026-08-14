@@ -1,4 +1,11 @@
 {
-  "name": "SPURGO FLOW 8 · Boot Core Fix", "short_name": "SF8", "description": "Suite operativa per ufficio e operatori · v8.0.0-beta.1.1", "start_url": "./", "scope": "./", "display": "standalone",
-  "background_color": "#f5f7fa", "theme_color": "#102a43", "icons": []
+  "name": "SPURGO FLOW 8.2 · Mockup UI",
+  "short_name": "Spurgo Flow",
+  "description": "Suite operativa per ufficio e operatori · v8.2.0",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#061a33",
+  "icons": []
 }
