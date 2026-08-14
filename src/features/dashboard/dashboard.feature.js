@@ -3,7 +3,8 @@ import { renderDashboard } from './dashboard.view.js';
 
 export const DASHBOARD_EVENTS = Object.freeze([
   'intervention:created', 'intervention:updated', 'intervention:deleted', 'intervention:statusChanged',
-  'operator:created', 'operator:updated', 'team:updated', 'vehicle:updated'
+  'operator:created', 'operator:updated', 'team:updated',
+  'vehicle:created', 'vehicle:updated', 'vehicle:deleted'
 ]);
 
 const REPOSITORIES = Object.freeze({

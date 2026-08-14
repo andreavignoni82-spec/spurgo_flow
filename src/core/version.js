@@ -1,2 +1,2 @@
-export const VERSION = '7.0.0-alpha.3';
-export const BUILD_LABEL = `v${VERSION} · CLIENTS MODULE`;
+export const VERSION = '7.0.0-alpha.4';
+export const BUILD_LABEL = `v${VERSION} · FLEET MODULE`;

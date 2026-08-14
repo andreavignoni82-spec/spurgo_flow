@@ -1,5 +1,13 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.4 · Fleet Module
+
+Mezzi is now an autonomous v7 feature. It preserves the v6.1.21 list, create, edit and conditional
+delete workflows and the existing name, code, type, plate, capacity, status, hours/km and maintenance
+fields. All persistence passes through `VehiclesRepository` and the legacy adapter without changing
+stored records. The feature emits `vehicle:created`, `vehicle:updated` and `vehicle:deleted` payloads
+containing only `{ id }`; Dashboard chooses independently whether to refresh.
+
 ## v7.0.0-alpha.3 · Clients Module
 
 Clienti is now an autonomous feature mounted by the v7 router and protected by `FeatureBoundary`.
