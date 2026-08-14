@@ -1,3 +1,4 @@
+import { loginFeature } from './login/index.js';
 import { dashboardFeature } from './dashboard/index.js';
 import { clientsFeature } from './clients/index.js';
 import { fleetFeature } from './fleet/index.js';
@@ -9,4 +10,4 @@ import { messagesFeature } from './messages/index.js';
 import { reportsFeature } from './reports/index.js';
 import { statisticsFeature } from './statistics/index.js';
 import { operatorFeature } from './operator/index.js';
-export const features = Object.freeze({ dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, 'control-room': controlRoomFeature, messages: messagesFeature, reports: reportsFeature, statistics: statisticsFeature, operator: operatorFeature });
+export const features = Object.freeze({ login:loginFeature, dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, 'control-room': controlRoomFeature, messages: messagesFeature, reports: reportsFeature, statistics: statisticsFeature, operator: operatorFeature });
