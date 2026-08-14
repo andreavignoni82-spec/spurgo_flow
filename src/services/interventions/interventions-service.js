@@ -37,6 +37,7 @@ export class InterventionsService {
   assignOperator(id, operatorId) { return this.#assignment(id, { operatorId, assignedOperatorIds: operatorId ? [operatorId] : [] }); }
   assignOperators(id, assignedOperatorIds) { return this.#assignment(id, { assignedOperatorIds }); }
   assignTeam(id, teamId) { return this.#assignment(id, { teamId, assignedTeamIds: teamId ? [teamId] : [] }); }
+  assignTeams(id, assignedTeamIds) { return this.#assignment(id, { assignedTeamIds }); }
   assignVehicle(id, vehicleId) { return this.#assignment(id, { vehicleId }); }
   async #assignment(id, patch) { const value = await this.repository.update(id, { ...patch, updatedAt: this.clock() }); this.eventBus?.emit(Events.INTERVENTION_ASSIGNMENT_CHANGED, { entityId: id, source: this.source, timestamp: this.clock(), changes: patch }); return value; }
   async changeStatus(id, status, extra = {}, event = Events.INTERVENTION_STATUS_CHANGED) {

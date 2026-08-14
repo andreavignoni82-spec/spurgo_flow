@@ -1,2 +1,2 @@
-import { createPlaceholderFeature } from '../../shared/ui/placeholder.js';
-export const statisticsFeature = createPlaceholderFeature('statistics', 'Statistiche');
+import{createReadFeature}from'../../shared/ui/operational.js';import{statisticsReadModel}from'../../shared/selectors/operations.js';
+export const statisticsFeature=createReadFeature('statistics','Statistiche',async c=>statisticsReadModel(await c.services.interventions.listInterventions()),m=>`<section class="ops-grid">${[['total','Interventi'],['completed','Terminati'],['cancelled','Annullati'],['urgent','Urgenti'],['estimatedMinutes','Minuti stimati']].map(([k,l])=>`<div class="ops-card metric"><strong>${m[k]}</strong>${l}</div>`).join('')}</section><p class="ops-card">Statistiche calcolate esclusivamente dagli interventi persistiti.</p>`);

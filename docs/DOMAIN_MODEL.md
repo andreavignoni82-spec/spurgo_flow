@@ -30,3 +30,7 @@ Repository patches recursively merge plain objects. Arrays are **explicit replac
 | `ANNULLATO` | none |
 
 Direct `PROGRAMMATO → TERMINATO` is rejected. Start assigns `actualStart` only when absent, completion assigns `actualEnd`, and reopening clears `actualEnd`; a reopened start preserves the original start. Normal creation accepts only the documented descriptive/planning whitelist. It rejects caller-provided identity, status, actual times, timestamps, and operator/team/vehicle assignment fields before persistence. Assignments require dedicated service commands.
+
+## Beta.1 invariants
+
+Operator non contiene password e lo username è lowercase/trimmed. Team contiene `operatorIds[]`. Intervention usa soltanto gli stati PROGRAMMATO, IN_CORSO, TERMINATO, ANNULLATO, RIAPERTO e priorità NORMALE/URGENTE. Report è un aggregate separato.

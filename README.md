@@ -10,3 +10,7 @@ npm start
 ```
 
 Clienti & Impianti and Mezzi & Flotta are operational. All other business modules intentionally remain placeholders; production Firebase remains disabled.
+
+## v8.0.0-beta.1 — Complete operational suite
+
+La beta.1 aggiunge People/Teams, Interventi, Agenda, Control Room, Messaggi, Rapportini separati, Dashboard e Statistiche derivate, oltre alla vista operatore smartphone-first. L'architettura resta Feature → Service → Repository contract → Adapter. Avvio: `npm start`; test: `npm test`; smoke browser: `npm run test:smoke`.

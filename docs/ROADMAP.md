@@ -21,3 +21,7 @@
 | stable | Production release |
 
 No automatic merge or legacy data migration is part of this roadmap.
+
+## v8.0.0-beta.1
+
+Complete operational suite. Fatturazione, WhatsApp/SMS, AI, ottimizzazione percorsi, Storage, Analytics, push, portale cliente, contabilità e magazzino restano futuri e non sono inclusi.

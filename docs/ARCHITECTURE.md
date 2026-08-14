@@ -43,3 +43,7 @@ There are no mutable `window` application globals, no feature-to-feature imports
 ## First operational feature
 
 Alpha.4 wires `ClientsFeature` to `ClientsService` through immutable `AppContext`. The service validates and timestamps writes, owns identity generation and semantic client events, and talks only to the `ClientsRepository` contract. The feature performs local search/sort and may consume read-only realtime snapshots through the service; realtime failure is non-blocking. Since the alpha.3 model defines no Plant, Site, or Facility aggregate, address and city remain the supported main-site representation and no new persistence schema is introduced.
+
+## Beta.1 operational modules
+
+Agenda, Dashboard, Control Room, Statistiche e agenda operatore sono read model puri e non persistono copie. People, Interventi, Messaggi e Rapportini usano i rispettivi application service e repository contract. Nessuna feature importa un'altra feature o Firebase.

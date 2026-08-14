@@ -1,0 +1,8 @@
+import { VERSION, PRODUCT_LABEL } from '../../app/version.js';
+export { todayISO } from '../selectors/operations.js';
+export const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export const shell=(title,body,id='operations')=>`<main class="ops" data-feature="${id}"><header class="ops-head"><div><small>${PRODUCT_LABEL}</small><h1>${esc(title)}</h1></div><span>${VERSION}</span></header><nav class="ops-nav">${[['dashboard','Dashboard'],['clients','Clienti'],['fleet','Mezzi'],['people','Operatori'],['interventions','Interventi'],['agenda','Agenda'],['control-room','Control Room'],['messages','Messaggi'],['reports','Rapportini'],['statistics','Statistiche'],['operator','App operatore']].map(([r,l])=>`<button data-route="${r}">${l}</button>`).join('')}</nav>${body}</main>`;
+export const loading=title=>shell(title,'<section class="ops-card" role="status">Caricamento…</section>');
+export const empty=text=>`<p class="empty">${esc(text)}</p>`;
+export const statusLabel=s=>({PROGRAMMATO:'Programmato',IN_CORSO:'In corso',TERMINATO:'Terminato',ANNULLATO:'Annullato',RIAPERTO:'Riaperto'}[s]??s);
+export function createReadFeature(id,title,load,render){let root,dead=false;return Object.freeze({id,async mount(container,context){root=container;dead=false;root.innerHTML=loading(title);try{const data=await load(context);if(!dead)root.innerHTML=shell(title,render(data,context),id);}catch(e){context.logger?.error(`${id} failed`,{error:e});if(!dead)root.innerHTML=shell(title,`<section class="ops-card error" role="alert">${esc(e.message||'Errore di caricamento')}</section>`,id);}},unmount(){dead=true;root=undefined;}});}
