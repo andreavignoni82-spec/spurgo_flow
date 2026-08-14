@@ -16,6 +16,10 @@ for (const [file, source] of await sources('src/features')) {
   assert.doesNotMatch(source, /(?:from\s*|import\s*\()["'][^"']*(?:firebase|features\/)[^"']*["']/, file);
   assert.doesNotMatch(source, /\b(?:sfOfficeInterventions|sfOperators|sfTeams)\b/, file);
 }
+for (const [file, source] of await sources('src/features/dashboard')) {
+  assert.doesNotMatch(source, /(?:from\s*|import\s*\()["'][^"']*features\/(?!dashboard(?:\/|$))[^"']*["']/, file);
+  assert.doesNotMatch(source, /\bfirebase\b|\blocalStorage\b|\bwindow\.sf\w*|\b(?:sfOfficeInterventions|sfOperators|sfTeams)\b/i, file);
+}
 for (const [file, source] of await sources('src/services/repositories')) {
   assert.doesNotMatch(source, /(?:shared\/ui|features\/|\bdocument\b|querySelector|innerHTML)/, file);
 }
