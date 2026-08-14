@@ -10,11 +10,11 @@ A feature implements `{ id, mount(container, context), unmount() }`. On mount it
 
 ### Domain isolation
 
-Domain modules hold entities and rules only. They do not know the DOM, features, browser APIs, Firebase, or concrete persistence. Alpha.1 intentionally provides only domain boundaries.
+Domain modules hold entities and rules only. They do not know the DOM, features, browser APIs, Firebase, or concrete persistence. Alpha.2.1 hardens the domain and repository boundaries without adding operational features.
 
 ### Repository and service patterns
 
-Repository contracts live at the service boundary and contain no DOM concepts. Infrastructure adapters may implement those contracts. Services orchestrate domain use cases without importing features or the DOM. Concrete adapters are injected through AppContext.
+Repository contracts live at the service boundary and contain no DOM concepts. Infrastructure adapters may implement those contracts. Services orchestrate domain use cases without importing features or the DOM. Concrete adapters are injected through AppContext. `InterventionsRepository` stores Intervention planning/lifecycle data. `ReportsRepository` alone stores the separate Report aggregate through `getByInterventionId`, `save`, `update`, and `remove`; `interventionId` is its immutable identity. Neither repository cascades into the other.
 
 ### Error isolation
 
