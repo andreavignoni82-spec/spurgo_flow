@@ -1,0 +1,5 @@
+import test from 'node:test'; import assert from 'node:assert/strict';
+import { EventBus } from '../../src/core/event-bus.js';
+test('subscriber errors are isolated', async () => { const errors=[]; const calls=[]; const bus=new EventBus({onSubscriberError:(e)=>errors.push(e)}); bus.on('x',()=>{throw Error('broken')}); bus.on('x',(value)=>calls.push(value)); bus.emit('x',42); assert.deepEqual(calls,[42]); assert.equal(errors.length,1); });
+test('on returns unsubscribe and off removes subscriber', () => { const bus=new EventBus(); let calls=0; const listener=()=>calls++; const unsubscribe=bus.on('x',listener); bus.emit('x'); unsubscribe(); assert.equal(bus.off('x',listener),false); bus.emit('x'); assert.equal(calls,1); });
+test('async subscriber rejection is contained', async () => { const errors=[]; const bus=new EventBus({onSubscriberError:(e)=>errors.push(e)}); bus.on('x',async()=>{throw Error('async')}); bus.emit('x'); await new Promise(setImmediate); assert.equal(errors.length,1); });

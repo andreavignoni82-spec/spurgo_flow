@@ -1,9 +1,7 @@
 /**
- * Feature contract: { id, mount(container, context), unmount(), refresh?(payload) }.
- * @param {unknown} candidate
+ * @typedef {Object} Feature
+ * @property {string} id
+ * @property {(container: Element, context: object & {signal: AbortSignal, lifecycle: object}) => void|Promise<void>} mount
+ * @property {() => void|Promise<void>} unmount
  */
-export function isFeature(candidate) {
-  return Boolean(candidate && typeof candidate.id === 'string' &&
-    typeof candidate.mount === 'function' && typeof candidate.unmount === 'function' &&
-    (candidate.refresh === undefined || typeof candidate.refresh === 'function'));
-}
+export {};

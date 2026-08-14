@@ -1,3 +1,3 @@
 # Shared validators
 
-Data-contract validators shared across feature boundaries belong here.
+Framework-independent shared building blocks belong here when introduced.

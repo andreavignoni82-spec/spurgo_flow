@@ -1,23 +1,4 @@
 {
-  "name": "Spurgo Flow 7.0.0-alpha.11.1 Operator Reliability",
-  "short_name": "Spurgo Flow",
-  "start_url": "./",
-  "display": "standalone",
-  "background_color": "#071d35",
-  "theme_color": "#071d35",
-  "description": "App operatore isolata con agenda personale e flusso rapportino sicuro",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+  "name": "Spurgo Flow 8", "short_name": "SF8", "start_url": "/", "display": "standalone",
+  "background_color": "#f5f7fa", "theme_color": "#102a43", "icons": []
 }

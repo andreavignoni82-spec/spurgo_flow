@@ -1,39 +1,25 @@
-export const DOMAIN_EVENTS = Object.freeze([
-  'intervention:created', 'intervention:updated', 'intervention:deleted',
-  'intervention:statusChanged', 'intervention:assignmentChanged', 'intervention:started',
-  'intervention:completed', 'intervention:reopened', 'intervention:openRequested', 'operator:created', 'operator:updated',
-  'operator:statusChanged', 'operator:availabilityChanged', 'team:created', 'team:updated', 'team:deleted', 'client:created',
-  'client:updated', 'client:deleted', 'client:interventionRequested',
-  'vehicle:created', 'vehicle:updated', 'vehicle:deleted', 'report:created', 'report:updated', 'report:signatureUpdated', 'report:photosUpdated', 'message:created', 'message:updated', 'message:read',
-  'auth:login', 'auth:logout', 'sync:online', 'sync:error'
-]);
-
 export class EventBus {
   #listeners = new Map();
-
-  on(eventName, handler) {
-    if (typeof handler !== 'function') throw new TypeError('handler must be a function');
-    const listeners = this.#listeners.get(eventName) ?? new Set();
-    listeners.add(handler);
-    this.#listeners.set(eventName, listeners);
-    return () => this.off(eventName, handler);
+  #onSubscriberError;
+  constructor({ onSubscriberError = () => {} } = {}) { this.#onSubscriberError = onSubscriberError; }
+  on(type, subscriber) {
+    const listeners = this.#listeners.get(type) ?? new Set();
+    listeners.add(subscriber); this.#listeners.set(type, listeners);
+    return () => this.off(type, subscriber);
   }
-
-  off(eventName, handler) {
-    const listeners = this.#listeners.get(eventName);
+  off(type, subscriber) {
+    const listeners = this.#listeners.get(type);
     if (!listeners) return false;
-    const removed = listeners.delete(handler);
-    if (!listeners.size) this.#listeners.delete(eventName);
+    const removed = listeners.delete(subscriber);
+    if (listeners.size === 0) this.#listeners.delete(type);
     return removed;
   }
-
-  emit(eventName, payload) {
-    const errors = [];
-    for (const handler of [...(this.#listeners.get(eventName) ?? [])]) {
-      try { handler(payload); } catch (error) { errors.push(error); }
+  emit(type, payload) {
+    for (const subscriber of [...(this.#listeners.get(type) ?? [])]) {
+      try {
+        const outcome = subscriber(payload);
+        if (outcome && typeof outcome.then === 'function') outcome.catch((error) => this.#onSubscriberError(error, type));
+      } catch (error) { this.#onSubscriberError(error, type); }
     }
-    return errors;
   }
 }
-
-export const eventBus = new EventBus();
