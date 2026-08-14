@@ -1,11 +1,11 @@
 {
-  "name": "Spurgo Flow 7.0.0-alpha.10 Reports Module",
+  "name": "Spurgo Flow 7.0.0-alpha.11 Operator App",
   "short_name": "Spurgo Flow",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
-  "description": "Rapportini isolati con firme, foto, anteprima, stampa e condivisione modulari",
+  "description": "App operatore isolata con agenda personale e flusso rapportino sicuro",
   "icons": [
     {
       "src": "icon-192.png",
