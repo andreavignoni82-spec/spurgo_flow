@@ -33,10 +33,10 @@ export class GoogleMapsService{
     return result.matrix.rows.map(row=>row.items.map(item=>({durationMinutes:Number.isFinite(item.durationMillis)?Math.max(1,Math.ceil(item.durationMillis/60000)):null,distanceKm:Number.isFinite(item.distanceMeters)?Math.round(item.distanceMeters/100)/10:null,condition:item.condition})));
   }
   async render(container,{center,markers=[],path=[]}={}){
-    if(!container)return;const maps=await this.ready();const[{Map},{Marker}]=await Promise.all([maps.importLibrary('maps'),maps.importLibrary('marker')]);
-    const fallback=center??markers[0]?.position??{lat:45.65,lng:9.95};const map=new Map(container,{center:fallback,zoom:12,mapTypeControl:false,streetViewControl:false,fullscreenControl:true});
-    for(const marker of markers)new Marker({map,position:marker.position,title:marker.title??''});
-    if(path?.length){const poly=new maps.Polyline({map,path,strokeOpacity:.85,strokeWeight:5});const bounds=new maps.LatLngBounds();path.forEach(p=>bounds.extend(p));map.fitBounds(bounds);}
+    if(!container)return;const maps=await this.ready();const[{Map},{AdvancedMarkerElement}]=await Promise.all([maps.importLibrary('maps'),maps.importLibrary('marker')]);
+    const fallback=center??markers[0]?.position??{lat:45.65,lng:9.95};const map=new Map(container,{center:fallback,zoom:12,mapTypeControl:false,streetViewControl:false,fullscreenControl:true,mapId:'DEMO_MAP_ID'});
+    for(const marker of markers)new AdvancedMarkerElement({map,position:marker.position,title:marker.title??''});
+    if(path?.length){await maps.importLibrary('geometry');const poly=new maps.Polyline({map,path,strokeOpacity:.85,strokeWeight:5});const bounds=new maps.LatLngBounds();path.forEach(p=>bounds.extend(p));map.fitBounds(bounds);}
     return map;
   }
 }
