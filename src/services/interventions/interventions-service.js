@@ -1,57 +1,21 @@
 import { Events } from '../../core/events.js';
 import { InterventionPriority, InterventionStatus } from '../../domain/interventions/constants.js';
 import { createId, now } from '../../domain/shared/utils.js';
-
-const DOMAIN_CONTROLLED_CREATE_FIELDS = new Set([
-  'id', 'status', 'actualStart', 'actualEnd', 'createdAt', 'updatedAt',
-  'operatorId', 'assignedOperatorIds', 'teamId', 'assignedTeamIds', 'vehicleId',
-]);
-const MUTATION_PROTECTED_FIELDS = new Set([...DOMAIN_CONTROLLED_CREATE_FIELDS, 'id', 'createdAt']);
-const CREATE_FIELDS = Object.freeze([
-  'clientId', 'clientSnapshot', 'address', 'city', 'coordinates', 'date', 'startTime',
-  'estimatedMinutes', 'type', 'priority', 'description', 'notes',
-]);
-
-export const INTERVENTION_TRANSITIONS = Object.freeze({
-  [InterventionStatus.PROGRAMMATO]: Object.freeze([InterventionStatus.IN_CORSO, InterventionStatus.ANNULLATO]),
-  [InterventionStatus.IN_CORSO]: Object.freeze([InterventionStatus.TERMINATO, InterventionStatus.ANNULLATO]),
-  [InterventionStatus.TERMINATO]: Object.freeze([InterventionStatus.RIAPERTO]),
-  [InterventionStatus.RIAPERTO]: Object.freeze([InterventionStatus.IN_CORSO, InterventionStatus.TERMINATO, InterventionStatus.ANNULLATO]),
-  [InterventionStatus.ANNULLATO]: Object.freeze([]),
-});
-
-function assertNoControlledCreateFields(input) {
-  const invalid = Object.keys(input).filter((key) => DOMAIN_CONTROLLED_CREATE_FIELDS.has(key));
-  if (invalid.length) throw new TypeError(`Domain-controlled intervention fields: ${invalid.join(', ')}`);
+const DOMAIN_CONTROLLED_CREATE_FIELDS=new Set(['id','status','actualStart','actualEnd','createdAt','updatedAt','operatorId','assignedOperatorIds','teamId','assignedTeamIds','vehicleId']);
+const MUTATION_PROTECTED_FIELDS=new Set([...DOMAIN_CONTROLLED_CREATE_FIELDS,'id','createdAt']);
+const CREATE_FIELDS=Object.freeze(['clientId','clientSnapshot','address','city','coordinates','date','startTime','estimatedMinutes','type','priority','description','notes']);
+export const INTERVENTION_TRANSITIONS=Object.freeze({[InterventionStatus.PROGRAMMATO]:Object.freeze([InterventionStatus.IN_CORSO,InterventionStatus.ANNULLATO]),[InterventionStatus.IN_CORSO]:Object.freeze([InterventionStatus.TERMINATO,InterventionStatus.ANNULLATO]),[InterventionStatus.TERMINATO]:Object.freeze([InterventionStatus.RIAPERTO]),[InterventionStatus.RIAPERTO]:Object.freeze([InterventionStatus.IN_CORSO,InterventionStatus.TERMINATO,InterventionStatus.ANNULLATO]),[InterventionStatus.ANNULLATO]:Object.freeze([])});
+function assertNoControlledCreateFields(input){const invalid=Object.keys(input).filter(key=>DOMAIN_CONTROLLED_CREATE_FIELDS.has(key));if(invalid.length)throw new TypeError(`Domain-controlled intervention fields: ${invalid.join(', ')}`)}
+const allowedCreateData=input=>Object.fromEntries(CREATE_FIELDS.filter(key=>input[key]!==undefined).map(key=>[key,input[key]]));
+export class InterventionsService{
+ constructor({repository,eventBus,source='interventions-service',clock=now,idFactory=createId}){Object.assign(this,{repository,eventBus,source,clock,idFactory})}
+ async createIntervention(input={}){assertNoControlledCreateFields(input);const timestamp=this.clock();return this.repository.create({...allowedCreateData(input),id:this.idFactory(),priority:input.priority??InterventionPriority.NORMALE,status:InterventionStatus.PROGRAMMATO,assignedOperatorIds:[],assignedTeamIds:[],actualStart:null,actualEnd:null,createdAt:timestamp,updatedAt:timestamp})}
+ async updateIntervention(id,patch){const invalid=Object.keys(patch).filter(key=>MUTATION_PROTECTED_FIELDS.has(key));if(invalid.length)throw new TypeError(`Protected intervention fields: ${invalid.join(', ')}`);return this.repository.update(id,{...patch,updatedAt:this.clock()})}
+ assignOperator(id,operatorId){return this.#assignment(id,{operatorId,assignedOperatorIds:operatorId?[operatorId]:[]})} assignOperators(id,assignedOperatorIds){return this.#assignment(id,{assignedOperatorIds})} assignTeam(id,teamId){return this.#assignment(id,{teamId,assignedTeamIds:teamId?[teamId]:[]})} assignTeams(id,assignedTeamIds){return this.#assignment(id,{assignedTeamIds})} assignVehicle(id,vehicleId){return this.#assignment(id,{vehicleId})}
+ async #assignment(id,patch){const value=await this.repository.update(id,{...patch,updatedAt:this.clock()});this.eventBus?.emit(Events.INTERVENTION_ASSIGNMENT_CHANGED,{entityId:id,source:this.source,timestamp:this.clock(),changes:patch});return value}
+ async changeStatus(id,status,extra={},event=Events.INTERVENTION_STATUS_CHANGED){const previous=await this.repository.getById(id);if(!previous)throw new Error(`Missing intervention: ${id}`);if(!INTERVENTION_TRANSITIONS[previous.status]?.includes(status))throw new TypeError(`Invalid intervention transition: ${previous.status} -> ${status}`);const timestamp=this.clock(),value=await this.repository.update(id,{status,...extra,updatedAt:timestamp}),payload={entityId:id,previousStatus:previous.status,status,source:this.source,timestamp};this.eventBus?.emit(Events.INTERVENTION_STATUS_CHANGED,payload);if(event!==Events.INTERVENTION_STATUS_CHANGED)this.eventBus?.emit(event,payload);return value}
+ async startIntervention(id){const value=await this.repository.getById(id);if(!value)throw new Error(`Missing intervention: ${id}`);return this.changeStatus(id,InterventionStatus.IN_CORSO,{actualStart:value.actualStart??this.clock()},Events.INTERVENTION_STARTED)}
+ completeIntervention(id){return this.changeStatus(id,InterventionStatus.TERMINATO,{actualEnd:this.clock()},Events.INTERVENTION_COMPLETED)} reopenIntervention(id){return this.changeStatus(id,InterventionStatus.RIAPERTO,{actualEnd:null},Events.INTERVENTION_REOPENED)} getIntervention(id){return this.repository.getById(id)} listInterventions(){return this.repository.list()}
+ async listForOperator(operatorId,teamIds=[]){const direct=this.repository.queryByOperator?await this.repository.queryByOperator(operatorId):(await this.repository.list()).filter(x=>x.operatorId===operatorId||x.assignedOperatorIds?.includes(operatorId));const teamRows=(await Promise.all(teamIds.map(id=>this.repository.queryByTeam?this.repository.queryByTeam(id):Promise.resolve([])))).flat();return [...new Map([...direct,...teamRows].map(row=>[String(row.id),row])).values()]}
 }
-const allowedCreateData = (input) => Object.fromEntries(CREATE_FIELDS.filter((key) => input[key] !== undefined).map((key) => [key, input[key]]));
-
-export class InterventionsService {
-  constructor({ repository, eventBus, source = 'interventions-service', clock = now, idFactory = createId }) { Object.assign(this, { repository, eventBus, source, clock, idFactory }); }
-  async createIntervention(input = {}) {
-    assertNoControlledCreateFields(input);
-    const timestamp = this.clock();
-    return this.repository.create({ ...allowedCreateData(input), id: this.idFactory(), priority: input.priority ?? InterventionPriority.NORMALE, status: InterventionStatus.PROGRAMMATO, assignedOperatorIds: [], assignedTeamIds: [], actualStart: null, actualEnd: null, createdAt: timestamp, updatedAt: timestamp });
-  }
-  async updateIntervention(id, patch) { const invalid = Object.keys(patch).filter((key) => MUTATION_PROTECTED_FIELDS.has(key)); if (invalid.length) throw new TypeError(`Protected intervention fields: ${invalid.join(', ')}`); return this.repository.update(id, { ...patch, updatedAt: this.clock() }); }
-  assignOperator(id, operatorId) { return this.#assignment(id, { operatorId, assignedOperatorIds: operatorId ? [operatorId] : [] }); }
-  assignOperators(id, assignedOperatorIds) { return this.#assignment(id, { assignedOperatorIds }); }
-  assignTeam(id, teamId) { return this.#assignment(id, { teamId, assignedTeamIds: teamId ? [teamId] : [] }); }
-  assignTeams(id, assignedTeamIds) { return this.#assignment(id, { assignedTeamIds }); }
-  assignVehicle(id, vehicleId) { return this.#assignment(id, { vehicleId }); }
-  async #assignment(id, patch) { const value = await this.repository.update(id, { ...patch, updatedAt: this.clock() }); this.eventBus?.emit(Events.INTERVENTION_ASSIGNMENT_CHANGED, { entityId: id, source: this.source, timestamp: this.clock(), changes: patch }); return value; }
-  async changeStatus(id, status, extra = {}, event = Events.INTERVENTION_STATUS_CHANGED) {
-    const previous = await this.repository.getById(id); if (!previous) throw new Error(`Missing intervention: ${id}`);
-    if (!INTERVENTION_TRANSITIONS[previous.status]?.includes(status)) throw new TypeError(`Invalid intervention transition: ${previous.status} -> ${status}`);
-    const timestamp = this.clock(); const value = await this.repository.update(id, { status, ...extra, updatedAt: timestamp });
-    const payload = { entityId: id, previousStatus: previous.status, status, source: this.source, timestamp };
-    this.eventBus?.emit(Events.INTERVENTION_STATUS_CHANGED, payload); if (event !== Events.INTERVENTION_STATUS_CHANGED) this.eventBus?.emit(event, payload); return value;
-  }
-  async startIntervention(id) { const value = await this.repository.getById(id); if (!value) throw new Error(`Missing intervention: ${id}`); return this.changeStatus(id, InterventionStatus.IN_CORSO, { actualStart: value.actualStart ?? this.clock() }, Events.INTERVENTION_STARTED); }
-  completeIntervention(id) { return this.changeStatus(id, InterventionStatus.TERMINATO, { actualEnd: this.clock() }, Events.INTERVENTION_COMPLETED); }
-  reopenIntervention(id) { return this.changeStatus(id, InterventionStatus.RIAPERTO, { actualEnd: null }, Events.INTERVENTION_REOPENED); }
-  getIntervention(id) { return this.repository.getById(id); }
-  listInterventions() { return this.repository.list(); }
-}
-export const protectedInterventionFields = Object.freeze([...MUTATION_PROTECTED_FIELDS]);
-export const controlledInterventionCreateFields = Object.freeze([...DOMAIN_CONTROLLED_CREATE_FIELDS]);
+export const protectedInterventionFields=Object.freeze([...MUTATION_PROTECTED_FIELDS]);export const controlledInterventionCreateFields=Object.freeze([...DOMAIN_CONTROLLED_CREATE_FIELDS]);
