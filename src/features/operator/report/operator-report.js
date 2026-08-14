@@ -9,14 +9,14 @@ export class OperatorReport {
   get busy() { return this.#busy; }
   async load(interventionId) { if (!this.reports?.getReport) throw new Error('Rapportino temporaneamente non disponibile.'); return this.reports.getReport(interventionId); }
   async save(interventionId, report) {
-    this.#available(); const saved = await this.reports.saveReport(interventionId, report); this.#active(); this.onMessage('Rapportino salvato'); return saved;
+    this.#available(); const saved = await this.reports.saveReport(interventionId, report); this.#active(); this.#photoPromises = []; if (this.#photoInput) this.#photoInput.value = ''; this.onMessage('Rapportino salvato'); return saved;
   }
   async complete(interventionId, report, completionData = {}) {
     if (this.#busy) return undefined;
     this.#busy = true;
     try {
       this.#available();
-      try { await this.reports.saveReport(interventionId, report); }
+      try { await this.reports.saveReport(interventionId, report); this.#photoPromises = []; if (this.#photoInput) this.#photoInput.value = ''; }
       catch (error) { this.#active(); this.onMessage('Rapportino non salvato. Intervento non terminato.'); throw Object.assign(error, { stage: 'report' }); }
       this.#active();
       try { const completed = await this.interventions.completeIntervention(interventionId, completionData); this.#active(); this.onMessage('Intervento terminato'); return completed; }

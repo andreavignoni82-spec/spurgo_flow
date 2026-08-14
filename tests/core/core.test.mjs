@@ -12,7 +12,7 @@ const errors = bus.emit('test', 7);
 assert.equal(delivered, 7);
 assert.equal(errors.length, 1);
 assert(DOMAIN_EVENTS.includes('intervention:statusChanged'));
-assert.equal(BUILD_LABEL, 'v7.0.0-alpha.11 · OPERATOR APP');
+assert.equal(BUILD_LABEL, 'v7.0.0-alpha.11.1 · OPERATOR RELIABILITY');
 
 const container = { textContent: '' };
 const logs = [];

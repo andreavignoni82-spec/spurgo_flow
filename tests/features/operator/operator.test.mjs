@@ -38,3 +38,44 @@ bus.on('intervention:completed', () => { controlRan = true; });
 assert.equal(bus.emit('intervention:completed', { id: 'job' }).length, 1);
 assert.equal(operatorRan && controlRan, true);
 console.log('Operator access, sequential completion, failures, double tap and failure cascade passed');
+
+// Pending photos become persisted after save and are not appended again by repeated saves/completion.
+const originalFileReader = globalThis.FileReader;
+const originalURL = globalThis.URL;
+globalThis.URL = { createObjectURL: file => `blob:${file.name}`, revokeObjectURL: () => {} };
+globalThis.FileReader = class { readAsDataURL(file) { this.result = `data:${file.name}`; queueMicrotask(() => this.onload()); } };
+let photoChange;
+const photoInput = { value: 'selected', addEventListener: (_name, listener) => { photoChange = listener; }, removeEventListener: () => {} };
+const photoContainer = { querySelector: () => photoInput, querySelectorAll: () => [] };
+const photoSaves = [];
+const photoReport = new OperatorReport({
+  reportsService: { saveReport: async (_id, value) => { const saved = structuredClone(value); photoSaves.push(saved); return saved; } },
+  interventionsService: { completeIntervention: async () => ({}) }
+});
+photoReport.mountEnhancements(photoContainer);
+photoChange({ target: { files: [{ name: 'one.jpg', type: 'image/jpeg', size: 1 }, { name: 'two.jpg', type: 'image/jpeg', size: 2 }] } });
+let reopened = {};
+for (let index = 0; index < 3; index++) reopened = await photoReport.save('photos', await photoReport.collect(reopened));
+await photoReport.complete('photos', await photoReport.collect(reopened));
+assert.deepEqual(photoSaves.map(item => item.photos.length), [2, 2, 2, 2]);
+assert.deepEqual(photoSaves.at(-1).photos.map(item => item.data), ['data:one.jpg', 'data:two.jpg']);
+photoReport.destroy(); globalThis.FileReader = originalFileReader; globalThis.URL = originalURL;
+console.log('Operator pending-photo persistence and duplicate prevention passed');
+
+// Dirty forms survive a realtime event storm and retain every persisted baseline field.
+const { OperatorIntervention } = await import('../../../src/features/operator/intervention/operator-intervention.js');
+const values = new Map([
+  ['relation', 'ABC'], ['activities', 'Lavaggio\n{"code":"VIDEO"}'], ['anomaly', 'Perdita'],
+  ['anomalies', 'Perdita'], ['materials', 'Guarnizione'], ['notes', 'nota'], ['customerSigner', 'Mario']
+]);
+const notice = { hidden: true, textContent: '' };
+const dirtyContainer = { querySelector: selector => selector === '[data-role="server-update"]' ? notice : { value: values.get(selector.match(/name="([^"]+)/)?.[1]) ?? '' } };
+const persistedBaseline = { relation: 'prima', activities: ['Lavaggio'], anomaly: 'Perdita', anomalies: ['Perdita'], materials: ['Guarnizione'], notes: 'nota', photos: [{ data: 'photo' }], operatorSignature: 'operator-sign', customerSignature: 'customer-sign', customerSigner: 'Mario', generatedAt: 'baseline', extensionField: { retained: true } };
+const dirtyView = new OperatorIntervention();
+dirtyView.container = dirtyContainer; dirtyView.state = { intervention: { id: 'current' }, report: persistedBaseline, reportAvailable: true };
+dirtyView.onEdit({ target: { matches: () => true } });
+for (let index = 0; index < 20; index++) dirtyView.updateServerState({ intervention: { id: 'current', revision: index }, report: { relation: `server-${index}` } });
+const dirtyData = dirtyView.reportData();
+assert.equal(dirtyView.formDirty, true); assert.equal(dirtyData.relation, 'ABC'); assert.equal(notice.hidden, false);
+assert.deepEqual(dirtyData.photos, persistedBaseline.photos); assert.equal(dirtyData.operatorSignature, 'operator-sign'); assert.equal(dirtyData.customerSignature, 'customer-sign'); assert.deepEqual(dirtyData.extensionField, { retained: true });
+console.log('Operator dirty-state, reopening preservation and 20-event storm passed');
