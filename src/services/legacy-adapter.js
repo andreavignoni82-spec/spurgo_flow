@@ -23,10 +23,16 @@ export class LegacyAdapter {
   teams() { return this.#collection('teams', 'sfTeams'); }
   vehicles() { return this.#collection('vehicles', 'sfVehicles'); }
   messages() { return this.#collection('messages', 'sfMessages'); }
+  clients() { return this.#collection('clients', 'sfClients'); }
+  clientById(id) { return this.clients().find(client => String(client.id) === String(id)); }
+  createClient(client) { return this.globals.SFState?.createClient(client); }
+  updateClient(id, patch) { return this.globals.SFState?.updateClient(id, patch); }
+  removeClient(id) { return this.globals.SFState?.removeClient(id); }
+  openInterventionForClient(id) { return this.globals.SFState?.openInterventionForClient(id); }
   snapshot() {
     return {
       interventions: this.interventions(), operators: this.operators(),
-      teams: this.teams(), vehicles: this.vehicles(), messages: this.messages()
+      teams: this.teams(), clients: this.clients(), vehicles: this.vehicles(), messages: this.messages()
     };
   }
 }

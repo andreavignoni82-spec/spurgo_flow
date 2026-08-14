@@ -2,9 +2,10 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.2</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.3</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
+<link rel="stylesheet" href="src/features/clients/clients.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -526,7 +527,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v7.0.0-alpha.2 · DASHBOARD MODULE</div>
+<div class="version">v7.0.0-alpha.3 · CLIENTS MODULE</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -581,13 +582,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </section>
 
 
-<section id="clienti" class="section">
- <div class="top"><div><h1>Clienti & Impianti</h1><div class="muted">Anagrafica clienti, contatti e storico impianti</div></div><button class="btn primary" onclick="openClientModal()">+ Nuovo cliente</button></div>
- <div class="card" style="margin-top:18px">
-  <div class="v6-toolbar"><input id="clientSearch" class="field" placeholder="Cerca cliente, comune, telefono..." oninput="renderClients()"></div>
-  <div id="clientList" class="v6-client-grid"></div>
- </div>
-</section>
+<section id="clienti" class="section" aria-live="polite"></section>
 
 
 <section id="flotta" class="section">
@@ -1411,132 +1406,6 @@ function renderOfficeAgenda(){
 }
 
 
-function openClientModal(id=null){
- const c=id?getClient(id):null;
- editingEntity={type:'client',id};
- showV6Modal(c?'Modifica cliente':'Nuovo cliente',`<div class="v6-form">
- <div class="full"><label>Ragione sociale / nome</label><input id="vcName" class="field" value="${esc(c?.name||'')}"></div>
- <div><label>Via / civico</label><input id="vcAddress" class="field" value="${esc(c?.address||'')}"></div>
- <div><label>Comune</label><input id="vcCity" class="field" value="${esc(c?.city||'')}"></div>
- <div><label>Telefono</label><input id="vcPhone" class="field" value="${esc(c?.phone||'')}"></div>
- <div><label>E-mail</label><input id="vcEmail" class="field" value="${esc(c?.email||'')}"></div>
- <div class="full"><label>Referente</label><input id="vcContact" class="field" value="${esc(c?.contact||'')}"></div>
- <div class="full"><label>Impianti / note</label><textarea id="vcNotes" class="textarea">${esc(c?.notes||'')}</textarea></div>
- </div><div class="panel-actions">
- <button class="btn ghost" onclick="closeV6Modal()">Annulla</button>
- <button class="btn primary" id="saveClientBtn" onclick="saveClient()">Salva cliente</button>
- </div>`);
-}
-
-async function saveClient(){
- const existing=editingEntity.id?getClient(editingEntity.id):null;
- const data={
-   name:el('vcName')?.value.trim()||'',
-   address:el('vcAddress')?.value.trim()||'',
-   city:el('vcCity')?.value.trim()||'',
-   phone:el('vcPhone')?.value.trim()||'',
-   email:el('vcEmail')?.value.trim()||'',
-   contact:el('vcContact')?.value.trim()||'',
-   notes:el('vcNotes')?.value.trim()||''
- };
- if(!data.name){alert('Inserisci il nome cliente.');return}
-
- const id=existing?.id||uniqueId('cl');
- const record={id,...data};
- const btn=el('saveClientBtn');
-
- try{
-   if(btn){btn.disabled=true;btn.textContent='Salvataggio…'}
-
-   // If the newest Firebase module is loaded, perform the direct cloud write.
-   if(window.SFCloud?.enabled && typeof window.SFCloud.saveClient==='function'){
-     await window.SFCloud.saveClient(record);
-   }
-
-   // Update the in-memory/local copy only after a successful direct write.
-   if(existing)Object.assign(existing,data);
-   else if(!sfClients.some(c=>c.id===id))sfClients.push(record);
-
-   localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
-   renderClients();
-
-   // Compatibility fallback: older firebase-sync.js still exposes syncFromGlobals.
-   if(window.SFCloud?.ready &&
-      typeof window.SFCloud.saveClient!=='function' &&
-      typeof window.SFCloud.syncFromGlobals==='function'){
-     window.SFCloud.syncFromGlobals();
-   }
-
-   closeV6Modal();
- }catch(e){
-   console.error('saveClient',e);
-   alert('Cliente non salvato: '+(e.message||e));
-   if(btn){btn.disabled=false;btn.textContent='Salva cliente'}
- }
-}
-
-async function deleteClient(id){
- if(sfOfficeInterventions.some(i=>i.clientId===id)){
-   alert('Cliente collegato a interventi: non può essere eliminato.');
-   return;
- }
- if(!confirm('Eliminare cliente?'))return;
-
- try{
-   if(window.SFCloud?.enabled && typeof window.SFCloud.deleteClient==='function'){
-     await window.SFCloud.deleteClient(id);
-   }
-   sfClients=sfClients.filter(c=>c.id!==id);
-   localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
-
-   if(window.SFCloud?.ready &&
-      typeof window.SFCloud.deleteClient!=='function' &&
-      typeof window.SFCloud.syncFromGlobals==='function'){
-     window.SFCloud.syncFromGlobals();
-   }
-
-   renderClients();
- }catch(e){
-   console.error('deleteClient',e);
-   alert('Eliminazione cliente non riuscita: '+(e.message||e));
- }
-}
-
-function renderClients(){
- const host=el('clientList');
- if(!host)return;
-
- const q=(el('clientSearch')?.value||'').toLowerCase();
- const list=(Array.isArray(sfClients)?sfClients:[]).filter(c=>
-   !q || [c.name,c.address,c.city,c.phone,c.email,c.contact,c.notes]
-     .join(' ').toLowerCase().includes(q)
- );
-
- if(!list.length){
-   host.innerHTML='<div class="v6-empty">Nessun cliente.</div>';
-   return;
- }
-
- host.innerHTML=list.map(c=>{
-   const n=(Array.isArray(sfOfficeInterventions)?sfOfficeInterventions:[])
-     .filter(i=>i.clientId===c.id).length;
-   return `<div class="v6-card">
-     <h3>${esc(c.name)}</h3>
-     <div>${esc(c.address||'')} ${c.city?'· '+esc(c.city):''}</div>
-     <div class="v6-meta">
-       ${esc(c.phone||'')} ${c.email?'· '+esc(c.email):''}<br>
-       Referente: ${esc(c.contact||'—')}<br>${esc(c.notes||'')}
-     </div>
-     <div class="v6-meta"><b>${n}</b> interventi registrati</div>
-     <div class="v6-row-actions">
-       <button class="btn ghost" onclick="openClientModal('${c.id}')">Modifica</button>
-       <button class="btn primary" onclick="newInterventionForClient('${c.id}')">Nuovo intervento</button>
-       <button class="btn danger" onclick="deleteClient('${c.id}')">Elimina</button>
-     </div>
-   </div>`;
- }).join('');
-}
-
 function newInterventionForClient(id){
  openInterventionModal();
  setTimeout(()=>{
@@ -1878,7 +1747,6 @@ function renderAllOfficeV6(){
  populateOfficeFilters();
  renderOfficeInterventions();
  renderOfficeAgenda();
- renderClients();
  renderVehicles();
  renderOfficeMessagesUsers();
  renderDashboardV6();
@@ -1900,6 +1768,30 @@ window.SFState={
      messages:Array.isArray(sfMessages)?sfMessages:[]
    };
  },
+ async createClient(client){
+   const record={...client,id:client.id||uniqueId('cl')};
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveClient==='function')await window.SFCloud.saveClient(record);
+   if(!sfClients.some(x=>x.id===record.id))sfClients.push(record);
+   localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveClient!=='function')window.SFCloud.syncFromGlobals?.();
+   return {...record};
+ },
+ async updateClient(id,patch){
+   const index=sfClients.findIndex(x=>x.id===id);if(index<0)throw new Error('Cliente non trovato.');
+   const record={...sfClients[index],...patch,id};
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveClient==='function')await window.SFCloud.saveClient(record);
+   sfClients[index]=record;localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveClient!=='function')window.SFCloud.syncFromGlobals?.();
+   return {...record};
+ },
+ async removeClient(id){
+   if(sfOfficeInterventions.some(i=>i.clientId===id))throw new Error('Cliente collegato a interventi: non può essere eliminato.');
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.deleteClient==='function')await window.SFCloud.deleteClient(id);
+   sfClients=sfClients.filter(x=>x.id!==id);localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.deleteClient!=='function')window.SFCloud.syncFromGlobals?.();
+   return {id};
+ },
+ openInterventionForClient(id){newInterventionForClient(id)},
  applyCloud(name,rows){
    if(name==='operators')sfOperators=rows;
    if(name==='teams')sfTeams=rows;
@@ -2015,7 +1907,6 @@ document.querySelectorAll('#menu button').forEach(b=>{
     if(b.dataset.sec==='control'){renderControlRoomV6();setTimeout(()=>renderControlMap(),80);}
     if(b.dataset.sec==='interventi')renderOfficeInterventions();
     if(b.dataset.sec==='agenda'){if(el('agendaDate'))el('agendaDate').value=localDateKey();setOfficeAgendaView('day');}
-    if(b.dataset.sec==='clienti')renderClients();
     if(b.dataset.sec==='flotta')renderVehicles();
     if(b.dataset.sec==='squadre')renderOfficePeople();
     if(b.dataset.sec==='messaggiUfficio'){renderOfficeMessagesUsers();renderOfficeThread();}
