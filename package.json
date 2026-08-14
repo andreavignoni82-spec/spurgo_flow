@@ -1,10 +1,11 @@
 {
   "name": "spurgo-flow-v8",
-  "version": "8.0.0-alpha.2.1",
+  "version": "8.0.0-alpha.3",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test",
+    "test:firebase": "node --test tests/firebase-emulator/*.test.js",
     "start": "node scripts/serve.mjs",
     "test:smoke": "node tests/e2e/browser-smoke.mjs"
   },
@@ -14,5 +15,8 @@
   "devDependencies": {
     "linkedom": "^0.18.13",
     "playwright": "^1.62.1"
+  },
+  "dependencies": {
+    "firebase": "^12.17.1"
   }
 }

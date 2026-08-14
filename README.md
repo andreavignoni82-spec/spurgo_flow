@@ -1,6 +1,6 @@
 # Spurgo Flow 8
 
-Data core and repository-contract foundation, release **v8.0.0-alpha.2.1**.
+Firebase test infrastructure and authentication boundary, release **v8.0.0-alpha.3**. The runtime remains on the **MEMORY** data driver by default; Firebase is restricted to local emulators.
 
 ```sh
 npm test
