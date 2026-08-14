@@ -1,5 +1,5 @@
-const CACHE='spurgoflow-v6-6.1.21-r1-stable-recovery';
-const LOCAL=['./index.html','./planning.js','./firebase-sync.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png'];
+const CACHE='spurgoflow-v7-0.0-alpha.1';
+const LOCAL=['./index.html','./planning.js','./firebase-sync.js','./manifest.webmanifest','./icon-192.png','./icon-512.png','./qr-demo-intervento.png','./src/core/bootstrap.js','./src/core/router.js','./src/core/event-bus.js','./src/core/app-state.js','./src/core/error-boundary.js','./src/core/version.js','./src/shared/styles/tokens.css','./src/shared/styles/base.css','./src/shared/styles/components.css'];
 
 self.addEventListener('install',e=>{
   self.skipWaiting();
