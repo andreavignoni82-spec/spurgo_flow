@@ -1,13 +1,13 @@
 {
   "name": "Spurgo Flow",
   "short_name": "Spurgo Flow",
-  "description": "Gestione interventi spurghi · v8.4.0",
+  "description": "Gestione interventi spurghi · v8.4.4",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#071d35",
   "theme_color": "#071d35",
   "icons": [
-    {"src":"./assets/spurgo-flow-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+    {"src":"./assets/spurgo-flow-icon-v2.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
   ]
 }
