@@ -1,5 +1,0 @@
-import assert from 'node:assert/strict';import {readFile} from 'node:fs/promises';
-const read=file=>readFile(new URL(`../../../${file}`,import.meta.url),'utf8');
-for(const file of ['src/features/interventions/interventions.feature.js','src/features/interventions/interventions.view.js','src/features/interventions/interventions.model.js']){const source=await read(file);assert.doesNotMatch(source,/firebase|features\/(dashboard|clients|fleet|people)/i,file)}
-assert.doesNotMatch(await read('src/features/interventions/interventions.view.js'),/repositories/i);assert.doesNotMatch(await read('src/features/interventions/interventions.model.js'),/document|querySelector|innerHTML/i);assert.doesNotMatch(await read('src/services/interventions/interventions.service.js'),/document|querySelector|innerHTML/i);assert.doesNotMatch(await read('src/services/repositories/interventions-repository.js'),/document|querySelector|innerHTML|features\//i);
-console.log('Interventions architectural contracts passed');

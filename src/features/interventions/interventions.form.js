@@ -1,1 +1,0 @@
-export function readInterventionForm(form) { const data=Object.fromEntries(new FormData(form)); const ids=[...form.querySelectorAll('[name="assignedOperatorIds"]:checked')].map(node=>node.value); return {...data,estimatedMinutes:Number(data.estimatedMinutes||60),assignedOperatorIds:ids,operatorId:ids[0]??''}; }

@@ -1,5 +1,1 @@
-.sf-module-fallback {
-  padding: var(--sf-space-3);
-  border-radius: var(--sf-radius-md);
-  background: var(--sf-color-surface);
-}
+.app-shell { max-width: 72rem; margin: 0 auto; padding: 4rem var(--space-4); } .app-shell__eyebrow { color: var(--color-accent); font-weight: 700; letter-spacing: .08em; } .app-shell__card { padding: 2rem; border-radius: var(--radius); background: var(--color-surface); box-shadow: 0 1rem 3rem #102a4315; }

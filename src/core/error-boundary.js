@@ -1,15 +1,11 @@
-const FALLBACK_MESSAGE = 'Modulo temporaneamente non disponibile';
-
-export class FeatureBoundary {
-  constructor({ logger = console } = {}) { this.logger = logger; }
-
-  run(featureName, callback, container) {
-    try { const result = callback(); return result?.then ? result.catch(error => this.#fail(featureName, error, container)) : result; }
-    catch (error) {
-      return this.#fail(featureName, error, container);
-    }
+export class ErrorBoundary {
+  constructor({ onError = () => {} } = {}) { this.onError = onError; }
+  run(operation, metadata = {}) {
+    try { return operation(); }
+    catch (error) { this.onError(error, metadata); return undefined; }
   }
-  #fail(featureName, error, container) { this.logger.error(`[${featureName}] feature failure`, error); if (container) container.textContent = FALLBACK_MESSAGE; return undefined; }
+  async runAsync(operation, metadata = {}) {
+    try { return await operation(); }
+    catch (error) { this.onError(error, metadata); return undefined; }
+  }
 }
-
-export { FALLBACK_MESSAGE };

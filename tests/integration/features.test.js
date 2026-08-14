@@ -1,0 +1,2 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import { features } from '../../src/features/index.js';
+test('all autonomous placeholders satisfy the feature contract',()=>{assert.deepEqual(Object.keys(features),['dashboard','clients','fleet','people','interventions','agenda','control-room','messages','reports','statistics','operator']); for(const [id,feature] of Object.entries(features)){assert.equal(feature.id,id); assert.equal(typeof feature.mount,'function'); assert.equal(typeof feature.unmount,'function');}});
