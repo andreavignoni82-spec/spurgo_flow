@@ -1,5 +1,6 @@
 import { assertValid, validEmail, validId, validTimestamp } from '../shared/validators.js';
 import { clean, clone, text } from '../shared/utils.js';
+export const normalizeVehiclePlate = plate => String(plate ?? '').trim().toUpperCase();
 export function normalizeVehicle(input) {
   const value = clean(clone(input)); for (const key of Object.keys(value)) if (typeof value[key] === 'string') value[key] = text(value[key]);
   return value;
