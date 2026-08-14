@@ -1,17 +1,12 @@
 import { bootstrap } from './bootstrap.js';
+import { VERSION } from './version.js';
 
-bootstrap().then(() => window.dispatchEvent(new Event('spurgo-flow:ready'))).catch((error) => {
-  console.error('Spurgo Flow bootstrap failed', error);
-  const root = document.querySelector('#app');
-  if (root) {
-    const driver = String(globalThis.__SPURGO_FLOW_ENV__?.dataDriver ?? globalThis.__SPURGO_FLOW_ENV__?.driver ?? 'memory').toUpperCase();
-    const safe = value => String(value ?? 'UNKNOWN').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[character]);
-    root.innerHTML = `<main role="alert"><strong>SPURGO FLOW 8 · BOOT CORE FIX</strong><h1>Errore di avvio</h1><p>Driver: ${safe(driver)}</p><p>Errore: ${safe(error.code)}</p><p>Componente: ${safe(error.component)}</p><small>v8.0.0-beta.1.1</small></main>`;
-  }
-});
+const root=document.querySelector('#app');
+const safe=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const loginView=()=>`<main class="login-screen"><section class="login-card"><img src="./assets/spurgo-flow-logo.svg" alt="Spurgo Flow"><h1>SPURGO <b>FLOW</b></h1><p>Accesso area operativa</p><div class="role-switch"><button data-role="office" class="active">Ufficio</button><button data-role="operator">Operatore</button></div><form id="login-form"><input type="hidden" name="role" value="office"><label>Utente<input name="username" autocomplete="username" required placeholder="Nome utente"></label><label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Password"></label><button class="login-submit">ACCEDI</button><small id="login-error"></small></form><footer>${VERSION}</footer></section></main>`;
+const addLoginStyle=()=>{const s=document.createElement('style');s.textContent=`.login-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 20% 10%,#123e64,#071d35 48%,#041321);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.login-card{width:min(390px,calc(100vw - 36px));box-sizing:border-box;background:#fff;border-radius:24px;padding:34px;box-shadow:0 30px 80px #0005;text-align:center}.login-card>img{width:82px;height:82px;border-radius:22px;box-shadow:0 12px 28px #071d3530}.login-card h1{margin:16px 0 3px;color:#071d35;font-size:25px}.login-card h1 b{color:#18a967}.login-card>p{margin:0 0 22px;color:#718399;font-size:12px}.role-switch{display:grid;grid-template-columns:1fr 1fr;background:#f1f4f7;padding:4px;border-radius:12px;margin-bottom:18px}.role-switch button{border:0;border-radius:9px;padding:10px;background:transparent;color:#60758a;font-weight:800}.role-switch button.active{background:#fff;color:#071d35;box-shadow:0 2px 8px #102a4314}.login-card form{display:grid;gap:12px;text-align:left}.login-card label{display:grid;gap:6px;color:#344b62;font-size:11px;font-weight:800}.login-card input{box-sizing:border-box;width:100%;height:48px;border:1px solid #d9e2ea;border-radius:11px;padding:0 13px;font-size:15px;outline:none}.login-card input:focus{border-color:#22b573;box-shadow:0 0 0 3px #22b57318}.login-submit{height:49px;border:0;border-radius:11px;background:#18a967;color:#fff;font-weight:900;margin-top:4px;box-shadow:0 8px 20px #18a96735}.login-card footer{margin-top:19px;color:#9aabba;font-size:9px}#login-error{color:#b42318;text-align:center;min-height:14px}@media(max-width:500px){.login-screen{padding:0;background:#071d35}.login-card{width:100%;min-height:100vh;border-radius:0;padding:calc(10vh + env(safe-area-inset-top)) 24px 30px;display:flex;flex-direction:column;justify-content:center}.login-card>img{align-self:center}}`;document.head.appendChild(s)};
+async function start(role,username,password){try{const app=await bootstrap(root,{initialRoute:role==='operator'?'operator':'dashboard'});await app.context.services.auth.loginOperator(username,password);sessionStorage.setItem('sf-role',role);sessionStorage.setItem('sf-user',username);window.dispatchEvent(new Event('spurgo-flow:ready'));}catch(error){console.error(error);root.innerHTML=loginView();bindLogin('Accesso non riuscito. Verifica utente e password.');}}
+function bindLogin(error=''){const form=document.querySelector('#login-form'),hidden=form?.elements.role;document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-role]').forEach(x=>x.classList.toggle('active',x===b));hidden.value=b.dataset.role});if(error)document.querySelector('#login-error').textContent=error;form?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(form);start(f.get('role'),f.get('username'),f.get('password'));});}
+addLoginStyle();root.innerHTML=loginView();bindLogin();
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register(new URL('../../sw.js', import.meta.url)).catch((error) => {
-    console.error('Service worker registration failed', error);
-  });
-}
+if('serviceWorker'in navigator)navigator.serviceWorker.register(new URL('../../sw.js',import.meta.url)).catch(console.error);
