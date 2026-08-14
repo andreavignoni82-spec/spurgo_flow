@@ -6,4 +6,5 @@ export class TeamsService {
   createTeam(input){const t=this.clock();return this.repository.create({...input,id:this.idFactory(),operatorIds:[...new Set(input.operatorIds??[])],active:input.active!==false,createdAt:t,updatedAt:t});}
   updateTeam(id,input){const {id:_,...patch}=input;return this.repository.update(id,{...patch,...('operatorIds'in patch?{operatorIds:[...new Set(patch.operatorIds)]}:{}),updatedAt:this.clock()});}
   setActive(id,active){return this.updateTeam(id,{active:Boolean(active)});}
+  async removeOperator(operatorId){const teams=await this.listTeams(),affected=teams.filter(team=>team.operatorIds?.includes(operatorId));await Promise.all(affected.map(team=>this.updateTeam(team.id,{operatorIds:team.operatorIds.filter(id=>id!==operatorId)})));return affected.length;}
 }
