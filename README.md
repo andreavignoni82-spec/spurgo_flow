@@ -1,6 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.9 · MESSAGES MODULE`. Messaggi is now an autonomous v7 feature backed only by MessagesRepository, OperatorsRepository, TeamsRepository and EventBus. Its local draft, post-persistence events, read updates and lifecycle-owned fallback refresh are isolated from every other module. Rapportini and App Operatore remain on the v6.1.21-R1 compatibility application.
+**Current modular release:** `v7.0.0-alpha.10 · REPORTS MODULE`. Rapportini is now an autonomous v7 feature: its data remains the single embedded `intervention.reportData` source behind `ReportsRepository`, while signatures, photos, persisted preview, print/export and sharing have separate responsibilities. Saving a report never completes or otherwise changes its intervention. App Operatore remains on the v6.1.21-R1 compatibility application.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.

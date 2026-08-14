@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+const root=new URL('../../../',import.meta.url);
+const source=path=>readFile(new URL(path,root),'utf8');
+assert.doesNotMatch(await source('src/features/reports/reports.feature.js'),/firebase|features\//i);
+assert.doesNotMatch(await source('src/features/reports/signatures/signature-pad.js'),/repository|firebase/i);
+assert.doesNotMatch(await source('src/features/reports/preview/report-template.js'),/repository|firebase/i);
+assert.doesNotMatch(await source('src/services/reports/reports.service.js'),/\b(?:document|window|canvas|querySelector)\b/i);
+assert.doesNotMatch(await source('src/services/reports/report-export.service.js'),/repository|reportData|intervention/i);
+console.log('Reports dependency contracts passed');

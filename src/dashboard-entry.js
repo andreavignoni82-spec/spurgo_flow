@@ -7,22 +7,30 @@ import { interventionsFeature } from './features/interventions/interventions.fea
 import { agendaFeature } from './features/agenda/agenda.feature.js';
 import { controlRoomFeature } from './features/control-room/control-room.feature.js';
 import { messagesFeature } from './features/messages/messages.feature.js';
+import { reportsFeature } from './features/reports/reports.feature.js';
 import { PlanningService } from './services/planning-service.js';
 import { MapsService } from './services/maps-service.js';
 import { LegacyAdapter } from './services/legacy-adapter.js';
 import { ClientsRepository } from './services/repositories/clients-repository.js';
 import { InterventionsRepository } from './services/repositories/interventions-repository.js';
 import { MessagesRepository } from './services/repositories/messages-repository.js';
+import { ReportsRepository } from './services/repositories/reports-repository.js';
 import { OperatorsRepository } from './services/repositories/operators-repository.js';
 import { TeamsRepository } from './services/repositories/teams-repository.js';
 import { VehiclesRepository } from './services/repositories/vehicles-repository.js';
 import { AuthService } from './services/firebase/auth-service.js';
 import { InterventionsService } from './services/interventions/interventions.service.js';
 import { InterventionsLegacyBridge } from './services/interventions/interventions-legacy-bridge.js';
+import { ReportsService } from './services/reports/reports.service.js';
+import { ReportPreviewService } from './services/reports/report-preview.service.js';
+import { ReportExportService } from './services/reports/report-export.service.js';
+import { ReportSharing } from './features/reports/sharing/report-sharing.js';
 
 const adapter = new LegacyAdapter();
+const interventionsRepository = new InterventionsRepository({ list: () => adapter.interventions(), getById: id => adapter.interventionById(id), create: row => adapter.createIntervention(row), update: (id, patch) => adapter.updateIntervention(id, patch), remove: id => adapter.removeIntervention(id) });
 const repositories = Object.freeze({
-  interventions: new InterventionsRepository({ list: () => adapter.interventions(), getById: id => adapter.interventionById(id), create: row => adapter.createIntervention(row), update: (id, patch) => adapter.updateIntervention(id, patch), remove: id => adapter.removeIntervention(id) }),
+  interventions: interventionsRepository,
+  reports: new ReportsRepository({ interventionsRepository }),
   operators: new OperatorsRepository({ list: () => adapter.operators(), getById: id => adapter.operatorById(id), create: row => adapter.createOperator(row), update: (id, patch) => adapter.updateOperator(id, patch), setActive: (id, active) => adapter.setOperatorActive(id, active) }),
   teams: new TeamsRepository({ list: () => adapter.teams(), getById: id => adapter.teamById(id), create: row => adapter.createTeam(row), update: (id, patch) => adapter.updateTeam(id, patch), remove: id => adapter.removeTeam(id) }),
   vehicles: new VehiclesRepository({
@@ -42,8 +50,12 @@ const auth = new AuthService({ auth: {
   signIn: credentials => window.SFCloud.login(credentials.username, credentials.password), signOut: () => window.SFCloud.logout()
 } });
 const services = { auth, logger: console, confirm: message => window.confirm(message), planning: new PlanningService(window.SFPlanning), maps: new MapsService({ renderControlRoom: () => window.renderControlMap?.() }) };
-const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, control: controlRoomFeature, messages: messagesFeature }, repositories, services });
+const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, control: controlRoomFeature, messages: messagesFeature, reports: reportsFeature }, repositories, services });
 services.interventions = new InterventionsService({ repository: repositories.interventions, eventBus: app.eventBus });
+services.reports = new ReportsService({ repository: repositories.reports, eventBus: app.eventBus });
+services.reportPreview = new ReportPreviewService();
+services.reportExport = new ReportExportService();
+services.reportSharing = new ReportSharing();
 window.SFInterventionsBridge = new InterventionsLegacyBridge(services.interventions);
 
 function activateDashboard() {
@@ -60,7 +72,8 @@ document.querySelectorAll('#menu [data-sec]').forEach(button => button.addEventL
   else if (button.dataset.sec === 'agenda') app.router.navigate('agenda', document.getElementById('agenda'));
   else if (button.dataset.sec === 'control') app.router.navigate('control', document.getElementById('control'));
   else if (button.dataset.sec === 'messaggiUfficio') app.router.navigate('messages', document.getElementById('messaggiUfficio'));
-  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); agendaFeature.unmount(); controlRoomFeature.unmount(); messagesFeature.unmount(); }
+  else if (button.dataset.sec === 'rapportini') app.router.navigate('reports', document.getElementById('rapportini'));
+  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); agendaFeature.unmount(); controlRoomFeature.unmount(); messagesFeature.unmount(); reportsFeature.unmount(); }
 }));
 
 app.eventBus.on('client:interventionRequested', ({ id }) => adapter.openInterventionForClient(id));
