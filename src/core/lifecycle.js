@@ -3,6 +3,7 @@ export function createLifecycle() {
   return Object.freeze({
     signal: controller.signal,
     abort: (reason = 'Feature unmounted') => controller.abort(reason),
+    add(cleanup) { controller.signal.addEventListener('abort', cleanup, { once: true }); return cleanup; },
     addCleanup(cleanup) { controller.signal.addEventListener('abort', cleanup, { once: true }); return cleanup; },
   });
 }

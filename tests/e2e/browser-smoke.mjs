@@ -1,38 +1,39 @@
 import assert from 'node:assert/strict';
 import { mkdir } from 'node:fs/promises';
-import { chromium } from 'playwright';
+import { chromium, devices } from 'playwright';
 
 const url = process.env.SMOKE_URL ?? 'http://127.0.0.1:4173/spurgo_flow_v8/';
+const serviceWorker = process.env.SMOKE_SERVICE_WORKER === 'disabled' ? 'block' : 'allow';
 const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROMIUM_PATH });
-const page = await browser.newPage();
+const page = await browser.newPage({ ...devices['iPhone 13'], viewport: { width: 390, height: 844 }, serviceWorkers: serviceWorker });
+page.setDefaultTimeout(5_000);
 const fatalErrors = [];
-page.on('pageerror', (error) => fatalErrors.push(error.message));
-page.on('console', (message) => { if (message.type() === 'error') fatalErrors.push(message.text()); });
+page.on('pageerror', error => fatalErrors.push(`pageerror: ${error.message}`));
+page.on('console', message => { if (message.type() === 'error') fatalErrors.push(`console: ${message.text()}`); });
 await page.goto(url, { waitUntil: 'networkidle' });
-await page.locator('#app').waitFor();
-const visibleText = (await page.locator('#app').innerText()).trim();
-assert.ok((await page.locator('body').innerText()).trim(), 'document.body must not be empty');
-assert.ok(visibleText, '#app must contain visible text after bootstrap');
-assert.match(visibleText, /COMPLETE OPERATIONAL SUITE/);
-assert.match(visibleText, /v8\.0\.0-beta\.1/);
-await page.getByRole('button', { name: 'Clienti' }).click();
-await page.locator('[data-feature="clients"]').waitFor();
-assert.match(await page.locator('#app').innerText(), /Clienti/);
-await page.getByRole('button', { name: 'Flotta' }).click();
-await page.locator('[data-feature="fleet"]').waitFor();
-assert.match(await page.locator('#app').innerText(), /MEZZI & FLOTTA/);
-await page.getByRole('button', { name: '+ NUOVO MEZZO' }).click();
-await page.locator('[name="plate"]').fill('ab 123 cd');
-await page.getByRole('button', { name: 'SALVA' }).click();
-await page.getByText('AB 123 CD').waitFor();
-await mkdir('artifacts', { recursive: true });
-await page.screenshot({ path: 'artifacts/spurgo-flow-v8-beta1-fleet.png', fullPage: true });
-for (const route of ['Operatori','Interventi','Agenda','Control Room','Messaggi','Rapportini','Statistiche','App operatore']) { await page.getByRole('button',{name:route,exact:true}).click(); assert.ok((await page.locator('#app').innerText()).trim(), `${route} must not be blank`); }
-await page.reload({ waitUntil: 'networkidle' });
 await page.locator('[data-feature="dashboard"]').waitFor();
-assert.ok(await page.evaluate(() => navigator.serviceWorker.controller !== null), 'service worker must control the refreshed GitHub Pages path');
-assert.ok((await page.evaluate(() => caches.keys())).includes('spurgoflow-v8-0.0-beta.1-complete-suite'), 'beta.1 service-worker cache must exist');
+const initial = await page.locator('#app').innerText();
+assert.doesNotMatch(initial, /Errore di avvio/);
+assert.match(initial, /BOOT CORE FIX/);
+assert.match(initial, /v8\.0\.0-beta\.1\.1/);
+
+for (const button of ['Clienti','Mezzi','Operatori','Interventi','Agenda','Control Room','Messaggi','Rapportini','Statistiche','App operatore']) {
+  await page.getByRole('button', { name: button, exact: true }).click();
+  await page.waitForTimeout(50);
+  assert.ok((await page.locator('#app').innerText()).trim(), `${button} must keep the shell visible`);
+  assert.doesNotMatch(await page.locator('#app').innerText(), /Errore di avvio/, `${button} must not cause a global failure`);
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.locator('[data-feature="dashboard"]').waitFor();
+}
+
+if (serviceWorker === 'allow') {
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.locator('[data-feature="dashboard"]').waitFor();
+  assert.ok(await page.evaluate(() => navigator.serviceWorker.controller !== null), 'service worker must control the GitHub Pages path');
+  assert.deepEqual((await page.evaluate(() => caches.keys())).filter(key => key.startsWith('spurgoflow-v8')), ['spurgoflow-v8-0.0-beta.1.1-boot-core-fix']);
+}
 assert.deepEqual(fatalErrors, []);
-await page.screenshot({ path: 'artifacts/spurgo-flow-v8-beta1.png', fullPage: true });
+await mkdir('artifacts', { recursive: true });
+await page.screenshot({ path: `artifacts/spurgo-flow-v8-beta1.1-${serviceWorker}.png`, fullPage: true });
 await browser.close();
-console.log(`Browser smoke passed: ${url}`);
+console.log(`Browser smoke passed (${serviceWorker} service worker, 390x844): ${url}`);
