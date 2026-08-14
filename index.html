@@ -2,10 +2,11 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.3</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.4</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
 <link rel="stylesheet" href="src/features/clients/clients.css">
+<link rel="stylesheet" href="src/features/fleet/fleet.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -527,7 +528,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v7.0.0-alpha.3 · CLIENTS MODULE</div>
+<div class="version">v7.0.0-alpha.4 · FLEET MODULE</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -585,12 +586,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="clienti" class="section" aria-live="polite"></section>
 
 
-<section id="flotta" class="section">
- <div class="top"><div><h1>Mezzi & Flotta</h1><div class="muted">Anagrafica mezzi, stato e assegnazioni</div></div><button class="btn primary" onclick="openVehicleModal()">+ Nuovo mezzo</button></div>
- <div class="card" style="margin-top:18px">
-  <div id="vehicleList" class="v6-vehicle-grid"></div>
- </div>
-</section>
+<section id="flotta" class="section" aria-live="polite"></section>
 
 
 <section id="squadre" class="section">
@@ -1789,6 +1785,29 @@ window.SFState={
    if(window.SFCloud?.enabled&&typeof window.SFCloud.deleteClient==='function')await window.SFCloud.deleteClient(id);
    sfClients=sfClients.filter(x=>x.id!==id);localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
    if(window.SFCloud?.ready&&typeof window.SFCloud.deleteClient!=='function')window.SFCloud.syncFromGlobals?.();
+   return {id};
+ },
+ async createVehicle(vehicle){
+   const record={...vehicle,id:vehicle.id||uniqueId('veh')};
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveVehicle==='function')await window.SFCloud.saveVehicle(record);
+   if(!sfVehicles.some(x=>x.id===record.id))sfVehicles.push(record);
+   localStorage.setItem('sf_v6_vehicles',JSON.stringify(sfVehicles));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveVehicle!=='function')window.SFCloud.syncFromGlobals?.();
+   return {...record};
+ },
+ async updateVehicle(id,patch){
+   const index=sfVehicles.findIndex(x=>x.id===id);if(index<0)throw new Error('Mezzo non trovato.');
+   const record={...sfVehicles[index],...patch,id};
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveVehicle==='function')await window.SFCloud.saveVehicle(record);
+   sfVehicles[index]=record;localStorage.setItem('sf_v6_vehicles',JSON.stringify(sfVehicles));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveVehicle!=='function')window.SFCloud.syncFromGlobals?.();
+   return {...record};
+ },
+ async removeVehicle(id){
+   if(sfOfficeInterventions.some(i=>i.vehicleId===id))throw new Error('Mezzo assegnato a interventi: rimuovi prima le assegnazioni.');
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.deleteVehicle==='function')await window.SFCloud.deleteVehicle(id);
+   sfVehicles=sfVehicles.filter(x=>x.id!==id);localStorage.setItem('sf_v6_vehicles',JSON.stringify(sfVehicles));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.deleteVehicle!=='function')window.SFCloud.syncFromGlobals?.();
    return {id};
  },
  openInterventionForClient(id){newInterventionForClient(id)},

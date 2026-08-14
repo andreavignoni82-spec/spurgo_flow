@@ -2,7 +2,8 @@ export const DOMAIN_EVENTS = Object.freeze([
   'intervention:created', 'intervention:updated', 'intervention:deleted',
   'intervention:statusChanged', 'operator:created', 'operator:updated',
   'operator:availabilityChanged', 'team:updated', 'client:created',
-  'client:updated', 'client:deleted', 'client:interventionRequested', 'vehicle:updated', 'report:updated', 'message:created',
+  'client:updated', 'client:deleted', 'client:interventionRequested',
+  'vehicle:created', 'vehicle:updated', 'vehicle:deleted', 'report:updated', 'message:created',
   'auth:login', 'auth:logout', 'sync:online', 'sync:error'
 ]);
 
