@@ -15,6 +15,7 @@ export function createMemoryAuthAdapter(){
   },
   async logout(){current=null;publish()},currentIdentity:()=>current,onAuthChanged(callback){listeners.add(callback);callback(current);return()=>listeners.delete(callback)},
   async createTestAccount(email,password,profile={}){if(!email||!password||password.length<6)throw new Error('Password operatore: minimo 6 caratteri');const store=readStore();if(store[email])throw new Error('Username operatore già registrato');const salt=randomSalt(),hash=await digest(password,salt),uid=`memory:${crypto.randomUUID?.()||Date.now()}`;store[email]={uid,email,salt,hash,operatorId:profile.operatorId??uid,active:profile.active!==false,username:profile.username};writeStore(store);return Object.freeze({uid,email,role:profile.role??'operator',operatorId:profile.operatorId??uid,active:profile.active!==false,username:profile.username})},
+  async revokeOperatorAccess(uid){const store=readStore();for(const [email,account] of Object.entries(store))if(account.uid===uid)delete store[email];writeStore(store);if(current?.uid===uid){current=null;publish()}return {uid,accessRevoked:true}},
   health:()=>Object.freeze({status:'local',mode:'memory'})
  })
 }
