@@ -10,13 +10,15 @@ function validateFirebaseConfig(firebase){
 }
 export function createEnvironment(source={}){
   const suppliedFirebase=source.firebase??globalThis.__SPURGO_FLOW_FIREBASE__??null;
+  const suppliedMaps=source.googleMaps??globalThis.__SPURGO_FLOW_GOOGLE_MAPS__??null;
+  const googleMaps=Object.freeze({enabled:suppliedMaps?.enabled!==false&&Boolean(suppliedMaps?.apiKey),apiKey:suppliedMaps?.apiKey??''});
   const requestedDriver=source.dataDriver??source.driver??(suppliedFirebase?'firebase':'memory');
   const driver=requestedDriver==='firebase-emulator'?'firebase':requestedDriver;
   if(!['memory','firebase'].includes(driver))throw new ConfigurationError('BOOT_CONFIG_UNKNOWN_DRIVER','environment.driver',`Unknown data driver: ${requestedDriver}`);
-  if(driver==='memory')return Object.freeze({driver,fallbackToMemory:false,firebase:null});
+  if(driver==='memory')return Object.freeze({driver,fallbackToMemory:false,firebase:null,googleMaps});
   const firebase=suppliedFirebase?Object.freeze({...suppliedFirebase,useEmulator:suppliedFirebase.useEmulator===true}):null;
   validateFirebaseConfig(firebase);
-  return Object.freeze({driver,fallbackToMemory:source.fallbackToMemory===true,firebase});
+  return Object.freeze({driver,fallbackToMemory:source.fallbackToMemory===true,firebase,googleMaps});
 }
 export const readEnvironment=createEnvironment;
 export const environment=createEnvironment();
