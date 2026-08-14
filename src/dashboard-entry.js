@@ -2,6 +2,7 @@ import { bootstrap } from './core/bootstrap.js';
 import { dashboardFeature } from './features/dashboard/dashboard.feature.js';
 import { clientsFeature } from './features/clients/clients.feature.js';
 import { fleetFeature } from './features/fleet/fleet.feature.js';
+import { peopleFeature } from './features/people/people.feature.js';
 import { LegacyAdapter } from './services/legacy-adapter.js';
 import { ClientsRepository } from './services/repositories/clients-repository.js';
 import { InterventionsRepository } from './services/repositories/interventions-repository.js';
@@ -9,12 +10,13 @@ import { MessagesRepository } from './services/repositories/messages-repository.
 import { OperatorsRepository } from './services/repositories/operators-repository.js';
 import { TeamsRepository } from './services/repositories/teams-repository.js';
 import { VehiclesRepository } from './services/repositories/vehicles-repository.js';
+import { AuthService } from './services/firebase/auth-service.js';
 
 const adapter = new LegacyAdapter();
 const repositories = Object.freeze({
   interventions: new InterventionsRepository({ list: () => adapter.interventions() }),
-  operators: new OperatorsRepository({ list: () => adapter.operators() }),
-  teams: new TeamsRepository({ list: () => adapter.teams() }),
+  operators: new OperatorsRepository({ list: () => adapter.operators(), getById: id => adapter.operatorById(id), create: row => adapter.createOperator(row), update: (id, patch) => adapter.updateOperator(id, patch), setActive: (id, active) => adapter.setOperatorActive(id, active) }),
+  teams: new TeamsRepository({ list: () => adapter.teams(), getById: id => adapter.teamById(id), create: row => adapter.createTeam(row), update: (id, patch) => adapter.updateTeam(id, patch), remove: id => adapter.removeTeam(id) }),
   vehicles: new VehiclesRepository({
     list: () => adapter.vehicles(), getById: id => adapter.vehicleById(id),
     create: vehicle => adapter.createVehicle(vehicle), update: (id, patch) => adapter.updateVehicle(id, patch),
@@ -27,7 +29,11 @@ const repositories = Object.freeze({
     remove: id => adapter.removeClient(id)
   })
 });
-const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature }, repositories });
+const auth = new AuthService({ auth: {
+  createOperatorAccount: ({ username, password, operator }) => window.SFCloud?.enabled ? window.SFCloud.provisionOperator({ ...operator, username }, password) : Promise.resolve({ email: `${username}@local`, localPassword: password }),
+  signIn: credentials => window.SFCloud.login(credentials.username, credentials.password), signOut: () => window.SFCloud.logout()
+} });
+const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature }, repositories, services: { auth, logger: console } });
 
 function activateDashboard() {
   const container = document.getElementById('dashboard');
@@ -38,7 +44,8 @@ document.querySelectorAll('#menu [data-sec]').forEach(button => button.addEventL
   if (button.dataset.sec === 'dashboard') activateDashboard();
   else if (button.dataset.sec === 'clienti') app.router.navigate('clients', document.getElementById('clienti'));
   else if (button.dataset.sec === 'flotta') app.router.navigate('fleet', document.getElementById('flotta'));
-  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); }
+  else if (button.dataset.sec === 'squadre') app.router.navigate('people', document.getElementById('squadre'));
+  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); }
 }));
 
 app.eventBus.on('client:interventionRequested', ({ id }) => adapter.openInterventionForClient(id));
@@ -56,6 +63,7 @@ window.addEventListener('sf:data-changed', event => {
   if (event.detail?.collection === 'vehicles' && document.getElementById('flotta')?.classList.contains('active')) {
     void fleetFeature.refresh();
   }
+  if (['operators', 'teams'].includes(event.detail?.collection) && document.getElementById('squadre')?.classList.contains('active')) void peopleFeature.refresh();
 });
 
 activateDashboard();

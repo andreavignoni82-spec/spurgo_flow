@@ -20,7 +20,15 @@ export class LegacyAdapter {
 
   interventions() { return this.#collection('interventions', 'sfOfficeInterventions'); }
   operators() { return this.#collection('operators', 'sfOperators'); }
+  operatorById(id) { return this.operators().find(operator => String(operator.id) === String(id)); }
+  createOperator(operator) { return this.globals.SFState?.createOperator(operator); }
+  updateOperator(id, patch) { return this.globals.SFState?.updateOperator(id, patch); }
+  setOperatorActive(id, active) { return this.globals.SFState?.setOperatorActive(id, active); }
   teams() { return this.#collection('teams', 'sfTeams'); }
+  teamById(id) { return this.teams().find(team => String(team.id) === String(id)); }
+  createTeam(team) { return this.globals.SFState?.createTeam(team); }
+  updateTeam(id, patch) { return this.globals.SFState?.updateTeam(id, patch); }
+  removeTeam(id) { return this.globals.SFState?.removeTeam(id); }
   vehicles() { return this.#collection('vehicles', 'sfVehicles'); }
   vehicleById(id) { return this.vehicles().find(vehicle => String(vehicle.id) === String(id)); }
   createVehicle(vehicle) { return this.globals.SFState?.createVehicle(vehicle); }

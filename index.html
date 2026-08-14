@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.4</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.5</title>
+<link rel="stylesheet" href="src/features/people/people.css">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
 <link rel="stylesheet" href="src/features/clients/clients.css">
@@ -528,7 +529,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v7.0.0-alpha.4 · FLEET MODULE</div>
+<div class="version">v7.0.0-alpha.5 · PEOPLE MODULE</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -589,37 +590,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="flotta" class="section" aria-live="polite"></section>
 
 
-<section id="squadre" class="section">
-  <div class="top"><div><h1>Operatori & Squadre</h1><div class="muted">Gestione utenti operativi e composizione squadre</div></div><span class="build">v6.1.21-R1</span></div>
-  <div class="manage-grid" style="margin-top:18px">
-    <div class="card">
-      <h3 style="margin-top:0">+ Nuovo operatore</h3>
-      <div class="form-grid">
-        <div><label>Nome</label><input id="opNome" class="field" placeholder="Marco"></div>
-        <div><label>Cognome</label><input id="opCognome" class="field" placeholder="Rossi"></div>
-        <div><label>Username</label><input id="opUsername" class="field" placeholder="marco"></div>
-        <div><label>Password</label><input id="opPassword" class="field" type="password" placeholder="Password dedicata"></div>
-        <div><label>Telefono</label><input id="opTelefono" class="field" placeholder="+39..."></div>
-        <div><label>Mezzo assegnato</label><select id="opMezzo" class="field"><option value="">Nessuno</option><option>Autobotte 01</option><option>Autobotte 02</option><option>Furgone Video 01</option></select></div>
-        <div class="full"><label>Ruolo / note</label><input id="opRuolo" class="field" placeholder="Operatore spurghi, videoispezione..."></div>
-      </div>
-      <button class="btn primary" onclick="addOperator()">Crea operatore</button>
-      <div id="operatorFormMsg" class="muted" style="margin-top:8px"></div>
-    </div>
-    <div class="card">
-      <h3 style="margin-top:0">+ Nuova squadra</h3>
-      <label>Nome squadra</label><input id="teamName" class="field" placeholder="Squadra A">
-      <label>Mezzo principale</label><select id="teamVehicle" class="field"><option value="">Nessuno</option><option>Autobotte 01</option><option>Autobotte 02</option><option>Furgone Video 01</option></select>
-      <label>Operatori della squadra</label><div id="teamOperatorChecks" class="check-grid"></div>
-      <button class="btn primary" style="margin-top:10px" onclick="addTeam()">Crea squadra</button>
-      <div id="teamFormMsg" class="muted" style="margin-top:8px"></div>
-    </div>
-  </div>
-  <div class="manage-grid" style="margin-top:16px">
-    <div class="card"><div class="top"><h3 style="margin:0">Operatori</h3><span id="operatorCount" class="small-pill green"></span></div><div id="operatorList" class="manage-list"></div></div>
-    <div class="card"><div class="top"><h3 style="margin:0">Squadre</h3><span id="teamCount" class="small-pill green"></span></div><div id="teamList" class="manage-list"></div></div>
-  </div>
-</section>
+<section id="squadre" class="section" aria-live="polite"></section>
 
 
 <section id="messaggiUfficio" class="section">
@@ -1810,6 +1781,23 @@ window.SFState={
    if(window.SFCloud?.ready&&typeof window.SFCloud.deleteVehicle!=='function')window.SFCloud.syncFromGlobals?.();
    return {id};
  },
+ async createOperator(operator){
+   const record={...operator,id:operator.id||uniqueId('op')};
+   if(!sfOperators.some(x=>x.id===record.id))sfOperators.push(record);
+   saveOfficePeople();window.dispatchEvent(new CustomEvent('sf:data-changed',{detail:{collection:'operators'}}));return {...record};
+ },
+ async updateOperator(id,patch){
+   const index=sfOperators.findIndex(x=>x.id===id);if(index<0)throw new Error('Operatore non trovato.');
+   const protectedAccount={username:sfOperators[index].username,cloudUid:sfOperators[index].cloudUid,cloudEmail:sfOperators[index].cloudEmail,password:sfOperators[index].password};
+   sfOperators[index]={...sfOperators[index],...patch,...protectedAccount,id};saveOfficePeople();return {...sfOperators[index]};
+ },
+ async setOperatorActive(id,active){
+   const index=sfOperators.findIndex(x=>x.id===id);if(index<0)throw new Error('Operatore non trovato.');
+   sfOperators[index]={...sfOperators[index],active:Boolean(active)};saveOfficePeople();return {...sfOperators[index]};
+ },
+ async createTeam(team){const record={...team,id:team.id||uniqueId('team'),operatorIds:[...(team.operatorIds||[])]};sfTeams.push(record);saveOfficePeople();return {...record};},
+ async updateTeam(id,patch){const index=sfTeams.findIndex(x=>x.id===id);if(index<0)throw new Error('Squadra non trovata.');sfTeams[index]={...sfTeams[index],...patch,id,operatorIds:[...(patch.operatorIds||sfTeams[index].operatorIds||[])]};saveOfficePeople();return {...sfTeams[index]};},
+ async removeTeam(id){if(!sfTeams.some(x=>x.id===id))throw new Error('Squadra non trovata.');sfTeams=sfTeams.filter(x=>x.id!==id);saveOfficePeople();return {id};},
  openInterventionForClient(id){newInterventionForClient(id)},
  applyCloud(name,rows){
    if(name==='operators')sfOperators=rows;

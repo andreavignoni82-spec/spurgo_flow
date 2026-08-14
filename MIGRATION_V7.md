@@ -1,5 +1,14 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.5 · People Module
+
+Operatori and Squadre are autonomous entities behind `OperatorsRepository` and `TeamsRepository`.
+Account provisioning is delegated to `AuthService`; profile updates and active-status changes never
+invoke authentication. Availability has its own `AvailabilityService` contract. The feature emits
+small EventBus notifications and contains repository failures within its own route boundary. Legacy
+records and the Firebase schema are preserved without data migration; destructive operator deletion
+is intentionally unavailable in alpha.5 in favour of reversible deactivation.
+
 ## v7.0.0-alpha.4 · Fleet Module
 
 Mezzi is now an autonomous v7 feature. It preserves the v6.1.21 list, create, edit and conditional

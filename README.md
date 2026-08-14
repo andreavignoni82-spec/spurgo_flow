@@ -1,6 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.4 · FLEET MODULE`. Dashboard and Clienti remain unchanged; Mezzi is now isolated behind
+**Current modular release:** `v7.0.0-alpha.5 · PEOPLE MODULE`. Dashboard, Clienti and Mezzi remain unchanged; Operatori & Squadre is now isolated behind
 the v7 router, repository contracts, EventBus, and FeatureBoundary. All remaining pages continue
 to run through the v6.1.21-R1 compatibility application. Fleet CRUD uses `VehiclesRepository`, scoped UI, lifecycle cleanup and domain events.
 Build 5.0.13
