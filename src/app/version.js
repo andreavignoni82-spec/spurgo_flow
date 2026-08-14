@@ -1,3 +1,3 @@
-export const VERSION = 'v8.5.2';
-export const BUILD_LABEL = 'v8.5.2 · SMART INTERVENTIONS';
+export const VERSION = 'v8.5.3';
+export const BUILD_LABEL = 'v8.5.3 · GOOGLE SMART SCHEDULER';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
