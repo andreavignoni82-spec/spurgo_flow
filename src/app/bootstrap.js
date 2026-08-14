@@ -10,6 +10,7 @@ import { createRepositories } from '../infrastructure/repositories/create-reposi
 import { createFirebaseClient } from '../infrastructure/firebase/firebase-client.js';
 import { createRealtimeAdapter } from '../infrastructure/firebase/realtime-adapter.js';
 import { ClientsService } from '../services/clients/clients-service.js';
+import { VehiclesService } from '../services/vehicles/vehicles-service.js';
 
 export async function bootstrap(container = document.querySelector('#app')) {
   if (!container) throw new Error('Bootstrap failed: #app container not found');
@@ -19,8 +20,11 @@ export async function bootstrap(container = document.querySelector('#app')) {
   const firebaseClient = environment.driver === 'firebase-emulator' ? createFirebaseClient(environment.firebase) : undefined;
   const repositories = createRepositories({ driver: environment.driver, eventBus, firebaseClient, fallbackToMemory: environment.fallbackToMemory, logger });
   const realtime = firebaseClient ? createRealtimeAdapter({ firestore: firebaseClient.firestore }) : undefined;
-  const context = createAppContext({ eventBus, logger, services: { clients: new ClientsService({ repository: repositories.clients, eventBus, realtime }) } });
-  const router = new Router({ routes: features, container, context, errorBoundary: boundary, onMountError: () => renderBootFallback(container, 'Feature non disponibile') });
+  const context = createAppContext({ eventBus, logger, services: {
+    clients: new ClientsService({ repository: repositories.clients, eventBus, realtime }),
+    vehicles: new VehiclesService({ repository: repositories.vehicles, eventBus, realtime }),
+  } });
+  const router = new Router({ routes: features, container, context, errorBoundary: boundary, onMountError: feature => renderBootFallback(container, feature.id === 'fleet' ? 'Mezzi & Flotta temporaneamente non disponibili' : 'Feature non disponibile') });
   const onNavigate = (event) => {
     const target = event.target.closest?.('[data-route]');
     if (target) router.navigate(target.dataset.route).catch((error) => {

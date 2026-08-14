@@ -1,2 +1,1 @@
-import { createPlaceholderFeature } from '../../shared/ui/placeholder.js';
-export const fleetFeature = createPlaceholderFeature('fleet', 'Flotta');
+export { fleetFeature, createFleetFeature } from './fleet.feature.js';

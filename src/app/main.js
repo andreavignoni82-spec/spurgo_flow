@@ -4,7 +4,7 @@ bootstrap().then(() => window.dispatchEvent(new Event('spurgo-flow:ready'))).cat
   console.error('Spurgo Flow bootstrap failed', error);
   const root = document.querySelector('#app');
   if (root) {
-    root.innerHTML = `<main role="alert"><strong>SPURGO FLOW 8 · CLIENTS MODULE</strong><h1>Errore di avvio</h1><p>${error.message}</p><small>v8.0.0-alpha.4</small></main>`;
+    root.innerHTML = `<main role="alert"><strong>SPURGO FLOW 8 · FLEET MODULE</strong><h1>Errore di avvio</h1><p>${error.message}</p><small>v8.0.0-alpha.5</small></main>`;
   }
 });
 
