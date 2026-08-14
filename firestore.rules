@@ -4,13 +4,13 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function profile() { return get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data; }
     function isOffice() { return signedIn() && profile().role == 'office'; }
-    function isOperator() { return signedIn() && profile().role == 'operator' && profile().active != false; }
+    function isOperator() { return signedIn() && profile().role == 'operator' && (!('active' in profile()) || profile().active != false); }
     function operatorId() { return profile().operatorId; }
     function assigned(data) {
       return isOperator() && (
-        data.operatorId == operatorId() ||
-        (data.assignedOperatorIds is list && operatorId() in data.assignedOperatorIds) ||
-        (data.teamId != null && get(/databases/$(database)/documents/teams/$(data.teamId)).data.operatorIds.hasAny([operatorId()]))
+        (('operatorId' in data) && data.operatorId == operatorId()) ||
+        (('assignedOperatorIds' in data) && data.assignedOperatorIds is list && operatorId() in data.assignedOperatorIds) ||
+        (('teamId' in data) && data.teamId is string && get(/databases/$(database)/documents/teams/$(data.teamId)).data.operatorIds.hasAny([operatorId()]))
       );
     }
 
@@ -23,7 +23,7 @@ service cloud.firestore {
       allow write: if isOffice();
     }
     match /teams/{id} {
-      allow read: if isOffice() || (isOperator() && resource.data.operatorIds.hasAny([operatorId()]));
+      allow read: if isOffice() || (isOperator() && ('operatorIds' in resource.data) && resource.data.operatorIds.hasAny([operatorId()]));
       allow write: if isOffice();
     }
     match /clients/{id} { allow read, write: if isOffice(); }
@@ -37,14 +37,13 @@ service cloud.firestore {
       allow update: if isOffice() || (assigned(resource.data) && assigned(request.resource.data));
     }
     match /reports/{id} {
-      allow read: if isOffice() || (isOperator() && assigned(get(/databases/$(database)/documents/interventions/$(id)).data));
-      allow create, update: if isOffice() || (isOperator() && assigned(get(/databases/$(database)/documents/interventions/$(id)).data));
+      allow read, create, update: if isOffice() || (isOperator() && assigned(get(/databases/$(database)/documents/interventions/$(id)).data));
       allow delete: if isOffice();
     }
     match /messages/{id} {
-      allow read: if isOffice() || (isOperator() && resource.data.operatorId == operatorId());
-      allow create: if isOffice() || (isOperator() && request.resource.data.operatorId == operatorId());
-      allow update: if isOffice() || (isOperator() && resource.data.operatorId == operatorId() && request.resource.data.operatorId == operatorId());
+      allow read: if isOffice() || (isOperator() && ('operatorId' in resource.data) && resource.data.operatorId == operatorId());
+      allow create: if isOffice() || (isOperator() && ('operatorId' in request.resource.data) && request.resource.data.operatorId == operatorId());
+      allow update: if isOffice() || (isOperator() && ('operatorId' in resource.data) && resource.data.operatorId == operatorId() && ('operatorId' in request.resource.data) && request.resource.data.operatorId == operatorId());
       allow delete: if isOffice();
     }
     match /{document=**} { allow read, write: if false; }
