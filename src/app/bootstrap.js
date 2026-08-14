@@ -5,13 +5,21 @@ import { createAppContext } from './app-context.js';
 import { Router } from './router.js';
 import { features } from '../features/index.js';
 import { renderBootFallback } from './fallback.js';
+import { environment } from '../config/environment.js';
+import { createRepositories } from '../infrastructure/repositories/create-repositories.js';
+import { createFirebaseClient } from '../infrastructure/firebase/firebase-client.js';
+import { createRealtimeAdapter } from '../infrastructure/firebase/realtime-adapter.js';
+import { ClientsService } from '../services/clients/clients-service.js';
 
 export async function bootstrap(container = document.querySelector('#app')) {
   if (!container) throw new Error('Bootstrap failed: #app container not found');
   const logger = createLogger();
   const eventBus = new EventBus({ onSubscriberError: (error, event) => logger.error('Event subscriber failed', { event, error }) });
   const boundary = new ErrorBoundary({ onError: (error, details) => logger.error('Feature failed', { ...details, error }) });
-  const context = createAppContext({ eventBus, logger, services: {} });
+  const firebaseClient = environment.driver === 'firebase-emulator' ? createFirebaseClient(environment.firebase) : undefined;
+  const repositories = createRepositories({ driver: environment.driver, eventBus, firebaseClient, fallbackToMemory: environment.fallbackToMemory, logger });
+  const realtime = firebaseClient ? createRealtimeAdapter({ firestore: firebaseClient.firestore }) : undefined;
+  const context = createAppContext({ eventBus, logger, services: { clients: new ClientsService({ repository: repositories.clients, eventBus, realtime }) } });
   const router = new Router({ routes: features, container, context, errorBoundary: boundary, onMountError: () => renderBootFallback(container, 'Feature non disponibile') });
   const onNavigate = (event) => {
     const target = event.target.closest?.('[data-route]');
@@ -22,5 +30,5 @@ export async function bootstrap(container = document.querySelector('#app')) {
   };
   container.addEventListener('click', onNavigate);
   if (!await router.navigate('dashboard')) throw new Error('Bootstrap failed: initial route "dashboard" was not mounted');
-  return Object.freeze({ router });
+  return Object.freeze({ router, close: async () => { await router.destroy(); await firebaseClient?.close(); } });
 }

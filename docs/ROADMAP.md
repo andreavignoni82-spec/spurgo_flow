@@ -5,8 +5,8 @@
 | alpha.1 | Core |
 | alpha.2 | Domain + repository contracts |
 | alpha.3 | Firebase test infrastructure |
-| alpha.4 | Dashboard |
-| alpha.5 | Clients |
+| alpha.4 | Clients & facilities (first operational feature) |
+| alpha.5 | Dashboard |
 | alpha.6 | Fleet |
 | alpha.7 | People |
 | alpha.8 | Interventions |
