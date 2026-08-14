@@ -10,12 +10,15 @@ export class AuthService {
   async login(credentials) {
     if (!this.auth?.signIn) throw new Error('Firebase Auth adapter is not configured');
     const user = await this.auth.signIn({ ...credentials, username: normalizeOperatorUsername(credentials?.username) });
+    this.user = user;
     this.eventBus?.emit('auth:login', user);
     return user;
   }
   async logout() {
     if (!this.auth?.signOut) throw new Error('Firebase Auth adapter is not configured');
     await this.auth.signOut();
+    this.user = undefined;
     this.eventBus?.emit('auth:logout');
   }
+  currentUser() { return this.user; }
 }

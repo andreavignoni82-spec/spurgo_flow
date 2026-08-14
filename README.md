@@ -1,6 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.10 · REPORTS MODULE`. Rapportini is now an autonomous v7 feature: its data remains the single embedded `intervention.reportData` source behind `ReportsRepository`, while signatures, photos, persisted preview, print/export and sharing have separate responsibilities. Saving a report never completes or otherwise changes its intervention. App Operatore remains on the v6.1.21-R1 compatibility application.
+**Current modular release:** `v7.0.0-alpha.11 · OPERATOR APP`. The smartphone-first Operator App is an isolated orchestrator over AuthService, InterventionsService and ReportsService. Its personal agenda enforces direct and team assignments; report saving is independent from the sequential, failure-safe completion workflow.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.

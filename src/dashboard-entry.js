@@ -8,6 +8,7 @@ import { agendaFeature } from './features/agenda/agenda.feature.js';
 import { controlRoomFeature } from './features/control-room/control-room.feature.js';
 import { messagesFeature } from './features/messages/messages.feature.js';
 import { reportsFeature } from './features/reports/reports.feature.js';
+import { operatorFeature } from './features/operator/operator.feature.js';
 import { PlanningService } from './services/planning-service.js';
 import { MapsService } from './services/maps-service.js';
 import { LegacyAdapter } from './services/legacy-adapter.js';
@@ -50,13 +51,15 @@ const auth = new AuthService({ auth: {
   signIn: credentials => window.SFCloud.login(credentials.username, credentials.password), signOut: () => window.SFCloud.logout()
 } });
 const services = { auth, logger: console, confirm: message => window.confirm(message), planning: new PlanningService(window.SFPlanning), maps: new MapsService({ renderControlRoom: () => window.renderControlMap?.() }) };
-const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, control: controlRoomFeature, messages: messagesFeature, reports: reportsFeature }, repositories, services });
+const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature, control: controlRoomFeature, messages: messagesFeature, reports: reportsFeature, operator: operatorFeature }, repositories, services });
 services.interventions = new InterventionsService({ repository: repositories.interventions, eventBus: app.eventBus });
 services.reports = new ReportsService({ repository: repositories.reports, eventBus: app.eventBus });
 services.reportPreview = new ReportPreviewService();
 services.reportExport = new ReportExportService();
 services.reportSharing = new ReportSharing();
 window.SFInterventionsBridge = new InterventionsLegacyBridge(services.interventions);
+app.eventBus.on('auth:login', identity => { if (identity?.role === 'operator') app.router.navigate('operator', document.getElementById('operator')); });
+app.eventBus.on('auth:logout', () => operatorFeature.unmount());
 
 function activateDashboard() {
   const container = document.getElementById('dashboard');

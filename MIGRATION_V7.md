@@ -8,7 +8,7 @@ normalizes them only inside the v7 domain. `ReportsRepository` is a non-destruct
 print/export and native sharing are independent components. Preview, print and export use the same
 persisted-data ViewModel and HTML. Report operations emit only `report:*` payloads with
 `{ interventionId }`; failures in persistence, signature capture, export or sharing remain contained in
-Reports. App Operatore and Statistiche remain intentionally unmigrated.
+Reports. This remains the alpha.10 baseline; Statistiche remains intentionally unmigrated after alpha.11.
 
 ## v7.0.0-alpha.9 · Messages Module
 
@@ -18,6 +18,19 @@ message identity pass only through `MessagesRepository`. Successful creates emit
 persistence. Realtime notifications and the lifecycle-owned 30-second fallback refresh update only this
 feature, and unmount clears every subscription and interval. The local form prevents duplicate sends and
 retains its text on failure. No Firebase, legacy global or other feature dependency is present.
+
+## v7.0.0-alpha.11 · Operator App
+
+Operator App is an autonomous, smartphone-first orchestrator. It reads operator and team identity through
+repositories, obtains canonical interventions through `InterventionsService`, and checks direct, multi-operator
+and team assignment both in the personal agenda and again before opening. Reports, signatures and photos use
+the shared report services and components. Saving a report never completes a job; completion awaits report
+persistence before invoking `completeIntervention`, preserves a successfully saved report if completion fails,
+and has a single-flight guard. Domain events refresh only Operator App, while AbortSignal/generation checks
+prevent late UI work after unmount. It has no Firebase, office-feature, AgendaFeature or ReportsFeature dependency.
+
+Dependency matrix: READS Operator/Teams/Interventions/Reports; WRITES InterventionsService/ReportsService;
+AUTH AuthService; DIRECT FEATURE DEPENDENCIES none (only isolated signature/photo components).
 
 ## v7.0.0-alpha.8 · Control Room Module
 
