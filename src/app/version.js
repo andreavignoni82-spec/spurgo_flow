@@ -1,3 +1,3 @@
-export const VERSION = 'v8.1.0';
-export const BUILD_LABEL = 'v8.1.0 · UNIFIED UI';
-export const PRODUCT_LABEL = 'SPURGO FLOW · GESTIONE INTERVENTI SPURGHI';
+export const VERSION = 'v8.2.0';
+export const BUILD_LABEL = 'v8.2.0 · MOCKUP UI';
+export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
