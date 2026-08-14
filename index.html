@@ -2,10 +2,11 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.6</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.7</title>
 <link rel="stylesheet" href="src/features/people/people.css">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="stylesheet" href="src/features/interventions/interventions.css">
+<link rel="stylesheet" href="src/features/agenda/agenda.css">
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
 <link rel="stylesheet" href="src/features/clients/clients.css">
 <link rel="stylesheet" href="src/features/fleet/fleet.css">
@@ -530,7 +531,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v7.0.0-alpha.6 · INTERVENTIONS DOMAIN</div>
+<div class="version">v7.0.0-alpha.7 · AGENDA MODULE</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -569,20 +570,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 </section>
 
 
-<section id="agenda" class="section">
-<div class="agenda-page">
- <div class="agenda-toolbar">
-  <input id="agendaDate" class="field" type="date" onchange="renderOfficeAgenda()">
-  <button class="btn ghost" onclick="agendaToday()">Oggi</button>
-  <div class="agenda-view-switch">
-   <button id="agendaDayBtn" class="active" onclick="setOfficeAgendaView('day')">Giorno</button>
-   <button id="agendaWeekBtn" onclick="setOfficeAgendaView('week')">Settimana</button>
-  </div>
- </div>
- <div id="officeAgendaDay" class="timeline-wrap"></div>
- <div id="officeAgendaWeek" class="hidden"></div>
-</div>
-</section>
+<section id="agenda" class="section" aria-live="polite"></section>
 
 
 <section id="clienti" class="section" aria-live="polite"></section>

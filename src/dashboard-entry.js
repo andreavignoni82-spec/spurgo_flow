@@ -4,6 +4,7 @@ import { clientsFeature } from './features/clients/clients.feature.js';
 import { fleetFeature } from './features/fleet/fleet.feature.js';
 import { peopleFeature } from './features/people/people.feature.js';
 import { interventionsFeature } from './features/interventions/interventions.feature.js';
+import { agendaFeature } from './features/agenda/agenda.feature.js';
 import { LegacyAdapter } from './services/legacy-adapter.js';
 import { ClientsRepository } from './services/repositories/clients-repository.js';
 import { InterventionsRepository } from './services/repositories/interventions-repository.js';
@@ -37,7 +38,7 @@ const auth = new AuthService({ auth: {
   signIn: credentials => window.SFCloud.login(credentials.username, credentials.password), signOut: () => window.SFCloud.logout()
 } });
 const services = { auth, logger: console };
-const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature }, repositories, services });
+const app = bootstrap({ routes: { dashboard: dashboardFeature, clients: clientsFeature, fleet: fleetFeature, people: peopleFeature, interventions: interventionsFeature, agenda: agendaFeature }, repositories, services });
 services.interventions = new InterventionsService({ repository: repositories.interventions, eventBus: app.eventBus });
 window.SFInterventionsBridge = new InterventionsLegacyBridge(services.interventions);
 
@@ -52,10 +53,12 @@ document.querySelectorAll('#menu [data-sec]').forEach(button => button.addEventL
   else if (button.dataset.sec === 'flotta') app.router.navigate('fleet', document.getElementById('flotta'));
   else if (button.dataset.sec === 'squadre') app.router.navigate('people', document.getElementById('squadre'));
   else if (button.dataset.sec === 'interventi') app.router.navigate('interventions', document.getElementById('interventi'));
-  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); }
+  else if (button.dataset.sec === 'agenda') app.router.navigate('agenda', document.getElementById('agenda'));
+  else { dashboardFeature.unmount(); clientsFeature.unmount(); fleetFeature.unmount(); peopleFeature.unmount(); interventionsFeature.unmount(); agendaFeature.unmount(); }
 }));
 
 app.eventBus.on('client:interventionRequested', ({ id }) => adapter.openInterventionForClient(id));
+app.eventBus.on('intervention:openRequested', ({ id }) => adapter.openIntervention(id));
 
 window.addEventListener('sf:data-changed', event => {
   const events = {

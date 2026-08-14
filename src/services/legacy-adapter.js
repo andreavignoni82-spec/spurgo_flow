@@ -45,6 +45,7 @@ export class LegacyAdapter {
   updateClient(id, patch) { return this.globals.SFState?.updateClient(id, patch); }
   removeClient(id) { return this.globals.SFState?.removeClient(id); }
   openInterventionForClient(id) { return this.globals.SFState?.openInterventionForClient(id); }
+  openIntervention(id) { return this.globals.openInterventionModal?.(id); }
   snapshot() {
     return {
       interventions: this.interventions(), operators: this.operators(),

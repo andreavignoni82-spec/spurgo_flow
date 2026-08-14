@@ -1,5 +1,13 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.7 · Agenda Module
+
+Agenda is an autonomous read model using `InterventionsService`, `OperatorsRepository` and
+`TeamsRepository`. Day and week rendering, deterministic resource colors and overlap lanes are
+pure feature-local concerns. The module never writes intervention data: block selection emits
+`intervention:openRequested` with the canonical id and the application shell owns compatibility
+navigation. Its EventBus subscriptions refresh only Agenda and are fully removed on unmount.
+
 ## v7.0.0-alpha.6 · Interventions Domain
 
 Intervention identity, status changes, assignments, non-destructive patches and post-persistence events are centralized in `InterventionsService`. The repository retains the v6.1.21 DTO shape and unknown fields (including complete `reportData`) without a Firebase schema change. Agenda, Control Room, Rapportini and App Operatore remain legacy consumers of the single `sf_v6_interventions`/Firebase source through the temporary compatibility seam.
