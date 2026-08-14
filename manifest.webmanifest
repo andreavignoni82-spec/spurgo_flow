@@ -1,11 +1,13 @@
 {
-  "name": "SPURGO FLOW 8.2 · Mockup UI",
+  "name": "Spurgo Flow",
   "short_name": "Spurgo Flow",
-  "description": "Suite operativa per ufficio e operatori · v8.2.0",
+  "description": "Gestione interventi spurghi · v8.4.0",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f8fb",
-  "theme_color": "#061a33",
-  "icons": []
+  "background_color": "#071d35",
+  "theme_color": "#071d35",
+  "icons": [
+    {"src":"./assets/spurgo-flow-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
 }
