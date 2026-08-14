@@ -10,5 +10,5 @@ export class AuthService{
   onAuthChanged(callback){return this.adapter.onAuthChanged(identity=>{if(identity?.role)this.identity=identity;else if(!identity)this.identity=null;callback(identity)})}
   async createOperatorAccount(username,password){const email=userEmail(username),identity=await this.adapter.createTestAccount(email,password,{role:'operator',operatorId:null,username:normalizeUsername(username),active:true});return Object.freeze({uid:identity.uid,email:identity.email??email})}
   createTestOperatorAccount(username,password){return this.createOperatorAccount(username,password)}
-  async deleteOperatorAccount(uid){if(!uid)throw new TypeError('UID operatore obbligatorio.');if(typeof this.adapter.deleteOperatorAccount!=='function')throw new Error('Eliminazione definitiva disponibile solo con Firebase configurato.');return this.adapter.deleteOperatorAccount(String(uid))}
+  async revokeOperatorAccess(uid){if(!uid)throw new TypeError('UID operatore obbligatorio.');if(typeof this.adapter.revokeOperatorAccess!=='function')throw new Error('Revoca accesso operatore non disponibile.');return this.adapter.revokeOperatorAccess(String(uid))}
 }
