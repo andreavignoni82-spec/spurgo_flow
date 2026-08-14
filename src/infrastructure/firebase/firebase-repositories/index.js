@@ -22,10 +22,10 @@ export function createFirebaseRepositories({client}){
  const definitions={clients:[normalizeClient,validateClient],operators:[normalizeOperator,validateOperator],teams:[normalizeTeam,validateTeam],vehicles:[normalizeVehicle,validateVehicle],interventions:[normalizeIntervention,validateIntervention],reports:[normalizeReport,validateReport],messages:[normalizeMessage,validateMessage]};
  const make=(name,idField='id')=>new FirebaseRepositoryAdapter({collection:name,idField,client,normalize:definitions[name][0],validate:definitions[name][1]});
  const interventions=make('interventions');
- interventions.queryByDate=async date=>(await client.adapter.query('interventions','date',date)).map(value=>interventions.#read?.(value)??normalizeIntervention(value));
- interventions.queryByOperator=async id=>(await client.adapter.queryArray('interventions','assignedOperatorIds',id)).map(normalizeIntervention);
- interventions.queryByTeam=async id=>(await client.adapter.queryArray('interventions','assignedTeamIds',id)).map(normalizeIntervention);
- const teams=make('teams');teams.queryByOperator=async id=>(await client.adapter.queryArray('teams','operatorIds',id)).map(normalizeTeam);
+ interventions.queryByDate=async date=>(await client.adapter.query('interventions','date',date)).map(value=>clone(normalizeIntervention(value)));
+ interventions.queryByOperator=async id=>(await client.adapter.queryArray('interventions','assignedOperatorIds',id)).map(value=>clone(normalizeIntervention(value)));
+ interventions.queryByTeam=async id=>(await client.adapter.queryArray('interventions','assignedTeamIds',id)).map(value=>clone(normalizeIntervention(value)));
+ const teams=make('teams');teams.queryByOperator=async id=>(await client.adapter.queryArray('teams','operatorIds',id)).map(value=>clone(normalizeTeam(value)));
  const reports=make('reports','interventionId');reports.getByInterventionId=id=>reports.getById(id);reports.save=async(id,report)=>await reports.getById(id)?reports.update(id,report):reports.create({...report,interventionId:id});
  return{clients:make('clients'),operators:make('operators'),teams,vehicles:make('vehicles'),interventions,reports,messages:make('messages')};
 }
