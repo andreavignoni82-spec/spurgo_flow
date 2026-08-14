@@ -1,4 +1,4 @@
 {
-  "name": "Spurgo Flow 8", "short_name": "SF8", "start_url": "./", "scope": "./", "display": "standalone",
+  "name": "SPURGO FLOW 8 · Complete Operational Suite", "short_name": "SF8", "description": "Suite operativa per ufficio e operatori · v8.0.0-beta.1", "start_url": "./", "scope": "./", "display": "standalone",
   "background_color": "#f5f7fa", "theme_color": "#102a43", "icons": []
 }

@@ -4,3 +4,7 @@ The authoritative constants live in `src/core/events.js`: create/update/delete e
 
 
 Event ownership is intentional. Repositories emit CRUD persistence events (for example `intervention:updated`); domain services emit semantic events (for example `intervention:statusChanged` and `intervention:completed`). Completion produces the persistence event followed by at most one of each semantic event—never duplicate semantic notifications.
+
+## Beta.1
+
+La suite riusa gli eventi semantici già catalogati per operator, team, intervention, report e message. Gli eventi aggiornano read model e UI; EventBus non è storage.

@@ -10,3 +10,7 @@ Environments: **development** defaults to memory; **test** uses memory or explic
 
 
 Interventions and Reports have independent repositories and are joined only by `interventionId`. Creating or deleting an Intervention has no implicit Report side effect: cascade deletion is deliberately deferred until an application policy is defined. The future Firebase adapter must match memory patches: recursive merge for plain nested objects, explicit array replacement, and immutable identity. Alpha.2.1 adds only this adapter contract—no production Firebase implementation or connection.
+
+## Beta.1
+
+InterventionsRepository → InterventionsService → Agenda / Dashboard / Control Room / Statistics / Operator App. ReportsRepository resta l'unico store di `reports/{interventionId}`. People e assegnazioni scambiano esclusivamente ID stabili.

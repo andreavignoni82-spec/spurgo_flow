@@ -1,2 +1,2 @@
-import { createPlaceholderFeature } from '../../shared/ui/placeholder.js';
-export const agendaFeature = createPlaceholderFeature('agenda', 'Agenda');
+import { createReadFeature,empty,esc,statusLabel,todayISO } from '../../shared/ui/operational.js';import{agendaForRange}from'../../shared/selectors/operations.js';
+export const agendaFeature=createReadFeature('agenda','Agenda',async c=>({items:await c.services.interventions.listInterventions(),date:todayISO()}),({items,date})=>`<section class="ops-card"><h2>Agenda giornaliera</h2>${agendaForRange(items,date).length?agendaForRange(items,date).map(x=>`<article class="${x.priority==='URGENTE'?'urgent':''}"><strong>${esc(x.startTime)} · ${esc(x.clientSnapshot?.name||'Cliente')}</strong><p>${esc(x.type)} · ${statusLabel(x.status)} · ${x.estimatedMinutes} min</p></article>`).join(''):empty('Nessun intervento presente')}</section>`);
