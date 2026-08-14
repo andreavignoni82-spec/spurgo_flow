@@ -1,5 +1,9 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.6 · Interventions Domain
+
+Intervention identity, status changes, assignments, non-destructive patches and post-persistence events are centralized in `InterventionsService`. The repository retains the v6.1.21 DTO shape and unknown fields (including complete `reportData`) without a Firebase schema change. Agenda, Control Room, Rapportini and App Operatore remain legacy consumers of the single `sf_v6_interventions`/Firebase source through the temporary compatibility seam.
+
 ## v7.0.0-alpha.5 · People Module
 
 Operatori and Squadre are autonomous entities behind `OperatorsRepository` and `TeamsRepository`.

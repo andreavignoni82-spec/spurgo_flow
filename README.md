@@ -1,8 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.5 · PEOPLE MODULE`. Dashboard, Clienti and Mezzi remain unchanged; Operatori & Squadre is now isolated behind
-the v7 router, repository contracts, EventBus, and FeatureBoundary. All remaining pages continue
-to run through the v6.1.21-R1 compatibility application. Fleet CRUD uses `VehiclesRepository`, scoped UI, lifecycle cleanup and domain events.
+**Current modular release:** `v7.0.0-alpha.6 · INTERVENTIONS DOMAIN`. The Interventi page now uses an isolated domain service and repository. Dashboard, Agenda, Control Room, Rapportini and App Operatore consume the same persisted legacy-compatible records through the v7 router, repository contracts, EventBus and FeatureBoundary. All remaining pages continue to run through the v6.1.21-R1 compatibility application.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.

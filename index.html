@@ -2,9 +2,10 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.5</title>
+<meta name="theme-color" content="#071d35"><title>Spurgo Flow Suite v7.0.0-alpha.6</title>
 <link rel="stylesheet" href="src/features/people/people.css">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="src/features/interventions/interventions.css">
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
 <link rel="stylesheet" href="src/features/clients/clients.css">
 <link rel="stylesheet" href="src/features/fleet/fleet.css">
@@ -529,7 +530,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <body>
 <div id="login" class="login"><div class="login-card">
 <div class="brand">SPURGO <b>FLOW</b></div><div>Suite aziendale per la gestione degli interventi</div>
-<div class="version">v7.0.0-alpha.5 · PEOPLE MODULE</div>
+<div class="version">v7.0.0-alpha.6 · INTERVENTIONS DOMAIN</div>
 <label>Username</label><input id="user" class="field" value="ufficio"><label>Password</label><input id="pass" type="password" class="field" value="" autocomplete="current-password">
 <button class="btn primary" style="width:100%" onclick="login()">ACCEDI</button>
 <div id="cloudStatusLogin" class="cloud-sync" style="margin-top:12px;font-size:12px;text-align:center">☁ Verifica Firebase…</div>
@@ -1757,6 +1758,29 @@ window.SFState={
    sfClients=sfClients.filter(x=>x.id!==id);localStorage.setItem('sf_v6_clients',JSON.stringify(sfClients));
    if(window.SFCloud?.ready&&typeof window.SFCloud.deleteClient!=='function')window.SFCloud.syncFromGlobals?.();
    return {id};
+ },
+ async createIntervention(intervention){
+   const record={...intervention,id:String(intervention.id||uniqueId('INT'))};
+   if(sfOfficeInterventions.some(x=>String(x.id)===record.id))throw new Error('ID intervento già esistente.');
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveIntervention==='function')await window.SFCloud.saveIntervention(record);
+   sfOfficeInterventions.push(structuredClone(record));localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveIntervention!=='function')window.SFCloud.syncFromGlobals?.();
+   return structuredClone(record);
+ },
+ async updateIntervention(id,patch){
+   const index=sfOfficeInterventions.findIndex(x=>String(x.id)===String(id));if(index<0)throw new Error('Intervento non trovato.');
+   if(patch?.id!=null&&String(patch.id)!==String(id))throw new Error('ID intervento immutabile.');
+   const clean={...patch};delete clean.id;const record={...sfOfficeInterventions[index],...clean,id:sfOfficeInterventions[index].id};
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.saveIntervention==='function')await window.SFCloud.saveIntervention(record);
+   sfOfficeInterventions[index]=structuredClone(record);localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.saveIntervention!=='function')window.SFCloud.syncFromGlobals?.();
+   return structuredClone(record);
+ },
+ async removeIntervention(id){
+   if(!sfOfficeInterventions.some(x=>String(x.id)===String(id)))throw new Error('Intervento non trovato.');
+   if(window.SFCloud?.enabled&&typeof window.SFCloud.deleteIntervention==='function')await window.SFCloud.deleteIntervention(id);
+   sfOfficeInterventions=sfOfficeInterventions.filter(x=>String(x.id)!==String(id));localStorage.setItem('sf_v6_interventions',JSON.stringify(sfOfficeInterventions));
+   if(window.SFCloud?.ready&&typeof window.SFCloud.deleteIntervention!=='function')window.SFCloud.syncFromGlobals?.();return {id};
  },
  async createVehicle(vehicle){
    const record={...vehicle,id:vehicle.id||uniqueId('veh')};
