@@ -1,6 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.11 · OPERATOR APP`. The smartphone-first Operator App is an isolated orchestrator over AuthService, InterventionsService and ReportsService. Its personal agenda enforces direct and team assignments; report saving is independent from the sequential, failure-safe completion workflow.
+**Current modular release:** `v7.0.0-alpha.11.1 · OPERATOR RELIABILITY`. The smartphone-first Operator App is an isolated orchestrator over AuthService, InterventionsService and ReportsService. Its personal agenda enforces direct and team assignments; report saving is independent from the sequential, failure-safe completion workflow.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.

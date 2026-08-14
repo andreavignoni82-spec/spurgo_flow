@@ -1,5 +1,16 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.11.1 · Operator Reliability
+
+Operator realtime events always refresh the personal agenda, but only events carrying the currently open
+intervention id may refresh its server state. A dirty report form is never remounted: its local values remain
+authoritative and a server-update notice is shown. Report events emitted while the same Operator App save or
+completion is in flight are ignored to avoid a redundant render. Successful persistence clears the pending-photo
+queue and promotes the returned report to the form baseline, preventing later saves or completion from appending
+the same photos again. The operator form reopens and preserves the complete normalized v6.1.21 operational report,
+including activities, anomaly/anomalies, materials, notes, photos and both signatures; unknown persisted fields
+continue to pass through unchanged, and quantities are exposed only when that field really exists in stored data.
+
 ## v7.0.0-alpha.10 · Reports Module
 
 Rapportini preserves the real v6.1.21 `reportData` fields embedded in the intervention document and
