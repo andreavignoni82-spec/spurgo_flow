@@ -1,6 +1,6 @@
 # Spurgo Flow 7 architecture
 
-**Build:** `v7.0.0-alpha.1 · ARCHITECTURE BUILD`
+**Build:** `v7.0.0-alpha.2 · DASHBOARD MODULE`
 
 This alpha adds an architecture alongside the recoverable v6.1.21-R1 application. It does not migrate pages, alter production behavior, or change Firebase configuration and schemas.
 

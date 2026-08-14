@@ -1,5 +1,16 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.2 · Dashboard Module
+
+The Dashboard is the first migrated v7 feature. It implements the v7 lifecycle contract in
+`src/features/dashboard`, builds a pure ViewModel from read-only repository DTOs, renders only
+inside its route container, and refreshes through domain EventBus subscriptions. The v7 router
+mounts it through `FeatureBoundary`; all other routes remain on the v6.1.21-R1 implementation.
+
+The compatibility path is deliberately one-way: Dashboard → repositories → `LegacyAdapter` →
+v6 state. No Firebase or legacy global is visible to the Dashboard module. This release changes
+neither the Firebase schema nor any write workflow.
+
 Migrate and test exactly one independently deployable module at a time while the v6.1.21-R1 application remains available. For every step: define/validate shared contracts, implement repositories, mount behind `FeatureBoundary`, test isolation and parity, then remove only that module's legacy-global access.
 
 1. Dashboard
