@@ -1,5 +1,15 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.10 · Reports Module
+
+Rapportini preserves the real v6.1.21 `reportData` fields embedded in the intervention document and
+normalizes them only inside the v7 domain. `ReportsRepository` is a non-destructive adapter over
+`InterventionsRepository`; it never writes status or timing fields. Signatures, photos, preview/template,
+print/export and native sharing are independent components. Preview, print and export use the same
+persisted-data ViewModel and HTML. Report operations emit only `report:*` payloads with
+`{ interventionId }`; failures in persistence, signature capture, export or sharing remain contained in
+Reports. App Operatore and Statistiche remain intentionally unmigrated.
+
 ## v7.0.0-alpha.9 · Messages Module
 
 Messaggi preserves the v6.1.21 office/operator DTO and is autonomous behind `MessagesRepository`.
