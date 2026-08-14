@@ -1,5 +1,16 @@
 # Spurgo Flow 7 migration plan
 
+## v7.0.0-alpha.8 · Control Room Module
+
+Control Room is an autonomous monitoring and suggestion feature. It reads interventions through
+`InterventionsService`, resources through their repositories, and delegates sequencing, travel, delay,
+criticality and resource scoring to `PlanningService`. Confirmed operator/team assignments write only
+through `InterventionsService`; post-persistence UI completion is emitted through EventBus. Planning and
+MapsService failures degrade independently, and all subscriptions and refresh timers are owned by the
+feature lifecycle. No Firebase, Leaflet, other feature, Agenda, or direct intervention repository dependency
+is present. The planning algorithm itself is unchanged: `PlanningService` is a technical adapter over the
+baseline engine.
+
 ## v7.0.0-alpha.7 · Agenda Module
 
 Agenda is an autonomous read model using `InterventionsService`, `OperatorsRepository` and
