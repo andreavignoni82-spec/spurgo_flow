@@ -39,3 +39,7 @@ EventBus supports `on`, `off`, and `emit` for transient notifications. It is not
 | App | all composition roots | business state globals |
 
 There are no mutable `window` application globals, no feature-to-feature imports, and no Firebase imports in features.
+
+## First operational feature
+
+Alpha.4 wires `ClientsFeature` to `ClientsService` through immutable `AppContext`. The service validates and timestamps writes, owns identity generation and semantic client events, and talks only to the `ClientsRepository` contract. The feature performs local search/sort and may consume read-only realtime snapshots through the service; realtime failure is non-blocking. Since the alpha.3 model defines no Plant, Site, or Facility aggregate, address and city remain the supported main-site representation and no new persistence schema is introduced.
