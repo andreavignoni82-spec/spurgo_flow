@@ -1,3 +1,3 @@
 # Event catalog
 
-No business events are defined in alpha.1. Future entries must document event name, owner, immutable payload schema, publisher, subscribers, and compatibility policy. Events communicate occurrences; they never act as state storage.
+The authoritative constants live in `src/core/events.js`: create/update/delete events for clients, teams and vehicles; operator create/update/status; intervention create/update/delete/status/assignment/start/complete/reopen; report create/update/signature/photos; and message create/update/read/delete. Events are emitted only after a successful write.

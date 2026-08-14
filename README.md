@@ -1,6 +1,6 @@
 # Spurgo Flow 8
 
-Clean architecture foundation, release **v8.0.0-alpha.1**.
+Data core and repository-contract foundation, release **v8.0.0-alpha.2**.
 
 ```sh
 npm test
