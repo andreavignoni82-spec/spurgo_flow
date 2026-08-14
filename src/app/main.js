@@ -4,7 +4,9 @@ bootstrap().then(() => window.dispatchEvent(new Event('spurgo-flow:ready'))).cat
   console.error('Spurgo Flow bootstrap failed', error);
   const root = document.querySelector('#app');
   if (root) {
-    root.innerHTML = `<main role="alert"><strong>SPURGO FLOW 8 · COMPLETE OPERATIONAL SUITE</strong><h1>Errore di avvio</h1><p>${error.message}</p><small>v8.0.0-beta.1</small></main>`;
+    const driver = String(globalThis.__SPURGO_FLOW_ENV__?.dataDriver ?? globalThis.__SPURGO_FLOW_ENV__?.driver ?? 'memory').toUpperCase();
+    const safe = value => String(value ?? 'UNKNOWN').replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[character]);
+    root.innerHTML = `<main role="alert"><strong>SPURGO FLOW 8 · BOOT CORE FIX</strong><h1>Errore di avvio</h1><p>Driver: ${safe(driver)}</p><p>Errore: ${safe(error.code)}</p><p>Componente: ${safe(error.component)}</p><small>v8.0.0-beta.1.1</small></main>`;
   }
 });
 

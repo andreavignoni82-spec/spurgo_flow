@@ -1,14 +1,35 @@
-const DEFAULT_FIREBASE_TEST = Object.freeze({
-  host: '127.0.0.1', firestorePort: 8080, authPort: 9099,
-  projectId: 'spurgoflow-v8-alpha3-test', apiKey: 'demo-test-only', useEmulator: true,
-});
+const FIREBASE_PROJECTS = new Set(['spurgoflow-test', 'spurgoflow-v8-alpha3-test']);
 
-export function readEnvironment(source = globalThis.__SPURGO_FLOW_ENV__ ?? {}) {
-  const driver = source.driver ?? 'memory';
-  if (!['memory', 'firebase-emulator'].includes(driver)) throw new TypeError(`Unknown data driver: ${driver}`);
-  const firebase = source.firebase ? { ...DEFAULT_FIREBASE_TEST, ...source.firebase } : null;
-  if (driver === 'firebase-emulator' && !firebase) throw new Error('Firebase emulator configuration is missing');
-  return Object.freeze({ driver, fallbackToMemory: source.fallbackToMemory === true, firebase: firebase && Object.freeze(firebase) });
+export class ConfigurationError extends Error {
+  constructor(code, component, message) {
+    super(message);
+    this.name = 'ConfigurationError';
+    this.code = code;
+    this.component = component;
+  }
 }
 
-export const environment = readEnvironment();
+function validateFirebaseConfig(firebase) {
+  if (!firebase) throw new ConfigurationError('BOOT_CONFIG_FIREBASE_MISSING', 'environment.firebase', 'Firebase configuration is missing');
+  for (const key of ['apiKey', 'projectId', 'authDomain']) {
+    if (!firebase[key]) throw new ConfigurationError('BOOT_CONFIG_FIREBASE_FIELD_MISSING', `environment.firebase.${key}`, `Firebase configuration is missing: ${key}`);
+  }
+  if (firebase.useEmulator !== true) throw new ConfigurationError('BOOT_FIREBASE_PRODUCTION_DISABLED', 'environment.firebase.useEmulator', 'Firebase production is disabled');
+  if (!FIREBASE_PROJECTS.has(firebase.projectId)) throw new ConfigurationError('BOOT_FIREBASE_PROJECT_BLOCKED', 'environment.firebase.projectId', 'Firebase project is not authorized');
+}
+
+export function createEnvironment(source = {}) {
+  const requestedDriver = source.dataDriver ?? source.driver ?? 'memory';
+  const driver = requestedDriver === 'firebase-emulator' ? 'firebase' : requestedDriver;
+  if (!['memory', 'firebase'].includes(driver)) throw new ConfigurationError('BOOT_CONFIG_UNKNOWN_DRIVER', 'environment.driver', `Unknown data driver: ${requestedDriver}`);
+  if (driver === 'memory') return Object.freeze({ driver, fallbackToMemory: false, firebase: null });
+  const firebase = source.firebase ? Object.freeze({ ...source.firebase }) : null;
+  validateFirebaseConfig(firebase);
+  return Object.freeze({ driver, fallbackToMemory: source.fallbackToMemory === true, firebase });
+}
+
+export const readEnvironment = createEnvironment;
+// Static UI modules may import this safe default. Runtime configuration is read
+// by bootstrap, so an invalid global cannot turn a recoverable config error into
+// a module-evaluation failure.
+export const environment = createEnvironment();
