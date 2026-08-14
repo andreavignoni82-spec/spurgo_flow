@@ -1,3 +1,3 @@
-export const VERSION = 'v8.5.1';
-export const BUILD_LABEL = 'v8.5.1 · OPERATOR MANAGEMENT';
+export const VERSION = 'v8.5.2';
+export const BUILD_LABEL = 'v8.5.2 · SMART INTERVENTIONS';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
