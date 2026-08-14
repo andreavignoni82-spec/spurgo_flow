@@ -3,6 +3,16 @@
   "version": "8.0.0-alpha.1",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test", "start": "node scripts/serve.mjs" },
-  "engines": { "node": ">=20" }
+  "scripts": {
+    "test": "node --test",
+    "start": "node scripts/serve.mjs",
+    "test:smoke": "node tests/e2e/browser-smoke.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.13",
+    "playwright": "^1.62.1"
+  }
 }

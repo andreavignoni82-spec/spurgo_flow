@@ -4,11 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#102a43">
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="stylesheet" href="/src/shared/styles/tokens.css">
-  <link rel="stylesheet" href="/src/shared/styles/base.css">
-  <link rel="stylesheet" href="/src/shared/styles/components.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23102a43'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='30' fill='white'%3ESF%3C/text%3E%3C/svg%3E">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./src/shared/styles/tokens.css">
+  <link rel="stylesheet" href="./src/shared/styles/base.css">
+  <link rel="stylesheet" href="./src/shared/styles/components.css">
   <title>Spurgo Flow 8</title>
 </head>
-<body><div id="app"></div><script type="module" src="/src/app/main.js"></script></body>
+<body>
+  <div id="app"></div>
+  <script>
+    (() => {
+      const showBootError = (event) => {
+        console.error('Spurgo Flow module bootstrap failed', event.error ?? event.reason ?? event.message);
+        const root = document.querySelector('#app');
+        if (root) root.innerHTML = '<main role="alert"><strong>SPURGO FLOW 8</strong><h1>Errore di avvio</h1><p>v8.0.0-alpha.1</p><small>v8.0.0-alpha.1-hotfix1</small></main>';
+      };
+      addEventListener('error', showBootError);
+      addEventListener('unhandledrejection', showBootError);
+      addEventListener('spurgo-flow:ready', () => {
+        removeEventListener('error', showBootError);
+        removeEventListener('unhandledrejection', showBootError);
+      }, { once: true });
+    })();
+  </script>
+  <script type="module" src="./src/app/main.js"></script>
+</body>
 </html>
