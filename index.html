@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="src/features/dashboard/dashboard.css">
 <link rel="stylesheet" href="src/features/clients/clients.css">
 <link rel="stylesheet" href="src/features/fleet/fleet.css">
+<link rel="stylesheet" href="src/features/messages/messages.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -583,17 +584,7 @@ button,input,select,textarea{font:inherit}.hidden{display:none!important}.btn{bo
 <section id="squadre" class="section" aria-live="polite"></section>
 
 
-<section id="messaggiUfficio" class="section">
- <div class="top"><div><h1>Messaggi operatori</h1><div class="muted">Comunicazioni operative individuali tra Ufficio e operatori</div></div><span class="build">v6.1.21-R1</span></div>
- <div class="msg-shell" style="margin-top:18px">
-  <div class="msg-users"><b>Operatori</b><div id="officeMsgUsers" style="margin-top:8px"></div></div>
-  <div class="msg-thread">
-   <div class="top"><div><b id="officeMsgTitle">Seleziona un operatore</b><div id="officeMsgSubtitle" class="muted"></div></div><button class="btn ghost" onclick="markThreadRead()">Segna letto</button></div>
-   <div id="officeMsgStream" class="msg-stream"><div class="v6-empty">Seleziona un operatore per aprire la conversazione.</div></div>
-   <div class="msg-compose"><textarea id="officeMsgText" class="textarea" placeholder="Scrivi un messaggio operativo..."></textarea><button class="btn primary" onclick="sendOfficeMessage()">Invia</button></div>
-  </div>
- </div>
-</section>
+<section id="messaggiUfficio" class="section" aria-live="polite"></section>
 
 <section id="rapportini" class="section">
 <div class="top"><div><h1>Rapportini</h1><div class="muted">Archivio dei rapportini realmente generati</div></div><span id="reportArchiveCount" class="build">0 rapportini</span></div>
@@ -1811,6 +1802,9 @@ window.SFState={
  async createTeam(team){const record={...team,id:team.id||uniqueId('team'),operatorIds:[...(team.operatorIds||[])]};sfTeams.push(record);saveOfficePeople();return {...record};},
  async updateTeam(id,patch){const index=sfTeams.findIndex(x=>x.id===id);if(index<0)throw new Error('Squadra non trovata.');sfTeams[index]={...sfTeams[index],...patch,id,operatorIds:[...(patch.operatorIds||sfTeams[index].operatorIds||[])]};saveOfficePeople();return {...sfTeams[index]};},
  async removeTeam(id){if(!sfTeams.some(x=>x.id===id))throw new Error('Squadra non trovata.');sfTeams=sfTeams.filter(x=>x.id!==id);saveOfficePeople();return {id};},
+ async createMessage(message){const record={...message,id:String(message.id||uniqueId('msg'))};if(sfMessages.some(x=>String(x.id)===record.id))throw new Error('ID messaggio già esistente.');sfMessages.push(structuredClone(record));saveV6();return structuredClone(record);},
+ async updateMessage(id,patch){const index=sfMessages.findIndex(x=>String(x.id)===String(id));if(index<0)throw new Error('Messaggio non trovato.');const clean={...patch};delete clean.id;sfMessages[index]={...sfMessages[index],...clean,id:sfMessages[index].id};saveV6();return structuredClone(sfMessages[index]);},
+ async markMessageRead(id,reader='office'){return this.updateMessage(id,reader==='operator'?{readByOperator:true}:{readByOffice:true});},
  openInterventionForClient(id){newInterventionForClient(id)},
  applyCloud(name,rows){
    if(name==='operators')sfOperators=rows;
@@ -1939,8 +1933,6 @@ document.querySelectorAll('#menu button').forEach(b=>{
 let officeAutoRefreshTimer=null;
 function refreshMessagesAndReports(){
  try{
-   renderOfficeMessagesUsers();
-   renderOfficeThread();
    renderOfficeReports();
    updateMessageBadges();
    if(!el('operator')?.classList.contains('hidden'))renderOperatorMessages();

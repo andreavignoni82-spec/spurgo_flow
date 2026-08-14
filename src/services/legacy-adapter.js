@@ -39,6 +39,10 @@ export class LegacyAdapter {
   updateVehicle(id, patch) { return this.globals.SFState?.updateVehicle(id, patch); }
   removeVehicle(id) { return this.globals.SFState?.removeVehicle(id); }
   messages() { return this.#collection('messages', 'sfMessages'); }
+  messageById(id) { return this.messages().find(message => String(message.id) === String(id)); }
+  createMessage(message) { return this.globals.SFState?.createMessage(message); }
+  updateMessage(id, patch) { return this.globals.SFState?.updateMessage(id, patch); }
+  markMessageRead(id, reader) { return this.globals.SFState?.markMessageRead(id, reader); }
   clients() { return this.#collection('clients', 'sfClients'); }
   clientById(id) { return this.clients().find(client => String(client.id) === String(id)); }
   createClient(client) { return this.globals.SFState?.createClient(client); }

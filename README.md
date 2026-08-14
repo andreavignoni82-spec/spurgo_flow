@@ -1,6 +1,6 @@
 # Spurgo Flow — Suite Beta v5.0
 
-**Current modular release:** `v7.0.0-alpha.8 · CONTROL ROOM MODULE`. Control Room is now an autonomous v7 monitor backed by InterventionsService, OperatorsRepository, TeamsRepository, VehiclesRepository and PlanningService. Reassignment writes use only InterventionsService; planning and maps degrade independently. Rapportini and App Operatore remain on the v6.1.21-R1 compatibility application.
+**Current modular release:** `v7.0.0-alpha.9 · MESSAGES MODULE`. Messaggi is now an autonomous v7 feature backed only by MessagesRepository, OperatorsRepository, TeamsRepository and EventBus. Its local draft, post-persistence events, read updates and lifecycle-owned fallback refresh are isolated from every other module. Rapportini and App Operatore remain on the v6.1.21-R1 compatibility application.
 Build 5.0.13
 
 Prototipo GitHub Pages della suite aziendale Spurgo Flow.
