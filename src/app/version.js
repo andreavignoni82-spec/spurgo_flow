@@ -1,3 +1,3 @@
-export const VERSION = 'v8.7.2';
-export const BUILD_LABEL = 'v8.7.2 · FIXED TYPES + FLEET OPTIMIZER';
+export const VERSION = 'v8.7.3';
+export const BUILD_LABEL = 'v8.7.3 · UNIFIED UI + INTERVENTIONS STARTUP FIX';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
