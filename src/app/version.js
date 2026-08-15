@@ -1,3 +1,3 @@
-export const VERSION = 'v8.6.3';
-export const BUILD_LABEL = 'v8.6.3 · LEGACY INTERVENTION SAVE FIX';
+export const VERSION = 'v8.7.0';
+export const BUILD_LABEL = 'v8.7.0 · INTERVENTIONS REBUILD';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
