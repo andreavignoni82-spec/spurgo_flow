@@ -1,3 +1,3 @@
-export const VERSION = 'v8.7.8';
-export const BUILD_LABEL = 'v8.7.8 · FIXED TIME + SLOT SELECTION + OPERATOR AGENDA';
+export const VERSION = 'v8.7.9';
+export const BUILD_LABEL = 'v8.7.9 · DIRECT SAVE + ALL SLOTS + OPERATOR SYNC';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
