@@ -14,6 +14,7 @@ export function createFirebaseClient(config={}){
     async get(name,id){const snapshot=await getDoc(doc(firestore,name,id));return snapshot.exists()?row(snapshot):null},
     async create(name,id,value){const reference=doc(firestore,name,id);if((await getDoc(reference)).exists()){const error=new Error(`Duplicate document: ${id}`);error.code='already-exists';throw error}await setDoc(reference,value);return {...value,id}},
     async update(name,id,value){await setDoc(doc(firestore,name,id),value,{merge:true});const snapshot=await getDoc(doc(firestore,name,id));return row(snapshot)},
+    async replace(name,id,value){await setDoc(doc(firestore,name,id),value);const snapshot=await getDoc(doc(firestore,name,id));return row(snapshot)},
     async remove(name,id){const reference=doc(firestore,name,id),snapshot=await getDoc(reference);if(!snapshot.exists()){const error=new Error(`Missing document: ${id}`);error.code='not-found';throw error}await deleteDoc(reference);return row(snapshot)},
     async query(name,field,value){return (await getDocs(query(collection(firestore,name),where(field,'==',value)))).docs.map(row)},
     async queryArray(name,field,value){return (await getDocs(query(collection(firestore,name),where(field,'array-contains',value)))).docs.map(row)}
