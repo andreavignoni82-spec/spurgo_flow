@@ -11,6 +11,19 @@ export class InterventionsService{
  constructor({repository,teamsRepository,eventBus,source='interventions-service',clock=now,idFactory=createId}){Object.assign(this,{repository,teamsRepository,eventBus,source,clock,idFactory})}
  async createIntervention(input={}){assertNoControlledCreateFields(input);const timestamp=this.clock();return this.repository.create({...allowedCreateData(input),id:this.idFactory(),priority:input.priority??InterventionPriority.NORMALE,status:InterventionStatus.PROGRAMMATO,assignedOperatorIds:[],assignedTeamIds:[],actualStart:null,actualEnd:null,createdAt:timestamp,updatedAt:timestamp})}
  async updateIntervention(id,patch){const invalid=Object.keys(patch).filter(key=>MUTATION_PROTECTED_FIELDS.has(key));if(invalid.length)throw new TypeError(`Protected intervention fields: ${invalid.join(', ')}`);return this.repository.update(id,{...patch,updatedAt:this.clock()})}
+ async saveOfficeIntervention(id,{patch={},operatorIds=[],teamIds=[],vehicleId=null}={}){
+  const current=await this.repository.getById(id);if(!current)throw new Error(`Missing intervention: ${id}`);
+  const invalid=Object.keys(patch).filter(key=>MUTATION_PROTECTED_FIELDS.has(key));if(invalid.length)throw new TypeError(`Protected intervention fields: ${invalid.join(', ')}`);
+  const teams=[...new Set(teamIds??[])];const directOperators=[...new Set(operatorIds??[])];
+  const teamRows=await Promise.all(teams.map(teamId=>this.teamsRepository?.getById?.(teamId)));
+  const allOperators=[...new Set([...directOperators,...teamRows.flatMap(team=>team?.operatorIds??[])])];
+  const timestamp=this.clock();
+  const mergedPatch={...patch,operatorId:allOperators[0]??null,assignedOperatorIds:allOperators,teamId:teams[0]??null,assignedTeamIds:teams,vehicleId:vehicleId||null,updatedAt:timestamp};
+  const value=await this.repository.update(id,mergedPatch);
+  this.eventBus?.emit(Events.INTERVENTION_UPDATED,{entityId:id,source:this.source,timestamp,changes:patch});
+  this.eventBus?.emit(Events.INTERVENTION_ASSIGNMENT_CHANGED,{entityId:id,source:this.source,timestamp,changes:{operatorId:mergedPatch.operatorId,assignedOperatorIds:allOperators,teamId:mergedPatch.teamId,assignedTeamIds:teams,vehicleId:mergedPatch.vehicleId}});
+  return value;
+ }
  assignOperator(id,operatorId){return this.#assignment(id,{operatorId,assignedOperatorIds:operatorId?[operatorId]:[]})}
  assignOperators(id,assignedOperatorIds){return this.#assignment(id,{assignedOperatorIds:[...new Set(assignedOperatorIds??[])]})}
  async assignTeam(id,teamId){if(!teamId)return this.#assignment(id,{teamId:null,assignedTeamIds:[]});const team=await this.teamsRepository?.getById?.(teamId),current=await this.repository.getById(id),operators=[...new Set([...(current?.assignedOperatorIds??[]),...(team?.operatorIds??[])])];return this.#assignment(id,{teamId,assignedTeamIds:[teamId],assignedOperatorIds:operators})}
