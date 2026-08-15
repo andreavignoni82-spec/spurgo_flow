@@ -1,3 +1,3 @@
-export const VERSION = 'v8.9.7';
-export const BUILD_LABEL = 'v8.9.7 · FIX SALVA RAPPORTINO + ANTEPRIMA PDF IOS';
+export const VERSION = 'v9.0.0';
+export const BUILD_LABEL = 'v9.0.0 · OPERATOR REBUILD MOBILE + SAFE PDF';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
