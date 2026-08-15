@@ -14,10 +14,11 @@ async function render(){
   root.innerHTML=shell('Scheda intervento',`<section class="ops-card"><div class="table-title"><div><h2>${esc(current.clientSnapshot?.name||'Intervento')}</h2><small>${esc(current.id)}</small></div><button data-route="interventions" class="ghost">← Elenco interventi</button></div>${lastMessage?`<p class="badge">${esc(lastMessage)}</p>`:''}<form id="intervention-detail-form" class="ops-form"><label>Cliente<input value="${esc(current.clientSnapshot?.name||'')}" disabled></label><label>Indirizzo<input name="address" value="${esc(current.address||'')}" required></label><label>Città<input name="city" value="${esc(current.city||'')}"></label><label>Data<input type="date" name="date" value="${esc(current.date||'')}" required></label>${timingFields(current)}<label>Durata stimata (min)<input type="number" name="estimatedMinutes" min="1" value="${Number(current.estimatedMinutes)||60}" required></label><label>Tipologia<input name="type" value="${esc(current.type||'')}" required></label><label>Priorità<select name="priority"><option ${current.priority==='NORMALE'?'selected':''}>NORMALE</option><option ${current.priority==='URGENTE'?'selected':''}>URGENTE</option></select></label><label>Operatori<select multiple name="operatorIds">${operators.filter(x=>x.active||assignedOps.has(x.id)).map(o=>option(o.id,o.name,assignedOps.has(o.id))).join('')}</select></label><label>Squadre<select multiple name="teamIds">${teams.filter(x=>x.active||assignedTeams.has(x.id)).map(t=>option(t.id,t.name,assignedTeams.has(t.id))).join('')}</select></label><label>Mezzo<select name="vehicleId"><option value="">Nessuno</option>${vehicles.filter(x=>x.active||x.id===current.vehicleId).map(v=>option(v.id,v.plate||v.name||v.id,v.id===current.vehicleId)).join('')}</select></label><label>Note<textarea name="notes">${esc(current.notes||'')}</textarea></label><div class="actions"><button class="primary" type="submit">Salva modifiche</button><button type="button" data-action="reload">Annulla modifiche</button></div><output data-save-status></output></form></section>`);
 }
 function toggleTimeMode(form){const mode=form.elements.timeMode?.value||'FIXED',fixed=form.querySelector('[data-time-fixed]'),flex=form.querySelector('[data-time-flex]');if(fixed)fixed.hidden=mode!=='FIXED';if(flex)flex.hidden=mode!=='FLEXIBLE';}
+const sameArray=(a,b)=>JSON.stringify([...(a??[])].map(String).sort())===JSON.stringify([...(b??[])].map(String).sort());
 async function submit(event){
   if(event.target.id!=='intervention-detail-form')return;
-  event.preventDefault(); if(busy)return; busy=true;
-  const form=event.target,submitter=event.submitter,out=form.querySelector('[data-save-status]'); if(submitter)submitter.disabled=true;
+  event.preventDefault();if(busy)return;busy=true;
+  const form=event.target,submitter=event.submitter,out=form.querySelector('[data-save-status]');if(submitter)submitter.disabled=true;
   try{
     const fd=new FormData(form),mode=String(fd.get('timeMode')||'FIXED');
     const fixed=String(fd.get('startTime')||''),flexStart=String(fd.get('flexibleStartTime')||''),flexEnd=String(fd.get('flexibleEndTime')||'');
@@ -25,14 +26,13 @@ async function submit(event){
     if(mode==='FLEXIBLE'&&(!flexStart||!flexEnd))throw new Error('Inserisci l’intervallo dell’orario flessibile.');
     if(mode==='FLEXIBLE'&&flexEnd<=flexStart)throw new Error('La fine della finestra flessibile deve essere successiva all’inizio.');
     const effectiveStart=mode==='FIXED'?fixed:flexStart;
-    const patch={address:String(fd.get('address')||''),city:String(fd.get('city')||''),date:String(fd.get('date')||''),startTime:effectiveStart,estimatedMinutes:Number(fd.get('estimatedMinutes')),type:String(fd.get('type')||''),priority:String(fd.get('priority')||'NORMALE'),notes:String(fd.get('notes')||''),timeMode:mode,flexibleStartTime:mode==='FLEXIBLE'?flexStart:null,flexibleEndTime:mode==='FLEXIBLE'?flexEnd:null};
-    await ctx.services.interventions.updateIntervention(item.id,patch);
-    await ctx.services.interventions.assignTeams(item.id,fd.getAll('teamIds'));
-    await ctx.services.interventions.assignOperators(item.id,fd.getAll('operatorIds'));
-    await ctx.services.interventions.assignVehicle(item.id,String(fd.get('vehicleId')||''));
+    const patch={address:String(fd.get('address')||'').trim(),city:String(fd.get('city')||'').trim(),date:String(fd.get('date')||''),startTime:effectiveStart,estimatedMinutes:Number(fd.get('estimatedMinutes')),type:String(fd.get('type')||'').trim(),priority:String(fd.get('priority')||'NORMALE'),notes:String(fd.get('notes')||''),timeMode:mode,flexibleStartTime:mode==='FLEXIBLE'?flexStart:null,flexibleEndTime:mode==='FLEXIBLE'?flexEnd:null};
+    const operatorIds=fd.getAll('operatorIds').map(String),teamIds=fd.getAll('teamIds').map(String),vehicleId=String(fd.get('vehicleId')||'');
+    await ctx.services.interventions.saveOfficeIntervention(item.id,{patch,operatorIds,teamIds,vehicleId});
     const verified=await ctx.services.interventions.getIntervention(item.id);
-    if(!verified||verified.address!==patch.address||verified.date!==patch.date||verified.startTime!==patch.startTime||verified.timeMode!==patch.timeMode)throw new Error('Verifica salvataggio non riuscita. Riprova.');
-    lastMessage='Modifiche salvate correttamente.'; if(out)out.textContent=lastMessage; await render();
+    const checks=[verified?.address===patch.address,verified?.city===patch.city,verified?.date===patch.date,verified?.startTime===patch.startTime,Number(verified?.estimatedMinutes)===patch.estimatedMinutes,verified?.type===patch.type,verified?.priority===patch.priority,String(verified?.notes||'')===patch.notes,verified?.timeMode===patch.timeMode,(verified?.flexibleStartTime??null)===(patch.flexibleStartTime??null),(verified?.flexibleEndTime??null)===(patch.flexibleEndTime??null),sameArray(verified?.assignedTeamIds,teamIds),vehicleId?verified?.vehicleId===vehicleId:!verified?.vehicleId];
+    if(checks.some(v=>!v))throw new Error('I dati non risultano salvati correttamente su Firebase. Riprova.');
+    item=verified;lastMessage='Modifiche salvate definitivamente su Firebase.';if(out)out.textContent=lastMessage;await render();
   }catch(error){lastMessage='';if(out)out.textContent=error?.message||'Salvataggio non riuscito.';}
   finally{busy=false;if(submitter)submitter.disabled=false;}
 }
