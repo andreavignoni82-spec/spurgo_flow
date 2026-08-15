@@ -1,3 +1,3 @@
-export const VERSION = 'v8.7.7';
-export const BUILD_LABEL = 'v8.7.7 · FIRESTORE TIMEOUT FIX';
+export const VERSION = 'v8.7.8';
+export const BUILD_LABEL = 'v8.7.8 · FIXED TIME + SLOT SELECTION + OPERATOR AGENDA';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
