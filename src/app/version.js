@@ -1,3 +1,3 @@
-export const VERSION = 'v8.7.5';
-export const BUILD_LABEL = 'v8.7.5 · OPERATOR ASSIGNMENT + UI REFINEMENT';
+export const VERSION = 'v8.7.6';
+export const BUILD_LABEL = 'v8.7.6 · INTERVENTION RELIABILITY FIX';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
