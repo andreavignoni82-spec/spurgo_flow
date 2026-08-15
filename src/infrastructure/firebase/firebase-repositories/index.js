@@ -14,6 +14,7 @@ const unique=rows=>[...new Map(rows.map(row=>[String(row.id),row])).values()];
 const LEGACY_REPORT_FIELDS=Object.freeze(['relation','signatures','photos','materials','reportData']);
 const STATUS_ALIASES=Object.freeze({PROGRAMMATO:'PROGRAMMATO',PROGRAMMATA:'PROGRAMMATO',PROGRAMMED:'PROGRAMMATO',SCHEDULED:'PROGRAMMATO',IN_CORSO:'IN_CORSO','IN CORSO':'IN_CORSO',IN_PROGRESS:'IN_CORSO',TERMINATO:'TERMINATO',TERMINATA:'TERMINATO',COMPLETATO:'TERMINATO',COMPLETATA:'TERMINATO',COMPLETED:'TERMINATO',ANNULLATO:'ANNULLATO',ANNULLATA:'ANNULLATO',CANCELLED:'ANNULLATO',CANCELED:'ANNULLATO',RIAPERTO:'RIAPERTO',RIAPERTA:'RIAPERTO',REOPENED:'RIAPERTO'});
 function migrateLegacyIntervention(value){const migrated=clone(value??{});for(const key of LEGACY_REPORT_FIELDS)delete migrated[key];const raw=String(migrated.status??'').trim().toUpperCase();const allowed=Object.values(InterventionStatus);migrated.status=allowed.includes(raw)?raw:(STATUS_ALIASES[raw]??InterventionStatus.PROGRAMMATO);return migrated;}
+async function safeRows(factory){try{return await factory()}catch{return[]}}
 export class FirebaseRepositoryAdapter{
  constructor({collection,idField='id',client,normalize=clone,validate=()=>true,migrate=value=>value}){if(!client)throw new Error('Firebase client is required');Object.assign(this,{collection,idField,client,normalize,validate,migrate})}
  #read(value){if(!value)return null;return clone(this.normalize(this.migrate(value)))}
@@ -27,10 +28,11 @@ export function createFirebaseRepositories({client}){
  const definitions={clients:[normalizeClient,validateClient],operators:[normalizeOperator,validateOperator],teams:[normalizeTeam,validateTeam],vehicles:[normalizeVehicle,validateVehicle],interventions:[normalizeIntervention,validateIntervention],reports:[normalizeReport,validateReport],messages:[normalizeMessage,validateMessage]};
  const make=(name,idField='id',migrate=value=>value)=>new FirebaseRepositoryAdapter({collection:name,idField,client,normalize:definitions[name][0],validate:definitions[name][1],migrate});
  const interventions=make('interventions','id',migrateLegacyIntervention);
- interventions.queryByDate=async date=>(await client.adapter.query('interventions','date',date)).map(value=>clone(normalizeIntervention(migrateLegacyIntervention(value))));
- interventions.queryByOperator=async id=>unique([...(await client.adapter.query('interventions','operatorId',id)),...(await client.adapter.queryArray('interventions','assignedOperatorIds',id))]).map(value=>clone(normalizeIntervention(migrateLegacyIntervention(value))));
- interventions.queryByTeam=async id=>unique([...(await client.adapter.query('interventions','teamId',id)),...(await client.adapter.queryArray('interventions','assignedTeamIds',id))]).map(value=>clone(normalizeIntervention(migrateLegacyIntervention(value))));
- const teams=make('teams');teams.queryByOperator=async id=>(await client.adapter.queryArray('teams','operatorIds',id)).map(value=>clone(normalizeTeam(value)));
+ const readInterventions=rows=>rows.map(value=>clone(normalizeIntervention(migrateLegacyIntervention(value))));
+ interventions.queryByDate=async date=>readInterventions(await client.adapter.query('interventions','date',date));
+ interventions.queryByOperator=async id=>{const exact=await safeRows(()=>client.adapter.query('interventions','operatorId',id)),array=await safeRows(()=>client.adapter.queryArray('interventions','assignedOperatorIds',id));return readInterventions(unique([...exact,...array]));};
+ interventions.queryByTeam=async id=>{const exact=await safeRows(()=>client.adapter.query('interventions','teamId',id)),array=await safeRows(()=>client.adapter.queryArray('interventions','assignedTeamIds',id));return readInterventions(unique([...exact,...array]));};
+ const teams=make('teams');teams.queryByOperator=async id=>readInterventions?((await client.adapter.queryArray('teams','operatorIds',id)).map(value=>clone(normalizeTeam(value)))):[];
  const reports=make('reports','interventionId');reports.getByInterventionId=id=>reports.getById(id);reports.save=async(id,report)=>await reports.getById(id)?reports.update(id,report):reports.create({...report,interventionId:id});
  return{clients:make('clients'),operators:make('operators'),teams,vehicles:make('vehicles'),interventions,reports,messages:make('messages')};
 }
