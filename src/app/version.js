@@ -1,3 +1,3 @@
-export const VERSION = 'v8.7.6';
-export const BUILD_LABEL = 'v8.7.6 · INTERVENTION RELIABILITY FIX';
+export const VERSION = 'v8.7.7';
+export const BUILD_LABEL = 'v8.7.7 · FIRESTORE TIMEOUT FIX';
 export const PRODUCT_LABEL = 'GESTIONE INTERVENTI SPURGHI';
